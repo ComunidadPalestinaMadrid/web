@@ -227,7 +227,10 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 @media (max-width: 560px) { .entrada { grid-template-columns: 64px 1fr; gap: .8rem; } .entrada__dia { font-size: 1.2rem; } }
 
 /* Eventos ---------------------------------------------------------------- */
-.evento { display: grid; grid-template-columns: 96px 1fr; gap: 1.1rem; padding: 1.1rem; border: 1px solid var(--linea); border-radius: var(--radio); background: #fff; box-shadow: var(--sombra); }
+.evento { display: flex; flex-direction: column; border: 1px solid var(--linea); border-radius: var(--radio); background: #fff; box-shadow: var(--sombra); overflow: hidden; }
+.evento__cartel { display: flex; justify-content: center; padding: .8rem; background: var(--fondo-suave); border-bottom: 1px solid var(--linea); }
+.evento__cartel img { width: auto; max-width: 100%; max-height: 360px; object-fit: contain; border-radius: var(--radio-sm); }
+.evento__cuerpo { display: grid; grid-template-columns: 96px 1fr; gap: 1.1rem; padding: 1.1rem; }
 .evento__fecha { background: var(--ps-negro); color: #fff; border-radius: var(--radio-sm); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: .6rem .3rem; height: fit-content; }
 .evento__dia { font-size: 2.05rem; font-weight: 700; line-height: 1; }
 .evento__mes { font-size: .78rem; text-transform: uppercase; letter-spacing: .11em; }
@@ -236,7 +239,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .evento__datos { font-size: .99rem; letter-spacing: .01em; color: var(--texto-suave); display: flex; flex-wrap: wrap; gap: .4rem 1rem; margin-bottom: .4rem; }
 .evento__desc { margin: 0; font-size: .95rem; }
 .evento--destacado { border-color: var(--ps-verde); box-shadow: 0 0 0 3px var(--fondo-verde), var(--sombra); }
-@media (max-width: 560px) { .evento { grid-template-columns: 72px 1fr; gap: .8rem; } .evento__dia { font-size: 1.3rem; } }
+@media (max-width: 560px) { .evento__cuerpo { grid-template-columns: 72px 1fr; gap: .8rem; } .evento__dia { font-size: 1.3rem; } }
 
 /* Prosa de artículos y páginas ------------------------------------------ */
 .prosa { max-width: var(--ancho-texto); font-size: 1.06rem; }

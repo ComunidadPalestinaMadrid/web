@@ -14,23 +14,26 @@ export interface Evento {
   descripcion: string;
   descripcionAr?: string;
   categoria: CategoriaEvento;
+  /** Ruta del cartel del evento, si lo tiene */
+  imagen?: string;
   destacado?: boolean;
   prueba?: boolean;
 }
 
 export const EVENTOS: Evento[] = [
   {
-    id: 'aniversario-7-octubre-2026',
-    titulo: 'Aniversario del 7 de octubre: memoria y dignidad',
-    tituloAr: 'ذكرى السابع من أكتوبر: ذاكرة وكرامة',
-    fecha: '2026-10-07',
-    hora: '19:00',
-    lugar: 'Madrid',
-    lugarAr: 'مدريد',
-    descripcion: 'Acto de recuerdo y denuncia de la situación en Gaza, con testimonios de la comunidad palestina en Madrid.',
-    descripcionAr: 'فعالية تذكارية وتنديد بالوضع في غزة، مع شهادات من الجالية الفلسطينية في مدريد.',
-    categoria: 'institucional',
-    prueba: true
+    id: 'manifestacion-4-octubre-2026',
+    titulo: 'Manifestación 4/10 - El genocidio continua.',
+    tituloAr: 'مظاهرة 4/10 - الإبادة الجماعية مستمرة.',
+    fecha: '2026-10-04',
+    hora: '12:00',
+    lugar: 'Glorieta de Carlos V, Madrid',
+    lugarAr: 'دوار كارلوس الخامس، مدريد',
+    descripcion: 'Manifestación en Madrid para denunciar que el genocidio continúa.',
+    descripcionAr: 'مظاهرة في مدريد للتنديد باستمرار الإبادة الجماعية.',
+    categoria: 'concentracion',
+    imagen: '/images/uploads/mani-4-octubre-2026.jpg',
+    destacado: true
   },
   {
     id: 'balfour-2026',
