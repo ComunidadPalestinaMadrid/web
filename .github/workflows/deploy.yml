@@ -30,14 +30,15 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      # Activa GitHub Pages si aun no lo esta y calcula la URL y el prefijo base.
+      # Calcula la URL publica y el prefijo base (origin y base_path).
       # Con el dominio propio configurado en Settings > Pages, "origin" pasa a ser
       # https://comunidadpalestina.madrid y "base_path" queda vacio, sin tocar codigo.
+      #
+      # OJO: el GITHUB_TOKEN no puede crear el sitio de Pages, asi que hay que
+      # activarlo UNA vez a mano en Settings > Pages > Source: GitHub Actions.
       - name: Configurar Pages
         id: pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Compilar Astro
         run: npm run build

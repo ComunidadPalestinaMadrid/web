@@ -97,9 +97,14 @@ El sitio se publica automáticamente con el flujo `.github/workflows/deploy.yml`
 
 ### Puesta en marcha (una sola vez)
 
+> **Requisito de plan:** con GitHub Free, Pages solo funciona en repositorios
+> **públicos**. Si el repositorio es privado necesitas GitHub Pro/Team, o cambiar la
+> visibilidad a pública en **Settings > General > Danger Zone > Change visibility**.
+
 1. Sube el proyecto a la rama `main`.
-2. En **Settings > Pages**, elige **Source: GitHub Actions**. El propio flujo intenta
-   activarlo (`enablement: true`), pero si el primer despliegue se queja, hazlo a mano.
+2. **Activa GitHub Pages a mano, una sola vez:** **Settings > Pages > Source: GitHub
+   Actions**. El `GITHUB_TOKEN` del flujo no puede crear el sitio de Pages, así que este
+   clic inicial es obligatorio.
 3. Lanza el despliegue con un push a `main`, o desde **Actions > Deploy web a GitHub
    Pages > Run workflow**.
 
