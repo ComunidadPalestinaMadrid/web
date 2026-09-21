@@ -31,7 +31,6 @@
   /* Tipografias: Barlow Condensed (titulares e interfaz) + Lora (texto corrido) */
   --fuente: "Barlow Condensed", "Oswald", "Arial Narrow", system-ui, -apple-system, sans-serif;
   --fuente-texto: "Lora", Georgia, "Times New Roman", Times, serif;
-  --fuente-ar: "Segoe UI", "Noto Sans Arabic", "Noto Kufi Arabic", "Traditional Arabic", Tahoma, system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -49,10 +48,6 @@ body {
   font-kerning: normal;
 }
 
-html[dir="rtl"] body { font-family: var(--fuente-ar); line-height: 1.85; }
-html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] h4,
-html[dir="rtl"] .eyebrow, html[dir="rtl"] .nav__enlace, html[dir="rtl"] .boton,
-html[dir="rtl"] .chip, html[dir="rtl"] .etiqueta, html[dir="rtl"] .migas { font-family: var(--fuente-ar); }
 
 img, svg, video { max-width: 100%; height: auto; display: block; }
 a { color: var(--ps-rojo); text-decoration: none; }

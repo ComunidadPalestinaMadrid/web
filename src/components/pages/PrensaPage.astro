@@ -5,21 +5,19 @@ import Buscador from '../Buscador.astro';
 import { publicaciones, ETIQUETA_TIPO, CLASE_TIPO } from '../../data/publicaciones';
 import { CONTACTO_PRENSA } from '../../data/prensa';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, formatFecha, type Lang } from '../../i18n/utils';
+import { useTranslations, localizePath, formatFecha } from '../../i18n/utils';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+const t = useTranslations();
 // Sala de prensa: notas de prensa y comunicados, del mas reciente al mas antiguo
 const notas = publicaciones.filter((p) => p.tipo === 'nota-prensa' || p.tipo === 'comunicado');
 ---
-<BaseLayout lang={lang} title={t('nav.salaPrensa')} description={t('prensa.salaIntro')}>
+<BaseLayout title={t('nav.salaPrensa')} description={t('prensa.salaIntro')}>
   <PaginaCabecera
     eyebrow={t('nav.prensa')}
     titulo={t('nav.salaPrensa')}
     entradilla={t('prensa.salaIntro')}
     migas={[
-      { texto: t('nav.inicio'), href: localizePath('/', lang) },
+      { texto: t('nav.inicio'), href: localizePath('/') },
       { texto: t('nav.prensa') },
       { texto: t('nav.salaPrensa') }
     ]}
@@ -32,15 +30,15 @@ const notas = publicaciones.filter((p) => p.tipo === 'nota-prensa' || p.tipo ===
           {notas.map((n) => (
             <li class="nota-prensa" data-buscable={n.title + ' ' + n.resumen + ' ' + n.date}>
               <p class="nota-prensa__meta">
-                <span class="nota-prensa__fecha">{formatFecha(n.date, lang)}</span>
+                <span class="nota-prensa__fecha">{formatFecha(n.date)}</span>
                 <span class={'etiqueta ' + CLASE_TIPO[n.tipo]}>{t(ETIQUETA_TIPO[n.tipo])}</span>
               </p>
               <h3 class="nota-prensa__titulo">
-                <a href={localizePath('/publicaciones/' + n.slug, lang)}>{n.title}</a>
+                <a href={localizePath('/publicaciones/' + n.slug)}>{n.title}</a>
               </h3>
               <p class="nota-prensa__resumen">{n.resumen}</p>
               <p class="nota-prensa__pie">
-                <a class="boton boton--texto boton--pequeno" href={localizePath('/publicaciones/' + n.slug, lang)}>{t('common.leerMas')} →</a>
+                <a class="boton boton--texto boton--pequeno" href={localizePath('/publicaciones/' + n.slug)}>{t('common.leerMas')} →</a>
               </p>
             </li>
           ))}
@@ -57,11 +55,9 @@ const notas = publicaciones.filter((p) => p.tipo === 'nota-prensa' || p.tipo ===
           <p class="pieza-pequena texto-suave">{CONTACTO_PRENSA.idiomas}</p>
           <h3 class="mt-3">{t('nav.apariciones')}</h3>
           <p class="pieza-pequena">
-            {lang === 'ar'
-              ? 'اطّلع على ظهور الجمعية في وسائل الإعلام.'
-              : 'Consulta los medios que se han hecho eco de la actividad de la asociación.'}
+            {'Consulta los medios que se han hecho eco de la actividad de la asociación.'}
           </p>
-          <a class="boton boton--fantasma boton--pequeno" href={localizePath('/prensa/apariciones', lang)}>{t('nav.apariciones')} →</a>
+          <a class="boton boton--fantasma boton--pequeno" href={localizePath('/prensa/apariciones')}>{t('nav.apariciones')} →</a>
         </div>
       </aside>
     </div>

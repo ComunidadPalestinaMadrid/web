@@ -2,15 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ETIQUETA_TIPO, CLASE_TIPO, type Publicacion } from '../../data/publicaciones';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, formatFecha, withBase, absoluteUrl, rewriteAssetUrls, type Lang } from '../../i18n/utils';
+import { useTranslations, localizePath, formatFecha, withBase, absoluteUrl, rewriteAssetUrls } from '../../i18n/utils';
 
-interface Props { pub: Publicacion; lang: Lang; relacionadas: Publicacion[]; }
-const { pub, lang, relacionadas } = Astro.props;
-const t = useTranslations(lang);
-const f = formatFecha(pub.date, lang);
+interface Props { pub: Publicacion; relacionadas: Publicacion[]; }
+const { pub, relacionadas } = Astro.props;
+const t = useTranslations();
+const f = formatFecha(pub.date);
 const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
 ---
-<BaseLayout lang={lang} title={pub.title} description={pub.resumen} image={pub.portada}>
+<BaseLayout title={pub.title} description={pub.resumen} image={pub.portada}>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
@@ -23,9 +23,9 @@ const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
   <section class="pagina-cabecera">
     <div class="contenedor">
       <nav class="migas" aria-label="Migas de pan">
-        <a href={localizePath('/', lang)}>{t('nav.inicio')}</a> /
-        <a href={localizePath('/publicaciones', lang)}>{t('pub.titulo')}</a> /
-        <a href={localizePath('/publicaciones/tipo/' + pub.tipo, lang)}>{t(ETIQUETA_TIPO[pub.tipo])}</a>
+        <a href={localizePath('/')}>{t('nav.inicio')}</a> /
+        <a href={localizePath('/publicaciones')}>{t('pub.titulo')}</a> /
+        <a href={localizePath('/publicaciones/tipo/' + pub.tipo)}>{t(ETIQUETA_TIPO[pub.tipo])}</a>
       </nav>
       <div class="articulo-cabecera">
         <span class={'etiqueta ' + CLASE_TIPO[pub.tipo]}>{t(ETIQUETA_TIPO[pub.tipo])}</span>
@@ -46,22 +46,20 @@ const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
         <div class="panel panel--sticky">
           <h3>{t('pub.archivo')}</h3>
           <p class="pieza-pequena texto-suave">
-            {lang === 'ar'
-              ? 'هذا المنشور محفوظ من أرشيف الجمعية (2017-2024) ومتاح حاليًا بالإسبانية.'
-              : 'Esta publicación procede del archivo histórico de la asociación (2017-2024).'}
+            {'Esta publicación procede del archivo histórico de la asociación (2017-2024).'}
           </p>
           <ul class="lista-enlaces pieza-pequena">
             {esAntigua && (
               <li><a href={pub.originalUrl} rel="noopener" target="_blank">{t('common.webAntigua')} ↗</a></li>
             )}
-            <li><a href={localizePath('/publicaciones', lang)}>{t('common.volver')}</a></li>
+            <li><a href={localizePath('/publicaciones')}>{t('common.volver')}</a></li>
           </ul>
           {relacionadas.length > 0 && (
             <>
               <h3 class="mt-3">{t('common.ultimasPublicaciones')}</h3>
               <ul class="lista-enlaces pieza-pequena">
                 {relacionadas.map((r) => (
-                  <li><a href={localizePath('/publicaciones/' + r.slug, lang)}>{r.title}</a></li>
+                  <li><a href={localizePath('/publicaciones/' + r.slug)}>{r.title}</a></li>
                 ))}
               </ul>
             </>

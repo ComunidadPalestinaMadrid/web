@@ -1,4 +1,4 @@
-import { ui, defaultLang, type Lang } from './ui';
+import { ui } from './ui';
 import { SITE } from '../data/site';
 
 /* ---------------------------------------------------------------------------
@@ -42,66 +42,44 @@ export function rewriteAssetUrls(html: string): string {
   return html.replace(/((?:src|href)=")\/(images|documentos)\//g, (_m, attr: string, dir: string) => attr + BASE + '/' + dir + '/');
 }
 
+/** Ruta interna normalizada y con el prefijo base: '/publicaciones' -> '/web/publicaciones/' */
+export function localizePath(path: string): string {
+  const clean = ('/' + path.replace(/^\/+|\/+$/g, '')).replace(/\/$/, '');
+  return withBase(clean === '' ? '/' : clean + '/');
+}
+
+/** Ruta actual sin el prefijo de despliegue. */
+export function currentPath(url: URL): string {
+  return stripBase(url.pathname);
+}
+
 /* ---------------------------------------------------------------------------
-   Idioma
+   Textos
    --------------------------------------------------------------------------- */
 
-export function getLangFromUrl(url: URL): Lang {
-  const [, first] = url.pathname.split('/');
-  return first === 'ar' ? 'ar' : defaultLang;
-}
-
-export function useTranslations(lang: Lang) {
+export function useTranslations() {
   return function t(key: keyof (typeof ui)['es']): string {
-    return (ui[lang] as Record<string, string>)[key] ?? (ui[defaultLang] as Record<string, string>)[key];
+    return (ui.es as Record<string, string>)[key] ?? String(key);
   };
-}
-
-/** Devuelve la ruta localizada y con el prefijo base: es -> '/web/', ar -> '/web/ar/...' */
-export function localizePath(path: string, lang: Lang): string {
-  const clean = ('/' + path.replace(/^\/+|\/+$/g, '')).replace(/\/$/, '');
-  const localized = lang === defaultLang
-    ? (clean === '' ? '/' : clean + '/')
-    : ('/ar' + clean + '/').replace(/\/\/+$/g, '/');
-  return withBase(localized);
-}
-
-/** Quita el prefijo de idioma: /ar/contacto -> /contacto */
-export function stripLang(pathname: string): string {
-  const p = pathname.replace(/\/ar(?=\/|$)/, '');
-  return p === '' ? '/' : p;
-}
-
-/** Ruta sin idioma ni prefijo de despliegue. */
-export function currentPath(url: URL): string {
-  return stripLang(stripBase(url.pathname));
-}
-
-export function dir(lang: Lang): 'ltr' | 'rtl' {
-  return lang === 'ar' ? 'rtl' : 'ltr';
 }
 
 /* ---------------------------------------------------------------------------
    Fechas
    --------------------------------------------------------------------------- */
 
-export function formatFecha(iso: string, lang: Lang): string {
+export function formatFecha(iso: string): string {
   const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
-  return new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'es-ES', {
-    day: 'numeric', month: 'long', year: 'numeric'
-  }).format(d);
+  return new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
 }
 
-export function formatFechaCorta(iso: string, lang: Lang): { dia: string; mes: string; anio: string } {
+export function formatFechaCorta(iso: string): { dia: string; mes: string; anio: string } {
   const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
-  const loc = lang === 'ar' ? 'ar-EG' : 'es-ES';
   return {
-    dia: new Intl.DateTimeFormat(loc, { day: 'numeric' }).format(d),
-    mes: new Intl.DateTimeFormat(loc, { month: 'short' }).format(d).replace('.', ''),
-    anio: new Intl.DateTimeFormat(loc, { year: 'numeric' }).format(d)
+    dia: new Intl.DateTimeFormat('es-ES', { day: 'numeric' }).format(d),
+    mes: new Intl.DateTimeFormat('es-ES', { month: 'short' }).format(d).replace('.', ''),
+    anio: new Intl.DateTimeFormat('es-ES', { year: 'numeric' }).format(d)
   };
 }
 
 export const site = SITE;
-export { ui, defaultLang };
-export type { Lang };
+export { ui };

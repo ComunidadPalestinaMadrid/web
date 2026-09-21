@@ -4,7 +4,7 @@ Sitio web estático construido con **Astro** para la Asociación de la Comunidad
 Palestina Jerusalén (AHPJ), conocida como **Comunidad Palestina de Madrid**.
 
 - **Dominio previsto:** https://comunidadpalestina.madrid
-- **Idiomas:** español (`/`) y árabe (`/ar/`, con maquetación RTL)
+- **Idioma:** español. La web se desarrolla **sin traducciones** por ahora (ver "Traducción" al final)
 - **Diseño:** predominantemente blanco, con acentos en los colores palestinos
   (rojo `#ce1126`, verde `#007a3d`, negro) y filetes con la bandera.
 
@@ -42,18 +42,16 @@ src/
     eventos.ts               Calendario de eventos (y generador .ics)
     prensa.ts                Apariciones en medios
   i18n/
-    ui.ts                    Textos de interfaz en español y árabe
-    utils.ts                 Utilidades de idioma, rutas y fechas
+    ui.ts                    Textos de la interfaz (solo español)
+    utils.ts                 Utilidades de rutas, textos y fechas
   layouts/BaseLayout.astro   Cabecera HTML, metadatos y SEO
-  pages/                     Rutas en español
-  pages/ar/                  Mismas rutas en árabe
+  pages/                     Rutas del sitio
   styles/global.css          Sistema de diseño
 scripts/                     Scripts de migración y verificación (uso puntual)
 ```
 
-Las páginas comparten componentes: `src/pages/*.astro` y `src/pages/ar/*.astro` son
-envoltorios finos que pasan `lang="es"` o `lang="ar"` a los componentes de
-`src/components/pages/`.
+Las páginas de `src/pages/` son envoltorios finos que renderizan los componentes de
+`src/components/pages/`, donde vive el contenido de cada sección.
 
 ---
 
@@ -65,7 +63,7 @@ envoltorios finos que pasan `lang="es"` o `lang="ar"` a los componentes de
 | Secciones del menú | `src/data/nav.ts` |
 | Eventos del calendario | `src/data/eventos.ts` |
 | Apariciones en prensa | `src/data/prensa.ts` |
-| Textos de interfaz (ambos idiomas) | `src/i18n/ui.ts` |
+| Textos de la interfaz | `src/i18n/ui.ts` |
 | Publicaciones | `src/data/publicaciones/*.json` |
 | Aviso legal | `src/components/pages/AvisoLegalPage.astro` |
 | Cole Árabe | `src/components/pages/ColeArabePage.astro` |
@@ -111,9 +109,6 @@ Se cargan solo los pesos y el subconjunto latino necesarios (Barlow Condensed 40
 Lora 400/400 cursiva/700), desde `src/layouts/BaseLayout.astro`. Las variables
 `--fuente` y `--fuente-texto` de `src/styles/global.css` controlan todo el sistema: para
 cambiar de tipografía basta con editar esas dos líneas.
-
-La versión en árabe mantiene su propia pila de fuentes (`--fuente-ar`) porque ni Barlow
-Condensed ni Lora incluyen glifos árabes.
 
 ---
 
@@ -226,6 +221,7 @@ devuelve 404); el enlace se ha conservado apuntando al original.
 ### Prensa
 - [ ] Revisar los enlaces a medios (algunos son de 2017 y pueden haber caducado)
 
-### Traducción al árabe
-- [ ] Los textos institucionales ya están traducidos; las publicaciones del archivo
-      histórico permanecen en español, como se indica en su ficha
+### Traducción
+- [ ] La web es **solo en español** por ahora. Si más adelante se traduce, el punto de
+      partida es `src/i18n/ui.ts` (textos de interfaz) y volver a añadir los idiomas en
+      `astro.config.mjs` y las rutas correspondientes.

@@ -3,20 +3,11 @@ import { withBase } from '../../i18n/utils';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PaginaCabecera from '../PaginaCabecera.astro';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import { useTranslations, localizePath } from '../../i18n/utils';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
-const t = useTranslations(lang);
-const ar = lang === 'ar';
+const t = useTranslations();
 
-const oferta = ar ? [
-  { titulo: 'اللغة العربية للأطفال', texto: 'دروس أسبوعية للقراءة والكتابة والمحادثة، مع أنشطة ثقافية وأغانٍ وحكايات.' },
-  { titulo: 'العربية للبالغين', texto: 'مستويات من المبتدئ إلى المتقدم: قواعد، قراءة، كتابة ومحادثة.' },
-  { titulo: 'اللهجة الفلسطينية', texto: 'ورشات محادثة للتعرف على اللهجة الفلسطينية والتعبيرات اليومية.' },
-  { titulo: 'الثقافة والتراث', texto: 'ورشات عن التطريز والدبكة والمطبخ الفلسطيني والذاكرة الشعبية.' },
-  { titulo: 'الدعم المدرسي', texto: 'متابعة دراسية ودعم في الواجبات لتلاميذ المدرسة.' }
-] : [
+const oferta = [
   { titulo: 'Árabe para niños y niñas', texto: 'Clases semanales de lectura, escritura y conversación con actividades culturales, canciones y cuentos.' },
   { titulo: 'Árabe para personas adultas', texto: 'Niveles inicial, intermedio y avanzado: gramática, lectura, escritura y conversación.' },
   { titulo: 'Dialecto palestino', texto: 'Talleres de conversación para acercarse al dialecto palestino y a las expresiones del día a día.' },
@@ -24,46 +15,35 @@ const oferta = ar ? [
   { titulo: 'Apoyo escolar', texto: 'Refuerzo y acompañamiento en las tareas para el alumnado de la escuela.' }
 ];
 
-const horarios = ar ? [
-  { grupo: 'الأطفال (6-11 سنة)', dia: 'السبت', hora: '10:00 - 12:00', modo: 'حضوري' },
-  { grupo: 'الفتيان (12-17 سنة)', dia: 'السبت', hora: '12:00 - 14:00', modo: 'حضوري' },
-  { grupo: 'البالغون - مبتدئ', dia: 'الثلاثاء', hora: '18:30 - 20:00', modo: 'حضوري / عن بعد' },
-  { grupo: 'البالغون - متوسط', dia: 'الخميس', hora: '18:30 - 20:00', modo: 'حضوري / عن بعد' }
-] : [
+const horarios = [
   { grupo: 'Infantil (6-11 años)', dia: 'Sábado', hora: '10:00 - 12:00', modo: 'Presencial' },
   { grupo: 'Juvenil (12-17 años)', dia: 'Sábado', hora: '12:00 - 14:00', modo: 'Presencial' },
   { grupo: 'Adultos inicial', dia: 'Martes', hora: '18:30 - 20:00', modo: 'Presencial / online' },
   { grupo: 'Adultos intermedio', dia: 'Jueves', hora: '18:30 - 20:00', modo: 'Presencial / online' }
 ];
 ---
-<BaseLayout lang={lang} title={t('cole.titulo')} description={t('cole.intro')}>
+<BaseLayout title={t('cole.titulo')} description={t('cole.intro')}>
   <PaginaCabecera
     eyebrow={t('nav.cole')}
     titulo={t('cole.titulo')}
     entradilla={t('cole.intro')}
-    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('cole.titulo') }]}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/') }, { texto: t('cole.titulo') }]}
   />
   <section class="seccion">
     <div class="contenedor">
       <div class="aviso mb-3">
-        {ar
-          ? 'هذا المحتوى نموذجي مؤقت، وسيُستكمل بالمعلومات النهائية عن المدرسة.'
-          : 'Contenido de ejemplo: la asociación completará próximamente la información definitiva del colegio (profesorado, calendario y precios).'}
+        {'Contenido de ejemplo: la asociación completará próximamente la información definitiva del colegio (profesorado, calendario y precios).'}
       </div>
       <div class="dos-columnas">
         <div class="prosa">
-          <h2>{ar ? 'من نحن' : 'La escuela'}</h2>
+          <h2>{'La escuela'}</h2>
           <p>
-            {ar
-              ? 'المدرسة العربية – القدس هي المشروع التربوي للجمعية الإسبانية الفلسطينية في مدريد. نُدرّس اللغة العربية وننقل الثقافة والتراث الفلسطيني إلى الأجيال الجديدة وإلى كل من يرغب في التعلّم.'
-              : 'La Escuela Árabe Jerusalén es el proyecto educativo de la Asociación de la Comunidad Hispano Palestina Jerusalén. Enseñamos lengua árabe y transmitimos la cultura y el patrimonio palestino a las nuevas generaciones y a todas las personas que quieran aprender.'}
+            {'La Escuela Árabe Jerusalén es el proyecto educativo de la Asociación de la Comunidad Hispano Palestina Jerusalén. Enseñamos lengua árabe y transmitimos la cultura y el patrimonio palestino a las nuevas generaciones y a todas las personas que quieran aprender.'}
           </p>
           <p>
-            {ar
-              ? 'اللغة العربية لغة أكثر من 400 مليون شخص، وهي مفتاح للتواصل مع الثقافة العربية وفهم قضية فلسطين.'
-              : 'El árabe es la lengua de más de 400 millones de personas y una puerta directa a la cultura árabe y a la comprensión de la causa palestina.'}
+            {'El árabe es la lengua de más de 400 millones de personas y una puerta directa a la cultura árabe y a la comprensión de la causa palestina.'}
           </p>
-          <h2>{ar ? 'ماذا نقدّم' : 'Qué ofrecemos'}</h2>
+          <h2>{'Qué ofrecemos'}</h2>
           <div class="rejilla rejilla--2">
             {oferta.map((o) => (
               <div class="panel">
@@ -72,14 +52,14 @@ const horarios = ar ? [
               </div>
             ))}
           </div>
-          <h2>{ar ? 'المجموعات والتوقيت' : 'Grupos y horarios'}</h2>
+          <h2>{'Grupos y horarios'}</h2>
           <table>
             <thead>
               <tr>
-                <th>{ar ? 'المجموعة' : 'Grupo'}</th>
-                <th>{ar ? 'اليوم' : 'Día'}</th>
-                <th>{ar ? 'الساعة' : 'Horario'}</th>
-                <th>{ar ? 'النمط' : 'Modalidad'}</th>
+                <th>{'Grupo'}</th>
+                <th>{'Día'}</th>
+                <th>{'Horario'}</th>
+                <th>{'Modalidad'}</th>
               </tr>
             </thead>
             <tbody>
@@ -88,11 +68,11 @@ const horarios = ar ? [
               ))}
             </tbody>
           </table>
-          <h2>{ar ? 'التسجيل' : 'Matrícula'}</h2>
+          <h2>{'Matrícula'}</h2>
           <ol>
-            <li>{ar ? 'املأ استمارة التسجيل.' : 'Rellena el formulario de inscripción.'}</li>
-            <li>{ar ? 'سنتواصل معك لتحديد المستوى والمجموعة.' : 'Nos pondremos en contacto para asignar nivel y grupo.'}</li>
-            <li>{ar ? 'أكمل التسجيل قبل بداية الدورة.' : 'Confirma la matrícula antes del inicio del curso.'}</li>
+            <li>{'Rellena el formulario de inscripción.'}</li>
+            <li>{'Nos pondremos en contacto para asignar nivel y grupo.'}</li>
+            <li>{'Confirma la matrícula antes del inicio del curso.'}</li>
           </ol>
           <p class="boton-fila">
             <a class="boton boton--primario" href={SITE.formularioContacto} target="_blank" rel="noopener">{t('cole.ctaContacto')} ↗</a>
@@ -102,12 +82,12 @@ const horarios = ar ? [
         <aside>
           <div class="panel panel--sticky">
             <img src={withBase('/images/uploads/e0db5-94e1c-elbordadoysurolenlaidentidadpalestina.jpg')} alt="" loading="lazy" style="border-radius:10px" />
-            <h3 class="mt-3">{ar ? 'معلومات التواصل' : 'Información y matrícula'}</h3>
+            <h3 class="mt-3">{'Información y matrícula'}</h3>
             <ul class="lista-enlaces pieza-pequena">
               <li><a href={'mailto:' + SITE.emails.cole}>{SITE.emails.cole}</a></li>
-              <li><a href={SITE.formularioContacto} target="_blank" rel="noopener">{ar ? 'استمارة التسجيل' : 'Formulario de inscripción'} ↗</a></li>
+              <li><a href={SITE.formularioContacto} target="_blank" rel="noopener">{'Formulario de inscripción'} ↗</a></li>
               <li><a href={SITE.instagram.url} target="_blank" rel="noopener">{SITE.instagram.usuario} ↗</a></li>
-              <li><a href={localizePath('/contacto', lang)}>{t('nav.contacto')}</a></li>
+              <li><a href={localizePath('/contacto')}>{t('nav.contacto')}</a></li>
             </ul>
           </div>
         </aside>

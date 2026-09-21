@@ -1,20 +1,16 @@
 ---
 import { NAV } from '../data/nav';
 import { SITE } from '../data/site';
-import { useTranslations, localizePath, currentPath, withBase, type Lang } from '../i18n/utils';
+import { useTranslations, localizePath, currentPath, withBase } from '../i18n/utils';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+const t = useTranslations();
 const base = currentPath(Astro.url);
-// En la pagina 404 el selector de idioma apunta al inicio (no existe /404/).
-const baseIdioma = base.startsWith('/404') ? '/' : base;
 const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.startsWith(p + '/'));
 ---
 <header class="cabecera">
   <div class="filete" aria-hidden="true"></div>
   <div class="contenedor cabecera__interior">
-    <a class="marca" href={localizePath('/', lang)}>
+    <a class="marca" href={localizePath('/')}>
       <img src={withBase('/images/logo.png')} alt="" width="44" height="44" />
       <span class="marca__texto">
         <span class="marca__nombre">{SITE.corto}</span>
@@ -26,7 +22,7 @@ const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.s
       <span class="barra"></span><span class="barra"></span><span class="barra"></span>
       <span class="salto">{t('common.abrirMenu')}</span>
     </label>
-    <nav class="nav" aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Navegación principal'}>
+    <nav class="nav" aria-label="Navegación principal">
       <ul class="nav__lista">
         {NAV.map((item) =>
           'children' in item ? (
@@ -42,7 +38,7 @@ const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.s
               <ul class="nav__sub">
                 {item.children.map((hijo) => (
                   <li>
-                    <a class="nav__enlace" href={localizePath(hijo.path, lang)} aria-current={esActivo(hijo.path) ? 'page' : undefined}>
+                    <a class="nav__enlace" href={localizePath(hijo.path)} aria-current={esActivo(hijo.path) ? 'page' : undefined}>
                       {t(hijo.key)}
                     </a>
                   </li>
@@ -51,16 +47,12 @@ const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.s
             </li>
           ) : (
             <li>
-              <a class="nav__enlace" href={localizePath(item.path, lang)} aria-current={esActivo(item.path) ? 'page' : undefined}>
+              <a class="nav__enlace" href={localizePath(item.path)} aria-current={esActivo(item.path) ? 'page' : undefined}>
                 {t(item.key)}
               </a>
             </li>
           )
         )}
-        <li class="idioma">
-          <a href={localizePath(baseIdioma, 'es')} aria-current={lang === 'es' ? 'true' : undefined} lang="es">ES</a>
-          <a href={localizePath(baseIdioma, 'ar')} aria-current={lang === 'ar' ? 'true' : undefined} lang="ar">ع</a>
-        </li>
       </ul>
     </nav>
   </div>

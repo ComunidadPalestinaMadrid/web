@@ -2,38 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PaginaCabecera from '../PaginaCabecera.astro';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import { useTranslations, localizePath } from '../../i18n/utils';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
-const t = useTranslations(lang);
-const ar = lang === 'ar';
+const t = useTranslations();
 
 // Modalidades de socio, presentadas como tarjetas de precios
-const modalidades = ar ? [
-  {
-    clave: 'participa.pleno' as const,
-    cuando: 'للأشخاص الفلسطينيين وأزواجهم',
-    periodo: 'رسوم سنوية',
-    incluye: [
-      'حق التصويت في الجمعية العامة',
-      'المشاركة في جميع أنشطة الجمعية'
-    ],
-    excluye: [] as string[],
-    destacado: true
-  },
-  {
-    clave: 'participa.simpatizante' as const,
-    cuando: 'أي شخص متضامن مع القضية الفلسطينية',
-    periodo: 'رسوم اختيارية',
-    incluye: [
-      'المشاركة في جميع أنشطة الجمعية',
-      'مساهمة تطوعية بـ 5 يورو'
-    ],
-    excluye: ['دون حق التصويت في الجمعية العامة'],
-    destacado: false
-  }
-] : [
+const modalidades = [
   {
     clave: 'participa.pleno' as const,
     cuando: 'Personas palestinas y sus cónyuges',
@@ -58,26 +32,20 @@ const modalidades = ar ? [
   }
 ];
 
-const donacionesIntro = ar
-  ? 'إذا رغبت في دعم عمل الجمعية ماليًا، فهذه هي الطرق المتاحة:'
-  : 'Si quieres apoyar económicamente el trabajo de la asociación, estas son las vías disponibles:';
+const donacionesIntro = 'Si quieres apoyar económicamente el trabajo de la asociación, estas son las vías disponibles:';
 
-const donaciones = ar ? [
-  { titulo: 'تحويل بنكي', texto: 'الحساب البنكي للجمعية: [قيد الإكمال].' },
-  { titulo: 'بيزوم', texto: 'رقم بيزوم للتبرعات: [قيد الإكمال].' },
-  { titulo: 'تبرعات عينية', texto: 'مواد أو خدمات أو مساحات: راسلنا وسننسّق معك.' }
-] : [
+const donaciones = [
   { titulo: 'Transferencia bancaria', texto: 'Cuenta de la asociación: [PENDIENTE].' },
   { titulo: 'Bizum', texto: 'Número para donaciones: [PENDIENTE].' },
   { titulo: 'Donaciones en especie', texto: 'Materiales, servicios o espacios: escríbenos y lo coordinamos.' }
 ];
 ---
-<BaseLayout lang={lang} title={t('participa.titulo')} description={t('participa.intro')}>
+<BaseLayout title={t('participa.titulo')} description={t('participa.intro')}>
   <PaginaCabecera
     eyebrow={t('nav.participa')}
     titulo={t('participa.titulo')}
     entradilla={t('participa.intro')}
-    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('participa.titulo') }]}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/') }, { texto: t('participa.titulo') }]}
   />
 
   <!-- Modalidades de socio -->

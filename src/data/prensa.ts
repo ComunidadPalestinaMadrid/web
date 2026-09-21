@@ -103,5 +103,5 @@ export const APARICIONES: Aparicion[] = [
 
 export const CONTACTO_PRENSA = {
   email: 'c.hispano.palestina.madrid@gmail.com',
-  idiomas: 'Español / English / العربية'
+  idiomas: 'Español / English'
 };

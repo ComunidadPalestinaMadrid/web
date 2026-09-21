@@ -1,17 +1,16 @@
 ---
-import { useTranslations, withBase, type Lang } from '../i18n/utils';
-import { tituloEvento, descripcionEvento, lugarEvento, enlaceGoogleCalendar, type Evento } from '../data/eventos';
+import { useTranslations, withBase } from '../i18n/utils';
+import { enlaceGoogleCalendar, type Evento } from '../data/eventos';
 
-interface Props { evento: Evento; lang: Lang; }
-const { evento, lang } = Astro.props;
-const t = useTranslations(lang);
-const ar = lang === 'ar';
+interface Props { evento: Evento; }
+const { evento } = Astro.props;
+const t = useTranslations();
 const claves: Record<string, string> = {
-  concentracion: 'cal.concentracion', cultural: 'cal.cultural',
+  'movilización': 'cal.movilizacion', cultural: 'cal.cultural',
   institucional: 'cal.institucional', formacion: 'cal.formacion'
 };
 // Fecha larga y destacada (sin el cuadro de fecha)
-const fechaBruta = new Date(evento.fecha + 'T12:00:00').toLocaleDateString(ar ? 'ar-EG' : 'es-ES', {
+const fechaBruta = new Date(evento.fecha + 'T12:00:00').toLocaleDateString('es-ES', {
   weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
 });
 const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (evento.hora ? ' · ' + evento.hora + ' h' : '');
@@ -21,20 +20,20 @@ const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (event
     <div class="evento__cartel">
       <img
         src={withBase(evento.imagen)}
-        alt={ar ? 'ملصق الفعالية' : 'Cartel del evento'}
+        alt={'Cartel del evento'}
         loading="lazy"
         decoding="async"
       />
     </div>
   )}
   <div class="evento__cuerpo">
-    <span class={'etiqueta ' + (evento.categoria === 'concentracion' ? 'etiqueta--comunicado' : evento.categoria === 'formacion' ? 'etiqueta--nota-prensa' : 'etiqueta--noticia')}>
+    <span class={'etiqueta ' + (evento.categoria === 'movilización' ? 'etiqueta--comunicado' : evento.categoria === 'formacion' ? 'etiqueta--nota-prensa' : 'etiqueta--noticia')}>
       {t(claves[evento.categoria])}
     </span>
     <p class="evento__cuando">{cuando}</p>
-    <h3 class="evento__titulo">{tituloEvento(evento, lang)}</h3>
-    <p class="evento__desc">{descripcionEvento(evento, lang)}</p>
-    <p class="evento__lugar">{t('common.lugar')}: {lugarEvento(evento, lang)}</p>
+    <h3 class="evento__titulo">{evento.titulo}</h3>
+    <p class="evento__desc">{evento.descripcion}</p>
+    <p class="evento__lugar">{t('common.lugar')}: {evento.lugar}</p>
     <p class="evento__acciones">
       <a class="boton boton--primario boton--pequeno" href={enlaceGoogleCalendar(evento)} target="_blank" rel="noopener">
         {t('cal.googleAdd')} ↗

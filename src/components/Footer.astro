@@ -2,11 +2,9 @@
 import { withBase } from '../i18n/utils';
 import { NAV_ENLACES } from '../data/nav';
 import { SITE } from '../data/site';
-import { useTranslations, localizePath, type Lang } from '../i18n/utils';
+import { useTranslations, localizePath } from '../i18n/utils';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+const t = useTranslations();
 const anio = new Date().getFullYear();
 ---
 <footer class="pie">
@@ -22,9 +20,7 @@ const anio = new Date().getFullYear();
           </span>
         </div>
         <p class="pie__texto">
-          {lang === 'ar'
-            ? 'جمعية غير ربحية تأسست عام 1988 في مدريد للعمل من أجل حقوق الشعب الفلسطيني.'
-            : 'La Asociación de la Comunidad Hispano Palestina Jerusalén es la Comunidad Palestina de Madrid. Fundada en 1988, se compromete con las personas palestinas en la Comunidad de Madrid y con la liberación de Palestina.'}
+          {'La Asociación de la Comunidad Hispano Palestina Jerusalén es la Comunidad Palestina de Madrid. Fundada en 1988, se compromete con las personas palestinas en la Comunidad de Madrid y con la liberación de Palestina.'}
         </p>
       </div>
 
@@ -32,7 +28,7 @@ const anio = new Date().getFullYear();
         <h3>{t('footer.explora')}</h3>
         <ul>
           {NAV_ENLACES.map((item) => (
-            <li><a href={localizePath(item.path, lang)}>{t(item.key)}</a></li>
+            <li><a href={localizePath(item.path)}>{t(item.key)}</a></li>
           ))}
         </ul>
       </div>
@@ -58,9 +54,9 @@ const anio = new Date().getFullYear();
       <div>
         <h3>{t('footer.sobre')}</h3>
         <ul>
-          <li><a href={localizePath('/quienes-somos', lang)}>{t('footer.junta')}</a></li>
-          <li><a href={localizePath('/calendario', lang)}>{t('nav.calendario')}</a></li>
-          <li><a href={localizePath('/aviso-legal', lang)}>{t('footer.legal')}</a></li>
+          <li><a href={localizePath('/quienes-somos')}>{t('footer.junta')}</a></li>
+          <li><a href={localizePath('/calendario')}>{t('nav.calendario')}</a></li>
+          <li><a href={localizePath('/aviso-legal')}>{t('footer.legal')}</a></li>
           <li><a href={SITE.webAntigua} rel="noopener" target="_blank">{t('common.webAntigua')}</a></li>
         </ul>
       </div>

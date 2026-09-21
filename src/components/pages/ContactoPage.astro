@@ -3,19 +3,16 @@ import { withBase } from '../../i18n/utils';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PaginaCabecera from '../PaginaCabecera.astro';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import { useTranslations, localizePath } from '../../i18n/utils';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
-const t = useTranslations(lang);
-const ar = lang === 'ar';
+const t = useTranslations();
 ---
-<BaseLayout lang={lang} title={t('contacto.titulo')} description={t('contacto.intro')}>
+<BaseLayout title={t('contacto.titulo')} description={t('contacto.intro')}>
   <PaginaCabecera
     eyebrow={t('nav.contacto')}
     titulo={t('contacto.titulo')}
     entradilla={t('contacto.intro')}
-    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('contacto.titulo') }]}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/') }, { texto: t('contacto.titulo') }]}
   />
   <section class="seccion">
     <div class="contenedor dos-columnas">
@@ -50,9 +47,7 @@ const ar = lang === 'ar';
         <div class="prosa mt-3">
           <h2>{t('contacto.sugerencias')}</h2>
           <p>
-            {ar
-              ? 'نرحّب بكل اقتراح أو ملاحظة تساعدنا على تحسين عمل الجمعية. استخدم النموذج أو راسلنا مباشرة.'
-              : 'Cualquier sugerencia o comentario que nos ayude a mejorar el trabajo de la asociación es bienvenido. Puedes usar el formulario o escribirnos directamente.'}
+            {'Cualquier sugerencia o comentario que nos ayude a mejorar el trabajo de la asociación es bienvenido. Puedes usar el formulario o escribirnos directamente.'}
           </p>
         </div>
       </div>

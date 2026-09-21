@@ -3,21 +3,11 @@ import { withBase } from '../../i18n/utils';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PaginaCabecera from '../PaginaCabecera.astro';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import { useTranslations, localizePath } from '../../i18n/utils';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
-const t = useTranslations(lang);
-const ar = lang === 'ar';
+const t = useTranslations();
 
-const fines = ar ? [
-  'التعريف بقضية فلسطين وبحقوق الشعب الفلسطيني في مدريد وإسبانيا.',
-  'المطالبة بحق العودة للاجئين الفلسطينيين وفقًا لقرارات الأمم المتحدة.',
-  'إدانة الاحتلال والاستيطان والتمييز العنصري والمطالبة بإنهائه.',
-  'دعم الجالية الفلسطينية المقيمة في إسبانيا ومرافقتها.',
-  'نشر الثقافة الفلسطينية واللغة العربية عبر المدرسة العربية.',
-  'التضامن مع الحركات الاجتماعية والإنسانية التي تدافع عن حقوق الإنسان.'
-] : [
+const fines = [
   'Visibilizar la causa palestina y los derechos del pueblo palestino en Madrid y en España.',
   'Reclamar el derecho al retorno de las personas refugiadas palestinas, recogido en las resoluciones de Naciones Unidas.',
   'Denunciar la ocupación, la colonización, el apartheid y exigir su fin.',
@@ -26,13 +16,7 @@ const fines = ar ? [
   'Solidarizarnos con los movimientos sociales y humanitarios que defienden los derechos humanos.'
 ];
 
-const junta = ar ? [
-  { cargo: 'الرئيس', nombre: SITE.presidente || '[قيد الإكمال]' },
-  { cargo: 'نائب الرئيس', nombre: '[قيد الإكمال]' },
-  { cargo: 'أمين السر', nombre: '[قيد الإكمال]' },
-  { cargo: 'أمين الصندوق', nombre: '[قيد الإكمال]' },
-  { cargo: 'أعضاء', nombre: '[قيد الإكمال]' }
-] : [
+const junta = [
   { cargo: 'Presidencia', nombre: SITE.presidente || '[PENDIENTE]' },
   { cargo: 'Vicepresidencia', nombre: '[PENDIENTE]' },
   { cargo: 'Secretaría', nombre: '[PENDIENTE]' },
@@ -40,30 +24,24 @@ const junta = ar ? [
   { cargo: 'Vocales', nombre: '[PENDIENTE]' }
 ];
 ---
-<BaseLayout lang={lang} title={t('quienes.titulo')} description={t('quienes.intro')}>
+<BaseLayout title={t('quienes.titulo')} description={t('quienes.intro')}>
   <PaginaCabecera
     eyebrow={t('nav.quienes')}
     titulo={t('quienes.titulo')}
     entradilla={t('quienes.intro')}
-    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('quienes.titulo') }]}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/') }, { texto: t('quienes.titulo') }]}
   />
   <section class="seccion">
     <div class="contenedor dos-columnas">
       <div class="prosa">
         <p>
-          {ar
-            ? 'تأسست جمعية الجالية الإسبانية الفلسطينية – القدس عام 1988 في مدريد. منذ ذلك الحين نشارك وننظّم الفعاليات التي تُظهر وجود الفلسطينيين في المهجر، ونذكّر الحكومات بحقنا المشروع في العودة إلى أرضنا، وهو حق مكرّس في قرارات الأمم المتحدة ولا يزال الاحتلال ينكره.'
-            : 'La Asociación de la Comunidad Hispano Palestina Jerusalén fue fundada en 1988 en Madrid. Desde entonces participamos y organizamos actos que visibilizan a los palestinos y las palestinas en la diáspora. Recordamos a los gobiernos nuestro legítimo derecho a volver a nuestras tierras: el retorno de las personas refugiadas palestinas, recogido en las resoluciones de la ONU y que hasta el momento el Estado ocupante de Israel ha negado impunemente.'}
+          {'La Asociación de la Comunidad Hispano Palestina Jerusalén fue fundada en 1988 en Madrid. Desde entonces participamos y organizamos actos que visibilizan a los palestinos y las palestinas en la diáspora. Recordamos a los gobiernos nuestro legítimo derecho a volver a nuestras tierras: el retorno de las personas refugiadas palestinas, recogido en las resoluciones de la ONU y que hasta el momento el Estado ocupante de Israel ha negado impunemente.'}
         </p>
         <p>
-          {ar
-            ? 'نطالب بإنهاء الاحتلال الذي يُبقي وطننا مقهورًا وداميًا ومُهانًا، محرومًا من أبسط الحقوق الأساسية.'
-            : 'Pedimos el fin de la ocupación que mantiene a nuestra patria oprimida, ensangrentada y pisoteada, privada de los más mínimos derechos fundamentales.'}
+          {'Pedimos el fin de la ocupación que mantiene a nuestra patria oprimida, ensangrentada y pisoteada, privada de los más mínimos derechos fundamentales.'}
         </p>
         <p>
-          {ar
-            ? 'تتكوّن الجمعية اليوم من أعضاء من الجالية الفلسطينية وأشخاص متضامنين في مدريد.'
-            : 'Actualmente la asociación está formada por personas de la comunidad palestina y personas solidarias residentes en Madrid.'}
+          {'Actualmente la asociación está formada por personas de la comunidad palestina y personas solidarias residentes en Madrid.'}
         </p>
 
         <h2>{t('quienes.fines')}</h2>
@@ -73,13 +51,11 @@ const junta = ar ? [
 
         <h2>{t('quienes.historia')}</h2>
         <figure>
-          <img src={withBase('/images/uploads/174be-f9289-jerusalem-1712855_640.jpg')} alt={ar ? 'القدس' : 'Jerusalén'} loading="lazy" />
-          <figcaption>{ar ? 'القدس، المدينة المقدسة' : 'Jerusalén, ciudad de referencia para la asociación'}</figcaption>
+          <img src={withBase('/images/uploads/174be-f9289-jerusalem-1712855_640.jpg')} alt={'Jerusalén'} loading="lazy" />
+          <figcaption>{'Jerusalén, ciudad de referencia para la asociación'}</figcaption>
         </figure>
         <p>
-          {ar
-            ? 'منذ عام 1988 وحتى اليوم، تشارك الجمعية في الوقفات والمناسبات والمبادرات التضامنية في مدريد وفي مختلف أنحاء إسبانيا، وتعمل مع منظمات وشبكات اجتماعية من أجل حقوق الشعب الفلسطيني.'
-            : 'Desde 1988 hasta hoy la asociación participa en concentraciones, actos y campañas de solidaridad en Madrid y en el resto del Estado, y colabora con organizaciones y redes sociales que trabajan por los derechos del pueblo palestino.'}
+          {'Desde 1988 hasta hoy la asociación participa en concentraciones, actos y campañas de solidaridad en Madrid y en el resto del Estado, y colabora con organizaciones y redes sociales que trabajan por los derechos del pueblo palestino.'}
         </p>
       </div>
 
@@ -94,11 +70,11 @@ const junta = ar ? [
           </ul>
         </div>
         <div class="panel panel--verde mt-3">
-          <h3>{ar ? 'بيانات الجمعية' : 'Datos de la asociación'}</h3>
+          <h3>{'Datos de la asociación'}</h3>
           <ul class="lista-enlaces pieza-pequena">
-            <li><strong>{ar ? 'التأسيس' : 'Fundación'}:</strong> {SITE.fundacion}</li>
-            <li><strong>{ar ? 'المقر' : 'Sede'}:</strong> {SITE.ciudad}</li>
-            <li><strong>{ar ? 'الاسم الكامل' : 'Denominación'}:</strong> {SITE.nombreLargo}</li>
+            <li><strong>{'Fundación'}:</strong> {SITE.fundacion}</li>
+            <li><strong>{'Sede'}:</strong> {SITE.ciudad}</li>
+            <li><strong>{'Denominación'}:</strong> {SITE.nombreLargo}</li>
           </ul>
         </div>
       </aside>
@@ -108,10 +84,10 @@ const junta = ar ? [
   <section class="seccion seccion--suave">
     <div class="contenedor">
       <div class="seccion-cabecera">
-        <span class="eyebrow">{ar ? 'الثقافة والهوية' : 'Cultura e identidad'}</span>
+        <span class="eyebrow">{'Cultura e identidad'}</span>
         <h2>{t('quienes.cultura')}</h2>
       </div>
-      <div class="prosa prosa--ancho" lang={ar ? 'es' : undefined} dir={ar ? 'ltr' : undefined}>
+      <div class="prosa prosa--ancho">
         <p>
           A pesar de la ocupación, Palestina es uno de los países que tiene mayores tasas de alfabetización.
           Entre las figuras palestinas de renombre internacional nos enorgullece contar con el poeta Mahmoud Darwish,
@@ -137,7 +113,7 @@ const junta = ar ? [
       <div class="seccion-cabecera mt-3">
         <h2>{t('quienes.gastronomia')}</h2>
       </div>
-      <div class="prosa" lang={ar ? 'es' : undefined} dir={ar ? 'ltr' : undefined}>
+      <div class="prosa">
         <p>
           Viajar a los territorios palestinos es encontrarse con una gente tremendamente hospitalaria, sonriente y amable.
           La diversidad de sabores y texturas que conforman la gastronomía palestina no pasa desapercibida. Platos
@@ -153,7 +129,7 @@ const junta = ar ? [
       <div class="rejilla rejilla--2">
         <figure class="panel">
           <img src={withBase('/images/uploads/f03d1-c223a-mapa-palestina.jpg')} alt="Mapa de Palestina" loading="lazy" style="border-radius:10px" />
-          <figcaption class="pieza-pequena texto-suave">{ar ? 'الخريطة الفيزيائية لفلسطين' : 'Mapa físico de Palestina'}</figcaption>
+          <figcaption class="pieza-pequena texto-suave">{'Mapa físico de Palestina'}</figcaption>
         </figure>
         <div class="panel panel--rojo">
           <h3>{t('quienes.poema')}</h3>

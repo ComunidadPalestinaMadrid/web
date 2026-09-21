@@ -28,11 +28,6 @@ export default defineConfig({
   site: SITE_URL,
   base: BASE_PATH,
   trailingSlash: 'ignore',
-  i18n: {
-    defaultLocale: 'es',
-    locales: ['es', 'ar'],
-    routing: { prefixDefaultLocale: false, redirectToDefaultLocale: false }
-  },
-  integrations: [sitemap({ i18n: { defaultLocale: 'es', locales: { es: 'es-ES', ar: 'ar' } } })],
+  integrations: [sitemap()],
   build: { inlineStylesheets: 'auto' }
 });
