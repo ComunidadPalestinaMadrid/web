@@ -9,29 +9,62 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const ar = lang === 'ar';
 
-const comparativa = ar ? [
-  { concepto: 'من يمكنه الانتساب', pleno: 'الفلسطينيون والفلسطينيات', simp: 'أي شخص متضامن' },
-  { concepto: 'الرسوم', pleno: 'نفس الرسوم', simp: 'نفس الرسوم' },
-  { concepto: 'حق التصويت', pleno: 'نعم', simp: 'لا' },
-  { concepto: 'الكلمة في الجمعية العامة', pleno: 'نعم', simp: 'نعم' },
-  { concepto: 'المشاركة في الأنشطة', pleno: 'نعم', simp: 'نعم' }
+const intro = ar
+  ? 'هناك شكلان للانضمام إلى الجمعية. كلاهما يشارك في الأنشطة ويستخدمان نفس نموذج الانتساب؛ والفرق بينهما هو حق التصويت في الجمعية العامة.'
+  : 'Hay dos formas de formar parte de la asociación. Ambas participan en las actividades y comparten el mismo formulario de afiliación; la diferencia entre ellas es el derecho a voto en la Asamblea.';
+
+// Modalidades de socio, presentadas como tarjetas de precios
+const modalidades = ar ? [
+  {
+    clave: 'participa.pleno' as const,
+    cuando: 'للأشخاص الفلسطينيين وأزواجهم',
+    periodo: 'رسوم سنوية',
+    incluye: [
+      'حق التصويت في الجمعية العامة',
+      'المشاركة في جميع أنشطة الجمعية'
+    ],
+    excluye: [] as string[],
+    destacado: true
+  },
+  {
+    clave: 'participa.simpatizante' as const,
+    cuando: 'أي شخص متضامن مع القضية الفلسطينية',
+    periodo: 'رسوم اختيارية',
+    incluye: [
+      'المشاركة في جميع أنشطة الجمعية',
+      'مساهمة تطوعية بـ 5 يورو'
+    ],
+    excluye: ['دون حق التصويت في الجمعية العامة'],
+    destacado: false
+  }
 ] : [
-  { concepto: 'Quién puede serlo', pleno: 'Palestinos y palestinas', simp: 'Cualquier persona solidaria' },
-  { concepto: 'Cuota', pleno: 'La misma', simp: 'La misma' },
-  { concepto: 'Derecho a voto', pleno: 'Sí', simp: 'No' },
-  { concepto: 'Voz en la asamblea', pleno: 'Sí', simp: 'Sí' },
-  { concepto: 'Participación en las actividades', pleno: 'Sí', simp: 'Sí' }
+  {
+    clave: 'participa.pleno' as const,
+    cuando: 'Personas palestinas y sus cónyuges',
+    periodo: 'cuota anual',
+    incluye: [
+      'Derecho a voto en la Asamblea',
+      'Participación en todas las actividades de la asociación'
+    ],
+    excluye: [] as string[],
+    destacado: true
+  },
+  {
+    clave: 'participa.simpatizante' as const,
+    cuando: 'Cualquier persona solidaria con la causa palestina',
+    periodo: 'cuota opcional',
+    incluye: [
+      'Participación en todas las actividades de la asociación',
+      'Aportación voluntaria de 5 €'
+    ],
+    excluye: ['Sin voto en la Asamblea'],
+    destacado: false
+  }
 ];
 
-const pasos = ar ? [
-  'املأ نموذج الانتساب وأرسله.',
-  'سنتواصل معك لتأكيد بياناتك والإجابة عن أسئلتك.',
-  'ادفع رسوم العضوية السنوية وستكون جزءًا من الجمعية.'
-] : [
-  'Rellena el formulario de afiliación y envíalo.',
-  'Nos pondremos en contacto para confirmar tus datos y resolver tus dudas.',
-  'Abona la cuota anual y pasa a formar parte de la asociación.'
-];
+const donacionesIntro = ar
+  ? 'إذا رغبت في دعم عمل الجمعية ماليًا، فهذه هي الطرق المتاحة:'
+  : 'Si quieres apoyar económicamente el trabajo de la asociación, estas son las vías disponibles:';
 
 const donaciones = ar ? [
   { titulo: 'تحويل بنكي', texto: 'الحساب البنكي للجمعية: [قيد الإكمال].' },
@@ -50,98 +83,52 @@ const donaciones = ar ? [
     entradilla={t('participa.intro')}
     migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('participa.titulo') }]}
   />
+
+  <!-- Modalidades de socio -->
   <section class="seccion">
-    <div class="contenedor dos-columnas">
-      <div>
+    <div class="contenedor">
+      <div class="seccion-cabecera">
         <h2>{t('participa.tipos')}</h2>
-        <p>
-          {ar
-            ? 'هناك شكلان للانتساب إلى الجمعية. كلاهما يدفع نفس الرسوم ويشارك في أنشطة الجمعية، والفرق بينهما هو حق التصويت في الجمعية العامة.'
-            : 'Hay dos formas de formar parte de la asociación. Ambas pagan la misma cuota y pueden participar en las actividades; la diferencia entre ellas es el derecho a voto en la asamblea general.'}
-        </p>
-
-        <div class="rejilla rejilla--2 mb-3">
-          <div class="panel panel--verde">
-            <h3>{t('participa.pleno')}</h3>
-            <p class="pieza-pequena mb-0">
-              {ar
-                ? 'للأشخاص الفلسطينيين: عضوية كاملة مع حق الصوت والتصويت في الجمعية العامة.'
-                : 'Para personas palestinas: membresía de pleno derecho, con voz y voto en la asamblea general.'}
-            </p>
-          </div>
-          <div class="panel">
-            <h3>{t('participa.simpatizante')}</h3>
-            <p class="pieza-pequena mb-0">
-              {ar
-                ? 'لكل شخص متضامن: عضو له صوت في الجمعية العامة دون حق التصويت، بنفس الرسوم، ويشارك في أنشطة الجمعية.'
-                : 'Para cualquier persona solidaria: socio o socia con voz en la asamblea general pero sin voto, con la misma cuota, y puede participar en las actividades de la asociación.'}
-            </p>
-          </div>
-        </div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>{ar ? 'المعيار' : 'Criterio'}</th>
-              <th>{t('participa.pleno')}</th>
-              <th>{t('participa.simpatizante')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {comparativa.map((c) => (
-              <tr><td>{c.concepto}</td><td>{c.pleno}</td><td>{c.simp}</td></tr>
-            ))}
-          </tbody>
-        </table>
-
-        <h2>{t('participa.formulario')}</h2>
-        <ol>
-          {pasos.map((p) => <li>{p}</li>)}
-        </ol>
-        <p class="boton-fila">
-          <a class="boton boton--primario" href={SITE.formularioAfiliacion} target="_blank" rel="noopener">
-            {t('participa.formulario')} ↗
-          </a>
-          <a class="boton boton--fantasma" href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a>
-        </p>
-        <div class="aviso mb-3">
-          {ar
-            ? 'قيمة الاشتراك السنوي: [قيد الإكمال]. النموذج الحالي مؤقت حتى تفعيل نموذج الانتساب النهائي.'
-            : 'Importe de la cuota anual: [PENDIENTE]. El formulario actual es provisional hasta habilitar el de afiliación definitivo.'}
-        </div>
-
-        <h2>{t('participa.donaciones')}</h2>
-        <p>
-          {ar
-            ? 'إذا رغبت في دعم عمل الجمعية ماليًا، فهذه هي الطرق المتاحة:'
-            : 'Si quieres apoyar económicamente el trabajo de la asociación, estas son las vías disponibles:'}
-        </p>
-        <div class="rejilla rejilla--3">
-          {donaciones.map((d) => (
-            <div class="panel">
-              <h3>{d.titulo}</h3>
-              <p class="pieza-pequena mb-0">{d.texto}</p>
-            </div>
-          ))}
-        </div>
+        <p class="entradilla">{intro}</p>
       </div>
 
-      <aside>
-        <div class="panel panel--sticky">
-          <h3>{SITE.nombre}</h3>
-          <p class="pieza-pequena">
-            {ar
-              ? 'لأي سؤال حول العضوية أو التبرعات، راسلنا.'
-              : 'Para cualquier duda sobre la afiliación o las donaciones, escríbenos.'}
-          </p>
-          <ul class="lista-enlaces pieza-pequena">
-            <li><a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
-            <li><a href={SITE.formularioAfiliacion} target="_blank" rel="noopener">{t('participa.formulario')} ↗</a></li>
-            <li><a href={localizePath('/contacto', lang)}>{t('nav.contacto')}</a></li>
-            <li><a href={localizePath('/atencion-a-refugiados', lang)}>{t('nav.refugiados')}</a></li>
-          </ul>
-        </div>
-      </aside>
+      <div class="precios">
+        {modalidades.map((m) => (
+          <div class={'precio' + (m.destacado ? ' precio--destacado' : '')}>
+            <h3 class="precio__nombre">{t(m.clave)}</h3>
+            <p class="precio__cuando">{m.cuando}</p>
+            <p class="precio__importe">
+              <span class="precio__cifra">5 €</span>
+              <span class="precio__periodo">{m.periodo}</span>
+            </p>
+            <ul class="precio__lista">
+              {m.incluye.map((x) => <li>{x}</li>)}
+              {m.excluye.map((x) => <li class="precio__no">{x}</li>)}
+            </ul>
+            <a class="boton boton--primario" href={SITE.formularioAfiliacion} target="_blank" rel="noopener">
+              {t('participa.formulario')} ↗
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Donaciones -->
+  <section class="seccion seccion--suave">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <h2>{t('participa.donaciones')}</h2>
+        <p class="entradilla">{donacionesIntro}</p>
+      </div>
+      <div class="rejilla rejilla--3">
+        {donaciones.map((d) => (
+          <div class="panel">
+            <h3>{d.titulo}</h3>
+            <p class="pieza-pequena mb-0">{d.texto}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>

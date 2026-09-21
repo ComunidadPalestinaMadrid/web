@@ -392,4 +392,22 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .nota-prensa__pie, .aparicion__pie { margin: 0; }
 [data-buscable][hidden] { display: none; }
 
+/* Participa: tarjetas de precios (modalidades de socio) ------------------- */
+.precios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; max-width: 880px; }
+@media (max-width: 720px) { .precios { grid-template-columns: 1fr; } }
+.precio { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); box-shadow: var(--sombra); padding: 1.7rem 1.6rem 1.8rem; }
+.precio--destacado { border-color: var(--ps-verde); box-shadow: 0 0 0 3px var(--fondo-verde), var(--sombra); }
+.precio__nombre { margin: 0 0 .25rem; font-size: 1.75rem; }
+.precio__cuando { margin: 0 0 1.1rem; color: var(--texto-suave); font-size: .95rem; min-height: 2.7em; }
+.precio__importe { display: flex; align-items: baseline; gap: .55rem; margin: 0 0 1.2rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--linea); }
+.precio__cifra { font-family: var(--fuente); font-size: 3.1rem; font-weight: 700; line-height: 1; color: var(--tinta); }
+.precio__periodo { color: var(--texto-suave); font-size: .95rem; }
+.precio__lista { list-style: none; margin: 0 0 1.7rem; padding: 0; display: grid; gap: .55rem; flex: 1; align-content: start; }
+.precio__lista li { position: relative; padding-inline-start: 1.6rem; font-size: .96rem; }
+.precio__lista li::before { content: '✓'; position: absolute; inset-inline-start: 0; color: var(--ps-verde); font-weight: 700; }
+.precio__lista li.precio__no { color: var(--texto-suave); }
+.precio__lista li.precio__no::before { content: '–'; color: var(--linea-fuerte); }
+.precio .boton { justify-content: center; }
+
+
 
