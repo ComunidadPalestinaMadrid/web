@@ -9,10 +9,6 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const ar = lang === 'ar';
 
-const intro = ar
-  ? 'هناك شكلان للانضمام إلى الجمعية. كلاهما يشارك في الأنشطة ويستخدمان نفس نموذج الانتساب؛ والفرق بينهما هو حق التصويت في الجمعية العامة.'
-  : 'Hay dos formas de formar parte de la asociación. Ambas participan en las actividades y comparten el mismo formulario de afiliación; la diferencia entre ellas es el derecho a voto en la Asamblea.';
-
 // Modalidades de socio, presentadas como tarjetas de precios
 const modalidades = ar ? [
   {
@@ -41,10 +37,10 @@ const modalidades = ar ? [
   {
     clave: 'participa.pleno' as const,
     cuando: 'Personas palestinas y sus cónyuges',
-    periodo: 'cuota anual',
+    periodo: 'cuota mensual',
     incluye: [
-      'Derecho a voto en la Asamblea',
-      'Participación en todas las actividades de la asociación'
+    'Participación en todas las actividades de la asociación',  
+    'Derecho a voto en la Asamblea'
     ],
     excluye: [] as string[],
     destacado: true
@@ -52,12 +48,12 @@ const modalidades = ar ? [
   {
     clave: 'participa.simpatizante' as const,
     cuando: 'Cualquier persona solidaria con la causa palestina',
-    periodo: 'cuota opcional',
+    periodo: 'cuota mensual voluntaria',
     incluye: [
       'Participación en todas las actividades de la asociación',
-      'Aportación voluntaria de 5 €'
+      'Aportación voluntaria de 5€'
     ],
-    excluye: ['Sin voto en la Asamblea'],
+    excluye: [] as string[],
     destacado: false
   }
 ];
@@ -87,11 +83,6 @@ const donaciones = ar ? [
   <!-- Modalidades de socio -->
   <section class="seccion">
     <div class="contenedor">
-      <div class="seccion-cabecera">
-        <h2>{t('participa.tipos')}</h2>
-        <p class="entradilla">{intro}</p>
-      </div>
-
       <div class="precios">
         {modalidades.map((m) => (
           <div class={'precio' + (m.destacado ? ' precio--destacado' : '')}>
