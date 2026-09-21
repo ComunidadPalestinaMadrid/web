@@ -27,13 +27,13 @@ const fines = ar ? [
 ];
 
 const junta = ar ? [
-  { cargo: 'الرئيس', nombre: 'د. ياميل محمود أبو سعدة' },
+  { cargo: 'الرئيس', nombre: SITE.presidente || '[قيد الإكمال]' },
   { cargo: 'نائب الرئيس', nombre: '[قيد الإكمال]' },
   { cargo: 'أمين السر', nombre: '[قيد الإكمال]' },
   { cargo: 'أمين الصندوق', nombre: '[قيد الإكمال]' },
   { cargo: 'أعضاء', nombre: '[قيد الإكمال]' }
 ] : [
-  { cargo: 'Presidencia', nombre: 'Dr. Yamil Mahmoud Abousada' },
+  { cargo: 'Presidencia', nombre: SITE.presidente || '[PENDIENTE]' },
   { cargo: 'Vicepresidencia', nombre: '[PENDIENTE]' },
   { cargo: 'Secretaría', nombre: '[PENDIENTE]' },
   { cargo: 'Tesorería', nombre: '[PENDIENTE]' },

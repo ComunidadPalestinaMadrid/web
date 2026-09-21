@@ -13,6 +13,11 @@ export const ui = {
     'nav.prensa': 'Prensa',
     'nav.contacto': 'Contacto',
     'nav.aviso': 'Aviso legal',
+    'nav.posts': 'Posts',
+    'nav.actividades': 'Actividades',
+    'nav.comunidad': 'La Comunidad',
+    'nav.participa': 'Participa',
+    'nav.refugiados': 'Atención a refugiados',
 
     'common.leerMas': 'Leer más',
     'common.volver': 'Volver',
@@ -127,7 +132,19 @@ export const ui = {
     'footer.sobre': 'Sobre la asociación',
     'footer.derechos': 'Todos los derechos reservados.',
     'footer.legal': 'Aviso legal',
-    'footer.creditos': 'Web de la Asociación Hispano Palestina de Madrid'
+    'footer.junta': 'Junta directiva',
+    'footer.creditos': 'Web de la Asociación Hispano Palestina de Madrid',
+
+    'participa.titulo': 'Participa',
+    'participa.intro': 'Únete a la asociación: hazte socio o socia, colabora como voluntario o voluntaria, o apoya económicamente nuestros proyectos.',
+    'participa.tipos': 'Formas de asociarse',
+    'participa.pleno': 'Socio o socia de pleno derecho',
+    'participa.simpatizante': 'Simpatizante',
+    'participa.formulario': 'Formulario de afiliación',
+    'participa.donaciones': 'Donaciones',
+    'refugiados.titulo': 'Atención a refugiados',
+    'refugiados.intro': 'Acompañamiento y apoyo a las personas refugiadas palestinas que llegan a Madrid.',
+    'refugiados.servicios': 'Qué ofrecemos'
   },
   ar: {
     'nav.inicio': 'الرئيسية',
@@ -138,6 +155,11 @@ export const ui = {
     'nav.prensa': 'الصحافة',
     'nav.contacto': 'اتصل بنا',
     'nav.aviso': 'الإشعار القانوني',
+    'nav.posts': 'المنشورات',
+    'nav.actividades': 'الأنشطة',
+    'nav.comunidad': 'الجالية',
+    'nav.participa': 'شارك معنا',
+    'nav.refugiados': 'رعاية اللاجئين',
 
     'common.leerMas': 'اقرأ المزيد',
     'common.volver': 'رجوع',
@@ -252,6 +274,18 @@ export const ui = {
     'footer.sobre': 'عن الجمعية',
     'footer.derechos': 'جميع الحقوق محفوظة.',
     'footer.legal': 'الإشعار القانوني',
-    'footer.creditos': 'موقع الجمعية الإسبانية الفلسطينية في مدريد'
+    'footer.junta': 'مجلس الإدارة',
+    'footer.creditos': 'موقع الجمعية الإسبانية الفلسطينية في مدريد',
+
+    'participa.titulo': 'شارك معنا',
+    'participa.intro': 'انضم إلى الجمعية: كن عضوًا أو متطوّعًا، أو ادعم مشاريعنا ماليًا.',
+    'participa.tipos': 'أشكال العضوية',
+    'participa.pleno': 'عضو كامل الحقوق',
+    'participa.simpatizante': 'عضو متعاطف',
+    'participa.formulario': 'نموذج الانتساب',
+    'participa.donaciones': 'التبرعات',
+    'refugiados.titulo': 'رعاية اللاجئين',
+    'refugiados.intro': 'مواكبة ودعم الأشخاص اللاجئين الفلسطينيين الذين يصلون إلى مدريد.',
+    'refugiados.servicios': 'ما نقدّمه'
   }
 } as const;

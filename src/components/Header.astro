@@ -1,8 +1,7 @@
 ---
-import { withBase } from '../i18n/utils';
 import { NAV } from '../data/nav';
 import { SITE } from '../data/site';
-import { useTranslations, localizePath, currentPath, type Lang } from '../i18n/utils';
+import { useTranslations, localizePath, currentPath, withBase, type Lang } from '../i18n/utils';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -29,13 +28,35 @@ const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.s
     </label>
     <nav class="nav" aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Navegación principal'}>
       <ul class="nav__lista">
-        {NAV.map((item) => (
-          <li>
-            <a class="nav__enlace" href={localizePath(item.path, lang)} aria-current={esActivo(item.path) ? 'page' : undefined}>
-              {t(item.key)}
-            </a>
-          </li>
-        ))}
+        {NAV.map((item) =>
+          'children' in item ? (
+            <li class="nav__grupo">
+              <button
+                type="button"
+                aria-haspopup="true"
+                class={'nav__enlace nav__enlace--grupo' + (item.children.some((c) => esActivo(c.path)) ? ' nav__enlace--activo' : '')}
+              >
+                {t(item.key)}
+                <span class="nav__flecha" aria-hidden="true">▾</span>
+              </button>
+              <ul class="nav__sub">
+                {item.children.map((hijo) => (
+                  <li>
+                    <a class="nav__enlace" href={localizePath(hijo.path, lang)} aria-current={esActivo(hijo.path) ? 'page' : undefined}>
+                      {t(hijo.key)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li>
+              <a class="nav__enlace" href={localizePath(item.path, lang)} aria-current={esActivo(item.path) ? 'page' : undefined}>
+                {t(item.key)}
+              </a>
+            </li>
+          )
+        )}
         <li class="idioma">
           <a href={localizePath(baseIdioma, 'es')} aria-current={lang === 'es' ? 'true' : undefined} lang="es">ES</a>
           <a href={localizePath(baseIdioma, 'ar')} aria-current={lang === 'ar' ? 'true' : undefined} lang="ar">ع</a>

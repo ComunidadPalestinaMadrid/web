@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import { SITE } from '../../data/site';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const ar = lang === 'ar';
+
+const comparativa = ar ? [
+  { concepto: 'من يمكنه الانتساب', pleno: 'الفلسطينيون والفلسطينيات', simp: 'أي شخص متضامن' },
+  { concepto: 'الرسوم', pleno: 'نفس الرسوم', simp: 'نفس الرسوم' },
+  { concepto: 'حق التصويت', pleno: 'نعم', simp: 'لا' },
+  { concepto: 'الكلمة في الجمعية العامة', pleno: 'نعم', simp: 'نعم' },
+  { concepto: 'المشاركة في الأنشطة', pleno: 'نعم', simp: 'نعم' }
+] : [
+  { concepto: 'Quién puede serlo', pleno: 'Palestinos y palestinas', simp: 'Cualquier persona solidaria' },
+  { concepto: 'Cuota', pleno: 'La misma', simp: 'La misma' },
+  { concepto: 'Derecho a voto', pleno: 'Sí', simp: 'No' },
+  { concepto: 'Voz en la asamblea', pleno: 'Sí', simp: 'Sí' },
+  { concepto: 'Participación en las actividades', pleno: 'Sí', simp: 'Sí' }
+];
+
+const pasos = ar ? [
+  'املأ نموذج الانتساب وأرسله.',
+  'سنتواصل معك لتأكيد بياناتك والإجابة عن أسئلتك.',
+  'ادفع رسوم العضوية السنوية وستكون جزءًا من الجمعية.'
+] : [
+  'Rellena el formulario de afiliación y envíalo.',
+  'Nos pondremos en contacto para confirmar tus datos y resolver tus dudas.',
+  'Abona la cuota anual y pasa a formar parte de la asociación.'
+];
+
+const donaciones = ar ? [
+  { titulo: 'تحويل بنكي', texto: 'الحساب البنكي للجمعية: [قيد الإكمال].' },
+  { titulo: 'بيزوم', texto: 'رقم بيزوم للتبرعات: [قيد الإكمال].' },
+  { titulo: 'تبرعات عينية', texto: 'مواد أو خدمات أو مساحات: راسلنا وسننسّق معك.' }
+] : [
+  { titulo: 'Transferencia bancaria', texto: 'Cuenta de la asociación: [PENDIENTE].' },
+  { titulo: 'Bizum', texto: 'Número para donaciones: [PENDIENTE].' },
+  { titulo: 'Donaciones en especie', texto: 'Materiales, servicios o espacios: escríbenos y lo coordinamos.' }
+];
+---
+<BaseLayout lang={lang} title={t('participa.titulo')} description={t('participa.intro')}>
+  <PaginaCabecera
+    eyebrow={t('nav.participa')}
+    titulo={t('participa.titulo')}
+    entradilla={t('participa.intro')}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('participa.titulo') }]}
+  />
+  <section class="seccion">
+    <div class="contenedor dos-columnas">
+      <div>
+        <h2>{t('participa.tipos')}</h2>
+        <p>
+          {ar
+            ? 'هناك شكلان للانتساب إلى الجمعية. كلاهما يدفع نفس الرسوم ويشارك في أنشطة الجمعية، والفرق بينهما هو حق التصويت في الجمعية العامة.'
+            : 'Hay dos formas de formar parte de la asociación. Ambas pagan la misma cuota y pueden participar en las actividades; la diferencia entre ellas es el derecho a voto en la asamblea general.'}
+        </p>
+
+        <div class="rejilla rejilla--2 mb-3">
+          <div class="panel panel--verde">
+            <h3>{t('participa.pleno')}</h3>
+            <p class="pieza-pequena mb-0">
+              {ar
+                ? 'للأشخاص الفلسطينيين: عضوية كاملة مع حق الصوت والتصويت في الجمعية العامة.'
+                : 'Para personas palestinas: membresía de pleno derecho, con voz y voto en la asamblea general.'}
+            </p>
+          </div>
+          <div class="panel">
+            <h3>{t('participa.simpatizante')}</h3>
+            <p class="pieza-pequena mb-0">
+              {ar
+                ? 'لكل شخص متضامن: عضو له صوت في الجمعية العامة دون حق التصويت، بنفس الرسوم، ويشارك في أنشطة الجمعية.'
+                : 'Para cualquier persona solidaria: socio o socia con voz en la asamblea general pero sin voto, con la misma cuota, y puede participar en las actividades de la asociación.'}
+            </p>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>{ar ? 'المعيار' : 'Criterio'}</th>
+              <th>{t('participa.pleno')}</th>
+              <th>{t('participa.simpatizante')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparativa.map((c) => (
+              <tr><td>{c.concepto}</td><td>{c.pleno}</td><td>{c.simp}</td></tr>
+            ))}
+          </tbody>
+        </table>
+
+        <h2>{t('participa.formulario')}</h2>
+        <ol>
+          {pasos.map((p) => <li>{p}</li>)}
+        </ol>
+        <p class="boton-fila">
+          <a class="boton boton--primario" href={SITE.formularioAfiliacion} target="_blank" rel="noopener">
+            {t('participa.formulario')} ↗
+          </a>
+          <a class="boton boton--fantasma" href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a>
+        </p>
+        <div class="aviso mb-3">
+          {ar
+            ? 'قيمة الاشتراك السنوي: [قيد الإكمال]. النموذج الحالي مؤقت حتى تفعيل نموذج الانتساب النهائي.'
+            : 'Importe de la cuota anual: [PENDIENTE]. El formulario actual es provisional hasta habilitar el de afiliación definitivo.'}
+        </div>
+
+        <h2>{t('participa.donaciones')}</h2>
+        <p>
+          {ar
+            ? 'إذا رغبت في دعم عمل الجمعية ماليًا، فهذه هي الطرق المتاحة:'
+            : 'Si quieres apoyar económicamente el trabajo de la asociación, estas son las vías disponibles:'}
+        </p>
+        <div class="rejilla rejilla--3">
+          {donaciones.map((d) => (
+            <div class="panel">
+              <h3>{d.titulo}</h3>
+              <p class="pieza-pequena mb-0">{d.texto}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <aside>
+        <div class="panel panel--sticky">
+          <h3>{SITE.nombre}</h3>
+          <p class="pieza-pequena">
+            {ar
+              ? 'لأي سؤال حول العضوية أو التبرعات، راسلنا.'
+              : 'Para cualquier duda sobre la afiliación o las donaciones, escríbenos.'}
+          </p>
+          <ul class="lista-enlaces pieza-pequena">
+            <li><a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
+            <li><a href={SITE.formularioAfiliacion} target="_blank" rel="noopener">{t('participa.formulario')} ↗</a></li>
+            <li><a href={localizePath('/contacto', lang)}>{t('nav.contacto')}</a></li>
+            <li><a href={localizePath('/atencion-a-refugiados', lang)}>{t('nav.refugiados')}</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

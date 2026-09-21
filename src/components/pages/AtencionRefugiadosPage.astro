@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import { SITE } from '../../data/site';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const ar = lang === 'ar';
+
+const servicios = ar ? [
+  { titulo: 'الاستشارة القانونية والإقامة', texto: 'معلومات ومتابعة في إجراءات اللجوء والإقامة والوثائق.' },
+  { titulo: 'المواكبة والاستقبال', texto: 'مرافقة عند الوصول: السكن المؤقت، التسجيل البلدي والخدمات الأساسية.' },
+  { titulo: 'تعلّم الإسبانية والعربية', texto: 'دروس اللغة الإسبانية للاندماج ودروس العربية للأطفال والشباب.' },
+  { titulo: 'الدعم المدرسي', texto: 'متابعة دراسية ودعم في الواجبات للتلاميذ الجدد.' },
+  { titulo: 'التوجيه المهني', texto: 'مساعدة في البحث عن عمل، وإعداد السيرة الذاتية، والتواصل مع أصحاب العمل.' },
+  { titulo: 'الدعم النفسي والاجتماعي', texto: 'مساحات استماع ودعم، وأنشطة جماعية للعائلات.' },
+  { titulo: 'الترجمة والاستشارة', texto: 'ترجمة وتفسير بالعربية والإسبانية في المواعيد والإجراءات.' },
+  { titulo: 'الغذاء والحاجات الأساسية', texto: 'تنسيق المساعدات الأساسية مع شبكات التضامن في مدريد.' }
+] : [
+  { titulo: 'Asesoría jurídica y extranjería', texto: 'Información y acompañamiento en trámites de asilo, extranjería y documentación.' },
+  { titulo: 'Acompañamiento y acogida', texto: 'Recepción a la llegada: alojamiento temporal, empadronamiento y servicios básicos.' },
+  { titulo: 'Español y árabe', texto: 'Clases de español para la integración y de árabe para niños, niñas y jóvenes.' },
+  { titulo: 'Apoyo escolar', texto: 'Refuerzo educativo y ayuda con las tareas para el alumnado recién llegado.' },
+  { titulo: 'Orientación laboral', texto: 'Ayuda en la búsqueda de empleo, elaboración de currículum y contacto con empleadores.' },
+  { titulo: 'Apoyo psicológico y social', texto: 'Espacios de escucha y acompañamiento, y actividades grupales para las familias.' },
+  { titulo: 'Traducción e interpretación', texto: 'Traducción e interpretación árabe-español en citas y gestiones.' },
+  { titulo: 'Alimentación y necesidades básicas', texto: 'Coordinación de ayudas básicas con las redes de solidaridad de Madrid.' }
+];
+---
+<BaseLayout lang={lang} title={t('refugiados.titulo')} description={t('refugiados.intro')}>
+  <PaginaCabecera
+    eyebrow={t('nav.actividades')}
+    titulo={t('refugiados.titulo')}
+    entradilla={t('refugiados.intro')}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('refugiados.titulo') }]}
+  />
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="aviso mb-3">
+        {ar
+          ? 'هذا المحتوى نموذجي ومؤقت، وسيُستكمل بمعلومات الخدمات النهائية.'
+          : 'Contenido de ejemplo: la asociación completará próximamente la información definitiva de este servicio.'}
+      </div>
+
+      <div class="dos-columnas">
+        <div class="prosa">
+          <p>
+            {ar
+              ? 'تُقدّم الجمعية، بالتعاون مع شبكات التضامن في مدريد، الدعم للأشخاص اللاجئين الفلسطينيين الذين يصلون إلى إسبانيا، وأيضًا للعائلات التي تعيش هنا بالفعل. نعمل على المستوى العملي: الوثائق، السكن، اللغة والعمل.'
+              : 'La asociación acompaña, junto a las redes de solidaridad de Madrid, a las personas refugiadas palestinas que llegan a España y también a las familias que ya residen aquí. Trabajamos en lo práctico: documentación, vivienda, idioma y empleo.'}
+          </p>
+
+          <h2>{t('refugiados.servicios')}</h2>
+        </div>
+      </div>
+
+      <div class="rejilla rejilla--3">
+        {servicios.map((s) => (
+          <div class="panel">
+            <h3>{s.titulo}</h3>
+            <p class="pieza-pequena mb-0">{s.texto}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="dos-columnas mt-3">
+        <div class="prosa">
+          <h2>{ar ? 'كيف تطلب المساعدة' : 'Cómo pedir ayuda'}</h2>
+          <p>
+            {ar
+              ? 'إن كنت لاجئًا أو لاجئة، أو تعرف شخصًا يحتاج الدعم، راسلنا على البريد الإلكتروني أو عبر نموذج التواصل. نتعامل مع كل حالة بسرية تامة.'
+              : 'Si eres una persona refugiada o conoces a alguien que necesita apoyo, escríbenos por correo o a través del formulario de contacto. Tratamos cada caso con total confidencialidad.'}
+          </p>
+          <p class="boton-fila">
+            <a class="boton boton--primario" href={localizePath('/contacto', lang)}>{t('nav.contacto')} →</a>
+            <a class="boton boton--fantasma" href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a>
+          </p>
+
+          <h2>{ar ? 'كيف تساعد' : 'Cómo colaborar'}</h2>
+          <p>
+            {ar
+              ? 'نبحث دائمًا عن متطوعين ومتطوعات: مرافقة، ترجمة، دعم مدرسي، وحاجات عملية. يمكنك أيضًا دعم البرنامج ماليًا.'
+              : 'Buscamos siempre personas voluntarias: acompañamiento, traducción, apoyo escolar y necesidades concretas. También puedes apoyar el programa económicamente.'}
+          </p>
+          <p><a class="boton boton--verde" href={localizePath('/participa', lang)}>{t('nav.participa')} →</a></p>
+        </div>
+        <aside>
+          <div class="panel panel--sticky">
+            <h3>{SITE.nombre}</h3>
+            <ul class="lista-enlaces pieza-pequena">
+              <li><a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
+              <li><a href={SITE.formularioContacto} target="_blank" rel="noopener">{t('contacto.formulario')} ↗</a></li>
+              <li><a href={localizePath('/cole-arabe', lang)}>{t('nav.cole')}</a></li>
+              <li><a href={localizePath('/participa', lang)}>{t('nav.participa')}</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

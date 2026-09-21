@@ -9,7 +9,7 @@ export const SITE = {
   lema: 'Palestina vive, Palestina libre',
   fundacion: 1988,
   ciudad: 'Madrid',
-  presidente: 'Dr. Yamil Mahmoud Abousada',
+  presidente: '',
   emails: {
     asociacion: 'c.hispano.palestina.madrid@gmail.com',
     cole: 'Escuela.arabe.jerusalem@gmail.com'
@@ -19,6 +19,8 @@ export const SITE = {
     url: 'https://www.instagram.com/asc.hispanopalestinajerusalen/'
   },
   formularioContacto: 'https://forms.gle/F7FHvF6YaA9jhVwJ8',
+  // [PENDIENTE] Formulario de afiliacion propio. De momento apunta al de contacto.
+  formularioAfiliacion: 'https://forms.gle/F7FHvF6YaA9jhVwJ8',
   webAntigua: 'https://comunidadhispanopalestinamadridblog.wordpress.com/'
 } as const;
 

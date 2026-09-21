@@ -30,7 +30,7 @@ const notas = ['nota-de-prensa-entrega-de-premios-anuales-jerusalen', 'nota-de-p
           <li><strong>{lang === 'ar' ? 'الاسم الكامل' : 'Denominación'}:</strong> {SITE.nombreLargo}</li>
           <li><strong>{lang === 'ar' ? 'التأسيس' : 'Fundación'}:</strong> {SITE.fundacion}, Madrid</li>
           <li><strong>{lang === 'ar' ? 'المقر' : 'Sede'}:</strong> {SITE.ciudad}, España</li>
-          <li><strong>{lang === 'ar' ? 'الرئيس' : 'Presidencia'}:</strong> {SITE.presidente}</li>
+          <li><strong>{lang === 'ar' ? 'الرئيس' : 'Presidencia'}:</strong> {SITE.presidente || '[PENDIENTE]'}</li>
           <li><strong>{lang === 'ar' ? 'البريد الصحفي' : 'Contacto de prensa'}:</strong> {SITE.emails.asociacion}</li>
           <li><strong>Instagram:</strong> {SITE.instagram.usuario}</li>
           <li><strong>Web:</strong> {SITE.dominio}</li>

@@ -1,6 +1,6 @@
 ---
 import { withBase } from '../i18n/utils';
-import { NAV } from '../data/nav';
+import { NAV_ENLACES } from '../data/nav';
 import { SITE } from '../data/site';
 import { useTranslations, localizePath, type Lang } from '../i18n/utils';
 
@@ -31,7 +31,7 @@ const anio = new Date().getFullYear();
       <div>
         <h3>{t('footer.explora')}</h3>
         <ul>
-          {NAV.map((item) => (
+          {NAV_ENLACES.map((item) => (
             <li><a href={localizePath(item.path, lang)}>{t(item.key)}</a></li>
           ))}
         </ul>
@@ -58,7 +58,7 @@ const anio = new Date().getFullYear();
       <div>
         <h3>{t('footer.sobre')}</h3>
         <ul>
-          <li><a href={localizePath('/quienes-somos', lang)}>{SITE.presidente}</a></li>
+          <li><a href={localizePath('/quienes-somos', lang)}>{t('footer.junta')}</a></li>
           <li><a href={localizePath('/calendario', lang)}>{t('nav.calendario')}</a></li>
           <li><a href={localizePath('/aviso-legal', lang)}>{t('footer.legal')}</a></li>
           <li><a href={SITE.webAntigua} rel="noopener" target="_blank">{t('common.webAntigua')}</a></li>
