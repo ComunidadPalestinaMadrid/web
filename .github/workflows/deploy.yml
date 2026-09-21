@@ -34,11 +34,14 @@ jobs:
       # Con el dominio propio configurado en Settings > Pages, "origin" pasa a ser
       # https://comunidadpalestina.madrid y "base_path" queda vacio, sin tocar codigo.
       #
-      # OJO: el GITHUB_TOKEN no puede crear el sitio de Pages, asi que hay que
-      # activarlo UNA vez a mano en Settings > Pages > Source: GitHub Actions.
+      # enablement: true intenta crear el sitio de Pages si aun no existe.
+      # Si el token no tuviera permiso, habria que activarlo a mano UNA vez en
+      # Settings > Pages > Source: GitHub Actions y volver a lanzar el flujo.
       - name: Configurar Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Compilar Astro
         run: npm run build
