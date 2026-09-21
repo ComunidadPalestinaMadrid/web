@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import { SITE } from '../../data/site';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const ar = lang === 'ar';
+---
+<BaseLayout lang={lang} title={t('contacto.titulo')} description={t('contacto.intro')}>
+  <PaginaCabecera
+    eyebrow={t('nav.contacto')}
+    titulo={t('contacto.titulo')}
+    entradilla={t('contacto.intro')}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('contacto.titulo') }]}
+  />
+  <section class="seccion">
+    <div class="contenedor dos-columnas">
+      <div>
+        <div class="rejilla rejilla--2">
+          <div class="panel">
+            <h3>{t('contacto.emailAsociacion')}</h3>
+            <p class="pieza-pequena mb-0"><a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></p>
+          </div>
+          <div class="panel">
+            <h3>{t('contacto.emailCole')}</h3>
+            <p class="pieza-pequena mb-0"><a href={'mailto:' + SITE.emails.cole}>{SITE.emails.cole}</a></p>
+          </div>
+          <div class="panel">
+            <h3>{t('contacto.instagram')}</h3>
+            <p class="pieza-pequena mb-0">
+              <a href={SITE.instagram.url} rel="me noopener" target="_blank">{SITE.instagram.usuario} ↗</a>
+            </p>
+          </div>
+          <div class="panel">
+            <h3>{t('contacto.sede')}</h3>
+            <p class="pieza-pequena mb-0">{t('contacto.sedeValor')}</p>
+          </div>
+        </div>
+
+        <div class="panel panel--verde mt-3">
+          <h2 class="mb-1">{t('contacto.formulario')}</h2>
+          <p>{t('contacto.formularioTexto')}</p>
+          <a class="boton boton--primario" href={SITE.formularioContacto} target="_blank" rel="noopener">{t('contacto.abrirFormulario')} ↗</a>
+        </div>
+
+        <div class="prosa mt-3">
+          <h2>{t('contacto.sugerencias')}</h2>
+          <p>
+            {ar
+              ? 'نرحّب بكل اقتراح أو ملاحظة تساعدنا على تحسين عمل الجمعية. استخدم النموذج أو راسلنا مباشرة.'
+              : 'Cualquier sugerencia o comentario que nos ayude a mejorar el trabajo de la asociación es bienvenido. Puedes usar el formulario o escribirnos directamente.'}
+          </p>
+        </div>
+      </div>
+
+      <aside>
+        <div class="panel panel--sticky">
+          <h3>{SITE.nombre}</h3>
+          <img src="/images/uploads/950e8-a5257-achp-logo.jpeg" alt={SITE.nombre} loading="lazy" style="border-radius:10px" />
+          <ul class="lista-enlaces pieza-pequena mt-3">
+            <li><a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
+            <li><a href={'mailto:' + SITE.emails.cole}>{SITE.emails.cole}</a></li>
+            <li><a href={SITE.instagram.url} rel="noopener" target="_blank">{SITE.instagram.usuario}</a></li>
+            <li><a href={SITE.formularioContacto} target="_blank" rel="noopener">{t('contacto.formulario')} ↗</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

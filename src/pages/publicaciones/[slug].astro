@@ -1,0 +1,12 @@
+---
+import PublicacionPage from '../../components/pages/PublicacionPage.astro';
+import { publicaciones } from '../../data/publicaciones';
+
+export function getStaticPaths() {
+  return publicaciones.map((pub) => ({ params: { slug: pub.slug }, props: { pub } }));
+}
+
+const { pub } = Astro.props;
+const relacionadas = publicaciones.filter((p) => p.tipo === pub.tipo && p.slug !== pub.slug).slice(0, 4);
+---
+<PublicacionPage pub={pub} lang="es" relacionadas={relacionadas} />

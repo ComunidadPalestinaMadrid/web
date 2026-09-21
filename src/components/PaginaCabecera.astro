@@ -1,0 +1,18 @@
+---
+interface Props { eyebrow?: string; titulo: string; entradilla?: string; migas?: { texto: string; href?: string }[]; }
+const { eyebrow, titulo, entradilla, migas } = Astro.props;
+---
+<section class="pagina-cabecera">
+  <div class="contenedor">
+    {migas && migas.length > 0 && (
+      <nav class="migas" aria-label="Migas de pan">
+        {migas.map((m, i) => (
+          <span>{i > 0 && ' / '}{m.href ? <a href={m.href}>{m.texto}</a> : m.texto}</span>
+        ))}
+      </nav>
+    )}
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h1>{titulo}</h1>
+    {entradilla && <p class="entradilla">{entradilla}</p>}
+  </div>
+</section>

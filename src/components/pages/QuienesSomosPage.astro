@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import { SITE } from '../../data/site';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const ar = lang === 'ar';
+
+const fines = ar ? [
+  'التعريف بقضية فلسطين وبحقوق الشعب الفلسطيني في مدريد وإسبانيا.',
+  'المطالبة بحق العودة للاجئين الفلسطينيين وفقًا لقرارات الأمم المتحدة.',
+  'إدانة الاحتلال والاستيطان والتمييز العنصري والمطالبة بإنهائه.',
+  'دعم الجالية الفلسطينية المقيمة في إسبانيا ومرافقتها.',
+  'نشر الثقافة الفلسطينية واللغة العربية عبر المدرسة العربية.',
+  'التضامن مع الحركات الاجتماعية والإنسانية التي تدافع عن حقوق الإنسان.'
+] : [
+  'Visibilizar la causa palestina y los derechos del pueblo palestino en Madrid y en España.',
+  'Reclamar el derecho al retorno de las personas refugiadas palestinas, recogido en las resoluciones de Naciones Unidas.',
+  'Denunciar la ocupación, la colonización, el apartheid y exigir su fin.',
+  'Apoyar y acompañar a la comunidad palestina residente en España.',
+  'Difundir la cultura palestina y la lengua árabe a través del Cole Árabe.',
+  'Solidarizarnos con los movimientos sociales y humanitarios que defienden los derechos humanos.'
+];
+
+const junta = ar ? [
+  { cargo: 'الرئيس', nombre: 'د. ياميل محمود أبو سعدة' },
+  { cargo: 'نائب الرئيس', nombre: '[قيد الإكمال]' },
+  { cargo: 'أمين السر', nombre: '[قيد الإكمال]' },
+  { cargo: 'أمين الصندوق', nombre: '[قيد الإكمال]' },
+  { cargo: 'أعضاء', nombre: '[قيد الإكمال]' }
+] : [
+  { cargo: 'Presidencia', nombre: 'Dr. Yamil Mahmoud Abousada' },
+  { cargo: 'Vicepresidencia', nombre: '[PENDIENTE]' },
+  { cargo: 'Secretaría', nombre: '[PENDIENTE]' },
+  { cargo: 'Tesorería', nombre: '[PENDIENTE]' },
+  { cargo: 'Vocales', nombre: '[PENDIENTE]' }
+];
+---
+<BaseLayout lang={lang} title={t('quienes.titulo')} description={t('quienes.intro')}>
+  <PaginaCabecera
+    eyebrow={t('nav.quienes')}
+    titulo={t('quienes.titulo')}
+    entradilla={t('quienes.intro')}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('quienes.titulo') }]}
+  />
+  <section class="seccion">
+    <div class="contenedor dos-columnas">
+      <div class="prosa">
+        <p>
+          {ar
+            ? 'تأسست جمعية الجالية الإسبانية الفلسطينية – القدس عام 1988 في مدريد. منذ ذلك الحين نشارك وننظّم الفعاليات التي تُظهر وجود الفلسطينيين في المهجر، ونذكّر الحكومات بحقنا المشروع في العودة إلى أرضنا، وهو حق مكرّس في قرارات الأمم المتحدة ولا يزال الاحتلال ينكره.'
+            : 'La Asociación de la Comunidad Hispano Palestina Jerusalén fue fundada en 1988 en Madrid. Desde entonces participamos y organizamos actos que visibilizan a los palestinos y las palestinas en la diáspora. Recordamos a los gobiernos nuestro legítimo derecho a volver a nuestras tierras: el retorno de las personas refugiadas palestinas, recogido en las resoluciones de la ONU y que hasta el momento el Estado ocupante de Israel ha negado impunemente.'}
+        </p>
+        <p>
+          {ar
+            ? 'نطالب بإنهاء الاحتلال الذي يُبقي وطننا مقهورًا وداميًا ومُهانًا، محرومًا من أبسط الحقوق الأساسية.'
+            : 'Pedimos el fin de la ocupación que mantiene a nuestra patria oprimida, ensangrentada y pisoteada, privada de los más mínimos derechos fundamentales.'}
+        </p>
+        <p>
+          {ar
+            ? 'تتكوّن الجمعية اليوم من أعضاء من الجالية الفلسطينية وأشخاص متضامنين في مدريد.'
+            : 'Actualmente la asociación está formada por personas de la comunidad palestina y personas solidarias residentes en Madrid.'}
+        </p>
+
+        <h2>{t('quienes.fines')}</h2>
+        <ul>
+          {fines.map((f) => <li>{f}</li>)}
+        </ul>
+
+        <h2>{t('quienes.historia')}</h2>
+        <figure>
+          <img src="/images/uploads/174be-f9289-jerusalem-1712855_640.jpg" alt={ar ? 'القدس' : 'Jerusalén'} loading="lazy" />
+          <figcaption>{ar ? 'القدس، المدينة المقدسة' : 'Jerusalén, ciudad de referencia para la asociación'}</figcaption>
+        </figure>
+        <p>
+          {ar
+            ? 'منذ عام 1988 وحتى اليوم، تشارك الجمعية في الوقفات والمناسبات والمبادرات التضامنية في مدريد وفي مختلف أنحاء إسبانيا، وتعمل مع منظمات وشبكات اجتماعية من أجل حقوق الشعب الفلسطيني.'
+            : 'Desde 1988 hasta hoy la asociación participa en concentraciones, actos y campañas de solidaridad en Madrid y en el resto del Estado, y colabora con organizaciones y redes sociales que trabajan por los derechos del pueblo palestino.'}
+        </p>
+      </div>
+
+      <aside>
+        <div class="panel">
+          <img src="/images/uploads/7ef2b-9de93-20294137_413172955745869_3903906838941361900_n1.jpg" alt="" loading="lazy" style="border-radius:10px" />
+          <h3 class="mt-3">{t('quienes.junta')}</h3>
+          <ul class="lista-enlaces pieza-pequena">
+            {junta.map((j) => (
+              <li><strong>{j.cargo}:</strong> {j.nombre}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="panel panel--verde mt-3">
+          <h3>{ar ? 'بيانات الجمعية' : 'Datos de la asociación'}</h3>
+          <ul class="lista-enlaces pieza-pequena">
+            <li><strong>{ar ? 'التأسيس' : 'Fundación'}:</strong> {SITE.fundacion}</li>
+            <li><strong>{ar ? 'المقر' : 'Sede'}:</strong> {SITE.ciudad}</li>
+            <li><strong>{ar ? 'الاسم الكامل' : 'Denominación'}:</strong> {SITE.nombreLargo}</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="seccion seccion--suave">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <span class="eyebrow">{ar ? 'الثقافة والهوية' : 'Cultura e identidad'}</span>
+        <h2>{t('quienes.cultura')}</h2>
+      </div>
+      <div class="prosa prosa--ancho" lang={ar ? 'es' : undefined} dir={ar ? 'ltr' : undefined}>
+        <p>
+          A pesar de la ocupación, Palestina es uno de los países que tiene mayores tasas de alfabetización.
+          Entre las figuras palestinas de renombre internacional nos enorgullece contar con el poeta Mahmoud Darwish,
+          cuyas obras han sido traducidas a multitud de idiomas. Nuestra rica historia nos deja un legado inigualable
+          de tradición cultural, que se refleja en el folclore, la gastronomía y los vestigios históricos.
+        </p>
+      </div>
+      <div class="rejilla rejilla--3 mt-3">
+        <figure class="panel">
+          <img src="/images/uploads/37505-f9dd1-dabke.jpg" alt="Dabke" loading="lazy" style="border-radius:10px" />
+          <figcaption class="pieza-pequena texto-suave">Dabke</figcaption>
+        </figure>
+        <figure class="panel">
+          <img src="/images/uploads/3529e-d942c-alquds.jpg" alt="Al-Quds" loading="lazy" style="border-radius:10px" />
+          <figcaption class="pieza-pequena texto-suave">Al-Quds</figcaption>
+        </figure>
+        <figure class="panel">
+          <img src="/images/uploads/e0db5-94e1c-elbordadoysurolenlaidentidadpalestina.jpg" alt="Bordado palestino" loading="lazy" style="border-radius:10px" />
+          <figcaption class="pieza-pequena texto-suave">El bordado y su rol en la identidad palestina</figcaption>
+        </figure>
+      </div>
+
+      <div class="seccion-cabecera mt-3">
+        <h2>{t('quienes.gastronomia')}</h2>
+      </div>
+      <div class="prosa" lang={ar ? 'es' : undefined} dir={ar ? 'ltr' : undefined}>
+        <p>
+          Viajar a los territorios palestinos es encontrarse con una gente tremendamente hospitalaria, sonriente y amable.
+          La diversidad de sabores y texturas que conforman la gastronomía palestina no pasa desapercibida. Platos
+          tradicionales como el taboule, la kunafa o el hummus tienen su identidad completamente árabe, a pesar de que
+          encontremos productos etiquetados en todo el mundo con marca israelí que no solo usurpan nuestras tierras,
+          sino también nuestro legado histórico y gastronómico.
+        </p>
+      </div>
+
+      <div class="seccion-cabecera mt-3">
+        <h2>{t('quienes.actualidad')}</h2>
+      </div>
+      <div class="rejilla rejilla--2">
+        <figure class="panel">
+          <img src="/images/uploads/f03d1-c223a-mapa-palestina.jpg" alt="Mapa de Palestina" loading="lazy" style="border-radius:10px" />
+          <figcaption class="pieza-pequena texto-suave">{ar ? 'الخريطة الفيزيائية لفلسطين' : 'Mapa físico de Palestina'}</figcaption>
+        </figure>
+        <div class="panel panel--rojo">
+          <h3>{t('quienes.poema')}</h3>
+          <blockquote>
+            Ocuparon mi patria,<br />
+            expulsaron a mi pueblo,<br />
+            anularon mi identidad.<br />
+            Y me llamaron terrorista.<br /><br />
+            Confiscaron mi propiedad,<br />
+            arrancaron mis frutales,<br />
+            demolieron mi casa.<br />
+            Y me llamaron terrorista.<br /><br />
+            Legislaron leyes fascistas,<br />
+            practicaron el odiado apartheid,<br />
+            destruyeron, dividieron, humillaron.<br />
+            Y me llamaron terrorista.<br /><br />
+            Asesinaron mis alegrías,<br />
+            secuestraron mis esperanzas,<br />
+            esposaron mis sueños.<br />
+            Cuando rechacé todas las barbaridades,<br />
+            ellos… ¡mataron a un terrorista!
+          </blockquote>
+          <p class="pieza-pequena texto-suave">Mahmoud Darwish, poeta palestino</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TarjetaPublicacion from '../TarjetaPublicacion.astro';
+import TarjetaEvento from '../TarjetaEvento.astro';
+import { SITE } from '../../data/site';
+import { ultimas } from '../../data/publicaciones';
+import { proximosEventos, tituloEvento } from '../../data/eventos';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const posts = ultimas(3);
+const eventos = proximosEventos(3);
+
+const destacados = [
+  { path: '/publicaciones', key: 'nav.publicaciones', texto: 'home.tarjetaPublicacionesTexto', filete: 'tarjeta__filete' },
+  { path: '/calendario', key: 'nav.calendario', texto: 'home.tarjetaCalendarioTexto', filete: 'tarjeta__filete--rojo' },
+  { path: '/cole-arabe', key: 'nav.cole', texto: 'home.tarjetaColeTexto', filete: 'tarjeta__filete--negro' },
+  { path: '/prensa', key: 'nav.prensa', texto: 'home.tarjetaPrensaTexto', filete: 'tarjeta__filete' },
+  { path: '/quienes-somos', key: 'nav.quienes', texto: 'home.tarjetaQuienesTexto', filete: 'tarjeta__filete--rojo' },
+  { path: '/contacto', key: 'nav.contacto', texto: 'home.tarjetaContactoTexto', filete: 'tarjeta__filete--negro' }
+] as const;
+---
+<BaseLayout lang={lang}>
+  <section class="hero">
+    <div class="contenedor hero__grid">
+      <div>
+        <span class="eyebrow">{t('home.eyebrow')}</span>
+        <h1 class="hero__titulo">{t('home.titulo')}</h1>
+        <p class="hero__lema">{SITE.nombreLargo}</p>
+        <p class="hero__texto">{t('home.texto')}</p>
+        <div class="boton-fila">
+          <a class="boton boton--primario" href={localizePath('/publicaciones', lang)}>{t('home.ctaPublicaciones')}</a>
+          <a class="boton boton--fantasma" href={localizePath('/calendario', lang)}>{t('home.ctaCalendario')}</a>
+        </div>
+      </div>
+      <div class="hero__panel">
+        <h3>{t('common.proximosEventos')}</h3>
+        <ul class="lista-enlaces">
+          {eventos.map((e) => (
+            <li>
+              <a href={localizePath('/calendario', lang)}>
+                <strong>{tituloEvento(e, lang)}</strong>
+              </a>
+              <div class="pieza-pequena texto-suave">
+                {new Date(e.fecha + 'T12:00:00').toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+                {e.hora ? ' · ' + e.hora : ''}
+              </div>
+            </li>
+          ))}
+        </ul>
+        <a class="boton boton--texto" href={localizePath('/calendario', lang)}>{t('common.verMasEventos')} →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <span class="eyebrow">{t('home.destacadosTitulo')}</span>
+        <h2>{t('home.destacadosTexto')}</h2>
+      </div>
+      <div class="rejilla rejilla--3">
+        {destacados.map((d) => (
+          <a class="tarjeta tarjeta--enlace" href={localizePath(d.path, lang)}>
+            <span class={'tarjeta__filete ' + d.filete} aria-hidden="true"></span>
+            <span class="tarjeta__cuerpo">
+              <span class="tarjeta__titulo">{t(d.key)}</span>
+              <span class="tarjeta__texto">{t(d.texto)}</span>
+              <span class="tarjeta__pie">{t('common.verTodo')} →</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--suave">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <span class="eyebrow">{t('common.ultimasPublicaciones')}</span>
+        <h2>{t('pub.titulo')}</h2>
+      </div>
+      <div class="rejilla rejilla--3">
+        {posts.map((p) => <TarjetaPublicacion pub={p} lang={lang} />)}
+      </div>
+      <p class="mt-3"><a class="boton boton--fantasma" href={localizePath('/publicaciones', lang)}>{t('common.verMasPublicaciones')} →</a></p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <span class="eyebrow">{t('home.eventosTitulo')}</span>
+        <h2>{t('cal.agenda')}</h2>
+      </div>
+      <div class="rejilla rejilla--2">
+        {eventos.map((e) => <TarjetaEvento evento={e} lang={lang} />)}
+      </div>
+      <p class="mt-3"><a class="boton boton--fantasma" href={localizePath('/calendario', lang)}>{t('common.verMasEventos')} →</a></p>
+    </div>
+  </section>
+
+  <section class="seccion seccion--suave">
+    <div class="contenedor dos-columnas">
+      <div>
+        <span class="eyebrow">{t('home.sobreTitulo')}</span>
+        <h2>{SITE.nombre}</h2>
+        <p>
+          {lang === 'ar'
+            ? 'جمعية الجالية الإسبانية الفلسطينية – القدس جمعية غير ربحية تأسست عام 1988 في مدريد. نعمل على التعريف بقضية فلسطين ودعم المجتمع الفلسطيني في إسبانيا.'
+            : 'La Asociación de la Comunidad Hispano Palestina Jerusalén es una asociación sin ánimo de lucro fundada en 1988 en Madrid. Trabajamos para visibilizar la causa palestina y apoyar a la comunidad palestina en España.'}
+        </p>
+        <a class="boton boton--fantasma" href={localizePath('/quienes-somos', lang)}>{t('nav.quienes')} →</a>
+      </div>
+      <div class="panel panel--verde">
+        <h3>{t('home.escribenos')}</h3>
+        <p class="pieza-pequena">{t('home.tarjetaContactoTexto')}</p>
+        <ul class="lista-enlaces pieza-pequena">
+          <li><a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
+          <li><a href={'mailto:' + SITE.emails.cole}>{SITE.emails.cole}</a></li>
+          <li><a href={SITE.instagram.url} rel="noopener" target="_blank">{SITE.instagram.usuario}</a></li>
+        </ul>
+        <a class="boton boton--verde" href={localizePath('/contacto', lang)}>{t('nav.contacto')} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

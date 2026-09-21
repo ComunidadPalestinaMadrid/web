@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { localizePath } from '../i18n/utils';
+---
+<BaseLayout lang="es" title="Página no encontrada">
+  <section class="seccion">
+    <div class="contenedor centrado">
+      <span class="eyebrow">Error 404</span>
+      <h1>Página no encontrada</h1>
+      <p class="entradilla">Lo sentimos, la página que buscas no existe o ha cambiado de dirección.</p>
+      <p class="boton-fila" style="justify-content:center">
+        <a class="boton boton--primario" href={localizePath('/', 'es')}>Volver al inicio</a>
+        <a class="boton boton--fantasma" href={localizePath('/publicaciones', 'es')}>Ver publicaciones</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

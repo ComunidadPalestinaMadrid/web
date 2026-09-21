@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import TarjetaPublicacion from '../TarjetaPublicacion.astro';
+import { publicaciones, porTipo, TIPOS, type TipoPublicacion } from '../../data/publicaciones';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; tipo?: TipoPublicacion | 'todas'; }
+const { lang } = Astro.props;
+const tipo = Astro.props.tipo ?? 'todas';
+const t = useTranslations(lang);
+const lista = porTipo(tipo);
+
+const filtros = [
+  { valor: 'todas' as const, etiqueta: t('common.todas'), path: '/publicaciones' },
+  ...TIPOS.map((x) => ({ valor: x, etiqueta: t(('pub.' + x) as any), path: '/publicaciones/tipo/' + x }))
+];
+---
+<BaseLayout lang={lang} title={t('pub.titulo')} description={t('pub.intro')}>
+  <PaginaCabecera
+    eyebrow={t('nav.publicaciones')}
+    titulo={t('pub.titulo')}
+    entradilla={t('pub.intro')}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('pub.titulo') }]}
+  />
+  <section class="seccion">
+    <div class="contenedor">
+      <ul class="chips">
+        {filtros.map((f) => (
+          <li>
+            <a class="chip" href={localizePath(f.path, lang)} aria-current={f.valor === tipo ? 'true' : undefined}>{f.etiqueta}</a>
+          </li>
+        ))}
+      </ul>
+      <p class="pieza-pequena texto-suave">{lista.length} {t('pub.total')}</p>
+      {lista.length === 0 ? (
+        <p class="aviso">{t('common.noResultados')}</p>
+      ) : tipo === 'todas' ? (
+        <div class="rejilla rejilla--3">
+          {lista.map((p) => <TarjetaPublicacion pub={p} lang={lang} conImagen />)}
+        </div>
+      ) : (
+        <div class="rejilla rejilla--2">
+          {lista.map((p) => (
+            <a class="entrada" href={localizePath('/publicaciones/' + p.slug, lang)} style="text-decoration:none">
+              <div class="entrada__fecha">
+                <span class="entrada__dia">{p.date.slice(8, 10)}</span>
+                <span class="entrada__mes">{p.date.slice(0, 4)}</span>
+              </div>
+              <div>
+                <h3 class="entrada__titulo">{p.title}</h3>
+                <p class="tarjeta__texto">{p.resumen}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

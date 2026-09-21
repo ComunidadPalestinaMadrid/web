@@ -1,0 +1,11 @@
+---
+import PublicacionesPage from '../../../components/pages/PublicacionesPage.astro';
+import { TIPOS } from '../../../data/publicaciones';
+
+export function getStaticPaths() {
+  return TIPOS.map((tipo) => ({ params: { tipo }, props: { tipo } }));
+}
+
+const { tipo } = Astro.props;
+---
+<PublicacionesPage lang="es" tipo={tipo} />

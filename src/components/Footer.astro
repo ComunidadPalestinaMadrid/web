@@ -1,0 +1,73 @@
+---
+import { NAV } from '../data/nav';
+import { SITE } from '../data/site';
+import { useTranslations, localizePath, type Lang } from '../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const anio = new Date().getFullYear();
+---
+<footer class="pie">
+  <div class="filete" aria-hidden="true"></div>
+  <div class="contenedor">
+    <div class="pie__grid">
+      <div>
+        <div class="pie__marca">
+          <img src="/images/logo.png" alt="" width="46" height="46" />
+          <span>
+            <strong>{SITE.nombre}</strong>
+            <span>{SITE.siglas} · {SITE.lema}</span>
+          </span>
+        </div>
+        <p class="pie__texto">
+          {lang === 'ar'
+            ? 'جمعية غير ربحية تأسست عام 1988 في مدريد للعمل من أجل حقوق الشعب الفلسطيني.'
+            : 'Asociación sin ánimo de lucro fundada en 1988 en Madrid para trabajar por los derechos del pueblo palestino.'}
+        </p>
+      </div>
+
+      <div>
+        <h3>{t('footer.explora')}</h3>
+        <ul>
+          {NAV.map((item) => (
+            <li><a href={localizePath(item.path, lang)}>{t(item.key)}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3>{t('footer.contacto')}</h3>
+        <ul>
+          <li><a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
+          <li><a href={'mailto:' + SITE.emails.cole}>{SITE.emails.cole}</a></li>
+          <li>
+            <a class="icono-red" href={SITE.instagram.url} rel="me noopener" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                <circle cx="12" cy="12" r="4"></circle>
+                <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"></circle>
+              </svg>
+              <span>{SITE.instagram.usuario}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>{t('footer.sobre')}</h3>
+        <ul>
+          <li><a href={localizePath('/quienes-somos', lang)}>{SITE.presidente}</a></li>
+          <li><a href={localizePath('/calendario', lang)}>{t('nav.calendario')}</a></li>
+          <li><a href={localizePath('/aviso-legal', lang)}>{t('footer.legal')}</a></li>
+          <li><a href={SITE.webAntigua} rel="noopener" target="_blank">{t('common.webAntigua')}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pie__base">
+      <span>© {anio} {SITE.nombre}. {t('footer.derechos')}</span>
+      <span>{t('footer.creditos')} · {SITE.dominio}</span>
+    </div>
+  </div>
+</footer>

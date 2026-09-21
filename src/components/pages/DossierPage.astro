@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../data/site';
+import { getPublicacion } from '../../data/publicaciones';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const notas = ['nota-de-prensa-entrega-de-premios-anuales-jerusalen', 'nota-de-prensa-convocatoria-de-concentracion-frente-a-la-embajada-eeuu']
+  .map((s) => getPublicacion(s))
+  .filter(Boolean);
+---
+<BaseLayout lang={lang} title={t('prensa.dossier')} description={t('prensa.dossierTexto')}>
+  <section class="seccion">
+    <div class="contenedor">
+      <p class="migas"><a href={localizePath('/prensa', lang)}>{t('nav.prensa')}</a> / {t('prensa.dossier')}</p>
+      <div class="prosa prosa--ancho">
+        <h1>{t('prensa.dossier')}</h1>
+        <p class="entradilla">{t('prensa.dossierTexto')}</p>
+        <p class="boton-fila">
+          <button class="boton boton--primario" onclick="window.print()">
+            {lang === 'ar' ? 'طباعة / حفظ بصيغة PDF' : 'Imprimir o guardar en PDF'}
+          </button>
+          <a class="boton boton--fantasma" href={localizePath('/prensa', lang)}>{t('common.volver')}</a>
+        </p>
+
+        <h2>{SITE.nombre}</h2>
+        <ul>
+          <li><strong>{lang === 'ar' ? 'الاسم الكامل' : 'Denominación'}:</strong> {SITE.nombreLargo}</li>
+          <li><strong>{lang === 'ar' ? 'التأسيس' : 'Fundación'}:</strong> {SITE.fundacion}, Madrid</li>
+          <li><strong>{lang === 'ar' ? 'المقر' : 'Sede'}:</strong> {SITE.ciudad}, España</li>
+          <li><strong>{lang === 'ar' ? 'الرئيس' : 'Presidencia'}:</strong> {SITE.presidente}</li>
+          <li><strong>{lang === 'ar' ? 'البريد الصحفي' : 'Contacto de prensa'}:</strong> {SITE.emails.asociacion}</li>
+          <li><strong>Instagram:</strong> {SITE.instagram.usuario}</li>
+          <li><strong>Web:</strong> {SITE.dominio}</li>
+        </ul>
+
+        <h2>{lang === 'ar' ? 'من نحن' : 'Quiénes somos'}</h2>
+        <p>La Asociación de la Comunidad Hispano Palestina Jerusalén es una asociación sin ánimo de lucro fundada en 1988 en Madrid. Trabaja para visibilizar la causa palestina, denunciar la ocupación y el apartheid, reclamar el derecho al retorno de las personas refugiadas y apoyar a la comunidad palestina en España. Desarrolla su labor en España y cuenta con el Cole Árabe como proyecto educativo.</p>
+
+        <h2>{lang === 'ar' ? 'مجالات العمل' : 'Áreas de trabajo'}</h2>
+        <ul>
+          <li>Denuncia pública y campañas de solidaridad con Palestina.</li>
+          <li>Concentraciones y actos conmemorativos (Nakba, Día de la Tierra, Día Internacional de Solidaridad con el Pueblo Palestino, Día contra los Muros).</li>
+          <li>Publicaciones, comunicados y notas de prensa.</li>
+          <li>Cole Árabe: enseñanza de la lengua árabe y difusión de la cultura palestina.</li>
+          <li>Boicot, desinversión y sanciones (BDS).</li>
+        </ul>
+
+        <h2>{lang === 'ar' ? 'بيانات صحفية' : 'Notas de prensa'}</h2>
+        <ul>
+          {notas.map((n) => n && (
+            <li><strong>{n.title}</strong> — {n.date} — <a href={localizePath('/publicaciones/' + n.slug, lang)}>{t('common.leerMas')}</a></li>
+          ))}
+        </ul>
+
+        <h2>{lang === 'ar' ? 'معلومات للصحافة' : 'Información para medios'}</h2>
+        <p>Para entrevistas, declaraciones o material gráfico adicional, escribe a <a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a>. Idiomas de atención: español, English, العربية.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

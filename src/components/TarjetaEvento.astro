@@ -1,0 +1,32 @@
+---
+import { useTranslations, formatFechaCorta, type Lang } from '../i18n/utils';
+import { tituloEvento, descripcionEvento, lugarEvento, type Evento } from '../data/eventos';
+
+interface Props { evento: Evento; lang: Lang; }
+const { evento, lang } = Astro.props;
+const t = useTranslations(lang);
+const f = formatFechaCorta(evento.fecha, lang);
+const claves: Record<string, string> = {
+  concentracion: 'cal.concentracion', cultural: 'cal.cultural',
+  institucional: 'cal.institucional', formacion: 'cal.formacion'
+};
+---
+<article class={'evento' + (evento.destacado ? ' evento--destacado' : '')}>
+  <div class="evento__fecha" aria-hidden="true">
+    <span class="evento__dia">{f.dia}</span>
+    <span class="evento__mes">{f.mes}</span>
+    <span class="evento__anio">{f.anio}</span>
+  </div>
+  <div>
+    <p class="evento__datos">
+      <span class={'etiqueta ' + (evento.categoria === 'concentracion' ? 'etiqueta--comunicado' : evento.categoria === 'formacion' ? 'etiqueta--nota-prensa' : 'etiqueta--noticia')}>
+        {t(claves[evento.categoria])}
+      </span>
+      <span>{t('common.fecha')}: {new Date(evento.fecha + 'T12:00:00').toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
+      {evento.hora && <span>{t('common.hora')}: {evento.hora}</span>}
+      <span>{t('common.lugar')}: {lugarEvento(evento, lang)}</span>
+    </p>
+    <h3 class="evento__titulo">{tituloEvento(evento, lang)}</h3>
+    <p class="evento__desc">{descripcionEvento(evento, lang)}</p>
+  </div>
+</article>

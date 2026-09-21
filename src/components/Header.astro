@@ -1,0 +1,45 @@
+---
+import { NAV } from '../data/nav';
+import { SITE } from '../data/site';
+import { useTranslations, localizePath, stripLang, type Lang } from '../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const base = stripLang(Astro.url.pathname);
+// En la pagina 404 el selector de idioma apunta al inicio (no existe /404/).
+const baseIdioma = base.startsWith('/404') ? '/' : base;
+const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.startsWith(p + '/'));
+---
+<header class="cabecera">
+  <div class="filete" aria-hidden="true"></div>
+  <div class="contenedor cabecera__interior">
+    <a class="marca" href={localizePath('/', lang)}>
+      <img src="/images/logo.png" alt="" width="44" height="44" />
+      <span class="marca__texto">
+        <span class="marca__nombre">{SITE.corto}</span>
+        <span class="marca__sub">{SITE.siglas} · {SITE.fundacion}</span>
+      </span>
+    </a>
+    <input type="checkbox" id="menu-principal" class="menu-toggle" />
+    <label for="menu-principal" class="menu-boton" title={t('common.abrirMenu')}>
+      <span class="barra"></span><span class="barra"></span><span class="barra"></span>
+      <span class="salto">{t('common.abrirMenu')}</span>
+    </label>
+    <nav class="nav" aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Navegación principal'}>
+      <ul class="nav__lista">
+        {NAV.map((item) => (
+          <li>
+            <a class="nav__enlace" href={localizePath(item.path, lang)} aria-current={esActivo(item.path) ? 'page' : undefined}>
+              {t(item.key)}
+            </a>
+          </li>
+        ))}
+        <li class="idioma">
+          <a href={localizePath(baseIdioma, 'es')} aria-current={lang === 'es' ? 'true' : undefined} lang="es">ES</a>
+          <a href={localizePath(baseIdioma, 'ar')} aria-current={lang === 'ar' ? 'true' : undefined} lang="ar">ع</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import { SITE } from '../../data/site';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const ar = lang === 'ar';
+---
+<BaseLayout lang={lang} title={t('aviso.titulo')} description={t('aviso.intro')}>
+  <PaginaCabecera
+    eyebrow={t('nav.aviso')}
+    titulo={t('aviso.titulo')}
+    entradilla={t('aviso.intro')}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('aviso.titulo') }]}
+  />
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="aviso mb-3">
+        {ar
+          ? 'هذا نص قانوني نموذجي. الحقول المعلَّمة بـ [PENDIENTE] يجب أن تُستكمل ببيانات الجمعية الرسمية قبل نشر الموقع.'
+          : 'Plantilla legal pendiente de revisión. Los campos marcados como [PENDIENTE] deben completarse con los datos registrales oficiales de la asociación antes de publicar el sitio.'}
+      </div>
+      <div class="prosa" lang={ar ? 'es' : undefined} dir={ar ? 'ltr' : undefined}>
+        <h2>1. Datos identificativos del titular</h2>
+        <p>En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los siguientes datos:</p>
+        <ul>
+          <li><strong>Denominación social:</strong> {SITE.nombreLargo} ({SITE.siglas})</li>
+          <li><strong>CIF:</strong> [PENDIENTE]</li>
+          <li><strong>Número de inscripción en el Registro Nacional de Asociaciones:</strong> [PENDIENTE]</li>
+          <li><strong>Domicilio social:</strong> [PENDIENTE], Madrid (España)</li>
+          <li><strong>Correo electrónico:</strong> <a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
+          <li><strong>Dominio:</strong> {SITE.dominio}</li>
+          <li><strong>Fecha de constitución:</strong> {SITE.fundacion}</li>
+        </ul>
+
+        <h2>2. Objeto y ámbito de aplicación</h2>
+        <p>El presente aviso legal regula el acceso, la navegación y el uso del sitio web {SITE.dominio} (en adelante, «el Sitio»), titularidad de {SITE.nombreLargo}. El acceso al Sitio atribuye la condición de persona usuaria e implica la aceptación plena de las condiciones aquí publicadas. Si no está de acuerdo con ellas, debe abstenerse de utilizarlo.</p>
+
+        <h2>3. Condiciones de uso</h2>
+        <p>La persona usuaria se compromete a utilizar el Sitio de forma diligente, correcta y lícita, y en particular a:</p>
+        <ul>
+          <li>No realizar actividades ilícitas, ilegales o contrarias a la buena fe y al orden público.</li>
+          <li>No difundir contenidos o propaganda de carácter racista, xenófobo, discriminatorio o que incite al odio o a la violencia.</li>
+          <li>No introducir virus, programas maliciosos o cualquier elemento susceptible de causar daños en los sistemas del Sitio o de terceros.</li>
+          <li>No intentar acceder a áreas restringidas, ni vulnerar los sistemas de seguridad.</li>
+        </ul>
+
+        <h2>4. Propiedad intelectual e industrial</h2>
+        <p>Los textos, fotografías, ilustraciones, vídeos, documentos, logotipos, signos distintivos y demás contenidos del Sitio son titularidad de {SITE.siglas} o de terceros que han autorizado su uso, y están protegidos por la normativa de propiedad intelectual e industrial.</p>
+        <p>Queda prohibida su reproducción, distribución, comunicación pública, transformación o cualquier otra forma de explotación sin autorización expresa y por escrito de la asociación, salvo los usos permitidos por la ley. Se permite la reproducción de los contenidos con fines informativos citando la fuente y enlazando al Sitio.</p>
+        <p>Los contenidos procedentes del archivo histórico de la asociación (publicaciones de 2017 a 2024) se publican con la misma finalidad informativa y de memoria. Si alguna persona titular de derechos considera que un contenido debe retirarse, puede solicitarlo en <a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a>.</p>
+
+        <h2>5. Protección de datos personales</h2>
+        <p>De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), se informa de lo siguiente:</p>
+        <ul>
+          <li><strong>Responsable del tratamiento:</strong> {SITE.nombreLargo}, CIF [PENDIENTE], domicilio [PENDIENTE], Madrid.</li>
+          <li><strong>Finalidades:</strong> atender las consultas, sugerencias y solicitudes de información o colaboración recibidas; gestionar la inscripción en las actividades del Cole Árabe; y gestionar la relación asociativa.</li>
+          <li><strong>Base jurídica:</strong> consentimiento de la persona interesada y/o interés legítimo en el funcionamiento de la asociación.</li>
+          <li><strong>Destinatarios:</strong> no se ceden datos a terceros salvo obligación legal. Los formularios de contacto se gestionan a través de la plataforma Google Forms, cuyos servidores pueden estar ubicados fuera del Espacio Económico Europeo.</li>
+          <li><strong>Conservación:</strong> los datos se conservarán el tiempo necesario para atender la solicitud y, posteriormente, durante los plazos legales aplicables.</li>
+          <li><strong>Derechos:</strong> puede ejercer los derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a <a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a>, adjuntando documento que acredite su identidad. Asimismo, puede presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener" target="_blank">www.aepd.es</a>).</li>
+        </ul>
+
+        <h2>6. Cookies</h2>
+        <p>Este sitio web es de carácter estático y no utiliza cookies propias de seguimiento ni herramientas de analítica propias. Podrían instalarse cookies de terceros al insertar contenidos externos (por ejemplo, vídeos o formularios alojados en plataformas externas). En tal caso, se informará al usuario y se solicitará su consentimiento cuando la normativa lo exija.</p>
+
+        <h2>7. Enlaces a sitios de terceros</h2>
+        <p>El Sitio puede incluir enlaces a páginas externas. {SITE.siglas} no controla dichos contenidos ni asume responsabilidad alguna por ellos, por lo que se recomienda leer sus propias políticas legales y de privacidad.</p>
+
+        <h2>8. Exclusión de responsabilidad</h2>
+        <p>{SITE.siglas} adopta medidas razonables para el correcto funcionamiento del Sitio, pero no garantiza la ausencia de interrupciones, errores o vulnerabilidades, ni la actualización permanente de todos los contenidos. La asociación no se responsabiliza de los daños derivados del uso indebido del Sitio por parte de terceros.</p>
+
+        <h2>9. Modificaciones</h2>
+        <p>{SITE.siglas} se reserva el derecho a modificar, sin previo aviso, el contenido de este aviso legal para adaptarlo a novedades legislativas o cambios en la actividad de la asociación. Las condiciones vigentes serán las publicadas en cada momento en el Sitio.</p>
+
+        <h2>10. Legislación aplicable y jurisdicción</h2>
+        <p>Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia serán competentes los juzgados y tribunales de Madrid, salvo que la normativa de consumo establezca otro fuero.</p>
+
+        <p class="pieza-pequena texto-suave">Última actualización: {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}. Documento pendiente de revisión jurídica y de completar los datos registrales.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

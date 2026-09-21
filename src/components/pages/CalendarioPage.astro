@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import TarjetaEvento from '../TarjetaEvento.astro';
+import { EVENTOS, proximosEventos, eventosPorAnio, tituloEvento, lugarEvento } from '../../data/eventos';
+import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const proximos = proximosEventos();
+const porAnio = eventosPorAnio();
+const MES = lang === 'ar'
+  ? ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
+  : ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+---
+<BaseLayout lang={lang} title={t('cal.titulo')} description={t('cal.intro')}>
+  <PaginaCabecera
+    eyebrow={t('nav.calendario')}
+    titulo={t('cal.titulo')}
+    entradilla={t('cal.intro')}
+    migas={[{ texto: t('nav.inicio'), href: localizePath('/', lang) }, { texto: t('cal.titulo') }]}
+  />
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="aviso mb-3">{t('cal.notaDemo')}</div>
+      <div class="seccion-cabecera">
+        <h2>{t('cal.proximos')}</h2>
+      </div>
+      <div class="rejilla rejilla--2">
+        {proximos.map((e) => <TarjetaEvento evento={e} lang={lang} />)}
+      </div>
+      <p class="mt-3"><a class="boton boton--fantasma" href="/calendario.ics" download>{t('cal.descargarIcs')}</a></p>
+    </div>
+  </section>
+
+  <section class="seccion seccion--suave">
+    <div class="contenedor">
+      <div class="seccion-cabecera">
+        <h2>{t('cal.agenda')}</h2>
+        <p class="entradilla">{t('cal.anual')}</p>
+      </div>
+      {Object.entries(porAnio).map(([anio, lista]) => (
+        <div class="mb-3">
+          <h3>{anio}</h3>
+          <ul class="lista-enlaces">
+            {lista.map((e) => {
+              const d = new Date(e.fecha + 'T12:00:00');
+              return (
+                <li>
+                  <strong>{d.getDate()} {MES[d.getMonth()]}</strong> — {tituloEvento(e, lang)}
+                  <div class="pieza-pequena texto-suave">{lugarEvento(e, lang)}{e.hora ? ' · ' + e.hora : ''}</div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+      <p class="pieza-pequena texto-suave">{EVENTOS.length} {lang === 'ar' ? 'فعالية' : 'eventos'} · {t('cal.notaDemo')}</p>
+    </div>
+  </section>
+</BaseLayout>

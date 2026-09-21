@@ -1,0 +1,22 @@
+---
+import { useTranslations, localizePath, formatFecha, formatFechaCorta, type Lang } from '../i18n/utils';
+import { ETIQUETA_TIPO, CLASE_TIPO, type Publicacion } from '../data/publicaciones';
+
+interface Props { pub: Publicacion; lang: Lang; conImagen?: boolean; }
+const { pub, lang, conImagen = false } = Astro.props;
+const t = useTranslations(lang);
+const f = formatFechaCorta(pub.date, lang);
+const filete = pub.tipo === 'comunicado' ? 'tarjeta__filete--rojo' : pub.tipo === 'campana' ? 'tarjeta__filete--negro' : '';
+---
+<a class="tarjeta" href={localizePath('/publicaciones/' + pub.slug, lang)}>
+  <span class={'tarjeta__filete ' + filete} aria-hidden="true"></span>
+  {conImagen && pub.portada && <span class="tarjeta__media"><img src={pub.portada} alt="" loading="lazy" /></span>}
+  <span class="tarjeta__cuerpo">
+    <span class={'etiqueta ' + CLASE_TIPO[pub.tipo]}>{t(ETIQUETA_TIPO[pub.tipo])}</span>
+    <span class="tarjeta__titulo">{pub.title}</span>
+    <span class="tarjeta__texto">{pub.resumen}</span>
+    <span class="tarjeta__pie">
+      {f.dia} {f.mes} {f.anio} · {t('common.leerMas')} →
+    </span>
+  </span>
+</a>
