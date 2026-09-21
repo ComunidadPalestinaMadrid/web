@@ -1,16 +1,20 @@
 ---
-import { useTranslations, formatFechaCorta, withBase, type Lang } from '../i18n/utils';
+import { useTranslations, withBase, type Lang } from '../i18n/utils';
 import { tituloEvento, descripcionEvento, lugarEvento, enlaceGoogleCalendar, type Evento } from '../data/eventos';
 
 interface Props { evento: Evento; lang: Lang; }
 const { evento, lang } = Astro.props;
 const t = useTranslations(lang);
 const ar = lang === 'ar';
-const f = formatFechaCorta(evento.fecha, lang);
 const claves: Record<string, string> = {
   concentracion: 'cal.concentracion', cultural: 'cal.cultural',
   institucional: 'cal.institucional', formacion: 'cal.formacion'
 };
+// Fecha larga y destacada (sin el cuadro de fecha)
+const fechaBruta = new Date(evento.fecha + 'T12:00:00').toLocaleDateString(ar ? 'ar-EG' : 'es-ES', {
+  weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+});
+const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (evento.hora ? ' · ' + evento.hora + ' h' : '');
 ---
 <article class={'evento' + (evento.destacado ? ' evento--destacado' : '')}>
   {evento.imagen && (
@@ -24,30 +28,25 @@ const claves: Record<string, string> = {
     </div>
   )}
   <div class="evento__cuerpo">
-    <div class="evento__fecha" aria-hidden="true">
-      <span class="evento__dia">{f.dia}</span>
-      <span class="evento__mes">{f.mes}</span>
-      <span class="evento__anio">{f.anio}</span>
-    </div>
-    <div>
-      <p class="evento__datos">
-        <span class={'etiqueta ' + (evento.categoria === 'concentracion' ? 'etiqueta--comunicado' : evento.categoria === 'formacion' ? 'etiqueta--nota-prensa' : 'etiqueta--noticia')}>
-          {t(claves[evento.categoria])}
-        </span>
-        <span>{t('common.fecha')}: {new Date(evento.fecha + 'T12:00:00').toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
-        {evento.hora && <span>{t('common.hora')}: {evento.hora}</span>}
-        <span>{t('common.lugar')}: {lugarEvento(evento, lang)}</span>
-      </p>
-      <h3 class="evento__titulo">{tituloEvento(evento, lang)}</h3>
-      <p class="evento__desc">{descripcionEvento(evento, lang)}</p>
-      <p class="evento__acciones">
-        <a class="boton boton--fantasma boton--pequeno" href={withBase('/calendario/' + evento.id + '.ics')} download>
-          {t('cal.anadir')}
+    <span class={'etiqueta ' + (evento.categoria === 'concentracion' ? 'etiqueta--comunicado' : evento.categoria === 'formacion' ? 'etiqueta--nota-prensa' : 'etiqueta--noticia')}>
+      {t(claves[evento.categoria])}
+    </span>
+    <p class="evento__cuando">{cuando}</p>
+    <h3 class="evento__titulo">{tituloEvento(evento, lang)}</h3>
+    <p class="evento__desc">{descripcionEvento(evento, lang)}</p>
+    <p class="evento__lugar">{t('common.lugar')}: {lugarEvento(evento, lang)}</p>
+    <p class="evento__acciones">
+      <a class="boton boton--primario boton--pequeno" href={enlaceGoogleCalendar(evento)} target="_blank" rel="noopener">
+        {t('cal.googleAdd')} ↗
+      </a>
+      <a class="boton boton--fantasma boton--pequeno" href={withBase('/calendario/' + evento.id + '.ics')} download>
+        {t('cal.icsEvento')}
+      </a>
+      {evento.imagen && (
+        <a class="boton boton--fantasma boton--pequeno" href={withBase(evento.imagen)} download>
+          {t('cal.cartel')}
         </a>
-        <a class="boton boton--texto boton--pequeno" href={enlaceGoogleCalendar(evento)} target="_blank" rel="noopener">
-          {t('cal.google')} ↗
-        </a>
-      </p>
-    </div>
+      )}
+    </p>
   </div>
 </article>
