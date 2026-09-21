@@ -10,17 +10,29 @@ import { useTranslations, localizePath, withBase, type Lang } from '../../i18n/u
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const posts = ultimas(3);
+const ar = lang === 'ar';
 const eventos = proximosEventos(3);
 
-const destacados = [
-  { path: '/publicaciones', key: 'nav.publicaciones', texto: 'home.tarjetaPublicacionesTexto', filete: 'tarjeta__filete' },
-  { path: '/calendario', key: 'nav.calendario', texto: 'home.tarjetaCalendarioTexto', filete: 'tarjeta__filete--rojo' },
-  { path: '/cole-arabe', key: 'nav.cole', texto: 'home.tarjetaColeTexto', filete: 'tarjeta__filete--negro' },
-  { path: '/prensa', key: 'nav.prensa', texto: 'home.tarjetaPrensaTexto', filete: 'tarjeta__filete' },
-  { path: '/quienes-somos', key: 'nav.quienes', texto: 'home.tarjetaQuienesTexto', filete: 'tarjeta__filete--rojo' },
-  { path: '/contacto', key: 'nav.contacto', texto: 'home.tarjetaContactoTexto', filete: 'tarjeta__filete--negro' }
-] as const;
+// Parrilla de portada: 2 posts grandes + 6 pequenos
+const posts = ultimas(8);
+const grandes = posts.slice(0, 2);
+const pequenos = posts.slice(2, 8);
+
+const coleIntro = ar
+  ? 'المدرسة العربية هي المشروع التربوي للجمعية. نجتمع كل أسبوع لتعلّم اللغة العربية والحفاظ على الثقافة الفلسطينية مع أطفال الجالية.'
+  : 'El Cole Árabe es el proyecto educativo de la asociación. Cada semana nos reunimos para aprender árabe y mantener viva la cultura palestina con las niñas y los niños de la comunidad.';
+
+const coleActividades = ar ? [
+  { titulo: 'دروس اللغة العربية', texto: 'القراءة والكتابة والقواعد والمحادثة، في مجموعات حسب العمر والمستوى.' },
+  { titulo: 'ورشات ثقافية', texto: 'التطريز والدبكة والمطبخ والأشغال اليدوية في المناسبات.' },
+  { titulo: 'الاحتفالات', texto: 'رمضان والعيد ويوم الأرض وأعياد الجالية الأخرى.' },
+  { titulo: 'الدعم المدرسي', texto: 'متابعة دراسية ودعم في الواجبات المدرسية.' }
+] : [
+  { titulo: 'Clases de árabe', texto: 'Lectoescritura, gramática y conversación, en grupos por edad y nivel.' },
+  { titulo: 'Talleres culturales', texto: 'Bordado, dabke, cocina y manualidades para las fechas señaladas.' },
+  { titulo: 'Celebraciones', texto: 'Ramadán, Eid, Día de la Tierra y otras fiestas de la comunidad.' },
+  { titulo: 'Apoyo escolar', texto: 'Refuerzo y acompañamiento en las tareas del colegio.' }
+];
 ---
 <BaseLayout lang={lang}>
   <section class="hero">
@@ -62,40 +74,49 @@ const destacados = [
     </div>
   </section>
 
+  <!-- Parrilla de posts: 2 grandes + 6 pequenos -->
   <section class="seccion">
-    <div class="contenedor">
-      <div class="seccion-cabecera">
-        <span class="eyebrow">{t('home.destacadosTitulo')}</span>
-        <h2>{t('home.destacadosTexto')}</h2>
-      </div>
-      <div class="rejilla rejilla--3">
-        {destacados.map((d) => (
-          <a class="tarjeta tarjeta--enlace" href={localizePath(d.path, lang)}>
-            <span class={'tarjeta__filete ' + d.filete} aria-hidden="true"></span>
-            <span class="tarjeta__cuerpo">
-              <span class="tarjeta__titulo">{t(d.key)}</span>
-              <span class="tarjeta__texto">{t(d.texto)}</span>
-              <span class="tarjeta__pie">{t('common.verTodo')} →</span>
-            </span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="seccion seccion--suave">
     <div class="contenedor">
       <div class="seccion-cabecera">
         <span class="eyebrow">{t('common.ultimasPublicaciones')}</span>
         <h2>{t('pub.titulo')}</h2>
       </div>
-      <div class="rejilla rejilla--3">
-        {posts.map((p) => <TarjetaPublicacion pub={p} lang={lang} />)}
+      <div class="parrilla-posts">
+        <div class="parrilla-posts__grandes">
+          {grandes.map((p) => <TarjetaPublicacion pub={p} lang={lang} variante="grande" />)}
+        </div>
+        <div class="parrilla-posts__pequenos">
+          {pequenos.map((p) => <TarjetaPublicacion pub={p} lang={lang} variante="pequeno" />)}
+        </div>
       </div>
-      <p class="mt-3"><a class="boton boton--fantasma" href={localizePath('/publicaciones', lang)}>{t('common.verMasPublicaciones')} →</a></p>
+      <p class="mt-3">
+        <a class="boton boton--fantasma" href={localizePath('/publicaciones', lang)}>{t('common.verMasPublicaciones')} →</a>
+      </p>
     </div>
   </section>
 
+  <!-- Cole Arabe -->
+  <section class="seccion seccion--suave">
+    <div class="contenedor cole-bloque">
+      <div>
+        <span class="eyebrow">{t('nav.actividades')}</span>
+        <h2>{t('nav.cole')}</h2>
+        <p>{coleIntro}</p>
+        <ul class="lista-actividades">
+          {coleActividades.map((a) => (
+            <li><strong>{a.titulo}</strong>{a.texto}</li>
+          ))}
+        </ul>
+        <a class="boton boton--primario" href={localizePath('/cole-arabe', lang)}>{t('common.leerMas')} →</a>
+      </div>
+      <div class="cole-fotos">
+        <img src={withBase('/images/uploads/cole-1.jpg')} alt={ar ? 'ورشة أشغال يدوية في المدرسة العربية' : 'Taller de manualidades del Cole Árabe'} loading="lazy" decoding="async" />
+        <img src={withBase('/images/uploads/cole-2.jpg')} alt={ar ? 'رسومات الأطفال في المدرسة العربية' : 'Dibujos del alumnado del Cole Árabe'} loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda -->
   <section class="seccion">
     <div class="contenedor">
       <div class="seccion-cabecera">
@@ -115,7 +136,7 @@ const destacados = [
         <span class="eyebrow">{t('home.sobreTitulo')}</span>
         <h2>{SITE.nombre}</h2>
         <p>
-          {lang === 'ar'
+          {ar
             ? 'جمعية الجالية الإسبانية الفلسطينية – القدس جمعية غير ربحية تأسست عام 1988 في مدريد. نعمل على التعريف بقضية فلسطين ودعم المجتمع الفلسطيني في إسبانيا.'
             : 'La Asociación de la Comunidad Hispano Palestina Jerusalén es una asociación sin ánimo de lucro fundada en 1988 en Madrid. Trabajamos para visibilizar la causa palestina y apoyar a la comunidad palestina en España.'}
         </p>

@@ -1,6 +1,6 @@
 ---
-import { useTranslations, formatFechaCorta, type Lang } from '../i18n/utils';
-import { tituloEvento, descripcionEvento, lugarEvento, type Evento } from '../data/eventos';
+import { useTranslations, formatFechaCorta, withBase, type Lang } from '../i18n/utils';
+import { tituloEvento, descripcionEvento, lugarEvento, enlaceGoogleCalendar, type Evento } from '../data/eventos';
 
 interface Props { evento: Evento; lang: Lang; }
 const { evento, lang } = Astro.props;
@@ -28,5 +28,13 @@ const claves: Record<string, string> = {
     </p>
     <h3 class="evento__titulo">{tituloEvento(evento, lang)}</h3>
     <p class="evento__desc">{descripcionEvento(evento, lang)}</p>
+    <p class="evento__acciones">
+      <a class="boton boton--fantasma boton--pequeno" href={withBase('/calendario/' + evento.id + '.ics')} download>
+        {t('cal.anadir')}
+      </a>
+      <a class="boton boton--texto boton--pequeno" href={enlaceGoogleCalendar(evento)} target="_blank" rel="noopener">
+        {t('cal.google')} ↗
+      </a>
+    </p>
   </div>
 </article>

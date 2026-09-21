@@ -69,6 +69,11 @@ envoltorios finos que pasan `lang="es"` o `lang="ar"` a los componentes de
 | Publicaciones | `src/data/publicaciones/*.json` |
 | Aviso legal | `src/components/pages/AvisoLegalPage.astro` |
 | Cole Árabe | `src/components/pages/ColeArabePage.astro` |
+| Portada: parrilla de posts y bloque del Cole | `src/components/pages/InicioPage.astro` |
+
+Los posts cuya `portada` esté vacía muestran el marcador gris
+`public/images/placeholder.svg`. Las fotos del Cole Árabe de la portada son
+`public/images/uploads/cole-1.jpg` y `cole-2.jpg`.
 
 Para añadir una publicación, crea un archivo JSON en `src/data/publicaciones/` con
 esta forma:

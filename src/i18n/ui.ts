@@ -88,6 +88,8 @@ export const ui = {
     'cal.institucional': 'Institucional',
     'cal.formacion': 'Formación',
     'cal.anual': 'Fecha señalada',
+    'cal.anadir': 'Añadir al calendario',
+    'cal.google': 'Google Calendar',
 
     'cole.titulo': 'Cole Árabe',
     'cole.intro': 'La escuela de árabe de la Asociación Hispano Palestina de Madrid: lengua, cultura e identidad.',
@@ -228,6 +230,8 @@ export const ui = {
     'cal.institucional': 'مؤسسي',
     'cal.formacion': 'تكوين',
     'cal.anual': 'تاريخ سنوي',
+    'cal.anadir': 'أضف إلى التقويم',
+    'cal.google': 'تقويم Google',
 
     'cole.titulo': 'المدرسة العربية',
     'cole.intro': 'مدرسة اللغة العربية التابعة للجمعية الإسبانية الفلسطينية في مدريد: اللغة والثقافة والهوية.',

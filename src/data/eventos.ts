@@ -209,26 +209,63 @@ export function eventosPorAnio(): Record<string, Evento[]> {
   return grupos;
 }
 
+/** Fecha local en formato iCalendar: 20261007T190000 */
+function fechaIcs(e: Evento): string {
+  const d = e.fecha.replace(/-/g, '');
+  const [hh, mm] = (e.hora || '12:00').split(':');
+  return d + 'T' + hh + mm + '00';
+}
+
+function escaparIcs(s: string): string {
+  return s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+}
+
+function vevent(e: Evento): string[] {
+  return [
+    'BEGIN:VEVENT',
+    'UID:' + e.id + '@comunidadpalestina.madrid',
+    'DTSTAMP:' + fechaIcs(e) + 'Z',
+    'DTSTART;TZID=Europe/Madrid:' + fechaIcs(e),
+    'SUMMARY:' + escaparIcs(e.titulo),
+    'LOCATION:' + escaparIcs(e.lugar),
+    'DESCRIPTION:' + escaparIcs(e.descripcion),
+    'END:VEVENT'
+  ];
+}
+
+/** Calendario completo, para suscribirse. */
 export function generarIcs(): string {
-  const fmt = (e: Evento) => {
-    const d = e.fecha.replace(/-/g, '');
-    const [hh, mm] = (e.hora || '12:00').split(':');
-    return d + 'T' + hh + mm + '00';
-  };
-  const esc = (s: string) => s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
   const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//AHPJ//Calendario//ES', 'CALSCALE:GREGORIAN', 'X-WR-CALNAME:Asociación Hispano Palestina de Madrid'];
-  for (const e of EVENTOS) {
-    lines.push(
-      'BEGIN:VEVENT',
-      'UID:' + e.id + '@comunidadpalestina.madrid',
-      'DTSTAMP:' + fmt(e) + 'Z',
-      'DTSTART;TZID=Europe/Madrid:' + fmt(e),
-      'SUMMARY:' + esc(e.titulo),
-      'LOCATION:' + esc(e.lugar),
-      'DESCRIPTION:' + esc(e.descripcion),
-      'END:VEVENT'
-    );
-  }
+  for (const e of EVENTOS) lines.push(...vevent(e));
   lines.push('END:VCALENDAR');
   return lines.join('\r\n');
+}
+
+/** Un solo evento, para el boton "anadir al calendario" (Apple, Outlook, Android...). */
+export function generarIcsEvento(e: Evento): string {
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//AHPJ//Calendario//ES', 'CALSCALE:GREGORIAN'];
+  lines.push(...vevent(e));
+  lines.push('END:VCALENDAR');
+  return lines.join('\r\n');
+}
+
+/** Enlace para anadir el evento directamente a Google Calendar. */
+export function enlaceGoogleCalendar(e: Evento): string {
+  const d = e.fecha.replace(/-/g, '');
+  const [hh, mm] = (e.hora || '12:00').split(':').map(Number);
+  const inicio = d + 'T' + String(hh).padStart(2, '0') + String(mm).padStart(2, '0') + '00';
+  const finHora = String(Math.min(hh + 2, 23)).padStart(2, '0') + String(mm).padStart(2, '0') + '00';
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: e.titulo,
+    dates: inicio + '/' + d + 'T' + finHora,
+    details: e.descripcion,
+    location: e.lugar,
+    ctz: 'Europe/Madrid'
+  });
+  return 'https://calendar.google.com/calendar/render?' + params.toString();
+}
+
+export function getEvento(id: string): Evento | undefined {
+  return EVENTOS.find((e) => e.id === id);
 }
