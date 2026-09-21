@@ -374,3 +374,22 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .evento__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: .9rem 0 0; }
 .boton--pequeno { padding: .45rem .9rem; font-size: .98rem; }
 
+/* Prensa: buscador, sala de prensa y apariciones -------------------------- */
+.buscador { margin-bottom: 1.7rem; max-width: 34rem; }
+.buscador__campo { width: 100%; padding: .7rem 1.1rem; border: 1px solid var(--linea-fuerte); border-radius: 999px; background: #fff; font-family: var(--fuente-texto); font-size: 1rem; color: var(--texto); }
+.buscador__campo:focus { outline: 2px solid var(--ps-verde); outline-offset: 1px; border-color: var(--ps-verde); }
+.buscador__vacio { margin: .9rem 0 0; color: var(--texto-suave); }
+
+.lista-prensa, .lista-apariciones { list-style: none; margin: 0; padding: 0; }
+.nota-prensa, .aparicion { padding-block: 1.5rem; border-bottom: 1px solid var(--linea); }
+.nota-prensa:first-child, .aparicion:first-child { border-top: 1px solid var(--linea); }
+.nota-prensa__meta, .aparicion__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 0 0 .45rem; font-family: var(--fuente); font-size: 1.04rem; letter-spacing: .01em; color: var(--texto-suave); }
+.aparicion__medio { font-weight: 700; color: var(--ps-rojo); text-transform: uppercase; letter-spacing: .08em; font-size: .96rem; }
+.nota-prensa__titulo, .aparicion__titular { margin: 0 0 .35rem; font-size: 1.5rem; line-height: 1.15; }
+.nota-prensa__titulo a, .aparicion__titular a { color: var(--tinta); }
+.nota-prensa__titulo a:hover, .aparicion__titular a:hover { color: var(--ps-rojo); text-decoration: none; }
+.nota-prensa__resumen, .aparicion__sub { margin: 0 0 .5rem; color: var(--texto-suave); font-size: .95rem; }
+.nota-prensa__pie, .aparicion__pie { margin: 0; }
+[data-buscable][hidden] { display: none; }
+
+

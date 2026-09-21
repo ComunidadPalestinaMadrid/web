@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import Buscador from '../Buscador.astro';
+import { APARICIONES, CONTACTO_PRENSA } from '../../data/prensa';
+import { SITE } from '../../data/site';
+import { useTranslations, localizePath, formatFecha, type Lang } from '../../i18n/utils';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<BaseLayout lang={lang} title={t('nav.apariciones')} description={t('prensa.aparicionesIntro')}>
+  <PaginaCabecera
+    eyebrow={t('nav.prensa')}
+    titulo={t('nav.apariciones')}
+    entradilla={t('prensa.aparicionesIntro')}
+    migas={[
+      { texto: t('nav.inicio'), href: localizePath('/', lang) },
+      { texto: t('nav.prensa') },
+      { texto: t('nav.apariciones') }
+    ]}
+  />
+  <section class="seccion" data-buscador-scope>
+    <div class="contenedor dos-columnas">
+      <div>
+        <Buscador placeholder={t('prensa.buscarMedios')} vacio={t('prensa.sinResultados')} />
+        <ul class="lista-apariciones">
+          {APARICIONES.map((a) => (
+            <li class="aparicion" data-buscable={a.medio + ' ' + a.titular + ' ' + (a.subtitulo || '') + ' ' + a.fecha}>
+              <p class="aparicion__meta">
+                <span class="aparicion__medio">{a.medio}</span>
+                <span class="aparicion__fecha">{formatFecha(a.fecha, lang)}</span>
+              </p>
+              <h3 class="aparicion__titular">
+                <a href={a.url} target="_blank" rel="noopener">{a.titular}</a>
+              </h3>
+              {a.subtitulo && <p class="aparicion__sub">{a.subtitulo}</p>}
+              <p class="aparicion__pie">
+                <a class="boton boton--texto boton--pequeno" href={a.url} target="_blank" rel="noopener">{t('prensa.abrir')} ↗</a>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <aside>
+        <div class="panel panel--sticky">
+          <h3>{t('nav.salaPrensa')}</h3>
+          <p class="pieza-pequena">
+            {lang === 'ar'
+              ? 'البيانات الصحفية وبيانات الجمعية، من الأحدث إلى الأقدم.'
+              : 'Notas de prensa y comunicados de la asociación, del más reciente al más antiguo.'}
+          </p>
+          <a class="boton boton--fantasma boton--pequeno" href={localizePath('/prensa', lang)}>{t('nav.salaPrensa')} →</a>
+          <h3 class="mt-3">{t('prensa.contactoMedios')}</h3>
+          <ul class="lista-enlaces pieza-pequena">
+            <li><a href={'mailto:' + CONTACTO_PRENSA.email}>{CONTACTO_PRENSA.email}</a></li>
+            <li><a href={SITE.instagram.url} rel="noopener" target="_blank">{SITE.instagram.usuario}</a></li>
+          </ul>
+          <p class="pieza-pequena texto-suave mb-0">{CONTACTO_PRENSA.idiomas}</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

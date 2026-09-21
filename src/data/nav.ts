@@ -16,7 +16,13 @@ export const NAV = [
       { key: 'nav.contacto', path: '/contacto' }
     ]
   },
-  { key: 'nav.prensa', path: '/prensa' },
+  {
+    key: 'nav.prensa',
+    children: [
+      { key: 'nav.salaPrensa', path: '/prensa' },
+      { key: 'nav.apariciones', path: '/prensa/apariciones' }
+    ]
+  },
   { key: 'nav.participa', path: '/participa' }
 ] as const;
 

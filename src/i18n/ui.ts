@@ -18,6 +18,8 @@ export const ui = {
     'nav.comunidad': 'La Comunidad',
     'nav.participa': 'Participa',
     'nav.refugiados': 'Atención a refugiados',
+    'nav.salaPrensa': 'Sala de prensa',
+    'nav.apariciones': 'Apariciones en medios',
 
     'common.leerMas': 'Leer más',
     'common.volver': 'Volver',
@@ -111,6 +113,12 @@ export const ui = {
     'prensa.notas': 'Notas de prensa',
     'prensa.medios': 'Apariciones en medios',
     'prensa.contactoMedios': 'Contacto para medios',
+    'prensa.salaIntro': 'Notas de prensa y comunicados de la asociación, del más reciente al más antiguo.',
+    'prensa.aparicionesIntro': 'Medios de comunicación que se han hecho eco de la actividad de la asociación o la han citado.',
+    'prensa.buscar': 'Buscar en las notas de prensa…',
+    'prensa.buscarMedios': 'Buscar por medio, titular o fecha…',
+    'prensa.sinResultados': 'No hay resultados para esa búsqueda.',
+    'prensa.abrir': 'Ver en el medio',
 
     'contacto.titulo': 'Contacto',
     'contacto.intro': '¿Quieres colaborar, participar en una actividad o pedir información? Escríbenos.',
@@ -161,6 +169,8 @@ export const ui = {
     'nav.comunidad': 'الجالية',
     'nav.participa': 'شارك معنا',
     'nav.refugiados': 'رعاية اللاجئين',
+    'nav.salaPrensa': 'غرفة الأخبار',
+    'nav.apariciones': 'ظهور في وسائل الإعلام',
 
     'common.leerMas': 'اقرأ المزيد',
     'common.volver': 'رجوع',
@@ -254,6 +264,12 @@ export const ui = {
     'prensa.notas': 'البيانات الصحفية',
     'prensa.medios': 'متابعات إعلامية',
     'prensa.contactoMedios': 'التواصل لوسائل الإعلام',
+    'prensa.salaIntro': 'البيانات الصحفية وبيانات الجمعية، من الأحدث إلى الأقدم.',
+    'prensa.aparicionesIntro': 'وسائل إعلام تناولت نشاط الجمعية أو أشارت إليها.',
+    'prensa.buscar': 'ابحث في البيانات الصحفية…',
+    'prensa.buscarMedios': 'ابحث حسب الوسيلة أو العنوان أو التاريخ…',
+    'prensa.sinResultados': 'لا توجد نتائج لهذا البحث.',
+    'prensa.abrir': 'عرض في الوسيلة',
 
     'contacto.titulo': 'اتصل بنا',
     'contacto.intro': 'هل ترغب في التعاون أو المشاركة في نشاط أو طلب معلومات؟ راسلنا.',

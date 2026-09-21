@@ -1,6 +1,6 @@
 // Calendario de eventos. Los eventos marcados con prueba:true son de ejemplo
 // mientras la asociacion publica su calendario definitivo.
-export type CategoriaEvento = 'concentracion' | 'cultural' | 'institucional' | 'formacion';
+export type CategoriaEvento = 'movilización' | 'cultural' | 'institucional' | 'formacion';
 export type IdiomaEvento = 'es' | 'ar';
 
 export interface Evento {
@@ -31,7 +31,7 @@ export const EVENTOS: Evento[] = [
     lugarAr: 'دوار كارلوس الخامس، مدريد',
     descripcion: 'Manifestación en Madrid para denunciar que el genocidio continúa.',
     descripcionAr: 'مظاهرة في مدريد للتنديد باستمرار الإبادة الجماعية.',
-    categoria: 'concentracion',
+    categoria: 'movilización',
     imagen: '/images/uploads/mani-4-octubre-2026.jpg',
     destacado: true
   },
@@ -41,11 +41,11 @@ export const EVENTOS: Evento[] = [
     tituloAr: 'ذكرى وعد بلفور (1917)',
     fecha: '2026-11-07',
     hora: '12:00',
-    lugar: 'Puerta del Sol, Madrid',
-    lugarAr: 'بويرتا ديل سول، مدريد',
-    descripcion: 'Concentración por el 109 aniversario de la Declaración Balfour y contra la impunidad colonial.',
-    descripcionAr: 'وقفة بمناسبة الذكرى 109 لوعد بلفور وضد الإفلات الاستعماري من العقاب.',
-    categoria: 'concentracion',
+    lugar: '',
+    lugarAr: '',
+    descripcion: '',
+    descripcionAr: '.',
+    categoria: 'institucional',
     prueba: true
   },
   {
@@ -58,7 +58,7 @@ export const EVENTOS: Evento[] = [
     lugarAr: 'ساحة كاياو، مدريد',
     descripcion: 'Jornada contra el muro de separación, las demoliciones y la colonización del territorio palestino.',
     descripcionAr: 'يوم للنضال ضد جدار الفصل والهدم والاستيطان في الأرض الفلسطينية.',
-    categoria: 'concentracion',
+    categoria: 'movilización',
     prueba: true
   },
   {
@@ -66,9 +66,9 @@ export const EVENTOS: Evento[] = [
     titulo: 'Aniversario del asesinato de Yasser Arafat',
     tituloAr: 'ذكرى اغتيال ياسر عرفات',
     fecha: '2026-11-13',
-    hora: '19:00',
-    lugar: 'Sede de la asociación, Madrid',
-    lugarAr: 'مقر الجمعية، مدريد',
+    hora: '',
+    lugar: '',
+    lugarAr: '',
     descripcion: 'Homenaje a la figura histórica de Yasser Arafat y a la lucha por la autodeterminación del pueblo palestino.',
     descripcionAr: 'تحية لشخصية ياسر عرفات التاريخية ولنضال الشعب الفلسطيني من أجل تقرير المصير.',
     categoria: 'institucional',
@@ -89,7 +89,7 @@ export const EVENTOS: Evento[] = [
   },
   {
     id: 'solidaridad-onu-2026',
-    titulo: 'Día Internacional de Solidaridad con el Pueblo Palestino (ONU)',
+    titulo: 'Día de la Partición de Palestina',
     tituloAr: 'اليوم الدولي للتضامن مع الشعب الفلسطيني (الأمم المتحدة)',
     fecha: '2026-11-29',
     hora: '12:00',
@@ -97,7 +97,7 @@ export const EVENTOS: Evento[] = [
     lugarAr: 'مدريد',
     descripcion: 'Acto central anual conmemorando la resolución 181 de Naciones Unidas y reclamando el fin de la ocupación.',
     descripcionAr: 'الفعالية المركزية السنوية إحياءً للقرار 181 للأمم المتحدة والمطالبة بإنهاء الاحتلال.',
-    categoria: 'institucional',
+    categoria: 'movilización',
     destacado: true,
     prueba: true
   },
@@ -137,7 +137,7 @@ export const EVENTOS: Evento[] = [
     lugarAr: 'مدريد',
     descripcion: 'Conmemoración del 51 aniversario del Día de la Tierra y defensa de la tierra y el campesinado palestino.',
     descripcionAr: 'إحياء الذكرى 51 ليوم الأرض والدفاع عن الأرض والفلاحين الفلسطينيين.',
-    categoria: 'concentracion',
+    categoria: 'movilización',
     prueba: true
   },
   {
@@ -164,7 +164,7 @@ export const EVENTOS: Evento[] = [
     lugarAr: 'مدريد',
     descripcion: 'Conmemoración de la Nakba y reivindicación del derecho al retorno de los refugiados palestinos.',
     descripcionAr: 'إحياء ذكرى النكبة والمطالبة بحق العودة للاجئين الفلسطينيين.',
-    categoria: 'concentracion',
+    categoria: 'movilización',
     destacado: true,
     prueba: true
   },

@@ -1,0 +1,41 @@
+---
+interface Props { placeholder: string; vacio: string; }
+const { placeholder, vacio } = Astro.props;
+---
+<div class="buscador" data-buscador>
+  <input
+    type="search"
+    class="buscador__campo"
+    placeholder={placeholder}
+    aria-label={placeholder}
+    autocomplete="off"
+  />
+  <p class="buscador__vacio" data-buscador-vacio hidden>{vacio}</p>
+</div>
+
+<script>
+  // Filtra en el cliente los elementos [data-buscable] dentro de [data-buscador-scope].
+  // Sin JavaScript se muestran todos los elementos, sin filtrar.
+  const normalizar = (s) =>
+    s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+  document.querySelectorAll('[data-buscador]').forEach((caja) => {
+    const campo = caja.querySelector('input');
+    const vacio = caja.querySelector('[data-buscador-vacio]');
+    const ambito = caja.closest('[data-buscador-scope]') || document;
+    const items = Array.from(ambito.querySelectorAll('[data-buscable]'));
+    if (!campo || items.length === 0) return;
+
+    campo.addEventListener('input', () => {
+      const q = normalizar(campo.value.trim());
+      let visibles = 0;
+      for (const el of items) {
+        const texto = normalizar(el.getAttribute('data-buscable') || el.textContent || '');
+        const coincide = q === '' || texto.includes(q);
+        el.toggleAttribute('hidden', !coincide);
+        if (coincide) visibles++;
+      }
+      if (vacio) vacio.toggleAttribute('hidden', visibles > 0);
+    });
+  });
+</script>
