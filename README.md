@@ -91,6 +91,27 @@ esta forma:
 
 ---
 
+## Tipografías
+
+El sitio usa dos tipografías de Google Fonts, **autoalojadas** (se descargan en el build
+mediante los paquetes `@fontsource`, así que el navegador del visitante no hace ninguna
+petición a Google):
+
+| Uso | Tipografía |
+| --- | --- |
+| Titulares, navegación, botones, etiquetas, fechas y metadatos | **Barlow Condensed** |
+| Texto corrido: párrafos, artículos, entradillas y texto legal | **Lora** |
+
+Se cargan solo los pesos y el subconjunto latino necesarios (Barlow Condensed 400/600/700;
+Lora 400/400 cursiva/700), desde `src/layouts/BaseLayout.astro`. Las variables
+`--fuente` y `--fuente-texto` de `src/styles/global.css` controlan todo el sistema: para
+cambiar de tipografía basta con editar esas dos líneas.
+
+La versión en árabe mantiene su propia pila de fuentes (`--fuente-ar`) porque ni Barlow
+Condensed ni Lora incluyen glifos árabes.
+
+---
+
 ## Despliegue en GitHub Pages
 
 El sitio se publica automáticamente con el flujo `.github/workflows/deploy.yml` en cada
