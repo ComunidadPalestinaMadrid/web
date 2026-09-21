@@ -8,6 +8,8 @@ node_modules/
 
 # migracion (HTML crudo de la web antigua; el contenido ya vive en src/data)
 _migration/raw/
+# originales de imagenes a resolucion completa (no se sirven)
+_migration/originales/
 
 # entorno
 .env

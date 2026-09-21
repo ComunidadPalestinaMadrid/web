@@ -5,7 +5,7 @@ import TarjetaEvento from '../TarjetaEvento.astro';
 import { SITE } from '../../data/site';
 import { ultimas } from '../../data/publicaciones';
 import { proximosEventos, tituloEvento } from '../../data/eventos';
-import { useTranslations, localizePath, type Lang } from '../../i18n/utils';
+import { useTranslations, localizePath, withBase, type Lang } from '../../i18n/utils';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
@@ -24,11 +24,18 @@ const destacados = [
 ---
 <BaseLayout lang={lang}>
   <section class="hero">
+    <img
+      class="hero__fondo"
+      src={withBase('/images/uploads/2023-10-15-manifestacion.jpg')}
+      alt=""
+      aria-hidden="true"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="hero__velo" aria-hidden="true"></div>
     <div class="contenedor hero__grid">
       <div>
-        <span class="eyebrow">{t('home.eyebrow')}</span>
         <h1 class="hero__titulo">{t('home.titulo')}</h1>
-        <p class="hero__lema">{SITE.nombreLargo}</p>
         <p class="hero__texto">{t('home.texto')}</p>
         <div class="boton-fila">
           <a class="boton boton--primario" href={localizePath('/publicaciones', lang)}>{t('home.ctaPublicaciones')}</a>

@@ -161,16 +161,20 @@ p { margin: 0 0 1em; }
 .boton-fila { display: flex; flex-wrap: wrap; gap: .75rem; }
 
 /* Hero ------------------------------------------------------------------- */
-.hero { padding-block: clamp(2.75rem, 6vw, 5rem); background:
-  radial-gradient(1100px 420px at 82% -10%, var(--fondo-verde), transparent 62%),
-  radial-gradient(900px 380px at 5% 0%, var(--fondo-rojo), transparent 60%), #fff; border-bottom: 1px solid var(--linea); }
+.hero { position: relative; overflow: hidden; padding-block: clamp(3rem, 7vw, 6rem); background: var(--ps-negro); border-bottom: 1px solid var(--linea); }
+.hero__fondo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+.hero__velo { position: absolute; inset: 0; background: linear-gradient(100deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.92) 40%, rgba(255,255,255,.75) 78%, rgba(255,255,255,.6) 100%); }
+.hero .contenedor { position: relative; z-index: 1; }
 .hero__grid { display: grid; grid-template-columns: 1.35fr .85fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
 .hero__titulo { margin-bottom: .4rem; }
 .hero__texto { font-size: 1.12rem; color: var(--texto-suave); max-width: 56ch; }
-.hero__lema { font-size: .92rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ps-verde); font-weight: 700; }
+.hero__lema { font-size: .92rem; text-transform: uppercase; color: var(--ps-verde); font-weight: 700; }
 .hero__panel { background: #fff; border: 1px solid var(--linea); border-radius: var(--radio); box-shadow: var(--sombra); padding: 1.4rem; }
 .hero__panel h3 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave); }
-@media (max-width: 860px) { .hero__grid { grid-template-columns: 1fr; } }
+@media (max-width: 860px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__velo { background: linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.88) 100%); }
+}
 
 /* Tarjetas --------------------------------------------------------------- */
 .rejilla { display: grid; gap: 1.1rem; }
