@@ -107,8 +107,6 @@ export const ui = {
     'prensa.intro': 'Notas de prensa de la asociación y recopilación de apariciones en medios de comunicación.',
     'prensa.notas': 'Notas de prensa',
     'prensa.medios': 'Apariciones en medios',
-    'prensa.dossier': 'Dossier de prensa',
-    'prensa.dossierTexto': 'Material informativo sobre la asociación para medios de comunicación.',
     'prensa.contactoMedios': 'Contacto para medios',
 
     'contacto.titulo': 'Contacto',
@@ -249,8 +247,6 @@ export const ui = {
     'prensa.intro': 'البيانات الصحفية للجمعية ومجموعة المتابعات الإعلامية.',
     'prensa.notas': 'البيانات الصحفية',
     'prensa.medios': 'متابعات إعلامية',
-    'prensa.dossier': 'الملف الصحفي',
-    'prensa.dossierTexto': 'مواد تعريفية عن الجمعية لوسائل الإعلام.',
     'prensa.contactoMedios': 'التواصل لوسائل الإعلام',
 
     'contacto.titulo': 'اتصل بنا',

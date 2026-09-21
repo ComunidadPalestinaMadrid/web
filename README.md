@@ -219,7 +219,6 @@ devuelve 404); el enlace se ha conservado apuntando al original.
 - [ ] Sustituir los 12 eventos de ejemplo por los reales (marcados con `prueba: true`)
 
 ### Prensa
-- [ ] El dossier de prensa (`/prensa/dossier`) se guarda como PDF desde el navegador
 - [ ] Revisar los enlaces a medios (algunos son de 2017 y pueden haber caducado)
 
 ### Traducción al árabe
