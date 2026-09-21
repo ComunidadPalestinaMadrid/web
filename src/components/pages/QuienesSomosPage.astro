@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../i18n/utils';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PaginaCabecera from '../PaginaCabecera.astro';
 import { SITE } from '../../data/site';
@@ -72,7 +73,7 @@ const junta = ar ? [
 
         <h2>{t('quienes.historia')}</h2>
         <figure>
-          <img src="/images/uploads/174be-f9289-jerusalem-1712855_640.jpg" alt={ar ? 'القدس' : 'Jerusalén'} loading="lazy" />
+          <img src={withBase('/images/uploads/174be-f9289-jerusalem-1712855_640.jpg')} alt={ar ? 'القدس' : 'Jerusalén'} loading="lazy" />
           <figcaption>{ar ? 'القدس، المدينة المقدسة' : 'Jerusalén, ciudad de referencia para la asociación'}</figcaption>
         </figure>
         <p>
@@ -84,7 +85,7 @@ const junta = ar ? [
 
       <aside>
         <div class="panel">
-          <img src="/images/uploads/7ef2b-9de93-20294137_413172955745869_3903906838941361900_n1.jpg" alt="" loading="lazy" style="border-radius:10px" />
+          <img src={withBase('/images/uploads/7ef2b-9de93-20294137_413172955745869_3903906838941361900_n1.jpg')} alt="" loading="lazy" style="border-radius:10px" />
           <h3 class="mt-3">{t('quienes.junta')}</h3>
           <ul class="lista-enlaces pieza-pequena">
             {junta.map((j) => (
@@ -120,15 +121,15 @@ const junta = ar ? [
       </div>
       <div class="rejilla rejilla--3 mt-3">
         <figure class="panel">
-          <img src="/images/uploads/37505-f9dd1-dabke.jpg" alt="Dabke" loading="lazy" style="border-radius:10px" />
+          <img src={withBase('/images/uploads/37505-f9dd1-dabke.jpg')} alt="Dabke" loading="lazy" style="border-radius:10px" />
           <figcaption class="pieza-pequena texto-suave">Dabke</figcaption>
         </figure>
         <figure class="panel">
-          <img src="/images/uploads/3529e-d942c-alquds.jpg" alt="Al-Quds" loading="lazy" style="border-radius:10px" />
+          <img src={withBase('/images/uploads/3529e-d942c-alquds.jpg')} alt="Al-Quds" loading="lazy" style="border-radius:10px" />
           <figcaption class="pieza-pequena texto-suave">Al-Quds</figcaption>
         </figure>
         <figure class="panel">
-          <img src="/images/uploads/e0db5-94e1c-elbordadoysurolenlaidentidadpalestina.jpg" alt="Bordado palestino" loading="lazy" style="border-radius:10px" />
+          <img src={withBase('/images/uploads/e0db5-94e1c-elbordadoysurolenlaidentidadpalestina.jpg')} alt="Bordado palestino" loading="lazy" style="border-radius:10px" />
           <figcaption class="pieza-pequena texto-suave">El bordado y su rol en la identidad palestina</figcaption>
         </figure>
       </div>
@@ -151,7 +152,7 @@ const junta = ar ? [
       </div>
       <div class="rejilla rejilla--2">
         <figure class="panel">
-          <img src="/images/uploads/f03d1-c223a-mapa-palestina.jpg" alt="Mapa de Palestina" loading="lazy" style="border-radius:10px" />
+          <img src={withBase('/images/uploads/f03d1-c223a-mapa-palestina.jpg')} alt="Mapa de Palestina" loading="lazy" style="border-radius:10px" />
           <figcaption class="pieza-pequena texto-suave">{ar ? 'الخريطة الفيزيائية لفلسطين' : 'Mapa físico de Palestina'}</figcaption>
         </figure>
         <div class="panel panel--rojo">

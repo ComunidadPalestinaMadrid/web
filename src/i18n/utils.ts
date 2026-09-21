@@ -1,6 +1,51 @@
 import { ui, defaultLang, type Lang } from './ui';
 import { SITE } from '../data/site';
 
+/* ---------------------------------------------------------------------------
+   Rutas y URL
+   --------------------------------------------------------------------------- */
+
+/** Prefijo de despliegue: '/web' en GitHub Pages, '' con dominio propio. */
+const RAW_BASE = import.meta.env.BASE_URL || '/';
+export const BASE = RAW_BASE.endsWith('/') ? RAW_BASE.slice(0, -1) : RAW_BASE;
+
+/** Origen del sitio (sin el prefijo base): https://ejemplo.org */
+export const ORIGIN = ((import.meta.env.SITE as string | undefined) || SITE.url).replace(/\/$/, '');
+
+/** Anade el prefijo base a una ruta absoluta del sitio. */
+export function withBase(path: string): string {
+  if (!path) return path;
+  if (/^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(path) || path.startsWith('mailto:') || path.startsWith('tel:') || path.startsWith('#')) return path;
+  const p = path.startsWith('/') ? path : '/' + path;
+  return BASE && BASE !== '/' ? BASE + p : p;
+}
+
+/** Convierte una ruta local en URL absoluta con el origen del sitio. */
+export function absoluteUrl(localPath: string): string {
+  if (/^https?:\/\//i.test(localPath)) return localPath;
+  const p = localPath.startsWith('/') ? localPath : '/' + localPath;
+  return ORIGIN + p;
+}
+
+/** Quita el prefijo base de una ruta: /web/publicaciones -> /publicaciones */
+export function stripBase(pathname: string): string {
+  if (BASE && BASE !== '/' && (pathname === BASE || pathname.startsWith(BASE + '/'))) {
+    const rest = pathname.slice(BASE.length);
+    return rest === '' ? '/' : rest;
+  }
+  return pathname || '/';
+}
+
+/** Antepone el prefijo base a las imagenes y documentos dentro del HTML migrado. */
+export function rewriteAssetUrls(html: string): string {
+  if (!BASE || BASE === '/') return html;
+  return html.replace(/((?:src|href)=")\/(images|documentos)\//g, (_m, attr: string, dir: string) => attr + BASE + '/' + dir + '/');
+}
+
+/* ---------------------------------------------------------------------------
+   Idioma
+   --------------------------------------------------------------------------- */
+
 export function getLangFromUrl(url: URL): Lang {
   const [, first] = url.pathname.split('/');
   return first === 'ar' ? 'ar' : defaultLang;
@@ -12,22 +57,33 @@ export function useTranslations(lang: Lang) {
   };
 }
 
-/** Devuelve la ruta localizada: es -> '/', ar -> '/ar/...' */
+/** Devuelve la ruta localizada y con el prefijo base: es -> '/web/', ar -> '/web/ar/...' */
 export function localizePath(path: string, lang: Lang): string {
   const clean = ('/' + path.replace(/^\/+|\/+$/g, '')).replace(/\/$/, '');
-  if (lang === defaultLang) return clean === '' ? '/' : clean + '/';
-  return ('/ar' + clean + '/').replace(/\/\/+$/g, '/');
+  const localized = lang === defaultLang
+    ? (clean === '' ? '/' : clean + '/')
+    : ('/ar' + clean + '/').replace(/\/\/+$/g, '/');
+  return withBase(localized);
 }
 
-/** Quita el prefijo de idioma de una ruta: /ar/contacto -> /contacto */
+/** Quita el prefijo de idioma: /ar/contacto -> /contacto */
 export function stripLang(pathname: string): string {
   const p = pathname.replace(/\/ar(?=\/|$)/, '');
   return p === '' ? '/' : p;
 }
 
+/** Ruta sin idioma ni prefijo de despliegue. */
+export function currentPath(url: URL): string {
+  return stripLang(stripBase(url.pathname));
+}
+
 export function dir(lang: Lang): 'ltr' | 'rtl' {
   return lang === 'ar' ? 'rtl' : 'ltr';
 }
+
+/* ---------------------------------------------------------------------------
+   Fechas
+   --------------------------------------------------------------------------- */
 
 export function formatFecha(iso: string, lang: Lang): string {
   const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));

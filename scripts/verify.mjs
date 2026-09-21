@@ -1,44 +1,53 @@
-import { readdir, readFile, stat } from 'node:fs/promises';
+// Comprueba enlaces internos e imagenes del build, teniendo en cuenta el prefijo base.
+import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+
+const BASE = (process.env.BASE_PATH ?? '/web').replace(/\/$/, '');
 
 async function walk(dir, out = []) {
   for (const e of await readdir(dir, { withFileTypes: true })) {
     const p = path.join(dir, e.name);
-    if (e.isDirectory()) await walk(p, out); else out.push(p);
+    if (e.isDirectory()) await walk(p, out);
+    else out.push(p);
   }
   return out;
 }
+
+const stripBase = (u) => (BASE && BASE !== '/' && (u === BASE || u.startsWith(BASE + '/'))) ? (u.slice(BASE.length) || '/') : u;
+
 const files = await walk('dist');
 const html = files.filter((f) => f.endsWith('.html'));
-const missing = new Map();
-const linksMissing = new Map();
 const pageSet = new Set(
   html.map((f) => '/' + path.relative('dist', f).replace(/\\/g, '/').replace(/index\.html$/, '')).map((s) => s.replace(/\/$/, '') || '/')
 );
 
+const missing = new Map();
+const broken = new Map();
+
 for (const f of html) {
   const t = await readFile(f, 'utf8');
   for (const m of t.matchAll(/(?:src|href)="(\/[^"#?]*)(?:\?[^"]*)?"/g)) {
-    const u = m[1];
-    if (/^\/(images|documentos|_astro)\//.test(u)) {
-      if (!existsSync(path.join('dist', u))) {
-        if (!missing.has(u)) missing.set(u, []);
-        missing.get(u).push(f);
+    const raw = m[1];
+    const local = stripBase(raw);
+    if (/^\/(images|documentos|_astro)\//.test(local)) {
+      if (!existsSync(path.join('dist', local))) {
+        if (!missing.has(raw)) missing.set(raw, []);
+        missing.get(raw).push(f);
       }
-    } else if (!/\.(svg|png|jpg|jpeg|webp|gif|ico|xml|txt|ics|pdf)$/i.test(u) && !u.startsWith('//')) {
-      const norm = u.replace(/\/$/, '') || '/';
+    } else if (!/\.(svg|png|jpg|jpeg|webp|gif|ico|xml|txt|ics|pdf)$/i.test(local)) {
+      const norm = local.replace(/\/$/, '') || '/';
       if (!pageSet.has(norm) && !existsSync(path.join('dist', norm))) {
-        if (!linksMissing.has(norm)) linksMissing.set(norm, []);
-        linksMissing.get(norm).push(f);
+        if (!broken.has(raw)) broken.set(raw, []);
+        broken.get(raw).push(f);
       }
     }
   }
 }
-console.log('HTML pages:', html.length);
-console.log('Imagenes/documentos rotos:', missing.size);
-for (const [u, fs_] of [...missing].slice(0, 20)) console.log('  MISSING ' + u + '  (' + fs_.length + ' paginas)');
-console.log('Enlaces internos rotos:', linksMissing.size);
-for (const [u, fs_] of [...linksMissing].slice(0, 20)) console.log('  BROKEN LINK ' + u + '  en ' + fs_[0]);
-console.log('--- dist/ar ---');
-console.log((await walk('dist/ar')).slice(0, 6).join('\n'));
+
+console.log('prefijo base analizado: ' + (BASE || '/'));
+console.log('paginas HTML: ' + html.length);
+console.log('imagenes/documentos rotos: ' + missing.size);
+for (const [u, fs_] of [...missing].slice(0, 15)) console.log('  MISSING ' + u + '  (' + fs_.length + ' paginas)');
+console.log('enlaces internos rotos: ' + broken.size);
+for (const [u, fs_] of [...broken].slice(0, 15)) console.log('  BROKEN ' + u + '  en ' + fs_[0]);

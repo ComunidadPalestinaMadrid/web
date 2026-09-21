@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE } from '../data/site';
-import { getLangFromUrl, localizePath, stripLang, dir, useTranslations, type Lang } from '../i18n/utils';
+import { getLangFromUrl, localizePath, currentPath, dir, useTranslations, withBase, absoluteUrl, type Lang } from '../i18n/utils';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -10,20 +10,20 @@ interface Props {
   description?: string;
   lang?: Lang;
   image?: string;
-  tipo?: string;
 }
 const { title, description, image } = Astro.props;
 const lang: Lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const base = stripLang(Astro.url.pathname);
-const canonical = SITE.url + localizePath(base, lang);
-const altEs = SITE.url + localizePath(base, 'es');
-const altAr = SITE.url + localizePath(base, 'ar');
+const base = currentPath(Astro.url);
+const canonical = absoluteUrl(localizePath(base, lang));
+const altEs = absoluteUrl(localizePath(base, 'es'));
+const altAr = absoluteUrl(localizePath(base, 'ar'));
 const desc = description ?? (lang === 'ar'
   ? 'الجمعية الإسبانية الفلسطينية في مدريد: المنشورات والفعاليات والمدرسة العربية.'
   : 'Asociación Hispano Palestina de Madrid: publicaciones, eventos, Cole Árabe y solidaridad con el pueblo palestino.');
 const titulo = title ? title + ' · ' + SITE.corto : SITE.corto + ' · ' + SITE.siglas;
-const img = image ? SITE.url + image : SITE.url + '/images/logo.png';
+const logo = absoluteUrl(withBase('/images/logo.png'));
+const ogImage = image ? absoluteUrl(withBase(image)) : logo;
 ---
 <!doctype html>
 <html lang={lang} dir={dir(lang)}>
@@ -36,8 +36,8 @@ const img = image ? SITE.url + image : SITE.url + '/images/logo.png';
     <link rel="alternate" hreflang="es" href={altEs} />
     <link rel="alternate" hreflang="ar" href={altAr} />
     <link rel="alternate" hreflang="x-default" href={altEs} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/images/logo.png" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="apple-touch-icon" href={withBase('/images/logo.png')} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#ffffff" />
     <meta property="og:type" content="website" />
@@ -45,7 +45,7 @@ const img = image ? SITE.url + image : SITE.url + '/images/logo.png';
     <meta property="og:title" content={titulo} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={img} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={lang === 'ar' ? 'ar' : 'es_ES'} />
     <meta name="twitter:card" content="summary_large_image" />
     <slot name="head" />

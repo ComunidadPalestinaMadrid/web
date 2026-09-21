@@ -20,17 +20,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Configurar Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+
       - name: Instalar dependencias
         run: npm ci
+
+      # Activa GitHub Pages si aun no lo esta y calcula la URL y el prefijo base.
+      # Con el dominio propio configurado en Settings > Pages, "origin" pasa a ser
+      # https://comunidadpalestina.madrid y "base_path" queda vacio, sin tocar codigo.
+      - name: Configurar Pages
+        id: pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Compilar Astro
         run: npm run build
-      - name: Configurar Pages
-        uses: actions/configure-pages@v5
+        env:
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+
       - name: Subir artefacto
         uses: actions/upload-pages-artifact@v3
         with:

@@ -93,20 +93,61 @@ esta forma:
 
 ## Despliegue en GitHub Pages
 
-1. Crea el repositorio y sube el proyecto a la rama `main`.
-2. En **Settings > Pages**, selecciona **Source: GitHub Actions**.
-3. El flujo `.github/workflows/deploy.yml` compila y publica automáticamente en cada
-   push a `main`.
-4. El archivo `public/CNAME` ya contiene `comunidadpalestina.madrid`, de modo que el
-   sitio se publica con el dominio propio.
-5. **DNS** en el proveedor del dominio:
-   - Registros `A` para `comunidadpalestina.madrid` hacia:
-     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - Registro `CNAME` para `www` hacia `<usuario>.github.io`
-6. Marca **Enforce HTTPS** cuando el certificado esté emitido.
+El sitio se publica automáticamente con el flujo `.github/workflows/deploy.yml`.
 
-El dominio canónico está configurado en `astro.config.mjs` (`site`), por lo que el
-sitemap y las etiquetas canónicas ya apuntan a https://comunidadpalestina.madrid.
+### Puesta en marcha (una sola vez)
+
+1. Sube el proyecto a la rama `main`.
+2. En **Settings > Pages**, elige **Source: GitHub Actions**. El propio flujo intenta
+   activarlo (`enablement: true`), pero si el primer despliegue se queja, hazlo a mano.
+3. Lanza el despliegue con un push a `main`, o desde **Actions > Deploy web a GitHub
+   Pages > Run workflow**.
+
+### URL provisional (dominio todavía no comprado)
+
+Como el repositorio se llama `web`, la web se publica como *project page*:
+
+```
+https://comunidadpalestinamadrid.github.io/web/
+```
+
+El flujo usa `actions/configure-pages`, que entrega a la compilación el origen y el
+prefijo base correctos (`SITE_URL` y `BASE_PATH`). Por eso **no hay nada que cambiar a
+mano** al pasar al dominio propio.
+
+En local, para reproducir la URL de GitHub Pages:
+
+```bash
+npm run build      # por defecto SITE_URL=https://comunidadpalestinamadrid.github.io y BASE_PATH=/web
+npm run preview    # http://localhost:4321/web/
+```
+
+### Pasar al dominio propio comunidadpalestina.madrid
+
+1. Compra el dominio y añádelo en **Settings > Pages > Custom domain**:
+   `comunidadpalestina.madrid`.
+2. **DNS** en el proveedor del dominio:
+   - Registros `A` para `comunidadpalestina.madrid` hacia
+     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - Registro `CNAME` para `www` hacia `comunidadpalestinamadrid.github.io`
+3. Vuelve a desplegar: `configure-pages` devolverá ya el dominio propio con
+   `base_path` vacío, así que enlaces, sitemap y etiquetas canónicas se ajustan solos.
+4. Marca **Enforce HTTPS** cuando el certificado esté emitido.
+
+También puedes forzarlo en local con variables de entorno:
+
+```bash
+# Windows PowerShell
+$env:SITE_URL='https://comunidadpalestina.madrid'; $env:BASE_PATH='/'; npm run build
+```
+
+> **Alternativa sin prefijo:** si renombras el repositorio a
+> `comunidadpalestinamadrid.github.io`, la web se sirve en la raíz
+> (`https://comunidadpalestinamadrid.github.io/`) y el `base` sería siempre `/`.
+
+> El archivo `public/CNAME` se ha retirado a propósito: si estuviera presente, GitHub
+> Pages intentaría servir el sitio en `comunidadpalestina.madrid`, que aún no existe.
+> Se puede volver a crear cuando el dominio esté comprado (el paso 3 lo hace solo).
 
 ---
 

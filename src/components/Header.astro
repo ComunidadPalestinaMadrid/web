@@ -1,12 +1,13 @@
 ---
+import { withBase } from '../i18n/utils';
 import { NAV } from '../data/nav';
 import { SITE } from '../data/site';
-import { useTranslations, localizePath, stripLang, type Lang } from '../i18n/utils';
+import { useTranslations, localizePath, currentPath, type Lang } from '../i18n/utils';
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const base = stripLang(Astro.url.pathname);
+const base = currentPath(Astro.url);
 // En la pagina 404 el selector de idioma apunta al inicio (no existe /404/).
 const baseIdioma = base.startsWith('/404') ? '/' : base;
 const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.startsWith(p + '/'));
@@ -15,7 +16,7 @@ const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.s
   <div class="filete" aria-hidden="true"></div>
   <div class="contenedor cabecera__interior">
     <a class="marca" href={localizePath('/', lang)}>
-      <img src="/images/logo.png" alt="" width="44" height="44" />
+      <img src={withBase('/images/logo.png')} alt="" width="44" height="44" />
       <span class="marca__texto">
         <span class="marca__nombre">{SITE.corto}</span>
         <span class="marca__sub">{SITE.siglas} · {SITE.fundacion}</span>

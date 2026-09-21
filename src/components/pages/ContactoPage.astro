@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../i18n/utils';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PaginaCabecera from '../PaginaCabecera.astro';
 import { SITE } from '../../data/site';
@@ -59,7 +60,7 @@ const ar = lang === 'ar';
       <aside>
         <div class="panel panel--sticky">
           <h3>{SITE.nombre}</h3>
-          <img src="/images/uploads/950e8-a5257-achp-logo.jpeg" alt={SITE.nombre} loading="lazy" style="border-radius:10px" />
+          <img src={withBase('/images/uploads/950e8-a5257-achp-logo.jpeg')} alt={SITE.nombre} loading="lazy" style="border-radius:10px" />
           <ul class="lista-enlaces pieza-pequena mt-3">
             <li><a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
             <li><a href={'mailto:' + SITE.emails.cole}>{SITE.emails.cole}</a></li>
