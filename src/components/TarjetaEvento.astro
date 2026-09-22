@@ -13,7 +13,8 @@ const claves: Record<string, string> = {
 const fechaBruta = new Date(evento.fecha + 'T12:00:00').toLocaleDateString('es-ES', {
   weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
 });
-const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (evento.hora ? ' · ' + evento.hora + ' h' : '');
+const rango = evento.hora ? evento.hora + (evento.horaFin ? ' - ' + evento.horaFin : '') + ' h' : '';
+const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (rango ? ' · ' + rango : '');
 ---
 <article class={'evento' + (evento.destacado ? ' evento--destacado' : '')}>
   {evento.imagen && (

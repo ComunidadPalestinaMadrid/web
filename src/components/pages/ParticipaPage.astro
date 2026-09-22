@@ -11,6 +11,7 @@ const modalidades = [
   {
     clave: 'participa.pleno' as const,
     cuando: 'Personas palestinas y sus cónyuges',
+    cuota: '5',
     periodo: 'cuota mensual',
     incluye: [
     'Participación en todas las actividades de la asociación',  
@@ -22,7 +23,8 @@ const modalidades = [
   {
     clave: 'participa.simpatizante' as const,
     cuando: 'Cualquier persona solidaria con la causa palestina',
-    periodo: 'cuota mensual voluntaria',
+    cuota: '0',
+    periodo: '',
     incluye: [
       'Participación en todas las actividades de la asociación',
       'Aportación voluntaria de 5€'
@@ -57,7 +59,7 @@ const donaciones = [
             <h3 class="precio__nombre">{t(m.clave)}</h3>
             <p class="precio__cuando">{m.cuando}</p>
             <p class="precio__importe">
-              <span class="precio__cifra">5 €</span>
+              <span class="precio__cifra">{m.cuota}€</span>
               <span class="precio__periodo">{m.periodo}</span>
             </p>
             <ul class="precio__lista">

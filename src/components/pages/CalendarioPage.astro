@@ -46,7 +46,7 @@ const MES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','
               return (
                 <li>
                   <strong>{d.getDate()} {MES[d.getMonth()]}</strong> — {e.titulo}
-                  <div class="pieza-pequena texto-suave">{e.lugar}{e.hora ? ' · ' + e.hora : ''}</div>
+                  <div class="pieza-pequena texto-suave">{e.lugar}{e.hora ? ' · ' + e.hora + (e.horaFin ? ' - ' + e.horaFin : '') : ''}</div>
                 </li>
               );
             })}

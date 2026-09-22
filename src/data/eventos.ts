@@ -1,18 +1,15 @@
 // Calendario de eventos. Los eventos marcados con prueba:true son de ejemplo
 // mientras la asociacion publica su calendario definitivo.
 export type CategoriaEvento = 'movilización' | 'cultural' | 'institucional' | 'formacion';
-export type IdiomaEvento = 'es' | 'ar';
 
 export interface Evento {
   id: string;
   titulo: string;
-  tituloAr?: string;
   fecha: string;        // ISO (YYYY-MM-DD)
-  hora?: string;
+  hora?: string;        // HH:MM
+  horaFin?: string;     // HH:MM (opcional)
   lugar: string;
-  lugarAr?: string;
   descripcion: string;
-  descripcionAr?: string;
   categoria: CategoriaEvento;
   /** Ruta del cartel del evento, si lo tiene */
   imagen?: string;
@@ -21,6 +18,18 @@ export interface Evento {
 }
 
 export const EVENTOS: Evento[] = [
+  {
+    id: 'climbers-for-palestine-2026',
+    titulo: 'Climbers for Palestine',
+    fecha: '2026-09-25',
+    hora: '17:00',
+    horaFin: '23:00',
+    lugar: 'Sharmwatico Bouldering, C/ de Guadarrama 18, Moralzarzal (Madrid)',
+    descripcion: 'Jornada de competición, rifas, documental, concierto y mucho más en apoyo a Palestina. Después del éxito rotundo del apoyo a Palestina en el Mundial de escalada de Alcobendas y de su impacto en las Federaciones nacional e internacional, esta es otra muestra de apoyo del colectivo de la escalada a la causa palestina. Entrada: 10 €.',
+    categoria: 'cultural',
+    imagen: '/images/uploads/climbers-for-palestine-2026.webp',
+    destacado: true
+  },
   {
     id: 'manifestacion-4-octubre-2026',
     titulo: 'Manifestación 4/10 - El genocidio continua.',
@@ -176,11 +185,23 @@ export function eventosPorAnio(): Record<string, Evento[]> {
   return grupos;
 }
 
-/** Fecha local en formato iCalendar: 20261007T190000 */
-function fechaIcs(e: Evento): string {
+/** Fecha local en formato iCalendar para una hora concreta: 20261007T190000 */
+function fechaIcs(e: Evento, hora: string): string {
   const d = e.fecha.replace(/-/g, '');
-  const [hh, mm] = (e.hora || '12:00').split(':');
-  return d + 'T' + hh + mm + '00';
+  const [hh, mm] = hora.split(':');
+  return d + 'T' + hh.padStart(2, '0') + mm.padStart(2, '0') + '00';
+}
+
+/** Suma horas a una hora HH:MM (por defecto los eventos duran 2 h). */
+function sumarHoras(hora: string, n: number): string {
+  const [hh, mm] = hora.split(':').map(Number);
+  return String(Math.min(hh + n, 23)).padStart(2, '0') + ':' + String(mm || 0).padStart(2, '0');
+}
+
+/** Hora de inicio y de fin de un evento. */
+function horario(e: Evento): { ini: string; fin: string } {
+  const ini = e.hora || '12:00';
+  return { ini, fin: e.horaFin || sumarHoras(ini, 2) };
 }
 
 function escaparIcs(s: string): string {
@@ -188,11 +209,13 @@ function escaparIcs(s: string): string {
 }
 
 function vevent(e: Evento): string[] {
+  const { ini, fin } = horario(e);
   return [
     'BEGIN:VEVENT',
     'UID:' + e.id + '@comunidadpalestina.madrid',
-    'DTSTAMP:' + fechaIcs(e) + 'Z',
-    'DTSTART;TZID=Europe/Madrid:' + fechaIcs(e),
+    'DTSTAMP:' + fechaIcs(e, ini) + 'Z',
+    'DTSTART;TZID=Europe/Madrid:' + fechaIcs(e, ini),
+    'DTEND;TZID=Europe/Madrid:' + fechaIcs(e, fin),
     'SUMMARY:' + escaparIcs(e.titulo),
     'LOCATION:' + escaparIcs(e.lugar),
     'DESCRIPTION:' + escaparIcs(e.descripcion),
@@ -219,13 +242,11 @@ export function generarIcsEvento(e: Evento): string {
 /** Enlace para anadir el evento directamente a Google Calendar. */
 export function enlaceGoogleCalendar(e: Evento): string {
   const d = e.fecha.replace(/-/g, '');
-  const [hh, mm] = (e.hora || '12:00').split(':').map(Number);
-  const inicio = d + 'T' + String(hh).padStart(2, '0') + String(mm).padStart(2, '0') + '00';
-  const finHora = String(Math.min(hh + 2, 23)).padStart(2, '0') + String(mm).padStart(2, '0') + '00';
+  const { ini, fin } = horario(e);
   const params = new URLSearchParams({
     action: 'TEMPLATE',
     text: e.titulo,
-    dates: inicio + '/' + d + 'T' + finHora,
+    dates: d + 'T' + ini.replace(':', '') + '00/' + d + 'T' + fin.replace(':', '') + '00',
     details: e.descripcion,
     location: e.lugar,
     ctz: 'Europe/Madrid'
