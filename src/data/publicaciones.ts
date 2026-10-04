@@ -7,6 +7,8 @@ export interface Publicacion {
   slug: string;
   title: string;
   date: string;
+  /** Hora de publicacion (HH:MM), opcional */
+  hora?: string;
   tipo: TipoPublicacion;
   categorias: string[];
   resumen: string;

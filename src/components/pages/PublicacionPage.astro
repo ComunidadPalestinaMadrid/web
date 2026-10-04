@@ -31,7 +31,7 @@ const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
         <span class={'etiqueta ' + CLASE_TIPO[pub.tipo]}>{t(ETIQUETA_TIPO[pub.tipo])}</span>
         <h1>{pub.title}</h1>
         <div class="meta">
-          <span>{t('common.publicadoEl')} {f}</span>
+          <span>{t('common.publicadoEl')} {f}{pub.hora ? ' · ' + pub.hora + ' h' : ''}</span>
           {pub.categorias.length > 0 && <span>{t('common.categoria')}: {pub.categorias.join(', ')}</span>}
         </div>
       </div>
