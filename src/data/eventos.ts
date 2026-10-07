@@ -42,6 +42,16 @@ export const EVENTOS: Evento[] = [
     destacado: true
   },
   {
+    id: 'becerril-8-2026',
+    titulo: 'Manifestación por la absolución de los 8 de Becerril',
+    fecha: '2026-10-18',
+    hora: '12:00',
+    lugar: 'Plaza de la Estación, Collado Villalba (Madrid)',
+    descripcion: 'Los 8 de Becerril son ocho represaliados durante la Vuelta Ciclista de 2025. La manifestación, convocada por la Asamblea de Vivienda de Villalba, reclama su absolución y la libertad del pueblo palestino.',
+    categoria: 'movilización',
+    imagen: '/images/uploads/becerril.jpg'
+  },
+  {
     id: 'balfour-2026',
     titulo: 'Aniversario de la Declaración Balfour (1917)',
     fecha: '2026-11-07',
