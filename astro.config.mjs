@@ -5,24 +5,24 @@ import sitemap from '@astrojs/sitemap';
 /* ---------------------------------------------------------------------------
    Configuracion de despliegue
    ---------------------------------------------------------------------------
-   GitHub Pages (URL provisional, repositorio "web"):
-       SITE_URL  = https://comunidadpalestinamadrid.github.io
-       BASE_PATH = /web
+   La web vive en el dominio propio comunidadpalestina.madrid, servido por
+   GitHub Pages desde el repositorio ComunidadPalestinaMadrid/web.
 
-   Dominio propio comunidadpalestina.madrid (cuando este comprado):
-       SITE_URL  = https://comunidadpalestina.madrid
-       BASE_PATH = /
+   Con un dominio propio, GitHub Pages sirve el sitio en la RAIZ del dominio
+   (no en /web/), por eso "base" es '/'.
 
-   En GitHub Actions estos dos valores llegan automaticamente desde
-   actions/configure-pages, asi que al anadir el dominio propio basta con
-   configurarlo en Settings > Pages y volver a desplegar.
---------------------------------------------------------------------------- */
+   Ambos valores se pueden sobrescribir por variables de entorno para desplegar
+   en otra ubicacion (por ejemplo el dominio provisional de github.io, que
+   sirve el repositorio bajo el prefijo /web):
+
+       SITE_URL=https://comunidadpalestinamadrid.github.io BASE_PATH=/web npm run build
+   --------------------------------------------------------------------------- */
 
 const ENV_SITE = process.env.SITE_URL;
 const ENV_BASE = process.env.BASE_PATH;
 
-export const SITE_URL = (ENV_SITE || 'https://comunidadpalestinamadrid.github.io').replace(/\/$/, '');
-export const BASE_PATH = ENV_BASE !== undefined ? (ENV_BASE || '/') : '/web';
+export const SITE_URL = (ENV_SITE || 'https://comunidadpalestina.madrid').replace(/\/$/, '');
+export const BASE_PATH = ENV_BASE !== undefined ? (ENV_BASE || '/') : '/';
 
 export default defineConfig({
   site: SITE_URL,
