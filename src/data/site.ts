@@ -8,7 +8,6 @@ export const SITE = {
   lema: 'Palestina resiste, Palestina vencerá',
   fundacion: 1988,
   ciudad: 'Madrid',
-  presidente: '',
   emails: {
     asociacion: 'c.hispano.palestina.madrid@gmail.com',
     cole: 'Escuela.arabe.jerusalem@gmail.com'

@@ -203,7 +203,7 @@ export const EFEMERIDES: Efemeride[] = [
   {
     id: 'balfour',
     titulo: 'Aniversario de la Declaración Balfour (1917)',
-    dia: 2,
+    dia: 7,
     mes: 11,
     anio: 1917,
     descripcion: 'El 2 de noviembre de 1917 el ministro de Asuntos Exteriores británico, Arthur Balfour, firmó una carta dirigida a lord Rothschild en la que el Gobierno del Reino Unido se comprometía a favorecer «el establecimiento en Palestina de un hogar nacional para el pueblo judío». La declaración ignoraba por completo a la población palestina, entonces mayoría en el territorio, y se convirtió en una de las bases del despojo que continúa hasta hoy.'
@@ -218,7 +218,7 @@ export const EFEMERIDES: Efemeride[] = [
   {
     id: 'arafat',
     titulo: 'Aniversario del asesinato de Yasser Arafat',
-    dia: 11,
+    dia: 13,
     mes: 11,
     anio: 2004,
     descripcion: 'El 11 de noviembre de 2004 fallecía en el hospital militar de Clamart, en Francia, Yasser Arafat, presidente de la Organización para la Liberación de Palestina y de la Autoridad Nacional Palestina, y símbolo de la lucha por la autodeterminación del pueblo palestino. Las circunstancias de su muerte nunca se han aclarado por completo.'
@@ -232,11 +232,11 @@ export const EFEMERIDES: Efemeride[] = [
   },
   {
     id: 'solidaridad',
-    titulo: 'Día Internacional de Solidaridad con el Pueblo Palestino',
+    titulo: 'Día de la Partición de Palestina',
     dia: 29,
     mes: 11,
     anio: 1947,
-    descripcion: 'El 29 de noviembre de 1947 la Asamblea General de Naciones Unidas aprobó la resolución 181, que dividía Palestina sin consultar a su población. Treinta años después, en 1977, la ONU declaró esa misma fecha Día Internacional de Solidaridad con el Pueblo Palestino. Cada año recordamos el derecho a la autodeterminación y exigimos el fin de la ocupación.'
+    descripcion: 'El 29 de noviembre de 1947 la Asamblea General de Naciones Unidas aprobó la resolución 181, que dividía Palestina sin consultar a su población. Cada año recordamos esa fecha para reivindicar el derecho a la autodeterminación y exigir el fin de la ocupación.'
   },
   {
     id: 'ddhh',

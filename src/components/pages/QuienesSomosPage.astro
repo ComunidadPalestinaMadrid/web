@@ -15,14 +15,6 @@ const fines = [
   'Difundir la cultura palestina y la lengua árabe a través del Cole Árabe.',
   'Solidarizarnos con los movimientos sociales y humanitarios que defienden los derechos humanos.'
 ];
-
-const junta = [
-  { cargo: 'Presidencia', nombre: SITE.presidente || '[PENDIENTE]' },
-  { cargo: 'Vicepresidencia', nombre: '[PENDIENTE]' },
-  { cargo: 'Secretaría', nombre: '[PENDIENTE]' },
-  { cargo: 'Tesorería', nombre: '[PENDIENTE]' },
-  { cargo: 'Vocales', nombre: '[PENDIENTE]' }
-];
 ---
 <BaseLayout title={t('quienes.titulo')} description={t('quienes.intro')}>
   <PaginaCabecera
@@ -60,16 +52,7 @@ const junta = [
       </div>
 
       <aside>
-        <div class="panel">
-          <img src={withBase('/images/uploads/7ef2b-9de93-20294137_413172955745869_3903906838941361900_n1.jpg')} alt="" loading="lazy" style="border-radius:10px" />
-          <h3 class="mt-3">{t('quienes.junta')}</h3>
-          <ul class="lista-enlaces pieza-pequena">
-            {junta.map((j) => (
-              <li><strong>{j.cargo}:</strong> {j.nombre}</li>
-            ))}
-          </ul>
-        </div>
-        <div class="panel panel--verde mt-3">
+        <div class="panel panel--verde">
           <h3>{'Datos de la asociación'}</h3>
           <ul class="lista-enlaces pieza-pequena">
             <li><strong>{'Fundación'}:</strong> {SITE.fundacion}</li>
