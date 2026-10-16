@@ -1,12 +1,11 @@
 // Datos centrales de la asociacion.
 export const SITE = {
-  nombre: 'Asociación Hispano Palestina de Madrid',
-  nombreLargo: 'Asociación de la Comunidad Hispano Palestina Jerusalén',
+  nombre: 'Comunidad Hispano Palestina Jerusalén',
   siglas: 'AHPJ',
   corto: 'Comunidad Palestina de Madrid',
   dominio: 'comunidadpalestina.madrid',
   url: 'https://comunidadpalestina.madrid',
-  lema: 'Palestina vive, Palestina libre',
+  lema: 'Palestina resiste, Palestina vencerá',
   fundacion: 1988,
   ciudad: 'Madrid',
   presidente: '',

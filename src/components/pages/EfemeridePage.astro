@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import { formatDiaMes, proximaFechaEfemeride, type Efemeride } from '../../data/eventos';
+import { useTranslations, localizePath } from '../../i18n/utils';
+
+interface Props { efemeride: Efemeride; }
+const { efemeride } = Astro.props;
+const t = useTranslations();
+const proxima = proximaFechaEfemeride(efemeride);
+const fechaLarga = proxima.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+const fechaLargaCap = fechaLarga.charAt(0).toUpperCase() + fechaLarga.slice(1);
+const diaMes = formatDiaMes(efemeride.dia, efemeride.mes);
+---
+<BaseLayout title={efemeride.titulo} description={efemeride.descripcion.slice(0, 155)}>
+  <PaginaCabecera
+    eyebrow={t('cal.efemeride')}
+    titulo={efemeride.titulo}
+    entradilla={diaMes + (efemeride.anio ? ' · ' + t('cal.conmemora') + ' ' + efemeride.anio : '')}
+    migas={[
+      { texto: t('nav.inicio'), href: localizePath('/') },
+      { texto: t('cal.titulo'), href: localizePath('/calendario') },
+      { texto: efemeride.titulo }
+    ]}
+  />
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="efemeride-ficha">
+        <div class="efemeride-ficha__fecha">
+          <span class="efemeride-ficha__dia">{efemeride.dia}</span>
+          <span class="efemeride-ficha__mes">{diaMes.split(' de ')[1]}</span>
+        </div>
+        <div>
+          <p class="efemeride-ficha__proxima">{t('cal.proxima')}: <strong>{fechaLargaCap}</strong></p>
+          <p class="pieza-pequena texto-suave">{t('cal.efemeridesIntro')}</p>
+        </div>
+      </div>
+      <div class="prosa prosa--ancho">
+        <p>{efemeride.descripcion}</p>
+      </div>
+      <p class="mt-3">
+        <a class="boton boton--fantasma" href={localizePath('/calendario')}>← {t('cal.volverAgenda')}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

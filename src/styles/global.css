@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Asociación Hispano Palestina de Madrid — hoja de estilos global
+   Comunidad Hispano Palestina Jerusalén — hoja de estilos global
    Diseño predominantemente blanco con acentos palestinos.
    ========================================================================== */
 
@@ -410,3 +410,50 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 
 
 
+
+/* ==========================================================================
+   Agenda: actividades y efemerides
+   Las actividades son tarjetas completas (cartel, lugar, hora, botones); las
+   efemerides son conmemoraciones anuales que se listan como enlaces con fecha.
+   ========================================================================== */
+
+.subtitulo-agenda {
+  font-family: var(--fuente); font-size: 1.1rem; text-transform: uppercase;
+  letter-spacing: .09em; color: var(--ps-verde); margin: 2.4rem 0 1rem;
+}
+.subtitulo-agenda:first-of-type { margin-top: 0; }
+
+.efemerides { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--linea); }
+.efemeride { border-bottom: 1px solid var(--linea); }
+.efemeride__enlace { display: flex; align-items: center; gap: 1rem; padding: .8rem .4rem; color: var(--texto); }
+.efemeride__enlace:hover { background: var(--fondo-suave); text-decoration: none; }
+
+.efemeride__fecha {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 3.6rem; padding: .3rem .45rem; border-radius: var(--radio-sm);
+  background: var(--fondo-verde); color: var(--ps-verde); line-height: 1.05;
+}
+.efemeride__dia { font-family: var(--fuente); font-weight: 700; font-size: 1.35rem; }
+.efemeride__mes { font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; }
+.efemeride__titulo { flex: 1 1 auto; }
+.efemeride__flecha { flex: 0 0 auto; color: var(--ps-rojo); font-weight: 700; }
+
+/* Ficha de una efemeride (pagina de detalle) ------------------------------ */
+.efemeride-ficha {
+  display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap;
+  padding: 1.3rem 1.4rem; margin-bottom: 1.8rem;
+  background: var(--fondo-verde); border-radius: var(--radio);
+}
+.efemeride-ficha__fecha {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;
+  min-width: 5rem; padding: .6rem .5rem; border-radius: var(--radio-sm);
+  background: var(--fondo); line-height: 1.05;
+}
+.efemeride-ficha__dia { font-family: var(--fuente); font-size: 2.2rem; font-weight: 700; color: var(--ps-verde); }
+.efemeride-ficha__mes { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--texto-suave); }
+.efemeride-ficha__proxima { margin: 0 0 .25rem; }
+
+@media (max-width: 640px) {
+  .efemeride__enlace { gap: .7rem; padding: .7rem .2rem; }
+  .efemeride__titulo { font-size: .95rem; }
+}

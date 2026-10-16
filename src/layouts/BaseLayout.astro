@@ -20,7 +20,7 @@ interface Props {
 const { title, description, image } = Astro.props;
 const t = useTranslations();
 const canonical = absoluteUrl(localizePath(currentPath(Astro.url)));
-const desc = description ?? 'Asociación Hispano Palestina de Madrid: publicaciones, eventos, Cole Árabe y solidaridad con el pueblo palestino.';
+const desc = description ?? 'Comunidad Hispano Palestina Jerusalén: publicaciones, eventos, Cole Árabe y solidaridad con el pueblo palestino desde Madrid.';
 const titulo = title ? title + ' · ' + SITE.corto : SITE.corto + ' · ' + SITE.siglas;
 const logo = absoluteUrl(withBase('/images/logo.png'));
 const ogImage = image ? absoluteUrl(withBase(image)) : logo;

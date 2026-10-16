@@ -1,0 +1,11 @@
+---
+import EfemeridePage from '../../../components/pages/EfemeridePage.astro';
+import { EFEMERIDES } from '../../../data/eventos';
+
+export function getStaticPaths() {
+  return EFEMERIDES.map((efemeride) => ({ params: { id: efemeride.id }, props: { efemeride } }));
+}
+
+const { efemeride } = Astro.props;
+---
+<EfemeridePage efemeride={efemeride} />

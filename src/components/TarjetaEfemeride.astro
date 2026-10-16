@@ -1,0 +1,20 @@
+---
+import { localizePath } from '../i18n/utils';
+import { formatDiaMes, type Efemeride } from '../data/eventos';
+
+interface Props { efemeride: Efemeride; }
+const { efemeride } = Astro.props;
+const MES_CORTO = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const iso = '--' + String(efemeride.mes).padStart(2, '0') + '-' + String(efemeride.dia).padStart(2, '0');
+---
+<li class="efemeride">
+  <a class="efemeride__enlace" href={localizePath('/calendario/efemerides/' + efemeride.id)}>
+    <time class="efemeride__fecha" datetime={iso}>
+      <span class="efemeride__dia">{efemeride.dia}</span>
+      <span class="efemeride__mes">{MES_CORTO[efemeride.mes - 1]}</span>
+    </time>
+    <span class="efemeride__titulo">{efemeride.titulo}</span>
+    <span class="efemeride__flecha" aria-hidden="true">→</span>
+  </a>
+  <span class="salto">{formatDiaMes(efemeride.dia, efemeride.mes)}: {efemeride.titulo}</span>
+</li>

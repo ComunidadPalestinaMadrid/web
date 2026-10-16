@@ -52,67 +52,6 @@ export const EVENTOS: Evento[] = [
     imagen: '/images/uploads/becerril.jpg'
   },
   {
-    id: 'balfour-2026',
-    titulo: 'Aniversario de la Declaración Balfour (1917)',
-    fecha: '2026-11-07',
-    hora: '12:00',
-    lugar: '',
-    descripcion: '',
-    categoria: 'institucional',
-    prueba: true
-  },
-  {
-    id: 'muros-2026',
-    titulo: 'Día Internacional contra los Muros y la Ocupación',
-    fecha: '2026-11-09',
-    hora: '18:30',
-    lugar: 'Plaza de Callao, Madrid',
-    descripcion: 'Jornada contra el muro de separación, las demoliciones y la colonización del territorio palestino.',
-    categoria: 'movilización',
-    prueba: true
-  },
-  {
-    id: 'arafat-2026',
-    titulo: 'Aniversario del asesinato de Yasser Arafat',
-    fecha: '2026-11-13',
-    hora: '',
-    lugar: '',
-    descripcion: 'Homenaje a la figura histórica de Yasser Arafat y a la lucha por la autodeterminación del pueblo palestino.',
-    categoria: 'institucional',
-    prueba: true
-  },
-  {
-    id: 'infancia-2026',
-    titulo: 'Día Mundial de la Infancia: la infancia palestina bajo ocupación',
-    fecha: '2026-11-20',
-    hora: '18:00',
-    lugar: 'Centro cultural, Madrid',
-    descripcion: 'Actividad familiar y educativa sobre los derechos de la infancia palestina.',
-    categoria: 'cultural',
-    prueba: true
-  },
-  {
-    id: 'solidaridad-onu-2026',
-    titulo: 'Día de la Partición de Palestina',
-    fecha: '2026-11-29',
-    hora: '12:00',
-    lugar: 'Madrid',
-    descripcion: 'Acto central anual conmemorando la resolución 181 de Naciones Unidas y reclamando el fin de la ocupación.',
-    categoria: 'movilización',
-    destacado: true,
-    prueba: true
-  },
-  {
-    id: 'ddhh-2026',
-    titulo: 'Día de los Derechos Humanos: mesa redonda sobre Palestina',
-    fecha: '2026-12-10',
-    hora: '18:30',
-    lugar: 'Ateneo, Madrid',
-    descripcion: 'Mesa redonda con juristas y activistas sobre derecho internacional y crímenes en Gaza.',
-    categoria: 'cultural',
-    prueba: true
-  },
-  {
     id: 'cocina-palestina-2027',
     titulo: 'Taller de cocina palestina (Cole Árabe)',
     fecha: '2027-01-24',
@@ -120,16 +59,6 @@ export const EVENTOS: Evento[] = [
     lugar: 'Sede de la asociación, Madrid',
     descripcion: 'Taller familiar de cocina tradicional palestina: kunafa, hummus y taboule. Organizado por el Cole Árabe.',
     categoria: 'cultural',
-    prueba: true
-  },
-  {
-    id: 'tierra-2027',
-    titulo: 'Día de la Tierra (Land Day)',
-    fecha: '2027-03-30',
-    hora: '12:00',
-    lugar: 'Madrid',
-    descripcion: 'Conmemoración del 51 aniversario del Día de la Tierra y defensa de la tierra y el campesinado palestino.',
-    categoria: 'movilización',
     prueba: true
   },
   {
@@ -142,39 +71,8 @@ export const EVENTOS: Evento[] = [
     categoria: 'formacion',
     destacado: true,
     prueba: true
-  },
-  {
-    id: 'nakba-2027',
-    titulo: 'Aniversario de la Nakba (1948)',
-    fecha: '2027-05-15',
-    hora: '12:00',
-    lugar: 'Madrid',
-    descripcion: 'Conmemoración de la Nakba y reivindicación del derecho al retorno de los refugiados palestinos.',
-    categoria: 'movilización',
-    destacado: true,
-    prueba: true
-  },
-  {
-    id: 'naksa-2027',
-    titulo: 'Aniversario de la Naksa (1967)',
-    fecha: '2027-06-05',
-    hora: '19:00',
-    lugar: 'Madrid',
-    descripcion: 'Acto de memoria de la ocupación de 1967 y de la situación actual de Jerusalén y Cisjordania.',
-    categoria: 'institucional',
-    prueba: true
   }
 ];
-
-export function tituloEvento(e: Evento, lang: IdiomaEvento): string {
-  return lang === 'ar' && e.tituloAr ? e.tituloAr : e.titulo;
-}
-export function descripcionEvento(e: Evento, lang: IdiomaEvento): string {
-  return lang === 'ar' && e.descripcionAr ? e.descripcionAr : e.descripcion;
-}
-export function lugarEvento(e: Evento, lang: IdiomaEvento): string {
-  return lang === 'ar' && e.lugarAr ? e.lugarAr : e.lugar;
-}
 
 const hoy = () => new Date(new Date().toISOString().slice(0, 10) + 'T00:00:00');
 
@@ -184,15 +82,6 @@ export function proximosEventos(limite?: number): Evento[] {
     .filter((e) => new Date(e.fecha + 'T23:59:59') >= h)
     .sort((a, b) => a.fecha.localeCompare(b.fecha));
   return typeof limite === 'number' ? lista.slice(0, limite) : lista;
-}
-
-export function eventosPorAnio(): Record<string, Evento[]> {
-  const grupos: Record<string, Evento[]> = {};
-  for (const e of [...EVENTOS].sort((a, b) => a.fecha.localeCompare(b.fecha))) {
-    const anio = e.fecha.slice(0, 4);
-    (grupos[anio] ||= []).push(e);
-  }
-  return grupos;
 }
 
 /** Fecha local en formato iCalendar para una hora concreta: 20261007T190000 */
@@ -235,7 +124,7 @@ function vevent(e: Evento): string[] {
 
 /** Calendario completo, para suscribirse. */
 export function generarIcs(): string {
-  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//AHPJ//Calendario//ES', 'CALSCALE:GREGORIAN', 'X-WR-CALNAME:Asociación Hispano Palestina de Madrid'];
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//AHPJ//Calendario//ES', 'CALSCALE:GREGORIAN', 'X-WR-CALNAME:Comunidad Hispano Palestina Jerusalén'];
   for (const e of EVENTOS) lines.push(...vevent(e));
   lines.push('END:VCALENDAR');
   return lines.join('\r\n');
@@ -266,4 +155,118 @@ export function enlaceGoogleCalendar(e: Evento): string {
 
 export function getEvento(id: string): Evento | undefined {
   return EVENTOS.find((e) => e.id === id);
+}
+
+/* ---------------------------------------------------------------------------
+   Efemerides
+   ---------------------------------------------------------------------------
+   Conmemoraciones con dia y mes fijos que se repiten cada anio. No llevan
+   cartel, lugar ni hora: se listan como enlaces con su fecha y tienen ficha
+   propia con una descripcion larga.
+   --------------------------------------------------------------------------- */
+
+export interface Efemeride {
+  id: string;
+  titulo: string;
+  dia: number;      // 1-31
+  mes: number;      // 1-12
+  /** Anio del acontecimiento conmemorado, si procede */
+  anio?: number;
+  descripcion: string;
+}
+
+export const EFEMERIDES: Efemeride[] = [
+  {
+    id: 'tierra',
+    titulo: 'Día de la Tierra (Land Day)',
+    dia: 30,
+    mes: 3,
+    anio: 1976,
+    descripcion: 'El 30 de marzo de 1976 la población palestina con ciudadanía israelí convocó una huelga general contra la expropiación de miles de hectáreas de tierra en Galilea. El ejército israelí mató a seis personas y dejó más de cien heridas. Desde entonces el Día de la Tierra es el símbolo de la defensa de la tierra y del campesinado palestino, y una fecha central en la lucha contra la colonización.'
+  },
+  {
+    id: 'nakba',
+    titulo: 'Aniversario de la Nakba (1948)',
+    dia: 15,
+    mes: 5,
+    anio: 1948,
+    descripcion: 'El 15 de mayo de 1948, con la creación del Estado de Israel, comenzó la Nakba («catástrofe»): la expulsión y el desplazamiento forzoso de más de 750.000 personas palestinas y la destrucción de más de 500 pueblos. Cada 15 de mayo exigimos el derecho al retorno de las personas refugiadas palestinas, recogido en la resolución 194 de Naciones Unidas, y denunciamos que la limpieza étnica que empezó entonces no ha terminado.'
+  },
+  {
+    id: 'naksa',
+    titulo: 'Aniversario de la Naksa (1967)',
+    dia: 5,
+    mes: 6,
+    anio: 1967,
+    descripcion: 'El 5 de junio de 1967, con la ocupación de Cisjordania, Gaza, Jerusalén Este, los Altos del Golán y el Sinaí, comenzó la Naksa («el revés»). Seis días de guerra que completaron el despojo iniciado en 1948 y provocaron una nueva expulsión de cientos de miles de personas palestinas. Conmemoramos esta fecha para recordar que la ocupación de 1967 sigue vigente y que es ilegal según el derecho internacional.'
+  },
+  {
+    id: 'balfour',
+    titulo: 'Aniversario de la Declaración Balfour (1917)',
+    dia: 2,
+    mes: 11,
+    anio: 1917,
+    descripcion: 'El 2 de noviembre de 1917 el ministro de Asuntos Exteriores británico, Arthur Balfour, firmó una carta dirigida a lord Rothschild en la que el Gobierno del Reino Unido se comprometía a favorecer «el establecimiento en Palestina de un hogar nacional para el pueblo judío». La declaración ignoraba por completo a la población palestina, entonces mayoría en el territorio, y se convirtió en una de las bases del despojo que continúa hasta hoy.'
+  },
+  {
+    id: 'muros',
+    titulo: 'Día Internacional contra los Muros y la Ocupación',
+    dia: 9,
+    mes: 11,
+    descripcion: 'Cada 9 de noviembre, aniversario de la caída del Muro de Berlín, recordamos que en Palestina los muros siguen en pie: el muro de separación, las colonias, los puestos de control y las demoliciones de viviendas fragmentan el territorio y la vida cotidiana del pueblo palestino. Denunciamos también a las empresas y a los Estados que se lucran con la ocupación.'
+  },
+  {
+    id: 'arafat',
+    titulo: 'Aniversario del asesinato de Yasser Arafat',
+    dia: 11,
+    mes: 11,
+    anio: 2004,
+    descripcion: 'El 11 de noviembre de 2004 fallecía en el hospital militar de Clamart, en Francia, Yasser Arafat, presidente de la Organización para la Liberación de Palestina y de la Autoridad Nacional Palestina, y símbolo de la lucha por la autodeterminación del pueblo palestino. Las circunstancias de su muerte nunca se han aclarado por completo.'
+  },
+  {
+    id: 'infancia',
+    titulo: 'Día Mundial de la Infancia: la infancia palestina bajo ocupación',
+    dia: 20,
+    mes: 11,
+    descripcion: 'El 20 de noviembre, Día Mundial de la Infancia, ponemos el foco en los niños y las niñas palestinas, que crecen bajo ocupación militar, bloqueo y ataques. Reclamamos el cumplimiento de la Convención sobre los Derechos del Niño para toda la infancia palestina, sin excepciones, y el fin de la impunidad ante los crímenes contra la niñez.'
+  },
+  {
+    id: 'solidaridad',
+    titulo: 'Día Internacional de Solidaridad con el Pueblo Palestino',
+    dia: 29,
+    mes: 11,
+    anio: 1947,
+    descripcion: 'El 29 de noviembre de 1947 la Asamblea General de Naciones Unidas aprobó la resolución 181, que dividía Palestina sin consultar a su población. Treinta años después, en 1977, la ONU declaró esa misma fecha Día Internacional de Solidaridad con el Pueblo Palestino. Cada año recordamos el derecho a la autodeterminación y exigimos el fin de la ocupación.'
+  },
+  {
+    id: 'ddhh',
+    titulo: 'Día de los Derechos Humanos',
+    dia: 10,
+    mes: 12,
+    anio: 1948,
+    descripcion: 'El 10 de diciembre de 1948 se aprobó la Declaración Universal de los Derechos Humanos. Ese día denunciamos que la ocupación y el apartheid israelíes vulneran de forma sistemática los derechos recogidos en la Declaración: la vida, la vivienda, la libertad de movimiento, la educación y la dignidad del pueblo palestino, y reclamamos que ningún Estado quede fuera de su cumplimiento.'
+  }
+];
+
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+/** "2 de noviembre" */
+export function formatDiaMes(dia: number, mes: number): string {
+  return dia + ' de ' + MESES[mes - 1];
+}
+
+/** Fecha (a mediodia local) de la proxima vez que cae la efemeride. */
+export function proximaFechaEfemeride(e: Efemeride, desde: Date = hoy()): Date {
+  const base = new Date(desde.getFullYear(), e.mes - 1, e.dia, 12);
+  return base >= desde ? base : new Date(desde.getFullYear() + 1, e.mes - 1, e.dia, 12);
+}
+
+/** Efemerides ordenadas por proximidad, con la fecha de su proxima aparicion. */
+export function efemeridesProximas(desde: Date = hoy()): { efemeride: Efemeride; fecha: Date }[] {
+  return EFEMERIDES.map((efemeride) => ({ efemeride, fecha: proximaFechaEfemeride(efemeride, desde) }))
+    .sort((a, b) => a.fecha.getTime() - b.fecha.getTime());
+}
+
+export function getEfemeride(id: string): Efemeride | undefined {
+  return EFEMERIDES.find((e) => e.id === id);
 }

@@ -2,20 +2,22 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TarjetaPublicacion from '../TarjetaPublicacion.astro';
 import TarjetaEvento from '../TarjetaEvento.astro';
+import TarjetaEfemeride from '../TarjetaEfemeride.astro';
 import { SITE } from '../../data/site';
 import { ultimas } from '../../data/publicaciones';
-import { proximosEventos } from '../../data/eventos';
+import { proximosEventos, efemeridesProximas } from '../../data/eventos';
 import { useTranslations, localizePath, withBase } from '../../i18n/utils';
 
 const t = useTranslations();
 const eventos = proximosEventos(3);
+const efemerides = efemeridesProximas().slice(0, 4);
 
 // Parrilla de portada: 2 posts grandes + 6 pequenos
 const posts = ultimas(8);
 const grandes = posts.slice(0, 2);
 const pequenos = posts.slice(2, 8);
 
-const coleIntro = 'El Cole Árabe es el proyecto educativo de la asociación. Cada semana nos reunimos para aprender árabe y mantener viva la cultura palestina con las niñas y los niños de la comunidad.';
+const coleIntro = 'El Cole Árabe es el proyecto educativo de la asociación, un espacio donde infancia y adolescencia aprenden la lengua árabe, descubren sus raíces y fortalecen vínculos con la cultura y la historia palestina. A través del aprendizaje, el juego, la música y la convivencia fomentamos la transmisión de nuestra identidad cultural.';
 
 const coleActividades = [
   { titulo: 'Clases de árabe', texto: 'Lectoescritura, gramática y conversación, en grupos por edad y nivel.' },
@@ -113,9 +115,14 @@ const coleActividades = [
         <span class="eyebrow">{t('home.eventosTitulo')}</span>
         <h2>{t('cal.agenda')}</h2>
       </div>
+      <h3 class="subtitulo-agenda">{t('cal.actividades')}</h3>
       <div class="rejilla rejilla--2">
         {eventos.map((e) => <TarjetaEvento evento={e} />)}
       </div>
+      <h3 class="subtitulo-agenda">{t('cal.efemerides')}</h3>
+      <ul class="efemerides">
+        {efemerides.map(({ efemeride }) => <TarjetaEfemeride efemeride={efemeride} />)}
+      </ul>
       <p class="mt-3"><a class="boton boton--fantasma" href={localizePath('/calendario')}>{t('common.verMasEventos')} →</a></p>
     </div>
   </section>
@@ -126,7 +133,7 @@ const coleActividades = [
         <span class="eyebrow">{t('home.sobreTitulo')}</span>
         <h2>{SITE.nombre}</h2>
         <p>
-          {'La Asociación de la Comunidad Hispano Palestina Jerusalén es una asociación sin ánimo de lucro fundada en 1988 en Madrid. Trabajamos para visibilizar la causa palestina y apoyar a la comunidad palestina en España.'}
+          {'La Comunidad Hispano Palestina Jerusalén es una asociación sin ánimo de lucro fundada en 1988 en Madrid. Trabajamos para visibilizar la causa palestina y apoyar a la comunidad palestina en España.'}
         </p>
         <a class="boton boton--fantasma" href={localizePath('/quienes-somos')}>{t('nav.quienes')} →</a>
       </div>
