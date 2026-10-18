@@ -7,6 +7,8 @@ import { SITE } from '../../data/site';
 import { useTranslations, localizePath, formatFecha } from '../../i18n/utils';
 
 const t = useTranslations();
+// Siempre de mas reciente a mas antigua, aunque el orden del fichero cambie.
+const apariciones = [...APARICIONES].sort((a, b) => b.fecha.localeCompare(a.fecha));
 ---
 <BaseLayout title={t('nav.apariciones')} description={t('prensa.aparicionesIntro')}>
   <PaginaCabecera
@@ -24,7 +26,7 @@ const t = useTranslations();
       <div>
         <Buscador placeholder={t('prensa.buscarMedios')} vacio={t('prensa.sinResultados')} />
         <ul class="lista-apariciones">
-          {APARICIONES.map((a) => (
+          {apariciones.map((a) => (
             <li class="aparicion" data-buscable={a.medio + ' ' + a.titular + ' ' + (a.subtitulo || '') + ' ' + a.fecha}>
               <p class="aparicion__meta">
                 <span class="aparicion__medio">{a.medio}</span>

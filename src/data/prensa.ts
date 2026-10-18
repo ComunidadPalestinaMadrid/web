@@ -11,6 +11,13 @@ export interface Aparicion {
 
 export const APARICIONES: Aparicion[] = [
   {
+    medio: 'Europa Press TV',
+    titular: 'Activistas exigen medidas urgentes a la UE y España para detener el "genocidio" en Palestina',
+    subtitulo: 'Declaraciones de Ibrahim Zaituni, de la Comunidad Hispano Palestina Jerusalén, y de otros activistas: el genocidio "continúa y se extiende" a Líbano, Yemen e Irán.',
+    url: 'https://www.europapress.tv/sociedad/1122718/1/activistas-exigen-medidas-urgentes-ue-espana-detener-genocidio-palestina',
+    fecha: '2026-10-04'
+  },
+  {
     medio: 'Infobae',
     titular: 'Manifestantes exigen en Madrid el fin de las relaciones con Israel y una Palestina libre',
     url: 'https://www.infobae.com/america/agencias/2026/05/17/manifestantes-exigen-en-madrid-el-fin-de-las-relaciones-con-israel-y-una-palestina-libre/',
