@@ -10,7 +10,14 @@ const t = useTranslations();
 const f = formatFecha(pub.date);
 const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
 ---
-<BaseLayout title={pub.title} description={pub.resumen} image={pub.portada}>
+<BaseLayout
+  title={pub.title}
+  description={pub.resumen}
+  image={pub.portada}
+  tipo="article"
+  fecha={pub.date}
+  seccion={t(ETIQUETA_TIPO[pub.tipo])}
+>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',

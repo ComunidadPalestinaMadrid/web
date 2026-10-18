@@ -15,15 +15,46 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  /** Ruta de la imagen de previsualizacion (por defecto, la del inicio) */
   image?: string;
+  /** Tipo Open Graph: 'website' (por defecto) o 'article' */
+  tipo?: 'website' | 'article';
+  /** Fecha ISO de publicacion, para article:published_time */
+  fecha?: string;
+  /** Seccion o categoria, para article:section */
+  seccion?: string;
 }
-const { title, description, image } = Astro.props;
+const { title, description, image, tipo = 'website', fecha, seccion } = Astro.props;
 const t = useTranslations();
 const canonical = absoluteUrl(localizePath(currentPath(Astro.url)));
 const desc = description ?? 'Comunidad Hispano Palestina Jerusalén: publicaciones, eventos, Cole Árabe y solidaridad con el pueblo palestino desde Madrid.';
 const titulo = title ? title + ' · ' + SITE.corto : SITE.corto + ' · ' + SITE.siglas;
-const logo = absoluteUrl(withBase('/images/logo.png'));
-const ogImage = image ? absoluteUrl(withBase(image)) : logo;
+
+/* --- Imagen de previsualizacion (Open Graph / Twitter / Telegram) ---
+   Por defecto se usa una imagen 1200x630 (ratio recomendado 1.91:1) hecha a
+   partir de la foto de fondo del inicio: una imagen cuadrada o pequena, como
+   el logo, no genera vista previa grande en Telegram, WhatsApp ni X. */
+const OG_DEFECTO = { ruta: '/images/og-default.jpg', ancho: 1200, alto: 630 };
+const OG_ALT_DEFECTO = 'Manifestación por Palestina en Madrid: pancarta de «Viva la Resistencia Palestina» y banderas palestinas';
+const ogRuta = image || OG_DEFECTO.ruta;
+const ogUrl = absoluteUrl(withBase(ogRuta));
+const ogAlt = image ? titulo : OG_ALT_DEFECTO;
+const extension = ogRuta.split('.').pop()?.toLowerCase();
+const ogMime = extension === 'png' ? 'image/png' : extension === 'webp' ? 'image/webp' : 'image/jpeg';
+
+let ogAncho: number | undefined = image ? undefined : OG_DEFECTO.ancho;
+let ogAlto: number | undefined = image ? undefined : OG_DEFECTO.alto;
+if (image) {
+  // Dimensiones reales del fichero, si se pueden leer en tiempo de compilacion.
+  try {
+    const { default: sharp } = await import('sharp');
+    const meta = await sharp('public' + ogRuta).metadata();
+    ogAncho = meta.width;
+    ogAlto = meta.height;
+  } catch {
+    /* si no se puede leer, se omiten las dimensiones */
+  }
+}
 ---
 <!doctype html>
 <html lang="es">
@@ -37,14 +68,30 @@ const ogImage = image ? absoluteUrl(withBase(image)) : logo;
     <link rel="apple-touch-icon" href={withBase('/images/logo.png')} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#ffffff" />
-    <meta property="og:type" content="website" />
+
+    <!-- Open Graph (Telegram, WhatsApp, Facebook, LinkedIn, Slack...) -->
+    <meta property="og:type" content={tipo} />
     <meta property="og:site_name" content={SITE.nombre} />
+    <meta property="og:locale" content="es_ES" />
     <meta property="og:title" content={titulo} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:secure_url" content={ogUrl} />
+    <meta property="og:image:type" content={ogMime} />
+    {ogAncho && ogAlto && <meta property="og:image:width" content={String(ogAncho)} />}
+    {ogAncho && ogAlto && <meta property="og:image:height" content={String(ogAlto)} />}
+    <meta property="og:image:alt" content={ogAlt} />
+    {tipo === 'article' && fecha && <meta property="article:published_time" content={fecha} />}
+    {tipo === 'article' && seccion && <meta property="article:section" content={seccion} />}
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={ogUrl} />
+    <meta name="twitter:image:alt" content={ogAlt} />
+
     <slot name="head" />
   </head>
   <body>
