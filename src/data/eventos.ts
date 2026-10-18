@@ -210,6 +210,30 @@ export const EFEMERIDES: Efemeride[] = [
     descripcion: 'El 5 de junio de 1967, con la ocupación de Cisjordania, Gaza, Jerusalén Este, los Altos del Golán y el Sinaí, comenzó la Naksa («el revés»). Seis días de guerra que completaron el despojo iniciado en 1948 y provocaron una nueva expulsión de cientos de miles de personas palestinas. Conmemoramos esta fecha para recordar que la ocupación de 1967 sigue vigente y que es ilegal según el derecho internacional.'
   },
   {
+    id: 'martires-de-al-buraq',
+    titulo: 'Ejecución de los tres mártires de Al-Buraq',
+    dia: 17,
+    mes: 6,
+    anio: 1930,
+    descripcion: 'El 17 de junio de 1930, las autoridades del Mandato británico ahorcaron en la prisión de Akka a Fouad Hijazi, Atta al-Zeer y Mohammed Khalil Jamjoum, tres de los primeros mártires del movimiento de presos palestinos.',
+    imagen: '/images/uploads/3-martires-buraq.jpg',
+    altImagen: 'Retrato de Fouad Hijazi, Atta al-Zeer y Mohammed Khalil Jamjoum, los tres mártires de Al-Buraq ejecutados en 1930',
+    contenido: `
+<p>El 17 de junio de 1930, las autoridades del Mandato británico ahorcaron en la prisión de Akka a Fouad Hijazi, Atta al-Zeer y Mohammed Khalil Jamjoum, tres de los primeros mártires del movimiento de presos palestinos. Su ejecución fue la respuesta colonial a su participación en la Revolución de Al-Buraq del año anterior, un levantamiento que estalló cuando grupos sionistas, tras una manifestación en el Muro de al-Buraq, izaron banderas sionistas y proclamaron que el lugar les pertenecía. Aquella provocación desencadenó protestas en Jerusalén, Haifa, Yafa y Safad, y las autoridades británicas detuvieron a cientos de palestinos. Veintiséis fueron condenados inicialmente a muerte; la presión popular logró que la mayoría de las penas fueran conmutadas por cadena perpetua, pero las de Hijazi, al-Zeer y Jamjoum se mantuvieron firmes.</p>
+
+<p>Los tres hombres tenían perfiles distintos, pero compartían un mismo compromiso anticolonial. Fouad Hijazi, nacido en Safad en 1904, había estudiado en la Universidad Americana de Beirut y dejó un mensaje a su familia antes de morir en el que pedía que el 17 de junio fuera recordado cada año con discursos y canciones por Palestina. Mohammed Jamjoum, nacido en al-Khalil en 1902, también había pasado por la Universidad Americana de Beirut. Atta al-Zeer, nacido en la misma ciudad en 1895, era agricultor y obrero manual, conocido por su valor y su fuerza física. El día de la ejecución, se declaró una huelga general en toda Palestina y miles de personas se concentraron en Yafa, Haifa, al-Khalil, Nablus y Akka, desafiando la prohibición británica de enterrar los cuerpos en sus ciudades de origen.</p>
+
+<p>Su memoria quedó inextricablemente unida a la cultura popular palestina. La canción «Min Sijjin Akka» («Desde la prisión de Akka»), atribuida al poeta obrero Nuḥ Ibrahim —quien años después moriría combatiendo en la revolución de 1936-1939—, se convirtió en un himno que aún hoy se entona en actos nacionales y celebraciones. El poeta Ibrahim Tuqan los inmortalizó en su poema «Martes Rojo», y el propio Fouad Hijazi dejó escrito que su muerte debía ser motivo de celebración, porque «la nación que se enfrenta a su miseria y lucha, es una nación que no morirá». A casi un siglo de distancia, la ejecución de estos tres mártires sigue siendo un símbolo de la continuidad de la resistencia palestina frente al colonialismo y la ocupación, y su legado resuena en la lucha actual por la liberación y el retorno.</p>
+
+<h2>Fuentes</h2>
+
+<ol>
+  <li>Red de Solidaridad con los Presos Políticos Palestinos (Samidoun): «La revolución de Al-Buraq: El legado, la lucha continua y el movimiento de los presos palestinos» (17 de junio de 2017; versión actualizada). <a href="https://samidoun.net/la-revolucion-de-al-buraq-el-legado-la-lucha-continua-y-el-movimiento-de-los-presos-palestinos/" rel="noopener" target="_blank">samidoun.net</a></li>
+  <li>Palestinapedia: artículo sobre la revolución de Al-Buraq de 1929. <a href="https://www.palestinapedia.net/%D8%AB%D9%88%D8%B1%D8%A9-1929-%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D9%82" rel="noopener" target="_blank">palestinapedia.net</a></li>
+</ol>
+`
+  },
+  {
     id: 'balfour',
     titulo: 'Aniversario de la Declaración Balfour (1917)',
     dia: 2,
