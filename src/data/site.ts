@@ -12,7 +12,7 @@ export const SITE = {
   ciudad: 'Madrid',
   emails: {
     asociacion: 'c.hispano.palestina.madrid@gmail.com',
-    cole: 'Escuela.arabe.jerusalem@gmail.com'
+    cole: 'escuela.arabe.jerusalem@gmail.com'
   },
   instagram: {
     usuario: '@asc.hispanopalestinajerusalen',

@@ -14,7 +14,7 @@ const fechaBruta = new Date(evento.fecha + 'T12:00:00').toLocaleDateString('es-E
   weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
 });
 const rango = evento.hora ? evento.hora + (evento.horaFin ? ' - ' + evento.horaFin : '') + 'h' : '';
-const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (rango ? ' · ' + rango : '');
+const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (rango ? ' · ' + rango : '');Escuela.arabe.jerusalem@gmail.com
 ---
 <article class={'evento' + (evento.destacado ? ' evento--destacado' : '')}>
   {evento.imagen && (
