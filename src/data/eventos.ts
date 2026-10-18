@@ -231,6 +231,18 @@ export const EFEMERIDES: Efemeride[] = [
   <li>Red de Solidaridad con los Presos Políticos Palestinos (Samidoun): «La revolución de Al-Buraq: El legado, la lucha continua y el movimiento de los presos palestinos» (17 de junio de 2017; versión actualizada). <a href="https://samidoun.net/la-revolucion-de-al-buraq-el-legado-la-lucha-continua-y-el-movimiento-de-los-presos-palestinos/" rel="noopener" target="_blank">samidoun.net</a></li>
   <li>Palestinapedia: artículo sobre la revolución de Al-Buraq de 1929. <a href="https://www.palestinapedia.net/%D8%AB%D9%88%D8%B1%D8%A9-1929-%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D9%82" rel="noopener" target="_blank">palestinapedia.net</a></li>
 </ol>
+
+<div class="video-embed">
+  <iframe src="https://www.youtube-nocookie.com/embed/zWaoL_iGwlQ" title="«Min Sijjin Akka» (Desde la prisión de Akka), por Hussein Munzer" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<div class="video-embed">
+  <iframe src="https://www.youtube-nocookie.com/embed/5yykxl6OIp4" title="«Min Sijjin Akka»: el funeral de Mohammed Jamjoum y Fouad Hijazi" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<div class="video-embed video-embed--vertical">
+  <iframe src="https://www.youtube-nocookie.com/embed/jZX7r638CAA" title="«Min Sijjin Akka», por Dalal Abu Amneh" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+</div>
 `
   },
   {
