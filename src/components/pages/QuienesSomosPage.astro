@@ -6,35 +6,42 @@ import { useTranslations, localizePath } from '../../i18n/utils';
 const t = useTranslations();
 
 const intro = [
-  'La Comunidad Hispano Palestina Jerusalén, también conocida como la Comunidad Palestina de Madrid o la Hispanopalestina es una asociación sin ánimo de lucro, legalmente constituida el 11 de enero de 1988, que nace con el objetivo de reunir a las personas palestinas de Madrid en un espacio de encuentro social, cultural y comunitario.',
+  'La <strong>Comunidad Hispano Palestina Jerusalén</strong>, también conocida como la <strong>Comunidad Palestina de Madrid</strong> o <strong>la Hispanopalestina</strong> es una asociación sin ánimo de lucro, legalmente constituida el 11 de enero de 1988, que nace con el objetivo de reunir a las personas palestinas de Madrid en un espacio de encuentro social, cultural y comunitario.',
   'Somos un espacio de convivencia, participación y solidaridad que busca fortalecer los vínculos entre las personas palestinas, preservar nuestra identidad colectiva y mantener viva nuestra lengua, cultura y memoria. Al mismo tiempo, trabajamos por la defensa de los derechos del pueblo palestino y por la construcción de una sociedad más justa, igualitaria e inclusiva, tanto en Palestina como aquí en España.'
 ];
 
 const objetivos = [
-  'Construir comunidad: ofrecer a las personas palestinas de Madrid un espacio de encuentro, convivencia, participación y apoyo mutuo',
-  'Establecer lazos de amistad entre el pueblo palestino y el español, compartiendo el patrimonio cultural e histórico de ambos pueblos.',
-  'Organizar actividades sociales, culturales, educativas y deportivas con otras asociaciones afines.',
-  'Educar a la comunidad palestina, para que la infancia y la juventud palestinas conozcan, aprendan y mantengan viva su lengua, cultura, historia e identidad.',
-  'Apoyar a las personas en situación de vulnerabilidad: acompañar y apoyar a personas refugiadas, migrantes y en situación de vulnerabilidad social, sean palestinas, árabes o procedentes de cualquier parte del mundo.',
-  'Defender la causa palestina: informar sobre Palestina, promover la solidaridad internacionalista y defender los derechos del pueblo palestino en la Comunidad de Madrid.'
+  '<strong>Construir comunidad</strong>: ofrecer a las personas palestinas de Madrid un espacio de encuentro, convivencia, participación y apoyo mutuo',
+  '<strong>Establecer lazos de amistad</strong> entre el pueblo palestino y el español, compartiendo el patrimonio cultural e histórico de ambos pueblos.',
+  'Organizar <strong>actividades sociales</strong>, culturales, educativas y deportivas con otras asociaciones afines.',
+  '<strong>Educar a la comunidad palestina</strong>, para que la infancia y la juventud palestinas conozcan, aprendan y mantengan viva su lengua, cultura, historia e identidad.',
+  '<strong>Apoyar a las personas en situación de vulnerabilidad</strong>: acompañar y apoyar a personas refugiadas, migrantes y en situación de vulnerabilidad social, sean palestinas, árabes o procedentes de cualquier parte del mundo.',
+  '<strong>Defender la causa palestina</strong>: informar sobre Palestina, promover la solidaridad internacionalista y defender los derechos del pueblo palestino en la Comunidad de Madrid.'
 ];
 
 const principios = [
-  'La Comunidad Palestina de Madrid se constituye como un espacio social y comunitario basado en los principios de la democracia, el laicismo, el feminismo y el antirracismo.',
+  'La Comunidad Palestina de Madrid se constituye como un espacio social y comunitario basado de natuzaleza democrática, basada en los principios de la igualdad, el laicismo, el feminismo y el antirracismo.',
   'Defendemos una comunidad abierta, participativa y plural, comprometida con la igualdad de derechos, la justicia social y la convivencia entre personas de diferentes procedencias, ideas y experiencias.',
-  'Somos una asociación independiente de partidos, organizaciones y facciones políticas, tanto españolas como palestinas. Esta independencia no significa que seamos un espacio apolítico, sino apartidista: reconocemos la dimensión política de la defensa de los derechos del pueblo palestino y de la lucha contra las injusticias, al tiempo que preservamos nuestra autonomía como organización comunitaria.',
+  'Somos una asociación independiente de partidos, organizaciones y facciones políticas, tanto españolas como palestinas. Esta independencia no significa que seamos un espacio apolítico, sino apartidista: <strong>reconocemos la dimensión política de la causa palestina</strong> y de la lucha contra las injusticias, al tiempo que preservamos nuestra autonomía como organización comunitaria.',
   'En este marco, la pluralidad política tiene cabida dentro de la comunidad. Participamos en actos y espacios de colaboración con partidos políticos, siempre que se respete la línea política general de la asociación y exista el respaldo de sus miembros.'
 ];
 
 const acceso = [
-  'Personas palestinas, y cónyuges de personas palestinas.',
-  'Personas internacionalistas no palestinas: también pueden formar parte de la comunidad, con derecho a voz, pero sin derecho a voto.'
+  '<strong>Personas palestinas</strong>, y cónyuges de personas palestinas.',
+  '<strong>Personas internacionalistas</strong> no palestinas: también pueden formar parte de la comunidad, con derecho a voz, pero sin derecho a voto.'
+];
+
+/* Iconos de los tres organos (SVG en linea: sin peticiones ni dependencias) */
+const iconosOrganos = [
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.526-1.526A2.402 2.402 0 0 1 12 1.998c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02z"/></svg>'
 ];
 
 const organizacion = [
-  'La Asamblea General es el máximo órgano de dirección de la Asociación, integrada por todas las personas socias con derecho a voz y voto. Es el espacio de participación democrática que decide las líneas generales de la Asociación.',
-  'La Junta Directiva es el órgano ejecutivo de la Asociación, elegida por la Asamblea General y con un mandato de 2 años.',
-  'Los Grupos de Trabajo se constituyen por acuerdo de la Junta Directiva, y es donde se reparten tareas entre personas socias o simpatizantes voluntarias saquen adelante el trabajo de la Comunidad Palestina.'
+  'La <strong>Asamblea General</strong> es el máximo órgano de dirección de la Asociación, integrada por todas las personas socias con derecho a voz y voto. Es el espacio de participación democrática que decide las líneas generales de la Asociación.',
+  'La <strong>Junta Directiva</strong> es el órgano ejecutivo de la Asociación, elegida por la Asamblea General y con un mandato de 2 años.',
+  'Los <strong>Grupos de Trabajo</strong> se constituyen por acuerdo de la Junta Directiva, y es donde se reparten tareas entre personas socias o simpatizantes voluntarias saquen adelante el trabajo de la Comunidad Palestina.'
 ];
 ---
 <BaseLayout title={t('quienes.titulo')} description={t('quienes.intro')}>
@@ -48,7 +55,7 @@ const organizacion = [
   <section class="seccion">
     <div class="contenedor">
       <div class="quienes-intro">
-        {intro.map((p, i) => <p class={i === 0 ? 'quienes-intro__entrada' : ''}>{p}</p>)}
+        {intro.map((p, i) => <p class={i === 0 ? 'quienes-intro__entrada' : ''} set:html={p} />)}
       </div>
     </div>
   </section>
@@ -65,7 +72,7 @@ const organizacion = [
         {objetivos.map((o, i) => (
           <div class="objetivo">
             <span class="objetivo__num">{String(i + 1).padStart(2, '0')}</span>
-            <p>{o}</p>
+            <p set:html={o} />
           </div>
         ))}
       </div>
@@ -80,7 +87,7 @@ const organizacion = [
         <h2>{'Nuestros principios'}</h2>
       </div>
       <div class="principios">
-        {principios.map((p, i) => <p class={i === 0 ? 'principios__entrada' : ''}>{p}</p>)}
+        {principios.map((p, i) => <p class={i === 0 ? 'principios__entrada' : ''} set:html={p} />)}
       </div>
     </div>
   </section>
@@ -97,7 +104,7 @@ const organizacion = [
         {acceso.map((a) => (
           <div class="acceso__item">
             <span class="acceso__marca" aria-hidden="true">✓</span>
-            <p>{a}</p>
+            <p set:html={a} />
           </div>
         ))}
       </div>
@@ -116,9 +123,10 @@ const organizacion = [
         <p class="entradilla">{'La Comunidad Palestina de Madrid se organiza mediante grupos de trabajo que permiten desarrollar sus distintas actividades, proyectos e iniciativas.'}</p>
       </div>
       <div class="organos">
-        {organizacion.map((o) => (
+        {organizacion.map((o, i) => (
           <div class="organo">
-            <p>{o}</p>
+            <span class="organo__icono" set:html={iconosOrganos[i]} />
+            <p set:html={o} />
           </div>
         ))}
       </div>
