@@ -453,6 +453,22 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .efemeride-ficha__mes { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--texto-suave); }
 .efemeride-ficha__proxima { margin: 0 0 .25rem; }
 
+/* Imagen de una efemeride -------------------------------------------------- */
+.efemeride-imagen { margin: 0 auto 2.2rem; text-align: center; }
+.efemeride-imagen img {
+  display: block; margin: 0 auto; width: auto; height: auto;
+  max-width: 100%; max-height: 520px;
+  border-radius: var(--radio-sm); box-shadow: var(--sombra);
+}
+.efemeride-imagen figcaption {
+  margin-top: .6rem; font-size: .78rem; line-height: 1.5; color: var(--texto-suave);
+}
+
+/* Listas dentro de la prosa (fuentes de una efemeride) --------------------- */
+.prosa ol { padding-left: 1.3rem; }
+.prosa ol li { margin-bottom: .4rem; }
+.prosa ol a { word-break: break-word; }
+
 @media (max-width: 640px) {
   .efemeride__enlace { gap: .7rem; padding: .7rem .2rem; }
   .efemeride__titulo { font-size: .95rem; }

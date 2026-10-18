@@ -172,7 +172,16 @@ export interface Efemeride {
   mes: number;      // 1-12
   /** Anio del acontecimiento conmemorado, si procede */
   anio?: number;
+  /** Resumen corto (se usa como meta description) */
   descripcion: string;
+  /** Texto alternativo de la imagen */
+  altImagen?: string;
+  /** Ruta de una imagen opcional (en /public) */
+  imagen?: string;
+  /** Pie de foto y credito de la imagen */
+  creditoImagen?: string;
+  /** Cuerpo largo en HTML; si falta se usa `descripcion` */
+  contenido?: string;
 }
 
 export const EFEMERIDES: Efemeride[] = [
@@ -206,7 +215,35 @@ export const EFEMERIDES: Efemeride[] = [
     dia: 7,
     mes: 11,
     anio: 1917,
-    descripcion: 'El 2 de noviembre de 1917 el ministro de Asuntos Exteriores británico, Arthur Balfour, firmó una carta dirigida a lord Rothschild en la que el Gobierno del Reino Unido se comprometía a favorecer «el establecimiento en Palestina de un hogar nacional para el pueblo judío». La declaración ignoraba por completo a la población palestina, entonces mayoría en el territorio, y se convirtió en una de las bases del despojo que continúa hasta hoy.'
+    descripcion: 'La Declaración Balfour fue una carta enviada el 2 de noviembre de 1917 y difundida una semana más tarde en la prensa británica en la que el Gobierno del Reino Unido manifestó su apoyo a la creación de un «hogar nacional judío» en Palestina, un territorio habitado mayoritariamente por población árabe palestina.',
+    imagen: '/images/efemerides/balfour-declaracion.jpg',
+    altImagen: 'Carta de la Declaración Balfour, firmada el 2 de noviembre de 1917',
+    creditoImagen: 'Declaración Balfour (1917). British Library, vía Wikimedia Commons. Dominio público.',
+    contenido: `
+<p>La Declaración Balfour fue una carta enviada el 2 de noviembre de 1917 y difundida una semana más tarde en la prensa británica en la que el Gobierno del Reino Unido manifestó su apoyo a la creación de un «hogar nacional judío» en Palestina, un territorio habitado mayoritariamente por población árabe palestina. Esta declaración constituyó un punto de inflexión en la historia de la región y sentó las bases para el posterior establecimiento del Estado de Israel en 1948.</p>
+
+<h2>¿Por qué fue tan importante?</h2>
+
+<p>A principios del siglo XX, Palestina formaba parte del Imperio otomano y era una sociedad diversa, en la que convivían comunidades musulmanas, cristianas y judías.</p>
+
+<p>El movimiento sionista, surgido en Europa a finales del siglo XIX, buscaba establecer un hogar nacional judío en Palestina. Para llevar adelante este proyecto, necesitaba el respaldo de una gran potencia internacional.</p>
+
+<p>Ese apoyo llegó del Reino Unido en 1917, durante la Primera Guerra Mundial. El Gobierno británico, a través de su ministro de Asuntos Exteriores, Arthur James Balfour, anunció en una carta dirigida a Lionel Walter Rothschild, representante destacado de la comunidad judía británica que apoyaba la creación de un hogar nacional judío en Palestina.</p>
+
+<p>La población palestina, mayoritaria en aquel territorio, no fue consultada sobre su futuro.</p>
+
+<p>La declaración abrió una nueva etapa de respaldo británico a la colonización sionista de Palestina, que se intensificó durante el Mandato británico (1922-1948). La población palestina respondió con protestas, movilizaciones y distintas formas de resistencia, en las que destaca la participación activa de las mujeres.</p>
+
+<p>Como explica el historiador Jorge Ramos Tolosa <a href="https://www.infolibre.es/opinion/plaza-publica/balfour-oslo-100-anos-complicidad-internacional-colonizacion-palestina-ii_1_1147171.html" rel="noopener" target="_blank">(1)</a>, la Declaración Balfour refleja cómo una potencia colonial europea decidió sobre el futuro de un territorio sin tener en cuenta la voluntad de su población autóctona.</p>
+
+<p>Este proceso histórico es fundamental para comprender la creación del Estado de Israel en 1948 y la Nakba («catástrofe» en árabe), durante la cual cientos de miles de palestinos fueron expulsados o huyeron de sus hogares.</p>
+
+<h2>Fuentes</h2>
+
+<ol>
+  <li>Basallote, Antonio; Checa, Diego; López, Lucía; Ramos, Jorge: «De Balfour a Oslo: 100 años de complicidad internacional con la colonización de Palestina (y II)», <a href="https://www.infolibre.es/opinion/plaza-publica/balfour-oslo-100-anos-complicidad-internacional-colonizacion-palestina-ii_1_1147171.html" rel="noopener" target="_blank">infoLibre</a>.</li>
+</ol>
+`
   },
   {
     id: 'muros',
