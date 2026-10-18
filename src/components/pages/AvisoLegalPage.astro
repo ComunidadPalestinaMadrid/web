@@ -15,20 +15,17 @@ const t = useTranslations();
   />
   <section class="seccion">
     <div class="contenedor">
-      <div class="aviso mb-3">
-        {'Plantilla legal pendiente de revisión. Los campos marcados como [PENDIENTE] deben completarse con los datos registrales oficiales de la asociación antes de publicar el sitio.'}
-      </div>
       <div class="prosa">
         <h2>1. Datos identificativos del titular</h2>
         <p>En cumplimiento del deber de información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los siguientes datos:</p>
         <ul>
           <li><strong>Denominación social:</strong> {SITE.nombre} ({SITE.siglas})</li>
-          <li><strong>CIF:</strong> [PENDIENTE]</li>
-          <li><strong>Número de inscripción en el Registro Nacional de Asociaciones:</strong> [PENDIENTE]</li>
-          <li><strong>Domicilio social:</strong> [PENDIENTE], Madrid (España)</li>
+          <li><strong>CIF:</strong>{SITE.cif}</li>
+          <li><strong>Número de inscripción en el Registro Nacional de Asociaciones:</strong>{SITE.rna}</li>
+          <li><strong>Domicilio social:</strong>{SITE.domicilio} (España)</li>
           <li><strong>Correo electrónico:</strong> <a href={'mailto:' + SITE.emails.asociacion}>{SITE.emails.asociacion}</a></li>
           <li><strong>Dominio:</strong> {SITE.dominio}</li>
-          <li><strong>Fecha de constitución:</strong> {SITE.fundacion}</li>
+          <li><strong>Fecha de constitución:</strong>11 de enero de {SITE.fundacion}</li>
         </ul>
 
         <h2>2. Objeto y ámbito de aplicación</h2>
@@ -51,7 +48,7 @@ const t = useTranslations();
         <h2>5. Protección de datos personales</h2>
         <p>De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), se informa de lo siguiente:</p>
         <ul>
-          <li><strong>Responsable del tratamiento:</strong> {SITE.nombre}, CIF [PENDIENTE], domicilio [PENDIENTE], Madrid.</li>
+          <li><strong>Responsable del tratamiento:</strong> {SITE.nombre}, CIF: {SITE.cif}, y domicilio {SITE.domicilio}.</li>
           <li><strong>Finalidades:</strong> atender las consultas, sugerencias y solicitudes de información o colaboración recibidas; gestionar la inscripción en las actividades del Cole Árabe; y gestionar la relación asociativa.</li>
           <li><strong>Base jurídica:</strong> consentimiento de la persona interesada y/o interés legítimo en el funcionamiento de la asociación.</li>
           <li><strong>Destinatarios:</strong> no se ceden datos a terceros salvo obligación legal. Los formularios de contacto se gestionan a través de la plataforma Google Forms, cuyos servidores pueden estar ubicados fuera del Espacio Económico Europeo.</li>
@@ -74,7 +71,7 @@ const t = useTranslations();
         <h2>10. Legislación aplicable y jurisdicción</h2>
         <p>Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier controversia serán competentes los juzgados y tribunales de Madrid, salvo que la normativa de consumo establezca otro fuero.</p>
 
-        <p class="pieza-pequena texto-suave">Última actualización: {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}. Documento pendiente de revisión jurídica y de completar los datos registrales.</p>
+        <p class="pieza-pequena texto-suave">Última actualización: 18 de octubre de 2026.</p>
       </div>
     </div>
   </section>

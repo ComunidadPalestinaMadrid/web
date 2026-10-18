@@ -3,6 +3,8 @@ export const SITE = {
   nombre: 'Comunidad Hispano Palestina Jerusalén',
   siglas: 'AHPJ',
   corto: 'Comunidad Palestina de Madrid',
+  cif: 'G79855748',
+  domicilio: 'C/ Cuevas de Almanzora 46 - Local, 28033, Madrid',
   dominio: 'comunidadpalestina.madrid',
   url: 'https://comunidadpalestina.madrid',
   lema: 'Palestina resiste, Palestina vencerá',
@@ -17,8 +19,8 @@ export const SITE = {
     url: 'https://www.instagram.com/asc.hispanopalestinajerusalen/'
   },
   formularioContacto: 'https://forms.gle/F7FHvF6YaA9jhVwJ8',
-  // [PENDIENTE] Formulario de afiliacion propio. De momento apunta al de contacto.
   formularioAfiliacion: 'https://forms.gle/F7FHvF6YaA9jhVwJ8',
+  rna: '76.614',
   webAntigua: 'https://comunidadhispanopalestinamadridblog.wordpress.com/'
 } as const;
 
