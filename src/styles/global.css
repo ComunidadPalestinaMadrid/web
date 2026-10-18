@@ -473,3 +473,75 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   .efemeride__enlace { gap: .7rem; padding: .7rem .2rem; }
   .efemeride__titulo { font-size: .95rem; }
 }
+
+/* ==========================================================================
+   Quienes somos
+   ========================================================================== */
+
+.quienes-intro { max-width: 74ch; }
+.quienes-intro p { margin: 0 0 1rem; }
+.quienes-intro__entrada { font-size: 1.22rem; line-height: 1.55; color: var(--tinta); }
+
+/* Objetivos: tarjetas numeradas */
+.objetivos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
+.objetivo {
+  padding: 1.4rem; background: var(--fondo); border: 1px solid var(--linea);
+  border-radius: var(--radio); box-shadow: var(--sombra);
+}
+.objetivo__num {
+  display: block; font-family: var(--fuente); font-size: 2rem; font-weight: 700;
+  line-height: 1; color: var(--ps-verde); margin-bottom: .55rem;
+}
+.objetivo p { margin: 0; font-size: .95rem; line-height: 1.6; }
+
+/* Principios: bloque destacado */
+.principios {
+  background: var(--fondo-verde); border-left: 5px solid var(--ps-verde);
+  border-radius: var(--radio); padding: 1.7rem 1.9rem; max-width: 76ch;
+}
+.principios p { margin: 0 0 1rem; }
+.principios p:last-child { margin-bottom: 0; }
+.principios__entrada {
+  font-family: var(--fuente); font-size: 1.15rem; font-weight: 600;
+  color: var(--tinta); line-height: 1.35;
+}
+
+/* Quien puede formar parte */
+.acceso { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+.acceso__item {
+  display: flex; gap: .9rem; align-items: flex-start;
+  padding: 1.4rem 1.5rem; background: var(--fondo); border: 1px solid var(--linea);
+  border-top: 4px solid var(--ps-rojo); border-radius: var(--radio); box-shadow: var(--sombra);
+}
+.acceso__item:nth-child(2) { border-top-color: var(--ps-verde); }
+.acceso__marca {
+  flex: 0 0 auto; display: grid; place-items: center; width: 1.9rem; height: 1.9rem;
+  border-radius: 50%; background: var(--fondo-verde); color: var(--ps-verde); font-weight: 700;
+}
+.acceso__item p { margin: 0; }
+.acceso__cierre { margin: 1.8rem 0 0; max-width: 72ch; color: var(--texto-suave); }
+
+/* Organizacion */
+.organos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; }
+.organo {
+  padding: 1.5rem; border-radius: var(--radio); background: var(--fondo);
+  border: 1px solid var(--linea); border-top: 4px solid var(--tinta);
+}
+.organo p { margin: 0; font-size: .95rem; }
+.organos__cierre { margin: 1.8rem 0 0; max-width: 72ch; color: var(--texto-suave); }
+
+/* Cierre con la invitacion a participar */
+.cierre { text-align: center; max-width: 68ch; margin: 0 auto; }
+.cierre h2 { margin-bottom: 1rem; }
+.cierre p { margin: 0 0 1rem; }
+.cierre .boton { margin-top: 1.4rem; }
+
+@media (max-width: 900px) {
+  .objetivos, .organos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .acceso { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .objetivos, .organos { grid-template-columns: 1fr; }
+  .quienes-intro__entrada { font-size: 1.08rem; }
+  .principios { padding: 1.3rem 1.2rem; }
+}
