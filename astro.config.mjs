@@ -1,6 +1,25 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { readdirSync, readFileSync } from 'node:fs';
+
+/* Fecha de cada publicacion, para el <lastmod> del sitemap: le dice a Google
+   que paginas se han actualizado y cuando, sin inventar fechas en las demas. */
+function fechasDePublicaciones() {
+  const mapa = new Map();
+  try {
+    const dir = new URL('./src/data/publicaciones/', import.meta.url);
+    for (const f of readdirSync(dir)) {
+      if (!f.endsWith('.json')) continue;
+      const datos = JSON.parse(readFileSync(new URL(f, dir), 'utf8'));
+      if (datos.slug && datos.date) mapa.set('/publicaciones/' + datos.slug + '/', datos.date);
+    }
+  } catch {
+    /* si no se puede leer, el sitemap sale sin lastmod */
+  }
+  return mapa;
+}
+const FECHAS_PUBLICACIONES = fechasDePublicaciones();
 
 /* ---------------------------------------------------------------------------
    Configuracion de despliegue
@@ -28,6 +47,14 @@ export default defineConfig({
   site: SITE_URL,
   base: BASE_PATH,
   trailingSlash: 'ignore',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      serialize(item) {
+        const fecha = FECHAS_PUBLICACIONES.get(new URL(item.url).pathname);
+        if (fecha) item.lastmod = new Date(fecha + 'T00:00:00Z').toISOString();
+        return item;
+      }
+    })
+  ],
   build: { inlineStylesheets: 'auto' }
 });

@@ -27,13 +27,35 @@ interface Props {
 const { title, description, image, tipo = 'website', fecha, seccion } = Astro.props;
 const t = useTranslations();
 const canonical = absoluteUrl(localizePath(currentPath(Astro.url)));
-const desc = description ?? 'Comunidad Hispano Palestina Jerusalén: publicaciones, eventos, Cole Árabe y solidaridad con el pueblo palestino desde Madrid.';
-const titulo = title ? title + ' · ' + SITE.corto : SITE.corto + ' · ' + SITE.siglas;
+
+/* --- TITULO ---------------------------------------------------------------
+   Google corta alrededor de 60 caracteres. El sufijo con la marca son 32, asi
+   que solo se anade cuando cabe; si no, se publica el titular solo, y si aun
+   asi se pasa, se recorta por palabra. */
+const MAX_TITULO = 60;
+function recortar(texto: string, max: number): string {
+  if (texto.length <= max) return texto;
+  const corte = texto.slice(0, max - 1);
+  const espacio = corte.lastIndexOf(' ');
+  const limpio = (espacio > max * 0.55 ? corte.slice(0, espacio) : corte).replace(/[\s,;:.·—-]+$/, '');
+  return limpio + '…';
+}
+function componerTitulo(pagina?: string): string {
+  if (!pagina) return SITE.corto;
+  const completo = pagina + ' · ' + SITE.corto;
+  if (completo.length <= MAX_TITULO) return completo;
+  if (pagina.length <= MAX_TITULO) return pagina;
+  return recortar(pagina, MAX_TITULO);
+}
+const titulo = componerTitulo(title);
+
+/* --- DESCRIPCION: se recorta a ~155 caracteres por palabra --- */
+const DESCRIPCION_DEFECTO = 'Comunidad Hispano Palestina Jerusalén: publicaciones, eventos, Cole Árabe y solidaridad con el pueblo palestino desde Madrid.';
+const desc = recortar((description ?? DESCRIPCION_DEFECTO).replace(/\s+/g, ' ').trim(), 155);
 
 /* --- Imagen de previsualizacion (Open Graph / Twitter / Telegram) ---
-   Por defecto se usa una imagen 1200x630 (ratio recomendado 1.91:1) hecha a
-   partir de la foto de fondo del inicio: una imagen cuadrada o pequena, como
-   el logo, no genera vista previa grande en Telegram, WhatsApp ni X. */
+   Por defecto, una imagen 1200x630 (ratio 1.91:1) hecha con la foto del inicio:
+   una imagen cuadrada o pequena, como el logo, no genera vista previa grande. */
 const OG_DEFECTO = { ruta: '/images/og-default.jpg', ancho: 1200, alto: 630 };
 const OG_ALT_DEFECTO = 'Manifestación por Palestina en Madrid: pancarta de «Viva la Resistencia Palestina» y banderas palestinas';
 const ogRuta = image || OG_DEFECTO.ruta;
@@ -45,7 +67,6 @@ const ogMime = extension === 'png' ? 'image/png' : extension === 'webp' ? 'image
 let ogAncho: number | undefined = image ? undefined : OG_DEFECTO.ancho;
 let ogAlto: number | undefined = image ? undefined : OG_DEFECTO.alto;
 if (image) {
-  // Dimensiones reales del fichero, si se pueden leer en tiempo de compilacion.
   try {
     const { default: sharp } = await import('sharp');
     const meta = await sharp('public' + ogRuta).metadata();
@@ -55,6 +76,45 @@ if (image) {
     /* si no se puede leer, se omiten las dimensiones */
   }
 }
+
+/* --- DATOS ESTRUCTURADOS: organizacion y sitio --- */
+const RAIZ = absoluteUrl('/');
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': RAIZ + '#organizacion',
+      name: SITE.nombre,
+      alternateName: SITE.corto,
+      url: RAIZ,
+      logo: {
+        '@type': 'ImageObject',
+        url: absoluteUrl(withBase('/images/logo.png')),
+        width: 512,
+        height: 512
+      },
+      email: SITE.emails.asociacion,
+      sameAs: [SITE.instagram.url],
+      foundingDate: String(SITE.fundacion),
+      taxID: SITE.cif,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: SITE.domicilio,
+        addressLocality: SITE.ciudad,
+        addressCountry: 'ES'
+      }
+    },
+    {
+      '@type': 'WebSite',
+      '@id': RAIZ + '#web',
+      url: RAIZ,
+      name: SITE.corto,
+      inLanguage: 'es',
+      publisher: { '@id': RAIZ + '#organizacion' }
+    }
+  ]
+};
 ---
 <!doctype html>
 <html lang="es">
@@ -92,6 +152,7 @@ if (image) {
     <meta name="twitter:image" content={ogUrl} />
     <meta name="twitter:image:alt" content={ogAlt} />
 
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <slot name="head" />
   </head>
   <body>

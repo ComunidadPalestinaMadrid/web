@@ -36,6 +36,11 @@ export function stripBase(pathname: string): string {
   return pathname || '/';
 }
 
+/** Degrada a h2 los h1 del contenido migrado: la plantilla ya pone el h1 de la pagina. */
+export function corregirEncabezados(html: string): string {
+  return html.replace(/<h1(\s|>)/gi, '<h2$1').replace(/<\/h1>/gi, '</h2>');
+}
+
 /** Antepone el prefijo base a las imagenes y documentos dentro del HTML migrado. */
 export function rewriteAssetUrls(html: string): string {
   if (!BASE || BASE === '/') return html;

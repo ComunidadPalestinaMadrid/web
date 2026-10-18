@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ETIQUETA_TIPO, CLASE_TIPO, type Publicacion } from '../../data/publicaciones';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, formatFecha, withBase, absoluteUrl, rewriteAssetUrls } from '../../i18n/utils';
+import { useTranslations, localizePath, formatFecha, withBase, absoluteUrl, rewriteAssetUrls, corregirEncabezados } from '../../i18n/utils';
 
 interface Props { pub: Publicacion; relacionadas: Publicacion[]; }
 const { pub, relacionadas } = Astro.props;
@@ -20,12 +20,30 @@ const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t('nav.inicio'), item: absoluteUrl(localizePath('/')) },
+      { '@type': 'ListItem', position: 2, name: t('pub.titulo'), item: absoluteUrl(localizePath('/publicaciones')) },
+      { '@type': 'ListItem', position: 3, name: t(ETIQUETA_TIPO[pub.tipo]), item: absoluteUrl(localizePath('/publicaciones/tipo/' + pub.tipo)) },
+      { '@type': 'ListItem', position: 4, name: pub.title }
+    ]
+  })} />
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
     '@type': 'NewsArticle',
     headline: pub.title,
+    description: pub.resumen,
     datePublished: pub.date,
+    dateModified: pub.date,
     inLanguage: 'es',
-    publisher: { '@type': 'Organization', name: SITE.nombre },
-    image: pub.portada ? absoluteUrl(withBase(pub.portada)) : undefined
+    mainEntityOfPage: { '@type': 'WebPage', '@id': absoluteUrl(localizePath('/publicaciones/' + pub.slug)) },
+    image: pub.portada ? [absoluteUrl(withBase(pub.portada))] : undefined,
+    author: { '@type': 'Organization', name: SITE.nombre, url: absoluteUrl('/') },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.nombre,
+      logo: { '@type': 'ImageObject', url: absoluteUrl(withBase('/images/logo.png')) }
+    }
   })} />
   <section class="pagina-cabecera">
     <div class="contenedor">
@@ -47,7 +65,7 @@ const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
 
   <section class="seccion">
     <div class="contenedor dos-columnas">
-      <article class="prosa" set:html={rewriteAssetUrls(pub.html)} />
+      <article class="prosa" set:html={corregirEncabezados(rewriteAssetUrls(pub.html))} />
 
       <aside>
         <div class="panel panel--sticky">

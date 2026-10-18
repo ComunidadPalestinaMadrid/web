@@ -30,9 +30,13 @@ const coleActividades = [
   <section class="hero">
     <img
       class="hero__fondo"
-      src={withBase('/images/uploads/2023-10-15-manifestacion.jpg')}
+      srcset={withBase('/images/uploads/hero-manifestacion-1280.webp') + ' 1280w, ' + withBase('/images/uploads/hero-manifestacion-1920.webp') + ' 1920w'}
+      sizes="100vw"
+      src={withBase('/images/uploads/hero-manifestacion-1920.webp')}
       alt=""
       aria-hidden="true"
+      width="1920"
+      height="1080"
       fetchpriority="high"
       decoding="async"
     />

@@ -1,6 +1,22 @@
 ---
+import { absoluteUrl } from '../i18n/utils';
+
 interface Props { eyebrow?: string; titulo: string; entradilla?: string; migas?: { texto: string; href?: string }[]; }
 const { eyebrow, titulo, entradilla, migas } = Astro.props;
+
+/* Datos estructurados de las migas de pan (Google las muestra en el resultado). */
+const jsonLd = migas && migas.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: migas.map((m, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: m.texto,
+        ...(m.href ? { item: absoluteUrl(m.href) } : {})
+      }))
+    }
+  : null;
 ---
 <section class="pagina-cabecera">
   <div class="contenedor">
@@ -16,3 +32,4 @@ const { eyebrow, titulo, entradilla, migas } = Astro.props;
     {entradilla && <p class="entradilla">{entradilla}</p>}
   </div>
 </section>
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
