@@ -15,12 +15,46 @@ const filete = pub.tipo === 'comunicado' ? 'tarjeta__filete--rojo' : pub.tipo ==
 const conFoto = conImagen || variante !== 'normal';
 // Si el post no tiene foto, se usa un marcador gris generico.
 const imagen = pub.portada || '/images/placeholder.svg';
+
+/* --- Variante de 640 px -------------------------------------------------
+   Las tarjetas se ven a 300-560 px, pero la portada original mide hasta
+   1200. Se ofrece una version reducida y se deja elegir al navegador. */
+const anchos = new Map<string, number>();
+async function anchoDe(ruta: string): Promise<number> {
+  if (anchos.has(ruta)) return anchos.get(ruta)!;
+  let ancho = 0;
+  try {
+    const { default: sharp } = await import('sharp');
+    ancho = (await sharp('public' + ruta).metadata()).width ?? 0;
+  } catch {
+    ancho = 0;
+  }
+  anchos.set(ruta, ancho);
+  return ancho;
+}
+const esFoto = Boolean(pub.portada) && /\.(jpe?g|png|webp)$/i.test(pub.portada);
+const anchoOriginal = esFoto ? await anchoDe(pub.portada) : 0;
+const srcset = esFoto && anchoOriginal > 640
+  ? withBase(pub.portada.replace(/\.(jpe?g|png|webp)$/i, '-640.webp')) + ' 640w, ' + withBase(pub.portada) + ' ' + anchoOriginal + 'w'
+  : undefined;
+const sizes = variante === 'grande'
+  ? '(max-width: 860px) 100vw, 540px'
+  : variante === 'pequeno'
+    ? '(max-width: 860px) 50vw, 260px'
+    : '(max-width: 860px) 100vw, 400px';
 ---
 <a class={'tarjeta' + (variante !== 'normal' ? ' tarjeta--' + variante : '')} href={localizePath('/publicaciones/' + pub.slug)}>
   <span class={'tarjeta__filete ' + filete} aria-hidden="true"></span>
   {conFoto && (
     <span class="tarjeta__media">
-      <img src={withBase(imagen)} alt="" loading="lazy" decoding="async" />
+      <img
+        src={withBase(imagen)}
+        srcset={srcset}
+        sizes={srcset ? sizes : undefined}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
     </span>
   )}
   <span class="tarjeta__cuerpo">

@@ -27,10 +27,17 @@ const coleActividades = [
 ];
 ---
 <BaseLayout>
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    imagesrcset={withBase('/images/uploads/hero-manifestacion-960.webp') + ' 960w, ' + withBase('/images/uploads/hero-manifestacion-1280.webp') + ' 1280w, ' + withBase('/images/uploads/hero-manifestacion-1920.webp') + ' 1920w'}
+    imagesizes="100vw"
+  />
   <section class="hero">
     <img
       class="hero__fondo"
-      srcset={withBase('/images/uploads/hero-manifestacion-1280.webp') + ' 1280w, ' + withBase('/images/uploads/hero-manifestacion-1920.webp') + ' 1920w'}
+      srcset={withBase('/images/uploads/hero-manifestacion-960.webp') + ' 960w, ' + withBase('/images/uploads/hero-manifestacion-1280.webp') + ' 1280w, ' + withBase('/images/uploads/hero-manifestacion-1920.webp') + ' 1920w'}
       sizes="100vw"
       src={withBase('/images/uploads/hero-manifestacion-1920.webp')}
       alt=""
@@ -106,7 +113,7 @@ const coleActividades = [
       </div>
       <div class="cole-fotos">
         <img src={withBase('/images/uploads/cole-1.jpg')} alt={'Taller de manualidades del Cole Árabe'} loading="lazy" decoding="async" />
-        <img src={withBase('/images/uploads/cole-2.jpg')} alt={'Dibujos del alumnado del Cole Árabe'} loading="lazy" decoding="async" />
+        <img src={withBase('/images/uploads/cole-2.webp')} alt={'Dibujos del alumnado del Cole Árabe'} loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
