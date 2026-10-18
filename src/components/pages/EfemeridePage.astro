@@ -18,7 +18,6 @@ const cuerpo = efemeride.contenido ?? '<p>' + efemeride.descripcion + '</p>';
   <PaginaCabecera
     eyebrow={t('cal.efemeride')}
     titulo={efemeride.titulo}
-    entradilla={diaMes + (efemeride.anio ? ' · ' + t('cal.conmemora') + ' ' + efemeride.anio : '')}
     migas={[
       { texto: t('nav.inicio'), href: localizePath('/') },
       { texto: t('cal.titulo'), href: localizePath('/calendario') },
