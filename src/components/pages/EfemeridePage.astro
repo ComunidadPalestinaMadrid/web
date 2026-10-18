@@ -27,16 +27,6 @@ const cuerpo = efemeride.contenido ?? '<p>' + efemeride.descripcion + '</p>';
   />
   <section class="seccion">
     <div class="contenedor">
-      <div class="efemeride-ficha">
-        <div class="efemeride-ficha__fecha">
-          <span class="efemeride-ficha__dia">{efemeride.dia}</span>
-          <span class="efemeride-ficha__mes">{diaMes.split(' de ')[1]}</span>
-        </div>
-        <div>
-          <p class="efemeride-ficha__proxima">{t('cal.proxima')}: <strong>{fechaLargaCap}</strong></p>
-          <p class="pieza-pequena texto-suave">{t('cal.efemeridesIntro')}</p>
-        </div>
-      </div>
 
       {efemeride.imagen && (
         <figure class="efemeride-imagen">

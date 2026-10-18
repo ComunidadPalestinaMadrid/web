@@ -212,7 +212,7 @@ export const EFEMERIDES: Efemeride[] = [
   {
     id: 'balfour',
     titulo: 'Aniversario de la Declaración Balfour (1917)',
-    dia: 7,
+    dia: 2,
     mes: 11,
     anio: 1917,
     descripcion: 'La Declaración Balfour fue una carta enviada el 2 de noviembre de 1917 y difundida una semana más tarde en la prensa británica en la que el Gobierno del Reino Unido manifestó su apoyo a la creación de un «hogar nacional judío» en Palestina, un territorio habitado mayoritariamente por población árabe palestina.',
