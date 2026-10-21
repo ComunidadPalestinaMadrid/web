@@ -14,11 +14,6 @@ const eventos = proximosEventos(3);
 // lo tiene, cae a la lista de siempre.
 const proximos = proximosEventos();
 const eventoPanel = proximos.find((e) => e.imagen);
-const fechaPanel = eventoPanel
-  ? new Date(eventoPanel.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }) +
-    (eventoPanel.hora ? ' · ' + eventoPanel.hora + (eventoPanel.horaFin ? ' - ' + eventoPanel.horaFin : '') + ' h' : '')
-  : '';
-const fechaPanelCap = fechaPanel.charAt(0).toUpperCase() + fechaPanel.slice(1);
 const efemerides = efemeridesProximas().slice(0, 4);
 
 // Parrilla de portada: 2 posts grandes + 6 pequenos
@@ -69,15 +64,15 @@ const coleActividades = [
         <h3>{t('common.proximosEventos')}</h3>
         {eventoPanel ? (
           <a class="panel-acto" href={localizePath('/calendario/' + eventoPanel.id)}>
-            <img
-              class="panel-acto__cartel"
-              src={withBase(eventoPanel.imagen!)}
-              alt={'Cartel: ' + eventoPanel.titulo}
-              loading="lazy"
-              decoding="async"
-            />
-            <span class="panel-acto__fecha">{fechaPanelCap}</span>
-            <strong class="panel-acto__titulo">{eventoPanel.titulo}</strong>
+            <span class="panel-acto__marco">
+              <img
+                class="panel-acto__cartel"
+                src={withBase(eventoPanel.imagen!)}
+                alt={'Cartel: ' + eventoPanel.titulo}
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
           </a>
         ) : (
           <ul class="lista-enlaces">

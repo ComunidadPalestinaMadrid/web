@@ -40,32 +40,35 @@ const clase = evento.categoria === 'movilización' ? 'etiqueta--comunicado' : ev
   />
   <section class="seccion">
     <div class="contenedor">
-      <div class="evento-ficha">
-        <span class={'etiqueta ' + clase}>{t(claves[evento.categoria])}</span>
-        <p class="evento-ficha__dato"><strong>{fecha}</strong>{rango ? ' · ' + rango : ''}</p>
-        <p class="evento-ficha__dato">{t('common.lugar')}: <strong>{evento.lugar}</strong></p>
-        <p class="boton-fila">
-          <a class="boton boton--primario boton--pequeno" href={enlaceGoogleCalendar(evento)} target="_blank" rel="noopener">
-            {t('cal.googleAdd')} ↗
-          </a>
-          <a class="boton boton--fantasma boton--pequeno" href={withBase('/calendario/' + evento.id + '.ics')} download>
-            {t('cal.icsEvento')}
-          </a>
-          {cartel && (
-            <a class="boton boton--fantasma boton--pequeno" href={withBase(cartel)} download>
-              {t('cal.cartel')}
-            </a>
-          )}
-        </p>
+      <div class="evento-detalle">
+        {evento.imagen && (
+          <figure class="evento-cartel">
+            <img src={withBase(evento.imagen)} alt={'Cartel: ' + evento.titulo} loading="lazy" decoding="async" />
+          </figure>
+        )}
+        <div class="evento-detalle__texto">
+          <div class="evento-ficha">
+            <span class={'etiqueta ' + clase}>{t(claves[evento.categoria])}</span>
+            <p class="evento-ficha__dato"><strong>{fecha}</strong>{rango ? ' · ' + rango : ''}</p>
+            <p class="evento-ficha__dato">{t('common.lugar')}: <strong>{evento.lugar}</strong></p>
+            <p class="boton-fila">
+              <a class="boton boton--primario boton--pequeno" href={enlaceGoogleCalendar(evento)} target="_blank" rel="noopener">
+                {t('cal.googleAdd')} ↗
+              </a>
+              <a class="boton boton--fantasma boton--pequeno" href={withBase('/calendario/' + evento.id + '.ics')} download>
+                {t('cal.icsEvento')}
+              </a>
+              {cartel && (
+                <a class="boton boton--fantasma boton--pequeno" href={withBase(cartel)} download>
+                  {t('cal.cartel')}
+                </a>
+              )}
+            </p>
+          </div>
+
+          <div class="prosa" set:html={cuerpo} />
+        </div>
       </div>
-
-      {evento.imagen && (
-        <figure class="evento-cartel">
-          <img src={withBase(evento.imagen)} alt={'Cartel: ' + evento.titulo} loading="lazy" decoding="async" />
-        </figure>
-      )}
-
-      <div class="prosa prosa--ancho" set:html={cuerpo} />
 
       <p class="mt-3">
         <a class="boton boton--fantasma" href={localizePath('/calendario')}>← {t('cal.volverAgenda')}</a>
