@@ -13,11 +13,50 @@ export interface Evento {
   categoria: CategoriaEvento;
   /** Ruta del cartel del evento, si lo tiene */
   imagen?: string;
+  /** Cartel en alta resolucion para el boton de descarga (si difiere del de la tarjeta) */
+  cartel?: string;
+  /** Texto largo en HTML para la pagina de detalle del acto */
+  detalle?: string;
   destacado?: boolean;
   prueba?: boolean;
 }
 
 export const EVENTOS: Evento[] = [
+  {
+    id: 'encuentro-familias-refugiadas-2026',
+    titulo: 'Encuentro con familias refugiadas recién llegadas',
+    fecha: '2026-10-25',
+    hora: '14:00',
+    horaFin: '18:00',
+    lugar: 'Ateneo La Maliciosa, Calle Peñuelas 12, Madrid',
+    descripcion: 'Bienvenida a las familias palestinas recién llegadas a Madrid: una tarde de encuentro y convivencia con comida, actividades infantiles, henna y otras sorpresas.',
+    categoria: 'cultural',
+    imagen: '/images/uploads/encuentro-familias-refugiadas.webp',
+    cartel: '/images/uploads/cartel-encuentro-familias-refugiadas.png',
+    detalle: `
+<p>Estimadas compañeras y compañeros:</p>
+
+<p>Queremos invitarles el próximo domingo 25 de octubre, de 14:00 a 18:00 horas, al Ateneo La Maliciosa (Calle Peñuelas, 12), para brindar una cálida bienvenida, aunque algo tardía, a las familias palestinas que se han trasladado recientemente a Madrid.</p>
+
+<p>Durante este tiempo hemos mantenido un contacto cercano con ellas, tratando de acompañarlas y hacer que se sientan lo más acogidas y arropadas posible en esta nueva etapa, siendo conscientes de las dificultades que supone comenzar una vida lejos de su hogar.</p>
+
+<p>Por ello, nos gustaría compartir una tarde de encuentro y convivencia, con comida, actividades infantiles, henna y otras sorpresas para disfrutar en comunidad.</p>
+
+<p>Si podéis, traed algunos insumos que pueden ayudar a estas familias en estos primeros momentos:</p>
+
+<ul>
+  <li>Ropa de abrigo en buen estado, tanto de adulto como para peques. También ropa de cama.</li>
+  <li>Productos de higiene femenina, leche de fórmula, pañales, etc.</li>
+  <li>Dispositivos electrónicos en buen estado: portátiles, móviles, baterías externas, etc.</li>
+  <li>Juguetes en buen estado.</li>
+</ul>
+
+<p>Por supuesto, contamos con que todo lo que traigamos tiene que estar en buen estado y limpio, y es posible que muchas cosas nos las traigamos de vuelta.</p>
+
+<p>Reciban un cordial saludo.</p>
+`,
+    destacado: true
+  },
   {
     id: 'climbers-for-palestine-2026',
     titulo: 'Climbers for Palestine',

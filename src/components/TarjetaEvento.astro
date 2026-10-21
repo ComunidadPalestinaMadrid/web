@@ -1,5 +1,5 @@
 ---
-import { useTranslations, withBase } from '../i18n/utils';
+import { useTranslations, withBase, localizePath } from '../i18n/utils';
 import { enlaceGoogleCalendar, type Evento } from '../data/eventos';
 
 interface Props { evento: Evento; }
@@ -32,7 +32,9 @@ const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (rango
       {t(claves[evento.categoria])}
     </span>
     <p class="evento__cuando">{cuando}</p>
-    <h3 class="evento__titulo">{evento.titulo}</h3>
+    <h3 class="evento__titulo">
+      <a href={localizePath('/calendario/' + evento.id)}>{evento.titulo}</a>
+    </h3>
     <p class="evento__desc">{evento.descripcion}</p>
     <p class="evento__lugar">{t('common.lugar')}: {evento.lugar}</p>
     <p class="evento__acciones">
@@ -42,8 +44,8 @@ const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (rango
       <a class="boton boton--fantasma boton--pequeno" href={withBase('/calendario/' + evento.id + '.ics')} download>
         {t('cal.icsEvento')}
       </a>
-      {evento.imagen && (
-        <a class="boton boton--fantasma boton--pequeno" href={withBase(evento.imagen)} download>
+      {(evento.cartel || evento.imagen) && (
+        <a class="boton boton--fantasma boton--pequeno" href={withBase(evento.cartel || evento.imagen)} download>
           {t('cal.cartel')}
         </a>
       )}

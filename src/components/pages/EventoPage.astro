@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaginaCabecera from '../PaginaCabecera.astro';
+import { enlaceGoogleCalendar, type Evento } from '../../data/eventos';
+import { useTranslations, localizePath, withBase } from '../../i18n/utils';
+
+interface Props { evento: Evento; }
+const { evento } = Astro.props;
+const t = useTranslations();
+const claves: Record<string, string> = {
+  'movilización': 'cal.movilizacion', cultural: 'cal.cultural',
+  institucional: 'cal.institucional', formacion: 'cal.formacion'
+};
+const fechaBruta = new Date(evento.fecha + 'T12:00:00').toLocaleDateString('es-ES', {
+  weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+});
+const fecha = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1);
+const rango = evento.hora ? evento.hora + (evento.horaFin ? ' - ' + evento.horaFin : '') + ' h' : '';
+const cuerpo = evento.detalle ?? '<p>' + evento.descripcion + '</p>';
+const cartel = evento.cartel ?? evento.imagen;
+const clase = evento.categoria === 'movilización' ? 'etiqueta--comunicado' : evento.categoria === 'formacion' ? 'etiqueta--nota-prensa' : 'etiqueta--noticia';
+---
+<BaseLayout
+  title={evento.titulo}
+  description={evento.descripcion}
+  image={evento.imagen}
+  tipo="article"
+  fecha={evento.fecha}
+  seccion={t(claves[evento.categoria])}
+>
+  <PaginaCabecera
+    eyebrow={t('nav.calendario')}
+    titulo={evento.titulo}
+    entradilla={fecha + (rango ? ' · ' + rango : '')}
+    migas={[
+      { texto: t('nav.inicio'), href: localizePath('/') },
+      { texto: t('nav.calendario'), href: localizePath('/calendario') },
+      { texto: evento.titulo }
+    ]}
+  />
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="evento-ficha">
+        <span class={'etiqueta ' + clase}>{t(claves[evento.categoria])}</span>
+        <p class="evento-ficha__dato"><strong>{fecha}</strong>{rango ? ' · ' + rango : ''}</p>
+        <p class="evento-ficha__dato">{t('common.lugar')}: <strong>{evento.lugar}</strong></p>
+        <p class="boton-fila">
+          <a class="boton boton--primario boton--pequeno" href={enlaceGoogleCalendar(evento)} target="_blank" rel="noopener">
+            {t('cal.googleAdd')} ↗
+          </a>
+          <a class="boton boton--fantasma boton--pequeno" href={withBase('/calendario/' + evento.id + '.ics')} download>
+            {t('cal.icsEvento')}
+          </a>
+          {cartel && (
+            <a class="boton boton--fantasma boton--pequeno" href={withBase(cartel)} download>
+              {t('cal.cartel')}
+            </a>
+          )}
+        </p>
+      </div>
+
+      {evento.imagen && (
+        <figure class="evento-cartel">
+          <img src={withBase(evento.imagen)} alt={'Cartel: ' + evento.titulo} loading="lazy" decoding="async" />
+        </figure>
+      )}
+
+      <div class="prosa prosa--ancho" set:html={cuerpo} />
+
+      <p class="mt-3">
+        <a class="boton boton--fantasma" href={localizePath('/calendario')}>← {t('cal.volverAgenda')}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
