@@ -599,7 +599,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 /* Marco de proporcion fija: el cartel entra centrado y el aire que sobra
    queda igual por arriba y por abajo. */
 .panel-acto__marco {
-  aspect-ratio: 4 / 5; display: grid; place-items: center;
+  aspect-ratio: 3 / 4; display: grid; place-items: center;
   width: 100%;
 }
 .panel-acto__cartel {
