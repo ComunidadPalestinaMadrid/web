@@ -10,6 +10,15 @@ import { useTranslations, localizePath, withBase } from '../../i18n/utils';
 
 const t = useTranslations();
 const eventos = proximosEventos(3);
+// El panel del hero muestra solo el proximo acto que tenga cartel; si ninguno
+// lo tiene, cae a la lista de siempre.
+const proximos = proximosEventos();
+const eventoPanel = proximos.find((e) => e.imagen);
+const fechaPanel = eventoPanel
+  ? new Date(eventoPanel.fecha + 'T12:00:00').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }) +
+    (eventoPanel.hora ? ' · ' + eventoPanel.hora + (eventoPanel.horaFin ? ' - ' + eventoPanel.horaFin : '') + ' h' : '')
+  : '';
+const fechaPanelCap = fechaPanel.charAt(0).toUpperCase() + fechaPanel.slice(1);
 const efemerides = efemeridesProximas().slice(0, 4);
 
 // Parrilla de portada: 2 posts grandes + 6 pequenos
@@ -58,19 +67,33 @@ const coleActividades = [
       </div>
       <div class="hero__panel">
         <h3>{t('common.proximosEventos')}</h3>
-        <ul class="lista-enlaces">
-          {eventos.map((e) => (
-            <li>
-              <a href={localizePath('/calendario')}>
-                <strong>{e.titulo}</strong>
-              </a>
-              <div class="pieza-pequena texto-suave">
-                {new Date(e.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
-                {e.hora ? ' · ' + e.hora : ''}
-              </div>
-            </li>
-          ))}
-        </ul>
+        {eventoPanel ? (
+          <a class="panel-acto" href={localizePath('/calendario/' + eventoPanel.id)}>
+            <img
+              class="panel-acto__cartel"
+              src={withBase(eventoPanel.imagen!)}
+              alt={'Cartel: ' + eventoPanel.titulo}
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="panel-acto__fecha">{fechaPanelCap}</span>
+            <strong class="panel-acto__titulo">{eventoPanel.titulo}</strong>
+          </a>
+        ) : (
+          <ul class="lista-enlaces">
+            {eventos.map((e) => (
+              <li>
+                <a href={localizePath('/calendario/' + e.id)}>
+                  <strong>{e.titulo}</strong>
+                </a>
+                <div class="pieza-pequena texto-suave">
+                  {new Date(e.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {e.hora ? ' · ' + e.hora : ''}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
         <a class="boton boton--texto" href={localizePath('/calendario')}>{t('common.verMasEventos')} →</a>
       </div>
     </div>
