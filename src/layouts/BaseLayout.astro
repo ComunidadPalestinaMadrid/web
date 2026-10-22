@@ -129,6 +129,13 @@ const jsonLd = {
     <link rel="icon" type="image/png" sizes="16x16" href={withBase('/favicon-16x16.png')} />
     <link rel="apple-touch-icon" sizes="180x180" href={withBase('/apple-touch-icon.png')} />
     <link rel="manifest" href={withBase('/site.webmanifest')} />
+
+    <!-- Relaciones de enlace (RFC 8288). GitHub Pages no permite emitir
+         cabeceras Link, asi que se declaran en el HTML, que es el sitio
+         natural para ellas en un documento HTML. -->
+    <link rel="sitemap" type="application/xml" href={withBase('/sitemap-index.xml')} />
+    <link rel="privacy-policy" href={localizePath('/aviso-legal')} />
+    <link rel="help" href={localizePath('/contacto')} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#ffffff" />
 
