@@ -29,6 +29,9 @@ const eventosJsonLd = actividades.length > 0 ? {
   itemListElement: actividades.map((e, i) => {
     const desfase = desfaseMadrid(e.fecha);
     const inicio = e.fecha + 'T' + (e.hora || '12:00') + ':00' + desfase;
+    // Google pide siempre endDate: si el acto no declara hora de fin se estima en dos horas.
+    const [h, m] = (e.hora || '12:00').split(':').map(Number);
+    const fin = e.horaFin || String((h + 2) % 24).padStart(2, '0') + ':' + String(m).padStart(2, '0');
     return {
       '@type': 'ListItem',
       position: i + 1,
@@ -36,16 +39,29 @@ const eventosJsonLd = actividades.length > 0 ? {
         '@type': 'Event',
         name: e.titulo,
         startDate: inicio,
-        ...(e.horaFin ? { endDate: e.fecha + 'T' + e.horaFin + ':00' + desfase } : {}),
+        endDate: e.fecha + 'T' + fin + ':00' + desfase,
         description: e.descripcion,
-        ...(e.imagen ? { image: absoluteUrl(withBase(e.imagen)) } : {}),
+        // Si el acto no tiene cartel se usa la imagen generica del sitio.
+        image: absoluteUrl(withBase(e.imagen || '/images/og-default.jpg')),
         location: {
           '@type': 'Place',
           name: e.lugar,
           address: { '@type': 'PostalAddress', addressLocality: SITE.ciudad, addressCountry: 'ES' }
         },
         eventStatus: 'https://schema.org/EventScheduled',
-        organizer: { '@type': 'Organization', name: SITE.nombre, url: absoluteUrl('/') }
+        organizer: { '@type': 'Organization', name: SITE.nombre, url: absoluteUrl('/') },
+        performer: { '@type': 'Organization', name: SITE.nombre, url: absoluteUrl('/') },
+        ...(e.precio !== undefined
+          ? {
+              offers: {
+                '@type': 'Offer',
+                price: String(e.precio),
+                priceCurrency: 'EUR',
+                availability: 'https://schema.org/InStock',
+                url: absoluteUrl(withBase('/calendario/' + e.id))
+              }
+            }
+          : {})
       }
     };
   })

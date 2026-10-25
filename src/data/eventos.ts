@@ -17,6 +17,8 @@ export interface Evento {
   cartel?: string;
   /** Texto largo en HTML para la pagina de detalle del acto */
   detalle?: string;
+  /** Precio de entrada en euros (0 = entrada libre). Si falta, no se declara oferta. */
+  precio?: number;
   destacado?: boolean;
   prueba?: boolean;
 }
@@ -33,6 +35,7 @@ export const EVENTOS: Evento[] = [
     categoria: 'cultural',
     imagen: '/images/uploads/encuentro-familias-refugiadas.webp',
     cartel: '/images/uploads/cartel-encuentro-familias-refugiadas.png',
+    precio: 0,
     detalle: `
 <p>Estimadas compañeras y compañeros:</p>
 
@@ -67,6 +70,7 @@ export const EVENTOS: Evento[] = [
     descripcion: 'Jornada de competición, rifas, documental, concierto y mucho más en apoyo a Palestina. Después del éxito rotundo del apoyo a Palestina en el Mundial de escalada de Alcobendas y de su impacto en las Federaciones nacional e internacional, esta es otra muestra de apoyo del colectivo de la escalada a la causa palestina. Entrada: 10 €.',
     categoria: 'cultural',
     imagen: '/images/uploads/climbers-for-palestine-2026.webp',
+    precio: 10,
     destacado: true
   },
   {
@@ -78,6 +82,7 @@ export const EVENTOS: Evento[] = [
     descripcion: 'Manifestación en Madrid para denunciar que el genocidio continúa.',
     categoria: 'movilización',
     imagen: '/images/uploads/mani-4-octubre-2026.jpg',
+    precio: 0,
     destacado: true
   },
   {
@@ -88,7 +93,8 @@ export const EVENTOS: Evento[] = [
     lugar: 'Plaza de la Estación, Collado Villalba (Madrid)',
     descripcion: 'Los 8 de Becerril son ocho represaliados durante la Vuelta Ciclista de 2025. La manifestación, convocada por la Asamblea de Vivienda de Villalba, reclama su absolución y la libertad del pueblo palestino.',
     categoria: 'movilización',
-    imagen: '/images/uploads/becerril.jpg'
+    imagen: '/images/uploads/becerril.jpg',
+    precio: 0
   },
   {
     id: 'cocina-palestina-2027',
