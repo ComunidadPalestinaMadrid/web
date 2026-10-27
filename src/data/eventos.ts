@@ -61,6 +61,18 @@ export const EVENTOS: Evento[] = [
     destacado: true
   },
   {
+    id: 'acto-asier-youssef-2026',
+    titulo: 'Acto con Asier y Youssef: El genocidio es el crimen, la resistencia, un deber',
+    fecha: '2026-11-13',
+    hora: '19:00',
+    lugar: 'C/ Gran Vía 40, 2A, Madrid',
+    descripcion: 'Acto político en solidaridad con Asier y Youssef, compañeros encausados y acusados de terrorismo en la Audiencia Nacional.',
+    categoria: 'movilización',
+    imagen: '/images/uploads/asier-youssef-2026.webp',
+    cartel: '/images/uploads/asier-youssef-2026.jpg',
+    precio: 0
+  },
+  {
     id: 'climbers-for-palestine-2026',
     titulo: 'Climbers for Palestine',
     fecha: '2026-09-25',
