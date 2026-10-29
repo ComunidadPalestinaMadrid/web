@@ -10,6 +10,7 @@ const t = useTranslations();
 const modalidades = [
   {
     clave: 'participa.pleno' as const,
+    formulario: SITE.formularioAfiliacion,
     cuando: 'Personas palestinas y sus cónyuges',
     cuota: '5',
     periodo: 'cuota mensual',
@@ -22,6 +23,7 @@ const modalidades = [
   },
   {
     clave: 'participa.simpatizante' as const,
+    formulario: SITE.formularioSimpatizante,
     cuando: 'Cualquier persona solidaria con la causa palestina',
     cuota: '0',
     periodo: '',
@@ -66,7 +68,7 @@ const donaciones = [
               {m.incluye.map((x) => <li>{x}</li>)}
               {m.excluye.map((x) => <li class="precio__no">{x}</li>)}
             </ul>
-            <a class="boton boton--primario" href={SITE.formularioAfiliacion} target="_blank" rel="noopener">
+            <a class="boton boton--primario" href={m.formulario} target="_blank" rel="noopener">
               {t('participa.formulario')} ↗
             </a>
           </div>

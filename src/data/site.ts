@@ -20,6 +20,7 @@ export const SITE = {
   },
   formularioContacto: 'https://forms.gle/F7FHvF6YaA9jhVwJ8',
   formularioAfiliacion: 'https://forms.gle/F7FHvF6YaA9jhVwJ8',
+  formularioSimpatizante: 'https://forms.gle/uGdCUUnV3RTLdAUj9',
   rna: '76.614',
   webAntigua: 'https://comunidadhispanopalestinamadridblog.wordpress.com/'
 } as const;
