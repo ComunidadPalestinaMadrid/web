@@ -70,9 +70,11 @@ const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
       <aside>
         <div class="panel panel--sticky">
           <h3>{t('pub.archivo')}</h3>
-          <p class="pieza-pequena texto-suave">
-            {'Esta publicación procede del archivo histórico de la asociación (2017-2024).'}
-          </p>
+          {esAntigua && (
+            <p class="pieza-pequena texto-suave">
+              {'Esta publicación procede del archivo histórico de la asociación (2017-2024).'}
+            </p>
+          )}
           <ul class="lista-enlaces pieza-pequena">
             {esAntigua && (
               <li><a href={pub.originalUrl} rel="noopener" target="_blank">{t('common.webAntigua')} ↗</a></li>
