@@ -54,7 +54,8 @@ const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
       </nav>
       <div class="articulo-cabecera">
         <span class={'etiqueta ' + CLASE_TIPO[pub.tipo]}>{t(ETIQUETA_TIPO[pub.tipo])}</span>
-        <h1>{pub.title}</h1>
+        <h1 class={pub.title.length > 90 ? 'h1--largo' : undefined}>{pub.title}</h1>
+        {pub.subtitulo && <p class="articulo-cabecera__subtitulo">{pub.subtitulo}</p>}
         <div class="meta">
           <span>{t('common.publicadoEl')} {f}{pub.hora ? ' · ' + pub.hora + ' h' : ''}</span>
           {pub.categorias.length > 0 && <span>{t('common.categoria')}: {pub.categorias.join(', ')}</span>}

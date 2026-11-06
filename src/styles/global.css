@@ -609,3 +609,10 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   transition: transform .18s ease;
 }
 .panel-acto:hover .panel-acto__cartel { transform: scale(1.015); }
+
+/* Nota de prensa: subencabezado y titulares largos ------------------------ */
+.h1--largo { font-size: clamp(1.65rem, 1.2rem + 1.7vw, 2.3rem); }
+.articulo-cabecera__subtitulo {
+  margin: .1rem 0 1.1rem; max-width: 46ch;
+  font-size: var(--t-lg); line-height: 1.45; color: var(--texto-suave);
+}

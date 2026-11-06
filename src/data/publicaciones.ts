@@ -11,6 +11,8 @@ export interface Publicacion {
   hora?: string;
   tipo: TipoPublicacion;
   categorias: string[];
+  /** Subencabezado de la nota de prensa, se muestra bajo el titular */
+  subtitulo?: string;
   resumen: string;
   portada: string;
   originalUrl: string;
