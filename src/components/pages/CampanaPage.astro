@@ -20,6 +20,25 @@ const campanaAbierta = new Date() <= limite;
   <!-- Cabecera de la campana -->
   <section class="campana-hero">
     <div class="contenedor campana-hero__grid">
+      <div class="campana-hero__video">
+        {idVideo ? (
+          <div class="video-embed video-embed--vertical">
+            <iframe
+              src={'https://www.youtube-nocookie.com/embed/' + idVideo}
+              title="Vídeo de la campaña Reencuentros que salvan vidas"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </div>
+        ) : (
+          <div class="campana-hueco campana-hueco--video">
+            <span class="campana-hueco__etiqueta">Vídeo de la campaña</span>
+            <span class="campana-hueco__nota">Espacio reservado</span>
+          </div>
+        )}
+      </div>
+
       <div class="campana-hero__texto">
         <span class="campana-plazo">
           <span class="campana-plazo__punto" aria-hidden="true"></span>
@@ -28,13 +47,8 @@ const campanaAbierta = new Date() <= limite;
         <span class="eyebrow">Campaña de reagrupación familiar</span>
         <h1 class="campana-hero__titulo">{CAMPANA.titulo}</h1>
         <p class="campana-hero__sub">{CAMPANA.subtitulo}</p>
-        <p class="boton-fila">
-          <a class="boton boton--primario" href="#donar">Cómo donar</a>
-          <a class="boton boton--fantasma" href="#recaudacion">Ver la recaudación</a>
-        </p>
-      </div>
 
-      <aside class="campana-importe" id="recaudacion">
+        <div class="campana-importe" id="recaudacion">
         <p class="campana-importe__cifra">{eur(CAMPANA.recaudado)}</p>
         <p class="campana-importe__de">recaudados de un mínimo de <strong>{eur(CAMPANA.objetivoMinimo)}</strong></p>
 
@@ -60,30 +74,9 @@ const campanaAbierta = new Date() <= limite;
           Actualizado cada día a las 12:00 h · última revisión: {fecha}
         </p>
 
-        <a class="boton boton--primario campana-importe__boton" href="#donar">Donar ahora</a>
-      </aside>
-    </div>
-  </section>
-
-  <!-- Video de la campana -->
-  <section class="campana-bloque">
-    <div class="contenedor">
-      {idVideo ? (
-        <div class="video-embed">
-          <iframe
-            src={'https://www.youtube-nocookie.com/embed/' + idVideo}
-            title="Vídeo de la campaña Reencuentros que salvan vidas"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-            loading="lazy"></iframe>
+          <a class="boton boton--primario campana-importe__boton" href="#donar">Donar ahora</a>
         </div>
-      ) : (
-        <div class="campana-hueco campana-hueco--video">
-          <span class="campana-hueco__etiqueta">Vídeo de la campaña</span>
-          <span class="campana-hueco__nota">Espacio reservado</span>
-        </div>
-      )}
+      </div>
     </div>
   </section>
 

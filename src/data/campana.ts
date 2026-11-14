@@ -18,7 +18,7 @@ export const CAMPANA = {
   fechaLimite: '2026-11-24',
 
   /** Video de la campana (URL de YouTube). Vacio = hueco reservado. */
-  videoUrl: '',
+  videoUrl: 'https://youtube.com/shorts/9w39VYWpa9g',
   /** Banner horizontal. Vacio = hueco reservado. */
   banner: '',
 
