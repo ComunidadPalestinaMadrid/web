@@ -1,8 +1,13 @@
 // Campaña de recaudación: "Reencuentros que salvan vidas".
+
+/** Importe en euros con separador de millar siempre (6.000 €, no 6000 €). */
+export const euros = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €';
 // El importe recaudado se revisa a mano cada dia a las 12:00 y se publica aqui.
 
 export const CAMPANA = {
   titulo: 'Reencuentros que salvan vidas: 10 refugiados palestinos de Gaza a España',
+  /** Titular corto, para el destacado de la portada */
+  tituloCorto: 'Reencuentros que salvan vidas',
   subtitulo: 'Vamos a traer a España 10 familiares de las personas evacuadas de Gaza el 24 de noviembre. Se nos ha abierto la oportunidad de manera inesperada y no podemos dejarla pasar.',
   descripcion: 'Reagrupación para traer a familiares de personas evacuadas de Gaza. Necesitamos 6.000 € para los billetes de avión de 10 personas refugiadas.',
 

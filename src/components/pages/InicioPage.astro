@@ -4,12 +4,19 @@ import TarjetaPublicacion from '../TarjetaPublicacion.astro';
 import TarjetaEvento from '../TarjetaEvento.astro';
 import TarjetaEfemeride from '../TarjetaEfemeride.astro';
 import { SITE } from '../../data/site';
+import { CAMPANA, euros } from '../../data/campana';
 import { ultimas } from '../../data/publicaciones';
 import { proximosEventos, efemeridesProximas } from '../../data/eventos';
 import { useTranslations, localizePath, withBase } from '../../i18n/utils';
 
 const t = useTranslations();
 const eventos = proximosEventos(3);
+
+/* --- Destacado de la campana --------------------------------------------- */
+const eur = euros;
+const pctCampana = Math.min(100, (CAMPANA.recaudado / CAMPANA.objetivoOptimo) * 100);
+const pctMinimoCampana = (CAMPANA.objetivoMinimo / CAMPANA.objetivoOptimo) * 100;
+const fechaLimiteCampana = new Date(CAMPANA.fechaLimite + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
 // El panel del hero muestra solo el proximo acto que tenga cartel; si ninguno
 // lo tiene, cae a la lista de siempre.
 const proximos = proximosEventos();
@@ -35,9 +42,42 @@ const coleActividades = [
     slot="head"
     rel="preload"
     as="image"
-    imagesrcset={withBase('/images/uploads/hero-manifestacion-960.webp') + ' 960w, ' + withBase('/images/uploads/hero-manifestacion-1280.webp') + ' 1280w, ' + withBase('/images/uploads/hero-manifestacion-1920.webp') + ' 1920w'}
+    imagesrcset={withBase('/images/campana/jumbo-960.webp') + ' 960w, ' + withBase('/images/campana/jumbo-1920.webp') + ' 1920w'}
     imagesizes="100vw"
   />
+  <!-- Campaña destacada -->
+  <section class="jumbo">
+    <img
+      class="jumbo__fondo"
+      srcset={withBase('/images/campana/jumbo-960.webp') + ' 960w, ' + withBase('/images/campana/jumbo-1920.webp') + ' 1920w'}
+      sizes="100vw"
+      src={withBase('/images/campana/jumbo-1920.webp')}
+      alt=""
+      aria-hidden="true"
+      width="1920"
+      height="1195"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="jumbo__velo" aria-hidden="true"></div>
+    <div class="contenedor jumbo__grid">
+      <div class="jumbo__texto">
+        <h2 class="jumbo__titulo">{CAMPANA.tituloCorto}</h2>
+        <p class="jumbo__sub">{CAMPANA.subtitulo}</p>
+        <p class="jumbo__plazo">¡Solo hasta el {fechaLimiteCampana}!</p>
+        <div class="jumbo__recaudacion">
+          <p class="jumbo__cifra">{eur(CAMPANA.recaudado)} <span class="jumbo__de">de {eur(CAMPANA.objetivoMinimo)}</span></p>
+          <div class="jumbo__barra" aria-hidden="true">
+            <span style={`width: ${pctCampana.toFixed(2)}%`}></span>
+            <i style={`left: ${pctMinimoCampana.toFixed(2)}%`}></i>
+          </div>
+          <p class="jumbo__leyenda">Mínimo {eur(CAMPANA.objetivoMinimo)} · óptimo {eur(CAMPANA.objetivoOptimo)}</p>
+        </div>
+        <a class="boton boton--primario jumbo__cta" href={localizePath('/reencuentrosquesalvanvidas')}>Dona ahora</a>
+      </div>
+    </div>
+  </section>
+
   <section class="hero">
     <img
       class="hero__fondo"
@@ -48,7 +88,6 @@ const coleActividades = [
       aria-hidden="true"
       width="1920"
       height="1080"
-      fetchpriority="high"
       decoding="async"
     />
     <div class="hero__velo" aria-hidden="true"></div>

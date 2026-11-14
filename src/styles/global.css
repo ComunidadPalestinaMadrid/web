@@ -798,3 +798,96 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   display: block; width: 100%; height: auto;
   border-radius: var(--radio); box-shadow: var(--sombra);
 }
+
+/* ==========================================================================
+   Destacado de campaña en la portada (jumbotron)
+   ========================================================================== */
+
+.jumbo {
+  position: relative; display: grid; align-items: center; overflow: hidden;
+  min-height: clamp(430px, 64vh, 640px); background: #0b1710;
+}
+.jumbo__fondo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  animation: jumbo-zoom 16s ease-out both;
+}
+.jumbo__velo {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg,
+    rgba(7, 18, 12, .93) 0%,
+    rgba(7, 18, 12, .82) 34%,
+    rgba(7, 18, 12, .38) 62%,
+    rgba(7, 18, 12, .10) 100%);
+}
+.jumbo__grid { position: relative; padding-block: clamp(2.2rem, 5vw, 3.4rem); }
+.jumbo__texto { max-width: 30rem; color: #fff; }
+
+.jumbo__titulo {
+  margin: 0 0 .7rem; color: #fff;
+  font-size: clamp(2rem, 1.4rem + 2.5vw, 3.3rem); line-height: 1.02;
+}
+.jumbo__sub {
+  margin: 0 0 1.1rem; color: rgba(255, 255, 255, .87);
+  font-size: var(--t-base); line-height: 1.5;
+}
+.jumbo__plazo {
+  display: inline-block; margin: 0 0 1.2rem; padding: .32rem .75rem;
+  border-radius: 999px; background: var(--ps-rojo); color: #fff;
+  font-family: var(--fuente); font-weight: 700; font-size: var(--t-xs);
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.jumbo__recaudacion { max-width: 22rem; margin-bottom: 1.3rem; }
+.jumbo__cifra {
+  margin: 0; color: #fff;
+  font-family: var(--fuente); font-size: 2.1rem; line-height: 1;
+}
+.jumbo__de { font-size: var(--t-base); font-weight: 400; color: rgba(255, 255, 255, .72); }
+.jumbo__barra {
+  position: relative; height: 10px; margin: .55rem 0 .4rem;
+  border-radius: 999px; background: rgba(255, 255, 255, .24);
+}
+.jumbo__barra span {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  border-radius: 999px; background: #fff;
+}
+.jumbo__barra i {
+  position: absolute; top: -4px; bottom: -4px; width: 2px;
+  border-radius: 1px; background: var(--ps-rojo);
+}
+.jumbo__leyenda { margin: 0; font-size: var(--t-xs); color: rgba(255, 255, 255, .72); }
+.jumbo__cta {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .38);
+  animation: jumbo-latido 3.2s ease-in-out infinite;
+}
+
+@keyframes jumbo-zoom { from { transform: scale(1.09); } to { transform: scale(1); } }
+@keyframes jumbo-entra {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes jumbo-latido {
+  0%, 100% { box-shadow: 0 10px 26px rgba(0, 0, 0, .38); }
+  50% { box-shadow: 0 10px 32px rgba(227, 6, 19, .55); }
+}
+
+.jumbo__texto > * { animation: jumbo-entra .9s cubic-bezier(.22, .68, .28, 1) both; }
+.jumbo__texto > :nth-child(2) { animation-delay: .14s; }
+.jumbo__texto > :nth-child(3) { animation-delay: .26s; }
+.jumbo__texto > :nth-child(4) { animation-delay: .38s; }
+.jumbo__texto > :nth-child(5) { animation-delay: .5s; }
+
+@media (max-width: 760px) {
+  .jumbo { min-height: 560px; align-items: end; }
+  .jumbo__velo {
+    background: linear-gradient(180deg,
+      rgba(7, 18, 12, .45) 0%,
+      rgba(7, 18, 12, .85) 46%,
+      rgba(7, 18, 12, .95) 100%);
+  }
+  .jumbo__texto { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jumbo__fondo, .jumbo__texto > *, .jumbo__cta { animation: none; }
+}

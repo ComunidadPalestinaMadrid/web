@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CAMPANA } from '../../data/campana';
+import { CAMPANA, euros } from '../../data/campana';
 import { withBase } from '../../i18n/utils';
 
-const eur = (n: number) => n.toLocaleString('es-ES') + ' €';
+const eur = euros;
 const pct = Math.min(100, (CAMPANA.recaudado / CAMPANA.objetivoOptimo) * 100);
 const pctMinimo = (CAMPANA.objetivoMinimo / CAMPANA.objetivoOptimo) * 100;
 const fecha = new Date(CAMPANA.actualizado + 'T12:00:00').toLocaleDateString('es-ES', {
