@@ -1,0 +1,29 @@
+RECUPERACION DEL HARNESS DSH
+=============================
+
+El 2026-11-06 se borro por error C:\Users\samik\AppData\Local\npm-cache,
+que contenía la instalación desde la que se ejecutaba esta sesión
+(...\npm-cache\_npx\1e7f6d9597241db0).
+
+Sintomas: los comandos de la herramienta fallan con
+"Cannot find package '@deepseek-ai/dsh-sandbox-windows-acl'".
+
+Pasos:
+
+1) Cierra la ventana/terminal donde corre el harness (esta sesión se cerrara).
+
+2) Abre PowerShell y borra la carpeta dañada:
+
+   Remove-Item "$env:LOCALAPPDATA\npm-cache\_npx\1e7f6d9597241db0" -Recurse -Force
+
+3) Vuelve a lanzar el harness con el mismo comando que usaste para abrirlo
+   (habitualmente algo como:  npx -y @deepseek-ai/dsh web
+   o simplemente:              dsh web ).
+   npx volvera a descargar el paquete en npm-cache.
+
+4) Si no recuerdas el comando: mira el acceso directo o el historial de la
+   terminal (flecha arriba) con el que abriste la interfaz en
+    http://127.0.0.1:3080
+
+Datos personales: INTACTOS. Solo se perdio la instalacion de la herramienta
+(npm-cache). No se toco ningun documento, video, correo ni proyecto.
