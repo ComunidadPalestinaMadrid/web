@@ -44,7 +44,6 @@ const campanaAbierta = new Date() <= limite;
           <span class="campana-plazo__punto" aria-hidden="true"></span>
           {campanaAbierta ? 'Campaña abierta hasta el ' + fechaLimite : 'Campaña finalizada el ' + fechaLimite}
         </span>
-        <span class="eyebrow">Campaña de reagrupación familiar</span>
         <h1 class="campana-hero__titulo">{CAMPANA.titulo}</h1>
         <p class="campana-hero__sub">{CAMPANA.subtitulo}</p>
 
@@ -80,18 +79,6 @@ const campanaAbierta = new Date() <= limite;
     </div>
   </section>
 
-  <!-- Banner horizontal -->
-  <div class="contenedor">
-    {CAMPANA.banner ? (
-      <img class="campana-banner" src={CAMPANA.banner} alt="Banner de la campaña" loading="lazy" decoding="async" />
-    ) : (
-      <div class="campana-hueco campana-hueco--banner">
-        <span class="campana-hueco__etiqueta">Banner horizontal</span>
-        <span class="campana-hueco__nota">Espacio reservado</span>
-      </div>
-    )}
-  </div>
-
   <!-- Como donar -->
   <section class="seccion" id="donar">
     <div class="contenedor">
@@ -121,7 +108,7 @@ const campanaAbierta = new Date() <= limite;
         </dl>
 
         <p class="campana-donar__aviso">
-          Escribe el concepto <strong>tal cual</strong>, sustituyendo <strong>[TU NOMBRE]</strong> por el tuyo: es lo que nos permite identificarte, avisarte y, si lo deseas, incluirte en la web de agradecimientos. Si no quieres que te mencionemos, deja el nombre en blanco.
+          Escribe el concepto <strong>tal cual</strong>, sustituyendo <strong>[TU NOMBRE]</strong> por el tuyo si quieres que te incluyamos en los agradecimientos. Si no quieres que te mencionemos, deja el nombre en blanco.
         </p>
       </div>
     </div>

@@ -3,7 +3,7 @@
 
 export const CAMPANA = {
   titulo: 'Reencuentros que salvan vidas: 10 refugiados palestinos de Gaza a España',
-  subtitulo: 'Reagrupación para traer a familiares de personas evacuadas de Gaza',
+  subtitulo: 'Vamos a traer a España 10 familiares de las personas evacuadas de Gaza el 24 de noviembre. Se nos ha abierto la oportunidad de manera inesperada y no podemos dejarla pasar.',
   descripcion: 'Reagrupación para traer a familiares de personas evacuadas de Gaza. Necesitamos 6.000 € para los billetes de avión de 10 personas refugiadas.',
 
   /** Importes en euros */
@@ -33,9 +33,9 @@ export const CAMPANA = {
 <p>La <strong>reagrupación familiar</strong> es un derecho reconocido en la legislación española, pero el proceso es costoso, complejo y lleno de barreras administrativas. Ahora, tras un largo trabajo de mediación, <strong>se nos ha abierto la posibilidad de traer a 10 personas familiares de estas evacuadas</strong>.</p>
 
 <h2>Nuestro objetivo</h2>
-<p>Desde la <strong>Comunidad Hispano-Palestina Jerusalén</strong> tenemos todo organizado para traer 10 personas refugiadas desde Gaza hasta Jordania, y de ahí a Madrid, para que puedan reunirse con sus familias, ya evacuadas y residentes en España. Todas ellas cumplen los requisitos legales para acogerse al derecho de reagrupación familiar. <strong>Para hacerlo posible, necesitamos recaudar como mínimo 6.000€.</strong></p>
+<p>Desde la <strong>Comunidad Hispano Palestina Jerusalén</strong> tenemos todo organizado para traer 10 personas refugiadas desde Gaza hasta Jordania, y de ahí a Madrid, para que puedan reunirse con sus familias, ya evacuadas y residentes en España. Todas ellas cumplen los requisitos legales para acogerse al derecho de reagrupación familiar. <strong>Para hacerlo posible, necesitamos recaudar como mínimo 6.000€.</strong></p>
 
-<h2>¿En qué se invertirán lo recaudado?</h2>
+<h2>¿En qué se invertirá lo recaudado?</h2>
 <p><strong>El gasto fundamental son los billetes de avión y gastos asociados al transporte.</strong></p>
 <p>Todos los demás gastos relativos a tasas consulares, visados, y demás gastos de gestión están ya resueltos.</p>
 <p>El presupuesto mínimo para poner en marcha la campaña será de 6.000 €. <strong>Si superamos el objetivo, haremos una aportación monetaria a las familias refugiadas que se apoyan en la Comunidad Palestina de Madrid.</strong></p>
@@ -44,7 +44,7 @@ export const CAMPANA = {
 <p>Si aportas, tu nombre aparecerá en la web de agradecimientos de la Asociación si así lo deseas.</p>
 <p>No hay mayores recompensas, la aportación monetaria es lo mínimo que podemos hacer para apoyar a estar personas que llevan tres años viviendo un genocidio.</p>
 
-<h2>Sobre la Comunidad Hispano-Palestina Jerusalén</h2>
+<h2>Sobre la Comunidad Hispano Palestina Jerusalén</h2>
 <p>La Comunidad Hispano Palestina Jerusalén, también conocida como la Comunidad Palestina de Madrid o la Hispanopalestina es una asociación sin ánimo de lucro, legalmente constituida el 11 de enero de 1988, que nace con el objetivo de reunir a las personas palestinas de Madrid en un espacio de encuentro social, cultural y comunitario.</p>
 <p>Somos un espacio de convivencia, participación y solidaridad que busca fortalecer los vínculos entre las personas palestinas, preservar nuestra identidad colectiva y mantener viva nuestra lengua, cultura y memoria. Al mismo tiempo, trabajamos por la defensa de los derechos del pueblo palestino y por la construcción de una sociedad más justa, igualitaria e inclusiva, tanto en Palestina como aquí en España.</p>
 <p>No partimos de cero: ya hemos acompañado con éxito otros procesos de reagrupación y conocemos de primera mano las dificultades del sistema. Solos no podemos. Necesitamos tu ayuda para que estos 10 reencuentros sean una realidad.</p>

@@ -682,7 +682,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 
 /* Cómo donar -------------------------------------------------------------- */
 .campana-donar {
-  max-width: 800px; margin: 0 auto; scroll-margin-top: 90px;
+  scroll-margin-top: 90px;
   border: 2px solid var(--ps-verde); border-radius: var(--radio);
   padding: clamp(1.4rem, 3vw, 2.2rem); background: #fff;
 }
