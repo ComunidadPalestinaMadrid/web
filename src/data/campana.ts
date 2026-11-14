@@ -23,8 +23,7 @@ export const CAMPANA = {
   banner: '',
 
   cuenta: {
-    /** IBAN: pendiente de que la asociacion lo facilite */
-    iban: '',
+    iban: 'ES4521002566981300788761',
     beneficiario: 'Comunidad Hispano Palestina Jerusalén',
     concepto: 'DONACION REFUGIADOS GAZA + [TU NOMBRE]'
   },

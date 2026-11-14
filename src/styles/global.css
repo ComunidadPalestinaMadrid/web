@@ -696,9 +696,14 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   text-transform: uppercase; color: var(--texto-suave);
 }
 .campana-datos dd { margin: 0; }
-.campana-datos__concepto, .campana-datos__iban {
+.campana-datos__concepto {
   font-family: var(--fuente); font-size: var(--t-lg); letter-spacing: .02em;
   user-select: all;
+}
+.campana-datos__iban {
+  display: inline-block;
+  font-family: var(--fuente); font-size: var(--t-xl); letter-spacing: .06em;
+  line-height: 1.25; user-select: all;
 }
 .campana-datos__pendiente { color: var(--ps-rojo); font-weight: 700; }
 .campana-donar__aviso { margin: 0; color: var(--texto-suave); font-size: var(--t-base); }
