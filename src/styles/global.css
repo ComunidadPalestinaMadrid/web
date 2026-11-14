@@ -772,3 +772,16 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 @media (prefers-reduced-motion: reduce) {
   .nav__campana, .nav__campana__punto, .campana-plazo__punto { animation: none; }
 }
+
+/* Refugiados: vídeo en una columna y servicios al lado -------------------- */
+.refugiados-servicios {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  margin-top: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+.refugiados-servicios__lista h2 { margin-top: 0; }
+@media (max-width: 900px) {
+  .refugiados-servicios { grid-template-columns: 1fr; }
+}

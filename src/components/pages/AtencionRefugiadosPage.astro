@@ -31,29 +31,34 @@ const servicios = [
           <p>
             La asociación acompaña, junto a las redes de solidaridad de Madrid, a las personas refugiadas palestinas que llegan a España y también a las familias que ya residen aquí. Trabajamos en lo práctico: documentación, vivienda, idioma y empleo.
           </p>
-
-          <h2>{t('refugiados.servicios')}</h2>
         </div>
       </div>
 
-      <!-- Vídeo de la campaña de acogida -->
-      <div class="video-embed video-embed--vertical mt-3">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/rZeLj2W1pFo"
-          title="Solidaridad, amistad y apoyo para quienes han vivido un genocidio"
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          loading="lazy"></iframe>
-      </div>
-
-      <div class="rejilla rejilla--3">
-        {servicios.map((s) => (
-          <div class="panel">
-            <h3>{s.titulo}</h3>
-            <p class="pieza-pequena mb-0">{s.texto}</p>
+      <!-- Video y servicios, uno al lado del otro -->
+      <div class="refugiados-servicios">
+        <div class="refugiados-servicios__video">
+          <div class="video-embed video-embed--vertical">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/rZeLj2W1pFo"
+              title="Solidaridad, amistad y apoyo para quienes han vivido un genocidio"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              loading="lazy"></iframe>
           </div>
-        ))}
+        </div>
+
+        <div class="refugiados-servicios__lista">
+          <h2>{t('refugiados.servicios')}</h2>
+          <div class="rejilla">
+            {servicios.map((s) => (
+              <div class="panel">
+                <h3>{s.titulo}</h3>
+                <p class="pieza-pequena mb-0">{s.texto}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div class="dos-columnas mt-3">
