@@ -616,3 +616,97 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   margin: .1rem 0 1.1rem; max-width: 46ch;
   font-size: var(--t-lg); line-height: 1.45; color: var(--texto-suave);
 }
+
+/* ==========================================================================
+   Campaña de recaudación (Reencuentros que salvan vidas)
+   ========================================================================== */
+
+.campana-hero { padding-block: clamp(2.5rem, 5vw, 4rem) clamp(1.2rem, 2.5vw, 2rem); }
+.campana-hero__grid {
+  display: grid; grid-template-columns: 1.25fr .75fr;
+  gap: clamp(1.6rem, 4vw, 3.2rem); align-items: center;
+}
+.campana-hero__titulo { font-size: clamp(1.95rem, 1.4rem + 2.5vw, 3.2rem); margin-bottom: .7rem; }
+.campana-hero__sub { font-size: var(--t-lg); color: var(--texto-suave); margin-bottom: 1.4rem; max-width: 42ch; }
+
+/* Tarjeta de recaudación -------------------------------------------------- */
+.campana-importe {
+  border: 1px solid var(--linea); border-radius: var(--radio);
+  padding: 1.6rem 1.5rem; background: #fff; box-shadow: var(--sombra);
+  scroll-margin-top: 90px;
+}
+.campana-importe__cifra {
+  font-family: var(--fuente); font-size: clamp(2.2rem, 1.8rem + 2vw, 3rem);
+  line-height: 1; margin: 0; color: var(--ps-verde);
+}
+.campana-importe__de { margin: .35rem 0 1.1rem; color: var(--texto-suave); }
+.campana-importe__nota { margin: 1rem 0 1.2rem; font-size: var(--t-xs); color: var(--texto-suave); }
+.campana-importe__boton { width: 100%; justify-content: center; }
+
+.barra {
+  position: relative; height: 14px; border-radius: 999px;
+  background: var(--fondo-suave); box-shadow: inset 0 0 0 1px var(--linea);
+}
+.barra__relleno {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: var(--ps-verde); border-radius: 999px;
+}
+.barra__marca {
+  position: absolute; top: -5px; bottom: -5px; width: 2px;
+  background: var(--ps-rojo); border-radius: 1px;
+}
+.barra__leyenda {
+  display: flex; flex-wrap: wrap; gap: .9rem; justify-content: center;
+  margin: .55rem 0 0; font-size: var(--t-xs); color: var(--texto-suave);
+}
+.barra__leyenda span + span::before { content: '·'; margin-right: .9rem; }
+
+/* Huecos reservados (vídeo y banner) -------------------------------------- */
+.campana-bloque { padding-block: 0 clamp(1rem, 2vw, 1.6rem); }
+.campana-hueco {
+  display: grid; place-content: center; gap: .35rem; text-align: center;
+  border: 2px dashed var(--linea); border-radius: var(--radio);
+  background: var(--fondo-suave); color: var(--texto-suave);
+}
+.campana-hueco--video { aspect-ratio: 16 / 9; }
+.campana-hueco--banner { aspect-ratio: 4 / 1; margin-bottom: clamp(1.6rem, 3vw, 2.4rem); }
+.campana-hueco__etiqueta {
+  font-family: var(--fuente); font-size: var(--t-lg);
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.campana-hueco__nota { font-size: var(--t-xs); }
+.campana-banner { display: block; width: 100%; height: auto; border-radius: var(--radio); margin-bottom: clamp(1.6rem, 3vw, 2.4rem); }
+
+/* Cómo donar -------------------------------------------------------------- */
+.campana-donar {
+  max-width: 800px; margin: 0 auto; scroll-margin-top: 90px;
+  border: 2px solid var(--ps-verde); border-radius: var(--radio);
+  padding: clamp(1.4rem, 3vw, 2.2rem); background: #fff;
+}
+.campana-donar__titulo { margin-bottom: .4rem; }
+.campana-donar__intro { color: var(--texto-suave); }
+.campana-datos { margin: 1.4rem 0; display: grid; }
+.campana-datos__fila {
+  display: grid; grid-template-columns: 12rem 1fr; gap: 1rem;
+  padding: .85rem 0; border-bottom: 1px solid var(--linea);
+}
+.campana-datos__fila:first-child { border-top: 1px solid var(--linea); }
+.campana-datos dt {
+  font-family: var(--fuente); font-size: var(--t-xs); letter-spacing: .06em;
+  text-transform: uppercase; color: var(--texto-suave);
+}
+.campana-datos dd { margin: 0; }
+.campana-datos__concepto, .campana-datos__iban {
+  font-family: var(--fuente); font-size: var(--t-lg); letter-spacing: .02em;
+  user-select: all;
+}
+.campana-datos__pendiente { color: var(--ps-rojo); font-weight: 700; }
+.campana-donar__aviso { margin: 0; color: var(--texto-suave); font-size: var(--t-base); }
+
+.campana-cierre { text-align: center; margin-top: 2.2rem; }
+
+@media (max-width: 860px) {
+  .campana-hero__grid { grid-template-columns: 1fr; }
+  .campana-hueco--banner { aspect-ratio: 2 / 1; }
+  .campana-datos__fila { grid-template-columns: 1fr; gap: .2rem; }
+}
