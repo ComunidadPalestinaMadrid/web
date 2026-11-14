@@ -15,6 +15,7 @@ export const ui = {
     'nav.actividades': 'Actividades',
     'nav.comunidad': 'La Comunidad',
     'nav.participa': 'Participa',
+  'nav.campana': 'Reencuentros',
     'nav.refugiados': 'Atención a personas refugiadas',
     'nav.salaPrensa': 'Sala de prensa',
     'nav.apariciones': 'Apariciones en medios',

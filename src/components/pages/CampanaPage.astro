@@ -10,6 +10,9 @@ const fecha = new Date(CAMPANA.actualizado + 'T12:00:00').toLocaleDateString('es
 });
 const idVideo = (CAMPANA.videoUrl.match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([\w-]{11})/) || [])[1] || '';
 const tieneIban = CAMPANA.cuenta.iban.trim().length > 0;
+const limite = new Date(CAMPANA.fechaLimite + 'T23:59:59');
+const fechaLimite = limite.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+const campanaAbierta = new Date() <= limite;
 ---
 <BaseLayout title={CAMPANA.titulo} description={CAMPANA.descripcion}>
 
@@ -17,6 +20,10 @@ const tieneIban = CAMPANA.cuenta.iban.trim().length > 0;
   <section class="campana-hero">
     <div class="contenedor campana-hero__grid">
       <div class="campana-hero__texto">
+        <span class="campana-plazo">
+          <span class="campana-plazo__punto" aria-hidden="true"></span>
+          {campanaAbierta ? 'Campaña abierta hasta el ' + fechaLimite : 'Campaña finalizada el ' + fechaLimite}
+        </span>
         <span class="eyebrow">Campaña de reagrupación familiar</span>
         <h1 class="campana-hero__titulo">{CAMPANA.titulo}</h1>
         <p class="campana-hero__sub">{CAMPANA.subtitulo}</p>
