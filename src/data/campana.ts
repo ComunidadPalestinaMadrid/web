@@ -18,6 +18,12 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261115-084', fecha: '2026-11-15', importe: 30, nombre: 'NRO' },
+    { id: 'don-20261115-083', fecha: '2026-11-15', importe: 100, nombre: 'Marta Puig de la Bellacasa' },
+    { id: 'don-20261115-082', fecha: '2026-11-15', importe: 25, nombre: 'Mely' },
+    { id: 'don-20261115-081', fecha: '2026-11-15', importe: 50, nombre: 'Ángeles López Ronco' },
+    { id: 'don-20261115-080', fecha: '2026-11-15', importe: 30, nombre: 'Kika' },
+    { id: 'don-20261115-079', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261115-078', fecha: '2026-11-15', importe: 40, nombre: 'Sadia' },
     { id: 'don-20261115-077', fecha: '2026-11-15', importe: 40, nombre: 'Guillermina Peragón' },
     { id: 'don-20261115-076', fecha: '2026-11-15', importe: 100, nombre: 'Toledo por Palestina' },
@@ -99,7 +105,7 @@ export const CAMPANA = {
   ],
   actualizado: '2026-11-15',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '19:34',
+  horaActualizacion: '19:55',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
