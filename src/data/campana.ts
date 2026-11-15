@@ -21,6 +21,8 @@ export const CAMPANA = {
     { fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' }
   ],
   actualizado: '2026-11-15',
+  /** Hora de la ultima revision del listado (HH:MM) */
+  horaActualizacion: '10:00',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',

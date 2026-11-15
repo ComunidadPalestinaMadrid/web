@@ -624,8 +624,11 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .campana-hero { padding-block: clamp(2.5rem, 5vw, 4rem) clamp(1.2rem, 2.5vw, 2rem); }
 .campana-hero__grid {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: clamp(1.6rem, 4vw, 3.2rem); align-items: start;
+  gap: clamp(1.6rem, 4vw, 3.2rem); align-items: stretch;
 }
+/* La columna de texto se reparte en vertical para igualar la altura del video */
+.campana-hero__texto { display: flex; flex-direction: column; }
+.campana-hero__texto > .campana-plazo { align-self: flex-start; }
 /* En el hero el video ocupa toda su columna, sin el limite de 340 px */
 .campana-hero__video .video-embed { max-width: none; margin: 0; }
 .campana-hero__texto .campana-importe { margin-top: 1.8rem; }
@@ -914,4 +917,70 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 @media (max-width: 560px) {
   .campana-lista__fila { grid-template-columns: 1fr auto; }
   .campana-lista__fecha { grid-column: 1 / -1; }
+}
+
+/* ==========================================================================
+   Campaña: ticker de donaciones y desglose plegable
+   ========================================================================== */
+
+/* Ticker: tarjetas que pasan de lado a lado ------------------------------- */
+.campana-ticker {
+  flex: 1 1 auto; display: flex; align-items: center;
+  margin-top: 1.4rem; min-height: 108px; overflow: hidden;
+  border: 1px solid var(--linea); border-radius: var(--radio);
+  background: var(--fondo-suave);
+}
+.campana-ticker__pista {
+  flex: 0 0 auto; display: flex; align-items: center; gap: .7rem;
+  width: max-content; padding-inline: .8rem;
+}
+.campana-ticker__pista--movil { animation: campana-ticker 26s linear infinite; }
+/* Con una sola donacion, la tarjeta se centra y no se mueve */
+.campana-ticker__pista:not(.campana-ticker__pista--movil) { margin-inline: auto; }
+.campana-ticker:hover .campana-ticker__pista--movil { animation-play-state: paused; }
+@keyframes campana-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.campana-ticker__item {
+  flex: 0 0 auto; display: grid; gap: .1rem; min-width: 8.5rem;
+  padding: .55rem .85rem;
+  border: 1px solid var(--linea); border-radius: var(--radio-sm); background: #fff;
+}
+.campana-ticker__importe {
+  font-family: var(--fuente); font-size: var(--t-lg); line-height: 1.1; color: var(--ps-verde);
+}
+.campana-ticker__nombre { font-size: var(--t-xs); color: var(--texto-suave); }
+
+/* Desglose plegable al final de la pagina --------------------------------- */
+.campana-desglose {
+  border: 1px solid var(--linea); border-radius: var(--radio);
+  background: var(--fondo-suave);
+}
+.campana-desglose__resumen {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; gap: .3rem 1rem;
+  padding: 1rem 1.2rem; cursor: pointer; list-style: none;
+  font-family: var(--fuente); font-size: var(--t-lg); font-weight: 600;
+}
+.campana-desglose__resumen::-webkit-details-marker { display: none; }
+.campana-desglose__resumen::after {
+  content: '+'; margin-left: auto;
+  font-size: 1.4rem; line-height: 1; font-weight: 700; color: var(--texto-suave);
+}
+.campana-desglose[open] .campana-desglose__resumen::after { content: '−'; }
+.campana-desglose__cuenta {
+  font-family: var(--secundaria); font-size: var(--t-xs);
+  font-weight: 400; color: var(--texto-suave);
+}
+.campana-desglose__cuerpo { padding: 0 1.2rem 1.2rem; }
+.campana-desglose__cuerpo .campana-lista { margin-top: .4rem; }
+
+@media (max-width: 860px) {
+  .campana-ticker { flex: none; margin-top: 1.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campana-ticker__pista--movil { animation: none; }
+  .campana-ticker { overflow-x: auto; }
 }

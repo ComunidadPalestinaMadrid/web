@@ -75,11 +75,28 @@ const campanaAbierta = new Date() <= limite;
         </p>
 
         <p class="campana-importe__nota">
-          Actualizado cada día a las 12:00 h · última revisión: {fecha}
+          Actualizado por última vez a las {CAMPANA.horaActualizacion} del {fecha}. Los datos se actualizan cada 6 horas.
         </p>
 
           <a class="boton boton--primario campana-importe__boton" href="#donar">Donar ahora</a>
         </div>
+
+        {CAMPANA.donaciones.length > 0 && (
+          <div class="campana-ticker" aria-label="Últimas donaciones">
+            <div class={'campana-ticker__pista' + (CAMPANA.donaciones.length > 1 ? ' campana-ticker__pista--movil' : '')}>
+              {[0, 1].map((vuelta) =>
+                vuelta === 1 && CAMPANA.donaciones.length < 2 ? null : (
+                  CAMPANA.donaciones.map((d) => (
+                    <span class="campana-ticker__item" aria-hidden={vuelta === 1 ? 'true' : undefined}>
+                      <span class="campana-ticker__importe">{eur(d.importe)}</span>
+                      <span class="campana-ticker__nombre">{d.nombre}</span>
+                    </span>
+                  ))
+                )
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   </section>
@@ -119,35 +136,6 @@ const campanaAbierta = new Date() <= limite;
     </div>
   </section>
 
-  <!-- Donaciones recibidas -->
-  <section class="seccion" id="donaciones">
-    <div class="contenedor">
-      <div class="campana-lista-envoltorio">
-        <h2>Donaciones recibidas</h2>
-        <p class="campana-lista__intro">
-          Estas son las aportaciones registradas hasta ahora. Aparecen con el nombre que cada persona indicó en el concepto de la transferencia; quienes no lo indicaron figuran como «Anónimo».
-        </p>
-
-        <ol class="campana-lista">
-          {CAMPANA.donaciones.map((d) => {
-            const fechaDonacion = new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
-            return (
-              <li class="campana-lista__fila">
-                <span class="campana-lista__nombre">{d.nombre}</span>
-                <span class="campana-lista__importe">{eur(d.importe)}</span>
-                <span class="campana-lista__fecha">{fechaDonacion}</span>
-              </li>
-            );
-          })}
-        </ol>
-
-        <p class="campana-lista__total">
-          Total: <strong>{eur(CAMPANA.recaudado)}</strong> de {eur(CAMPANA.objetivoMinimo)}
-        </p>
-      </div>
-    </div>
-  </section>
-
   <!-- Texto de la campana -->
   <section class="seccion seccion--suave">
     <div class="contenedor">
@@ -165,6 +153,40 @@ const campanaAbierta = new Date() <= limite;
       <p class="campana-cierre">
         <a class="boton boton--primario" href="#donar">Quiero ayudar</a>
       </p>
+    </div>
+  </section>
+  <!-- Desglose de donaciones (al final y plegado) -->
+  <section class="seccion" id="donaciones">
+    <div class="contenedor">
+      <details class="campana-desglose">
+        <summary class="campana-desglose__resumen">
+          <span>Desglose de donaciones</span>
+          <span class="campana-desglose__cuenta">{CAMPANA.donaciones.length} {CAMPANA.donaciones.length === 1 ? 'aportación' : 'aportaciones'} · {eur(CAMPANA.recaudado)} de {eur(CAMPANA.objetivoMinimo)}</span>
+        </summary>
+
+        <div class="campana-desglose__cuerpo">
+          <p class="campana-lista__intro">
+            Aparecen con el nombre que cada persona indicó en el concepto de la transferencia; quienes no lo indicaron figuran como «Anónimo».
+          </p>
+
+          <ol class="campana-lista">
+            {CAMPANA.donaciones.map((d) => {
+              const fechaDonacion = new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+              return (
+                <li class="campana-lista__fila">
+                  <span class="campana-lista__nombre">{d.nombre}</span>
+                  <span class="campana-lista__importe">{eur(d.importe)}</span>
+                  <span class="campana-lista__fecha">{fechaDonacion}</span>
+                </li>
+              );
+            })}
+          </ol>
+
+          <p class="campana-lista__total">
+            Total: <strong>{eur(CAMPANA.recaudado)}</strong> de {eur(CAMPANA.objetivoMinimo)}
+          </p>
+        </div>
+      </details>
     </div>
   </section>
 </BaseLayout>
