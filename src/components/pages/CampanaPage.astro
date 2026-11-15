@@ -13,10 +13,7 @@ const idVideo = (CAMPANA.videoUrl.match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)
 const tieneIban = CAMPANA.cuenta.iban.trim().length > 0;
 /* Siempre de la mas reciente a la mas antigua, sin depender del orden del fichero */
 const donaciones = [...CAMPANA.donaciones].sort((a, b) => b.fecha.localeCompare(a.fecha));
-/* El bucle continuo obliga a repetir la lista para que no haya saltos. Solo se
-   activa cuando hay donaciones suficientes para llenar el ancho del recuadro;
-   con pocas se muestran exactamente las que hay, sin copias. */
-const animarTicker = donaciones.length >= 6;
+
 const ibanFormateado = CAMPANA.cuenta.iban.replace(/(.{4})/g, '$1 ').trim();
 const limite = new Date(CAMPANA.fechaLimite + 'T23:59:59');
 const fechaLimite = limite.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
@@ -87,22 +84,15 @@ const campanaAbierta = new Date() <= limite;
           <a class="boton boton--primario campana-importe__boton" href="#donar">Donar ahora</a>
         </div>
 
-        {CAMPANA.donaciones.length > 0 && (
-          <div class="campana-ticker" aria-label="Últimas donaciones">
-            <div class={'campana-ticker__pista' + (animarTicker ? ' campana-ticker__pista--movil' : '')}>
+        {donaciones.length > 0 && (
+          <div class="campana-ticker" role="region" aria-label="Últimas donaciones" tabindex="0" data-ticker>
+            <div class="campana-ticker__pista">
               {donaciones.map((d) => (
                 <span class="campana-ticker__item">
                   <span class="campana-ticker__importe">{eur(d.importe)}</span>
                   <span class="campana-ticker__nombre">{d.nombre}</span>
                 </span>
               ))}
-              {animarTicker &&
-                donaciones.map((d) => (
-                  <span class="campana-ticker__item" aria-hidden="true">
-                    <span class="campana-ticker__importe">{eur(d.importe)}</span>
-                    <span class="campana-ticker__nombre">{d.nombre}</span>
-                  </span>
-                ))}
             </div>
           </div>
         )}
@@ -194,4 +184,58 @@ const campanaAbierta = new Date() <= limite;
       </details>
     </div>
   </section>
+
+<script>
+  const pista = document.querySelector<HTMLElement>('[data-ticker]');
+  if (pista) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let animando = !reduce;
+    let pausado = false;
+    let anterior = 0;
+
+    const avanzar = (t: number) => {
+      const dt = anterior ? Math.min(t - anterior, 60) : 16;
+      anterior = t;
+      if (animando && !pausado) {
+        const fin = pista.scrollWidth - pista.clientWidth;
+        if (fin <= 0) {
+          animando = false;
+        } else if (pista.scrollLeft >= fin - 1) {
+          animando = false; // llego al final: se para y no vuelve a empezar
+        } else {
+          pista.scrollLeft += dt * 0.022;
+        }
+      }
+      requestAnimationFrame(avanzar);
+    };
+    requestAnimationFrame(avanzar);
+
+    let arrastrando = false;
+    let x0 = 0;
+    let s0 = 0;
+
+    pista.addEventListener('pointerdown', (e) => {
+      arrastrando = true;
+      pausado = true;
+      x0 = e.clientX;
+      s0 = pista.scrollLeft;
+      pista.setPointerCapture(e.pointerId);
+      pista.classList.add('campana-ticker--arrastrando');
+    });
+    pista.addEventListener('pointermove', (e) => {
+      if (!arrastrando) return;
+      pista.scrollLeft = s0 - (e.clientX - x0);
+    });
+    const soltar = () => {
+      if (!arrastrando) return;
+      arrastrando = false;
+      pista.classList.remove('campana-ticker--arrastrando');
+      window.setTimeout(() => { pausado = false; }, 1400);
+    };
+    pista.addEventListener('pointerup', soltar);
+    pista.addEventListener('pointercancel', soltar);
+    pista.addEventListener('pointerenter', () => { pausado = true; });
+    pista.addEventListener('pointerleave', () => { if (!arrastrando) pausado = false; });
+  }
+</script>
 </BaseLayout>

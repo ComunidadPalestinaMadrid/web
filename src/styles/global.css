@@ -926,24 +926,18 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 /* Ticker: tarjetas que pasan de lado a lado ------------------------------- */
 .campana-ticker {
   flex: 1 1 auto; display: flex; align-items: center;
-  margin-top: 1.4rem; min-height: 108px; overflow: hidden;
+  margin-top: 1.4rem; min-height: 108px;
+  overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
   border: 1px solid var(--linea); border-radius: var(--radio);
   background: var(--fondo-suave);
+  cursor: grab; user-select: none; touch-action: pan-x;
+  scrollbar-width: thin;
 }
+.campana-ticker:focus-visible { outline: 2px solid var(--ps-verde); outline-offset: 2px; }
+.campana-ticker--arrastrando { cursor: grabbing; }
 .campana-ticker__pista {
   flex: 0 0 auto; display: flex; align-items: center; gap: .7rem;
   width: max-content; padding-inline: .8rem;
-}
-.campana-ticker__pista--movil { animation: campana-ticker 26s linear infinite; }
-/* Con una sola donacion, la tarjeta se centra y no se mueve */
-.campana-ticker__pista:not(.campana-ticker__pista--movil) {
-  margin-inline: auto; width: auto; max-width: 100%;
-  flex-wrap: wrap; justify-content: center;
-}
-.campana-ticker:hover .campana-ticker__pista--movil { animation-play-state: paused; }
-@keyframes campana-ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 .campana-ticker__item {
   flex: 0 0 auto; display: grid; gap: .1rem; min-width: 8.5rem;
