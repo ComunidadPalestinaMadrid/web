@@ -936,7 +936,10 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 }
 .campana-ticker__pista--movil { animation: campana-ticker 26s linear infinite; }
 /* Con una sola donacion, la tarjeta se centra y no se mueve */
-.campana-ticker__pista:not(.campana-ticker__pista--movil) { margin-inline: auto; }
+.campana-ticker__pista:not(.campana-ticker__pista--movil) {
+  margin-inline: auto; width: auto; max-width: 100%;
+  flex-wrap: wrap; justify-content: center;
+}
 .campana-ticker:hover .campana-ticker__pista--movil { animation-play-state: paused; }
 @keyframes campana-ticker {
   from { transform: translateX(0); }
