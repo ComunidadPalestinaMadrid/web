@@ -15,9 +15,12 @@ export const CAMPANA = {
   objetivoMinimo: 6000,
   objetivoOptimo: 10000,
 
-  /** Recaudado hasta la fecha y fecha de la ultima revision */
-  recaudado: 0,
-  actualizado: '2026-11-14',
+  /** Donaciones recibidas, de la mas reciente a la mas antigua.
+      El total recaudado se calcula solo a partir de esta lista. */
+  donaciones: [
+    { fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' }
+  ],
+  actualizado: '2026-11-15',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
@@ -32,6 +35,9 @@ export const CAMPANA = {
     beneficiario: 'ASOC. COM. HISPANO PALESTINA (JERUSALEN)',
     concepto: 'DONACION REFUGIADOS GAZA + [TU NOMBRE]'
   },
+
+  /** Suma de las donaciones */
+  get recaudado() { return this.donaciones.reduce((t, d) => t + d.importe, 0); },
 
   contenido: `<h2>La situación: familias rotas por el genocidio</h2>
 <p>Desde el inicio del <strong>genocidio en Palestina</strong>, miles de familias palestinas han quedado separadas. Algunas personas fueron evacuadas desde Gaza a España, pero sus seres queridos quedaron <strong>atrapados en Gaza</strong>, viviendo en condiciones de extrema vulnerabilidad, sin acceso a derechos básicos y con el miedo constante de no volver a verse.</p>

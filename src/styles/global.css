@@ -891,3 +891,27 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 @media (prefers-reduced-motion: reduce) {
   .jumbo__fondo, .jumbo__texto > *, .jumbo__cta { animation: none; }
 }
+
+/* ==========================================================================
+   Campaña: listado de donaciones
+   ========================================================================== */
+
+.campana-lista-envoltorio { max-width: 760px; }
+.campana-lista__intro { color: var(--texto-suave); }
+.campana-lista { list-style: none; margin: 1.4rem 0 0; padding: 0; }
+.campana-lista__fila {
+  display: grid; grid-template-columns: 1fr auto auto; gap: 1rem;
+  align-items: baseline; padding: .7rem 0; border-bottom: 1px solid var(--linea);
+}
+.campana-lista__fila:first-child { border-top: 1px solid var(--linea); }
+.campana-lista__nombre { font-weight: 600; overflow-wrap: anywhere; }
+.campana-lista__importe {
+  font-family: var(--fuente); font-size: var(--t-lg); color: var(--ps-verde);
+}
+.campana-lista__fecha { font-size: var(--t-xs); color: var(--texto-suave); white-space: nowrap; }
+.campana-lista__total { margin: 1.1rem 0 0; font-size: var(--t-lg); }
+
+@media (max-width: 560px) {
+  .campana-lista__fila { grid-template-columns: 1fr auto; }
+  .campana-lista__fecha { grid-column: 1 / -1; }
+}

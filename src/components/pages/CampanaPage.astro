@@ -119,6 +119,35 @@ const campanaAbierta = new Date() <= limite;
     </div>
   </section>
 
+  <!-- Donaciones recibidas -->
+  <section class="seccion" id="donaciones">
+    <div class="contenedor">
+      <div class="campana-lista-envoltorio">
+        <h2>Donaciones recibidas</h2>
+        <p class="campana-lista__intro">
+          Estas son las aportaciones registradas hasta ahora. Aparecen con el nombre que cada persona indicó en el concepto de la transferencia; quienes no lo indicaron figuran como «Anónimo».
+        </p>
+
+        <ol class="campana-lista">
+          {CAMPANA.donaciones.map((d) => {
+            const fechaDonacion = new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+            return (
+              <li class="campana-lista__fila">
+                <span class="campana-lista__nombre">{d.nombre}</span>
+                <span class="campana-lista__importe">{eur(d.importe)}</span>
+                <span class="campana-lista__fecha">{fechaDonacion}</span>
+              </li>
+            );
+          })}
+        </ol>
+
+        <p class="campana-lista__total">
+          Total: <strong>{eur(CAMPANA.recaudado)}</strong> de {eur(CAMPANA.objetivoMinimo)}
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Texto de la campana -->
   <section class="seccion seccion--suave">
     <div class="contenedor">
