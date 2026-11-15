@@ -167,10 +167,6 @@ const campanaAbierta = new Date() <= limite;
         </summary>
 
         <div class="campana-desglose__cuerpo">
-          <p class="campana-lista__intro">
-            Aparecen con el nombre que cada persona indicó en el concepto de la transferencia; quienes no lo indicaron figuran como «Anónimo».
-          </p>
-
           <ol class="campana-lista">
             {donaciones.map((d) => {
               const fechaDonacion = new Date(d.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
