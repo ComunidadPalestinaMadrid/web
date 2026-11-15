@@ -160,7 +160,7 @@ const campanaAbierta = new Date() <= limite;
       <details class="campana-desglose">
         <summary class="campana-desglose__resumen">
           <span>Desglose de donaciones</span>
-          <span class="campana-desglose__cuenta">{CAMPANA.donaciones.length} {CAMPANA.donaciones.length === 1 ? 'aportación' : 'aportaciones'} · {eur(CAMPANA.recaudado)} de {eur(CAMPANA.objetivoMinimo)}</span>
+          <span class="campana-desglose__cuenta">{CAMPANA.donaciones.length} {CAMPANA.donaciones.length === 1 ? 'aportación' : 'aportaciones'} · {eur(CAMPANA.recaudado)}</span>
         </summary>
 
         <div class="campana-desglose__cuerpo">
@@ -178,7 +178,7 @@ const campanaAbierta = new Date() <= limite;
           </ol>
 
           <p class="campana-lista__total">
-            Total: <strong>{eur(CAMPANA.recaudado)}</strong> de {eur(CAMPANA.objetivoMinimo)}
+            Total: <strong>{eur(CAMPANA.recaudado)}</strong>
           </p>
         </div>
       </details>
