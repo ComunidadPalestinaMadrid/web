@@ -20,6 +20,7 @@ export const CAMPANA = {
   donaciones: [
     { fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
+    { fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { fecha: '2026-11-15', importe: 30, nombre: 'Carmen Masip' },
     { fecha: '2026-11-15', importe: 10, nombre: 'Anónimo' },
     { fecha: '2026-11-15', importe: 200, nombre: 'Anónimo' },
@@ -61,7 +62,7 @@ export const CAMPANA = {
   ],
   actualizado: '2026-11-15',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '15:46',
+  horaActualizacion: '16:21',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
