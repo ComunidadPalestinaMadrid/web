@@ -623,9 +623,12 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 
 .campana-hero { padding-block: clamp(2.5rem, 5vw, 4rem) clamp(1.2rem, 2.5vw, 2rem); }
 .campana-hero__grid {
-  display: grid; grid-template-columns: 1fr 1fr;
+  /* minmax(0, 1fr): sin esto, un hijo mas ancho que la columna (la pista del
+     carrusel) estira la rejilla y rompe las dos columnas. */
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(1.6rem, 4vw, 3.2rem); align-items: stretch;
 }
+.campana-hero__video, .campana-hero__texto { min-width: 0; }
 /* La columna de texto se reparte en vertical para igualar la altura del video */
 .campana-hero__texto { display: flex; flex-direction: column; }
 .campana-hero__texto > .campana-plazo { align-self: flex-start; }
@@ -932,6 +935,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   background: var(--fondo-suave);
   cursor: grab; user-select: none; touch-action: pan-x;
   scrollbar-width: thin;
+  min-width: 0; max-width: 100%;
 }
 .campana-ticker:focus-visible { outline: 2px solid var(--ps-verde); outline-offset: 2px; }
 .campana-ticker--arrastrando { cursor: grabbing; }
