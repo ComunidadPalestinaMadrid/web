@@ -990,9 +990,10 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .barra__extra {
   position: absolute; top: 0; bottom: 0;
   border-radius: 0 999px 999px 0;
-  background-image: repeating-linear-gradient(115deg, var(--ps-rojo) 0 9px, #ff6b73 9px 18px);
+  background-color: var(--ps-verde);
+  background-image: repeating-linear-gradient(115deg, transparent 0 9px, rgba(255, 255, 255, .32) 9px 18px);
   background-size: 200% 100%;
-  box-shadow: 0 0 10px rgba(227, 6, 19, .5);
+  box-shadow: 0 0 10px rgba(46, 160, 100, .45);
   animation: barra-extra 1.8s linear infinite;
 }
 @keyframes barra-extra {
@@ -1000,7 +1001,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   to { background-position: -36px 0; }
 }
 .barra__marca--optimo { background: var(--tinta); top: -6px; bottom: -6px; }
-.barra__leyenda-extra { color: var(--ps-rojo); font-weight: 700; }
+.barra__leyenda-extra { color: var(--ps-verde); font-weight: 700; }
 
 @media (prefers-reduced-motion: reduce) {
   .barra__extra { animation: none; }

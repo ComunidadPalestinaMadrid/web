@@ -77,7 +77,7 @@ const campanaAbierta = new Date() <= limite;
           {hayExtra && (
             <span
               class="barra__extra"
-              style={`left: ${pctOptimo.toFixed(2)}%; width: ${(pct - pctOptimo).toFixed(2)}%`}
+              style={`left: calc(${pctOptimo.toFixed(2)}% - 10px); width: calc(${(pct - pctOptimo).toFixed(2)}% + 10px)`}
               title={`Extra: ${eur(importeExtra)} por encima del objetivo óptimo`}
             ></span>
           )}
