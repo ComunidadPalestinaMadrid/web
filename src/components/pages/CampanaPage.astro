@@ -4,8 +4,13 @@ import { CAMPANA, euros } from '../../data/campana';
 import { withBase } from '../../i18n/utils';
 
 const eur = euros;
-const pct = Math.min(100, (CAMPANA.recaudado / CAMPANA.objetivoOptimo) * 100);
-const pctMinimo = (CAMPANA.objetivoMinimo / CAMPANA.objetivoOptimo) * 100;
+/* La escala crece cuando se supera el objetivo optimo: el tramo de mas es el "extra" */
+const escala = Math.round(Math.max(CAMPANA.objetivoOptimo, CAMPANA.recaudado) * 100) / 100;
+const pct = (CAMPANA.recaudado / escala) * 100;
+const pctMinimo = (CAMPANA.objetivoMinimo / escala) * 100;
+const pctOptimo = (CAMPANA.objetivoOptimo / escala) * 100;
+const hayExtra = CAMPANA.recaudado > CAMPANA.objetivoOptimo;
+const importeExtra = CAMPANA.recaudado - CAMPANA.objetivoOptimo;
 const fecha = new Date(CAMPANA.actualizado + 'T12:00:00').toLocaleDateString('es-ES', {
   day: 'numeric', month: 'long', year: 'numeric'
 });
@@ -63,18 +68,29 @@ const campanaAbierta = new Date() <= limite;
           class="barra"
           role="progressbar"
           aria-valuemin="0"
-          aria-valuemax={CAMPANA.objetivoOptimo}
+          aria-valuemax={escala}
           aria-valuenow={CAMPANA.recaudado}
           aria-valuetext={eur(CAMPANA.recaudado) + ' de ' + eur(CAMPANA.objetivoMinimo)}
           aria-label="Recaudación de la campaña"
         >
-          <span class="barra__relleno" style={`width: ${pct.toFixed(2)}%`}></span>
+          <span class="barra__relleno" style={`width: ${pctOptimo.toFixed(2)}%`}></span>
+          {hayExtra && (
+            <span
+              class="barra__extra"
+              style={`left: ${pctOptimo.toFixed(2)}%; width: ${(pct - pctOptimo).toFixed(2)}%`}
+              title={`Extra: ${eur(importeExtra)} por encima del objetivo óptimo`}
+            ></span>
+          )}
           <span class="barra__marca" style={`left: ${pctMinimo.toFixed(2)}%`} title={`Objetivo mínimo: ${eur(CAMPANA.objetivoMinimo)}`}></span>
+          {hayExtra && (
+            <span class="barra__marca barra__marca--optimo" style={`left: ${pctOptimo.toFixed(2)}%`} title={`Objetivo óptimo: ${eur(CAMPANA.objetivoOptimo)}`}></span>
+          )}
         </div>
 
         <p class="barra__leyenda">
           <span>Mínimo {eur(CAMPANA.objetivoMinimo)}</span>
           <span>Óptimo {eur(CAMPANA.objetivoOptimo)}</span>
+          {hayExtra && <span class="barra__leyenda-extra">Extra +{eur(importeExtra)}</span>}
         </p>
 
         <p class="campana-importe__nota">

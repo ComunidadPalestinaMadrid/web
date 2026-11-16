@@ -1,7 +1,11 @@
 // Campaña de recaudación: "Reencuentros que salvan vidas".
 
 /** Importe en euros con separador de millar siempre (6.000 €, no 6000 €). */
-export const euros = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €';
+export const euros = (n: number) => {
+  const [ent, dec] = n.toFixed(2).split('.');
+  const entero = ent.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return (dec === '00' ? entero : entero + ',' + dec) + ' €';
+};
 // El importe recaudado se revisa a mano cada dia a las 12:00 y se publica aqui.
 
 export const CAMPANA = {
@@ -18,6 +22,15 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261116-117', fecha: '2026-11-16', importe: 50, nombre: 'Juan Pablo' },
+    { id: 'don-20261116-116', fecha: '2026-11-16', importe: 100, nombre: 'Santiago González Vallejo' },
+    { id: 'don-20261116-115', fecha: '2026-11-16', importe: 30, nombre: 'Luz' },
+    { id: 'don-20261116-114', fecha: '2026-11-16', importe: 3.69, nombre: 'Marwane' },
+    { id: 'don-20261116-113', fecha: '2026-11-16', importe: 50, nombre: 'Mohammad Diab Ali' },
+    { id: 'don-20261116-112', fecha: '2026-11-16', importe: 20, nombre: 'Anónimo' },
+    { id: 'don-20261116-111', fecha: '2026-11-16', importe: 6000, nombre: 'Javier Angel Encinas Bardem' },
+    { id: 'don-20261115-110', fecha: '2026-11-15', importe: 20, nombre: 'Anónimo' },
+    { id: 'don-20261115-109', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261115-108', fecha: '2026-11-15', importe: 20, nombre: 'Anónimo' },
     { id: 'don-20261115-107', fecha: '2026-11-15', importe: 20, nombre: 'Amira y mamá' },
     { id: 'don-20261115-106', fecha: '2026-11-15', importe: 100, nombre: 'Waleed Saleh' },
@@ -127,9 +140,9 @@ export const CAMPANA = {
     { id: 'don-20261115-002', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261115-001', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
   ],
-  actualizado: '2026-11-15',
+  actualizado: '2026-11-16',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '23:36',
+  horaActualizacion: '09:30',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
