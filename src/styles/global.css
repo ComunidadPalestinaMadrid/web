@@ -997,9 +997,10 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   animation: barra-extra 1.8s linear infinite;
 }
 @keyframes barra-extra {
-  from { background-position: 0 0; }
-  to { background-position: -36px 0; }
+  from { background-position: -36px 0; }
+  to { background-position: 0 0; }
 }
+.barra__relleno--extra { border-radius: 999px 0 0 999px; }
 .barra__marca--optimo { background: var(--tinta); top: -6px; bottom: -6px; }
 .barra__leyenda-extra { color: var(--ps-verde); font-weight: 700; }
 

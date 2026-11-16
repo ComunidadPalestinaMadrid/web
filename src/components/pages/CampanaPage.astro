@@ -73,11 +73,11 @@ const campanaAbierta = new Date() <= limite;
           aria-valuetext={eur(CAMPANA.recaudado) + ' de ' + eur(CAMPANA.objetivoMinimo)}
           aria-label="Recaudación de la campaña"
         >
-          <span class="barra__relleno" style={`width: ${pctOptimo.toFixed(2)}%`}></span>
+          <span class={'barra__relleno' + (hayExtra ? ' barra__relleno--extra' : '')} style={`width: ${pctOptimo.toFixed(2)}%`}></span>
           {hayExtra && (
             <span
               class="barra__extra"
-              style={`left: calc(${pctOptimo.toFixed(2)}% - 10px); width: calc(${(pct - pctOptimo).toFixed(2)}% + 10px)`}
+              style={`left: ${pctOptimo.toFixed(2)}%; width: ${(pct - pctOptimo).toFixed(2)}%`}
               title={`Extra: ${eur(importeExtra)} por encima del objetivo óptimo`}
             ></span>
           )}
