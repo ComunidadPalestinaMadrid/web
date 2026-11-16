@@ -10,6 +10,27 @@ const pct = (CAMPANA.recaudado / escala) * 100;
 const pctMinimo = (CAMPANA.objetivoMinimo / escala) * 100;
 const pctOptimo = (CAMPANA.objetivoOptimo / escala) * 100;
 const hayExtra = CAMPANA.recaudado > CAMPANA.objetivoOptimo;
+
+/* El contenido llega en HTML con un h2 por bloque: se parte para poder colgar
+   las preguntas frecuentes debajo de cada uno. */
+const bloques = CAMPANA.contenido.split(/(?=<h2>)/).map((html) => {
+  const titulo = (html.match(/<h2>([^<]+)<\/h2>/) || [])[1] || '';
+  return { html, faqs: CAMPANA.faq.filter((f) => f.bloque === titulo) };
+});
+const faqsPublicas = CAMPANA.faq;
+
+/* Datos estructurados: es lo que leen los buscadores y los asistentes de IA */
+const jsonLdFaq = faqsPublicas.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqsPublicas.map((f) => ({
+        '@type': 'Question',
+        name: f.pregunta,
+        acceptedAnswer: { '@type': 'Answer', text: f.respuesta }
+      }))
+    }
+  : null;
 const importeExtra = CAMPANA.recaudado - CAMPANA.objetivoOptimo;
 const fecha = new Date(CAMPANA.actualizado + 'T12:00:00').toLocaleDateString('es-ES', {
   day: 'numeric', month: 'long', year: 'numeric'
@@ -29,6 +50,7 @@ const campanaAbierta = new Date() <= limite;
   description={CAMPANA.descripcion}
   image="/images/campana/reencuentros-gaza-madrid-og.jpg"
 >
+  {jsonLdFaq && <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdFaq)} />}
 
   <!-- Cabecera de la campana -->
   <section class="campana-hero">
@@ -163,7 +185,23 @@ const campanaAbierta = new Date() <= limite;
         />
       </figure>
 
-      <div class="prosa prosa--ancho" set:html={CAMPANA.contenido} />
+      <div class="prosa prosa--ancho">
+        {bloques.map((b) => (
+          <>
+            <Fragment set:html={b.html} />
+            {b.faqs.length > 0 && (
+              <div class="faq">
+                {b.faqs.map((f) => (
+                  <details class="faq__item">
+                    <summary class="faq__pregunta">{f.pregunta}</summary>
+                    <p class="faq__respuesta">{f.respuesta}</p>
+                  </details>
+                ))}
+              </div>
+            )}
+          </>
+        ))}
+      </div>
 
       <p class="campana-cierre">
         <a class="boton boton--primario" href="#donar">Quiero ayudar</a>

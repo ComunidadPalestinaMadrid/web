@@ -22,6 +22,8 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261117-171', fecha: '2026-11-17', importe: 20, nombre: 'Anónimo' },
+    { id: 'don-20261117-170', fecha: '2026-11-17', importe: 20, nombre: 'Marta' },
     { id: 'don-20261116-169', fecha: '2026-11-16', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261116-168', fecha: '2026-11-16', importe: 10, nombre: 'Anónimo' },
     { id: 'don-20261116-167', fecha: '2026-11-16', importe: 100, nombre: 'Anónimo' },
@@ -192,9 +194,9 @@ export const CAMPANA = {
     { id: 'don-20261115-002', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261115-001', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
   ],
-  actualizado: '2026-11-16',
+  actualizado: '2026-11-17',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '22:22',
+  horaActualizacion: '00:51',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
@@ -209,6 +211,26 @@ export const CAMPANA = {
     beneficiario: 'ASOC. COM. HISPANO PALESTINA (JERUSALEN)',
     concepto: 'DONACION REFUGIADOS GAZA + [TU NOMBRE]'
   },
+
+  /** Preguntas frecuentes, agrupadas por el titular del bloque en el que se muestran.
+      Todas las respuestas salen del texto de la campana o de los datos de arriba. */
+  faq: [
+    {
+      bloque: 'Nuestro objetivo',
+      pregunta: '¿A cuántas personas quiere traer la campaña?',
+      respuesta: 'A 10 personas refugiadas de Gaza, familiares de personas que ya fueron evacuadas a España. El viaje es desde Gaza hasta Jordania y, desde allí, a Madrid, donde se reencuentran con sus familias.'
+    },
+    {
+      bloque: 'Nuestro objetivo',
+      pregunta: '¿Cuánto dinero hace falta?',
+      respuesta: 'Como mínimo 6.000 €, que cubren los billetes de avión y los gastos asociados al transporte. El objetivo óptimo de la campaña son 10.000 €.'
+    },
+    {
+      bloque: 'Nuestro objetivo',
+      pregunta: '¿Cumplen los requisitos legales para venir a España?',
+      respuesta: 'Sí. Todas las personas incluidas en la campaña cumplen los requisitos legales para acogerse al derecho de reagrupación familiar, reconocido en la legislación española.'
+    }
+  ],
 
   /** Suma de las donaciones */
   get recaudado() { return this.donaciones.reduce((t, d) => t + d.importe, 0); },
