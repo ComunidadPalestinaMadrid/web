@@ -14,8 +14,12 @@ const eventos = proximosEventos(3);
 
 /* --- Destacado de la campana --------------------------------------------- */
 const eur = euros;
-const pctCampana = Math.min(100, (CAMPANA.recaudado / CAMPANA.objetivoOptimo) * 100);
-const pctMinimoCampana = (CAMPANA.objetivoMinimo / CAMPANA.objetivoOptimo) * 100;
+/* Misma logica que en la pagina de la campana: la escala crece si se supera el optimo */
+const escalaCampana = Math.max(CAMPANA.objetivoOptimo, CAMPANA.recaudado);
+const pctCampana = (CAMPANA.recaudado / escalaCampana) * 100;
+const pctMinimoCampana = (CAMPANA.objetivoMinimo / escalaCampana) * 100;
+const pctOptimoCampana = (CAMPANA.objetivoOptimo / escalaCampana) * 100;
+const hayExtraCampana = CAMPANA.recaudado > CAMPANA.objetivoOptimo;
 const fechaLimiteCampana = new Date(CAMPANA.fechaLimite + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
 
 const efemerides = efemeridesProximas().slice(0, 4);
@@ -65,8 +69,15 @@ const coleActividades = [
         <div class="jumbo__recaudacion">
           <p class="jumbo__cifra">{eur(CAMPANA.recaudado)} <span class="jumbo__de">de {eur(CAMPANA.objetivoMinimo)}</span></p>
           <div class="jumbo__barra" aria-hidden="true">
-            <span style={`width: ${pctCampana.toFixed(2)}%`}></span>
-            <i style={`left: ${pctMinimoCampana.toFixed(2)}%`}></i>
+            <span class={'jumbo__relleno' + (hayExtraCampana ? ' jumbo__relleno--extra' : '')} style={`width: ${pctOptimoCampana.toFixed(2)}%`}></span>
+            {hayExtraCampana && (
+              <span
+                class="jumbo__extra"
+                style={`left: ${pctOptimoCampana.toFixed(2)}%; width: ${(pctCampana - pctOptimoCampana).toFixed(2)}%`}
+              ></span>
+            )}
+            <i class="jumbo__marca" style={`left: ${pctMinimoCampana.toFixed(2)}%`}></i>
+            {hayExtraCampana && <i class="jumbo__marca jumbo__marca--optimo" style={`left: ${pctOptimoCampana.toFixed(2)}%`}></i>}
           </div>
           <p class="jumbo__leyenda">Mínimo {eur(CAMPANA.objetivoMinimo)} · óptimo {eur(CAMPANA.objetivoOptimo)}</p>
         </div>

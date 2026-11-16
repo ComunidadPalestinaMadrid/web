@@ -853,13 +853,27 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   position: relative; height: 10px; margin: .55rem 0 .4rem;
   border-radius: 999px; background: rgba(255, 255, 255, .24);
 }
-.jumbo__barra span {
+.jumbo__relleno {
   position: absolute; left: 0; top: 0; bottom: 0;
   border-radius: 999px; background: #fff;
 }
-.jumbo__barra i {
+.jumbo__relleno--extra { border-radius: 999px 0 0 999px; }
+/* Tramo extra del destacado: grises suaves, en movimiento */
+.jumbo__extra {
+  position: absolute; top: 0; bottom: 0;
+  border-radius: 0 999px 999px 0;
+  background-color: #cfd4dc;
+  background-image: repeating-linear-gradient(115deg, transparent 0 9px, rgba(255, 255, 255, .55) 9px 18px);
+  background-size: 200% 100%;
+  animation: barra-extra 1.8s linear infinite;
+}
+.jumbo__marca {
   position: absolute; top: -4px; bottom: -4px; width: 2px;
   border-radius: 1px; background: var(--ps-rojo);
+}
+.jumbo__marca--optimo { background: rgba(255, 255, 255, .85); }
+@media (prefers-reduced-motion: reduce) {
+  .jumbo__extra { animation: none; }
 }
 .jumbo__leyenda { margin: 0; font-size: var(--t-xs); color: rgba(255, 255, 255, .72); }
 .jumbo__cta {
