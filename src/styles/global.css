@@ -1022,18 +1022,4 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   .barra__extra { animation: none; }
 }
 
-/* ==========================================================================
-   Preguntas frecuentes por bloque
-   ========================================================================== */
 
-.faq { margin: 1.4rem 0 2.2rem; border-top: 1px solid var(--linea); }
-.faq__item { border-bottom: 1px solid var(--linea); }
-.faq__pregunta {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-  padding: .85rem 0; cursor: pointer; list-style: none;
-  font-family: var(--fuente); font-size: var(--t-base); font-weight: 600; color: var(--tinta);
-}
-.faq__pregunta::-webkit-details-marker { display: none; }
-.faq__pregunta::after { content: '+'; color: var(--texto-suave); font-weight: 700; }
-.faq__item[open] .faq__pregunta::after { content: '−'; }
-.faq__respuesta { margin: 0 0 1rem; color: var(--texto-suave); }

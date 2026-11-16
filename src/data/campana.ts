@@ -212,26 +212,6 @@ export const CAMPANA = {
     concepto: 'DONACION REFUGIADOS GAZA + [TU NOMBRE]'
   },
 
-  /** Preguntas frecuentes, agrupadas por el titular del bloque en el que se muestran.
-      Todas las respuestas salen del texto de la campana o de los datos de arriba. */
-  faq: [
-    {
-      bloque: 'Nuestro objetivo',
-      pregunta: '¿A cuántas personas quiere traer la campaña?',
-      respuesta: 'A 10 personas refugiadas de Gaza, familiares de personas que ya fueron evacuadas a España. El viaje es desde Gaza hasta Jordania y, desde allí, a Madrid, donde se reencuentran con sus familias.'
-    },
-    {
-      bloque: 'Nuestro objetivo',
-      pregunta: '¿Cuánto dinero hace falta?',
-      respuesta: 'Como mínimo 6.000 €, que cubren los billetes de avión y los gastos asociados al transporte. El objetivo óptimo de la campaña son 10.000 €.'
-    },
-    {
-      bloque: 'Nuestro objetivo',
-      pregunta: '¿Cumplen los requisitos legales para venir a España?',
-      respuesta: 'Sí. Todas las personas incluidas en la campaña cumplen los requisitos legales para acogerse al derecho de reagrupación familiar, reconocido en la legislación española.'
-    }
-  ],
-
   /** Suma de las donaciones */
   get recaudado() { return this.donaciones.reduce((t, d) => t + d.importe, 0); },
 
