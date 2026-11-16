@@ -22,6 +22,24 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261116-142', fecha: '2026-11-16', importe: 30, nombre: 'Anónimo' },
+    { id: 'don-20261116-141', fecha: '2026-11-16', importe: 70, nombre: 'Anónimo' },
+    { id: 'don-20261116-140', fecha: '2026-11-16', importe: 50, nombre: 'Carmen Arias' },
+    { id: 'don-20261116-139', fecha: '2026-11-16', importe: 500, nombre: 'Nacho' },
+    { id: 'don-20261116-138', fecha: '2026-11-16', importe: 50, nombre: 'Anónimo' },
+    { id: 'don-20261116-137', fecha: '2026-11-16', importe: 50, nombre: 'Anónimo' },
+    { id: 'don-20261116-136', fecha: '2026-11-16', importe: 50, nombre: 'Bahdja' },
+    { id: 'don-20261116-135', fecha: '2026-11-16', importe: 50, nombre: 'Ascensión López Avendano' },
+    { id: 'don-20261116-134', fecha: '2026-11-16', importe: 50, nombre: 'Inmaculada Jiménez Morell' },
+    { id: 'don-20261116-133', fecha: '2026-11-16', importe: 50, nombre: 'Anónimo' },
+    { id: 'don-20261116-132', fecha: '2026-11-16', importe: 30, nombre: 'Nuria' },
+    { id: 'don-20261116-131', fecha: '2026-11-16', importe: 25, nombre: 'Anónimo' },
+    { id: 'don-20261116-130', fecha: '2026-11-16', importe: 25, nombre: 'Pilar' },
+    { id: 'don-20261116-129', fecha: '2026-11-16', importe: 25, nombre: 'Anónimo' },
+    { id: 'don-20261116-128', fecha: '2026-11-16', importe: 10, nombre: 'Anónimo' },
+    { id: 'don-20261116-127', fecha: '2026-11-16', importe: 10, nombre: 'Anónimo' },
+    { id: 'don-20261116-126', fecha: '2026-11-16', importe: 50, nombre: 'Anónimo' },
+    { id: 'don-20261116-125', fecha: '2026-11-16', importe: 25, nombre: 'Anónimo' },
     { id: 'don-20261116-124', fecha: '2026-11-16', importe: 50, nombre: 'Juanjo Ordoñez' },
     { id: 'don-20261116-123', fecha: '2026-11-16', importe: 12, nombre: 'Waby' },
     { id: 'don-20261116-122', fecha: '2026-11-16', importe: 30, nombre: 'Anónimo' },
@@ -149,7 +167,7 @@ export const CAMPANA = {
   ],
   actualizado: '2026-11-16',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '12:40',
+  horaActualizacion: '14:22',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
