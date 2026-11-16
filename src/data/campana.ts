@@ -22,6 +22,8 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261116-152', fecha: '2026-11-16', importe: 40, nombre: 'Anónimo' },
+    { id: 'don-20261116-151', fecha: '2026-11-16', importe: 50, nombre: 'Ana' },
     { id: 'don-20261116-150', fecha: '2026-11-16', importe: 50, nombre: 'Karmele y Manuel' },
     { id: 'don-20261116-149', fecha: '2026-11-16', importe: 200, nombre: 'Inma y Jose' },
     { id: 'don-20261116-148', fecha: '2026-11-16', importe: 50, nombre: 'Anónimo' },
@@ -175,7 +177,7 @@ export const CAMPANA = {
   ],
   actualizado: '2026-11-16',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '17:17',
+  horaActualizacion: '17:39',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
