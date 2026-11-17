@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PaginaCabecera from '../PaginaCabecera.astro';
 import Buscador from '../Buscador.astro';
 import { publicaciones, ETIQUETA_TIPO, CLASE_TIPO } from '../../data/publicaciones';
+import { CONTACTO_PRENSA } from '../../data/prensa';
 import { useTranslations, localizePath, formatFecha, claveFecha, withBase } from '../../i18n/utils';
 
 const t = useTranslations();
@@ -25,7 +26,14 @@ const notas = publicaciones.filter((p) => p.tipo === 'nota-prensa' || p.tipo ===
   </PaginaCabecera>
   <section class="seccion seccion--ajustada" data-buscador-scope>
     <div class="contenedor">
-        <ul class="lista-prensa">
+        <div class="aviso-prensa">
+        <p class="aviso-prensa__pregunta">¿Quieres que te enviemos nuestras notas de prensa y recursos gráficos?</p>
+        <p class="aviso-prensa__texto">
+          Escríbenos a <a href={'mailto:' + CONTACTO_PRENSA.email}>{CONTACTO_PRENSA.email}</a> indicándonos tu nombre y medio y te incluiremos en nuestra lista de difusión.
+        </p>
+      </div>
+
+      <ul class="lista-prensa">
           {notas.map((n) => (
             <li class="nota-prensa" data-buscable={n.title + ' ' + n.resumen + ' ' + claveFecha(n.date)}>
               {n.miniatura ? (

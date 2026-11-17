@@ -1088,3 +1088,18 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .seccion--ajustada { padding-top: .6rem; }
 /* La primera entrada ya no necesita línea superior: la separa la cabecera */
 .lista-apariciones .aparicion:first-child { border-top: 0; }
+
+/* Aviso de lista de difusión, encima del listado de notas ------------------ */
+.aviso-prensa {
+  margin: 0 0 2rem;
+  padding: 1.15rem 1.3rem;
+  background: var(--fondo-suave);
+  border-left: 3px solid var(--ps-rojo);
+  border-radius: var(--radio-sm);
+}
+.aviso-prensa__pregunta {
+  margin: 0 0 .4rem;
+  font-family: var(--fuente); font-size: var(--t-lg);
+  font-weight: 600; color: var(--tinta); text-wrap: pretty;
+}
+.aviso-prensa__texto { margin: 0; color: var(--texto-suave); }
