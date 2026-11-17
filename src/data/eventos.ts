@@ -25,6 +25,24 @@ export interface Evento {
 
 export const EVENTOS: Evento[] = [
   {
+    id: 'juventud-palestina-ucm-2026',
+    titulo: 'La juventud palestina bajo la colonización israelí',
+    fecha: '2026-11-18',
+    hora: '13:00',
+    lugar: 'Salón de Grados, Facultad de Ciencias Políticas y Sociología (UCM), Madrid',
+    descripcion: 'Mesa redonda con miembros del Foro de Juventud Palestina sobre la juventud palestina bajo la colonización israelí.',
+    categoria: 'cultural',
+    imagen: '/images/uploads/juventud-palestina-ucm-2026.webp',
+    cartel: '/images/uploads/juventud-palestina-ucm-2026.jpg',
+    detalle: `
+<p>Mesa redonda con Tala Nasser, Nadeen Odeh, Adam Lahham y Mohammed Zeyad, miembros del Foro de Juventud Palestina.</p>
+
+<p>Organizan BADIL (Resource Center for Palestinian Residency & Refugee Rights) y la Red Universitaria por Palestina (RUxP).</p>
+`,
+    precio: 0,
+    destacado: true
+  },
+  {
     id: 'encuentro-familias-refugiadas-2026',
     titulo: 'Encuentro con familias refugiadas recién llegadas',
     fecha: '2026-10-25',
