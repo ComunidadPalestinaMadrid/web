@@ -11,6 +11,13 @@ export interface Aparicion {
 
 export const APARICIONES: Aparicion[] = [
   {
+    medio: 'AION SUR',
+    titular: 'Piden ayuda para traer a España a 10 familiares de niños palestinos evacuados de Gaza',
+    subtitulo: 'La Comunidad Hispano Palestina Jerusalén pone en marcha una campaña para financiar los billetes de avión de diez familiares de menores evacuados desde Gaza.',
+    url: 'https://www.aionsur.com/piden-ayuda-para-traer-a-espana-a-10-familiares-de-ninos-palestinos-evacuados-de-gaza/',
+    fecha: '2026-11-16'
+  },
+  {
     medio: 'Europa Press TV',
     titular: 'Activistas exigen medidas urgentes a la UE y España para detener el "genocidio" en Palestina',
     subtitulo: 'Declaraciones de Ibrahim Zaituni, de la Comunidad Hispano Palestina Jerusalén, y de otros activistas: el genocidio "continúa y se extiende" a Líbano, Yemen e Irán.',
