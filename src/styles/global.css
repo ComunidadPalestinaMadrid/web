@@ -405,6 +405,17 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   transition: transform .25s ease;
 }
 .aparicion__foto:hover img { transform: scale(1.03); }
+.aparicion__foto--vacia {
+  display: grid; place-content: center; gap: .35rem; text-align: center;
+  padding: .8rem;
+  background: var(--fondo-suave);
+  border: 1px dashed var(--linea);
+  color: var(--texto-suave);
+}
+.aparicion__foto-texto {
+  font-family: var(--fuente); font-size: var(--t-xs);
+  letter-spacing: .06em; text-transform: uppercase;
+}
 .aparicion__contenido { display: flex; flex-direction: column; min-width: 0; }
 .aparicion__pie { margin-top: auto; padding-top: .4rem; }
 
