@@ -1,8 +1,15 @@
 ---
 import { absoluteUrl, localizePath, currentPath } from '../i18n/utils';
 
-interface Props { eyebrow?: string; titulo: string; entradilla?: string; migas?: { texto: string; href?: string }[]; }
-const { eyebrow, titulo, entradilla, migas } = Astro.props;
+interface Props {
+  eyebrow?: string;
+  titulo: string;
+  entradilla?: string;
+  migas?: { texto: string; href?: string }[];
+  /** Quita la linea inferior de la cabecera */
+  sinFilete?: boolean;
+}
+const { eyebrow, titulo, entradilla, migas, sinFilete = false } = Astro.props;
 
 /* Datos estructurados de las migas de pan (Google las muestra en el resultado).
    Google exige el campo `item` en TODOS los ListItem: el ultimo nivel, que es la
@@ -21,7 +28,7 @@ const jsonLd = migas && migas.length > 0
     }
   : null;
 ---
-<section class="pagina-cabecera">
+<section class={'pagina-cabecera' + (sinFilete ? ' pagina-cabecera--sin-filete' : '')}>
   <div class="contenedor">
     {migas && migas.length > 0 && (
       <nav class="migas" aria-label="Migas de pan">
@@ -31,7 +38,10 @@ const jsonLd = migas && migas.length > 0
       </nav>
     )}
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
-    <h1>{titulo}</h1>
+    <div class="pagina-cabecera__fila">
+      <h1>{titulo}</h1>
+      <slot />
+    </div>
     {entradilla && <p class="entradilla">{entradilla}</p>}
   </div>
 </section>

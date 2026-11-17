@@ -14,15 +14,19 @@ const apariciones = [...APARICIONES].sort((a, b) => b.fecha.localeCompare(a.fech
   <PaginaCabecera
     eyebrow={t('nav.prensa')}
     titulo={t('nav.apariciones')}
+    sinFilete
     migas={[
       { texto: t('nav.inicio'), href: localizePath('/') },
       { texto: t('nav.prensa'), href: localizePath('/prensa') },
       { texto: t('nav.apariciones') }
     ]}
-  />
-  <section class="seccion" data-buscador-scope>
-    <div class="contenedor">
+  >
+    <div class="pagina-cabecera__accion">
       <Buscador placeholder={t('prensa.buscarMedios')} vacio={t('prensa.sinResultados')} />
+    </div>
+  </PaginaCabecera>
+  <section class="seccion seccion--ajustada" data-buscador-scope>
+    <div class="contenedor">
       <ul class="lista-apariciones">
         {apariciones.map((a) => (
           <li class="aparicion" data-buscable={a.medio + ' ' + a.titular + ' ' + (a.subtitulo || '') + ' ' + claveFecha(a.fecha)}>
