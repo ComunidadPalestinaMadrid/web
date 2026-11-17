@@ -1079,11 +1079,13 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 
 /* Cabecera con acciones a la derecha (buscador, etc.) --------------------- */
 .pagina-cabecera__fila {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: flex-end; justify-content: space-between;
   gap: 1.25rem 2rem; flex-wrap: wrap;
 }
 .pagina-cabecera__fila h1 { margin: 0; }
+/* La caja queda apoyada en la misma linea que el titulo */
 .pagina-cabecera__accion { flex: 0 0 auto; width: 100%; max-width: 320px; }
+.pagina-cabecera__accion .buscador { margin: 0; }
 .pagina-cabecera--sin-filete { border-bottom: 0; background: none; }
 .seccion--ajustada { padding-top: .6rem; }
 /* La primera entrada ya no necesita línea superior: la separa la cabecera */
