@@ -247,7 +247,11 @@ export const CAMPANA = {
     {
       pregunta: 'He hecho una donación correcta pero mi nombre no aparece entre los donantes en esta web',
       respuesta: '<p>Si has hecho una donación pero no te encuentras, puede ser debido a un fallo humano transcribiendo los datos, o a que no has puesto claramente el nombre con el que querías aparecer en el concepto.</p><p>En <a href="#donaciones">esta sección</a> puedes ver todas las personas que han donado.</p><p>Si quieres que lo corrijamos, por favor envíanos el recibo de la donación a <a href="mailto:c.hispano.palestina.madrid@gmail.com">c.hispano.palestina.madrid@gmail.com</a> y el nombre con el que quieres aparecer y lo modificamos.</p>'
-    }
+    },
+    {
+      pregunta: '¿Qué se hará con el dinero que sobre, una vez comprados los billetes de avión?',
+      respuesta: '<p>Con el dinero sobrante haremos una aportación monetaria a las familias refugiadas que se apoyan en la Comunidad Palestina de Madrid, siguiendo nuestros criterios propios de reparto equitativo.</p>'
+    },
   ],
 
   /** Suma de las donaciones */
