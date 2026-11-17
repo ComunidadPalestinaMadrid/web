@@ -1094,7 +1094,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   margin: 0 0 2rem;
   padding: 1.15rem 1.3rem;
   background: var(--fondo-suave);
-  border-left: 3px solid var(--ps-rojo);
+  border: 1px solid var(--ps-rojo);
   border-radius: var(--radio-sm);
 }
 .aviso-prensa__pregunta {
