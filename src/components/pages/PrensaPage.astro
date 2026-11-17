@@ -5,7 +5,7 @@ import Buscador from '../Buscador.astro';
 import { publicaciones, ETIQUETA_TIPO, CLASE_TIPO } from '../../data/publicaciones';
 import { CONTACTO_PRENSA } from '../../data/prensa';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, formatFecha } from '../../i18n/utils';
+import { useTranslations, localizePath, formatFecha, claveFecha } from '../../i18n/utils';
 
 const t = useTranslations();
 // Sala de prensa: notas de prensa y comunicados, del mas reciente al mas antiguo
@@ -27,7 +27,7 @@ const notas = publicaciones.filter((p) => p.tipo === 'nota-prensa' || p.tipo ===
         <Buscador placeholder={t('prensa.buscar')} vacio={t('prensa.sinResultados')} />
         <ul class="lista-prensa">
           {notas.map((n) => (
-            <li class="nota-prensa" data-buscable={n.title + ' ' + n.resumen + ' ' + n.date}>
+            <li class="nota-prensa" data-buscable={n.title + ' ' + n.resumen + ' ' + claveFecha(n.date)}>
               <p class="nota-prensa__meta">
                 <span class="nota-prensa__fecha">{formatFecha(n.date)}</span>
                 <span class={'etiqueta ' + CLASE_TIPO[n.tipo]}>{t(ETIQUETA_TIPO[n.tipo])}</span>

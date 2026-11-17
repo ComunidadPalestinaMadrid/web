@@ -77,6 +77,16 @@ export function formatFecha(iso: string): string {
   return new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
 }
 
+/** Texto de fecha para el buscador: admite "noviembre", "16/11/2026", "11/2026" o la ISO. */
+export function claveFecha(iso: string): string {
+  const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
+  const [anio, mes, dia] = iso.split('-');
+  const larga = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+  const corta = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }).format(d).replace(/\./g, '');
+  const mesLargo = new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(d);
+  return [iso, larga, corta, mesLargo, mesLargo + ' ' + anio, dia + '/' + mes + '/' + anio, mes + '/' + anio, dia + '-' + mes + '-' + anio].join(' ');
+}
+
 export function formatFechaCorta(iso: string): { dia: string; mes: string; anio: string } {
   const d = new Date(iso + (iso.length === 10 ? 'T12:00:00' : ''));
   return {
