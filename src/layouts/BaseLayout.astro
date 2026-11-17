@@ -23,8 +23,10 @@ interface Props {
   fecha?: string;
   /** Seccion o categoria, para article:section */
   seccion?: string;
+  /** Marca la pagina como no indexable (paginas de prueba o internas) */
+  noindex?: boolean;
 }
-const { title, description, image, tipo = 'website', fecha, seccion } = Astro.props;
+const { title, description, image, tipo = 'website', fecha, seccion, noindex = false } = Astro.props;
 const t = useTranslations();
 const canonical = absoluteUrl(localizePath(currentPath(Astro.url)));
 
@@ -124,6 +126,7 @@ const jsonLd = {
     <title>{titulo}</title>
     <meta name="description" content={desc} />
     <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="icon" type="image/png" sizes="32x32" href={withBase('/favicon-32x32.png')} />
     <link rel="icon" type="image/png" sizes="16x16" href={withBase('/favicon-16x16.png')} />
