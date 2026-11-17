@@ -15,6 +15,8 @@ export interface Publicacion {
   subtitulo?: string;
   resumen: string;
   portada: string;
+  /** Miniatura para listados (version reducida de la portada), opcional */
+  miniatura?: string;
   originalUrl: string;
   html: string;
 }
