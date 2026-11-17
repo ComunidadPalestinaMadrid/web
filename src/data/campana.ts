@@ -22,6 +22,7 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261117-196', fecha: '2026-11-17', importe: 10, nombre: 'Anónimo' },
     { id: 'don-20261117-195', fecha: '2026-11-17', importe: 1000, nombre: 'Fundación Alejandro Rojas-Marcos' },
     { id: 'don-20261117-194', fecha: '2026-11-17', importe: 200, nombre: 'Anónimo' },
     { id: 'don-20261117-193', fecha: '2026-11-17', importe: 200, nombre: 'BDS Madrid' },
@@ -220,7 +221,7 @@ export const CAMPANA = {
   ],
   actualizado: '2026-11-17',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '09:39',
+  horaActualizacion: '11:22',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
