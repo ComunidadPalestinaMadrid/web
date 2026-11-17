@@ -1106,6 +1106,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 
 /* Bloque de transferencia y vías secundarias ------------------------------- */
 .donacion-transferencia {
+  font-family: var(--fuente);
   padding: 1.4rem 1.5rem;
   background: var(--fondo);
   border: 1px solid var(--linea);
@@ -1122,7 +1123,27 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   color: var(--texto-suave); font-size: var(--t-xs);
   letter-spacing: .06em; text-transform: uppercase;
 }
-.donacion-datos dd { margin: 0; font-weight: 600; color: var(--tinta); }
+.donacion-datos dd {
+  margin: 0; font-weight: 600; color: var(--tinta);
+  display: flex; align-items: center; gap: .55rem;
+}
+.donacion-datos__valor { min-width: 0; }
+
+/* Botón de copiar */
+.copiar {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; padding: 0;
+  background: transparent; border: 0; border-radius: 5px;
+  color: var(--texto-suave); cursor: pointer;
+  transition: background-color .14s ease, color .14s ease;
+}
+.copiar:hover { background: var(--fondo-suave); color: var(--tinta); }
+.copiar:focus-visible { outline: 2px solid var(--ps-rojo); outline-offset: 2px; }
+.copiar__hecho { display: none; color: var(--ps-verde); }
+.copiar--hecho .copiar__icono { display: none; }
+.copiar--hecho .copiar__hecho { display: inline-flex; }
+.copiar--hecho { color: var(--ps-verde); }
 .donacion-datos__iban {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   letter-spacing: .02em; user-select: all;

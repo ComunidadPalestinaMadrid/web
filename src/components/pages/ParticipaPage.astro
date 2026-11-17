@@ -96,15 +96,33 @@ const otrasVias = [
         <dl class="donacion-datos">
           <div>
             <dt>Beneficiario</dt>
-            <dd>{transferencia.beneficiario}</dd>
+            <dd>
+              <span class="donacion-datos__valor">{transferencia.beneficiario}</span>
+              <button type="button" class="copiar" data-copiar={transferencia.beneficiario} aria-label="Copiar beneficiario">
+                <span class="copiar__icono"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span>
+                <span class="copiar__hecho"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+              </button>
+            </dd>
           </div>
           <div>
             <dt>Concepto</dt>
-            <dd>{transferencia.concepto}</dd>
+            <dd>
+              <span class="donacion-datos__valor">{transferencia.concepto}</span>
+              <button type="button" class="copiar" data-copiar={transferencia.concepto} aria-label="Copiar concepto">
+                <span class="copiar__icono"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span>
+                <span class="copiar__hecho"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+              </button>
+            </dd>
           </div>
           <div>
             <dt>Número de cuenta</dt>
-            <dd class="donacion-datos__iban">{transferencia.cuenta}</dd>
+            <dd class="donacion-datos__iban">
+              <span class="donacion-datos__valor">{transferencia.cuenta}</span>
+              <button type="button" class="copiar" data-copiar={transferencia.cuenta} aria-label="Copiar número de cuenta">
+                <span class="copiar__icono"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span>
+                <span class="copiar__hecho"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+              </button>
+            </dd>
           </div>
         </dl>
       </div>
@@ -119,4 +137,20 @@ const otrasVias = [
       </div>
     </div>
   </section>
+
+<script>
+  // Botones de copiar de los datos de la transferencia
+  document.querySelectorAll('[data-copiar]').forEach((boton) => {
+    boton.addEventListener('click', async () => {
+      const texto = boton.getAttribute('data-copiar') || '';
+      try {
+        await navigator.clipboard.writeText(texto);
+        boton.classList.add('copiar--hecho');
+        setTimeout(() => boton.classList.remove('copiar--hecho'), 1600);
+      } catch {
+        /* sin permiso de portapapeles: no hacemos nada */
+      }
+    });
+  });
+</script>
 </BaseLayout>
