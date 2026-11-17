@@ -22,6 +22,10 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261117-201', fecha: '2026-11-17', importe: 150, nombre: 'Juliana García' },
+    { id: 'don-20261117-200', fecha: '2026-11-17', importe: 10, nombre: 'Jesús Pozo García' },
+    { id: 'don-20261117-199', fecha: '2026-11-17', importe: 100, nombre: 'Anónimo' },
+    { id: 'don-20261117-198', fecha: '2026-11-17', importe: 20, nombre: 'Pedro y Sonia' },
     { id: 'don-20261117-197', fecha: '2026-11-17', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261117-196', fecha: '2026-11-17', importe: 10, nombre: 'Anónimo' },
     { id: 'don-20261117-195', fecha: '2026-11-17', importe: 1000, nombre: 'Fundación Alejandro Rojas-Marcos' },
@@ -222,7 +226,7 @@ export const CAMPANA = {
   ],
   actualizado: '2026-11-17',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '14:59',
+  horaActualizacion: '19:12',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
