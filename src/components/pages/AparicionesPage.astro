@@ -4,7 +4,7 @@ import PaginaCabecera from '../PaginaCabecera.astro';
 import Buscador from '../Buscador.astro';
 import { APARICIONES, CONTACTO_PRENSA } from '../../data/prensa';
 import { SITE } from '../../data/site';
-import { useTranslations, localizePath, formatFecha } from '../../i18n/utils';
+import { useTranslations, localizePath, formatFecha, withBase } from '../../i18n/utils';
 
 const t = useTranslations();
 // Siempre de mas reciente a mas antigua, aunque el orden del fichero cambie.
@@ -14,7 +14,6 @@ const apariciones = [...APARICIONES].sort((a, b) => b.fecha.localeCompare(a.fech
   <PaginaCabecera
     eyebrow={t('nav.prensa')}
     titulo={t('nav.apariciones')}
-    entradilla={t('prensa.aparicionesIntro')}
     migas={[
       { texto: t('nav.inicio'), href: localizePath('/') },
       { texto: t('nav.prensa'), href: localizePath('/prensa') },
@@ -22,12 +21,17 @@ const apariciones = [...APARICIONES].sort((a, b) => b.fecha.localeCompare(a.fech
     ]}
   />
   <section class="seccion" data-buscador-scope>
-    <div class="contenedor dos-columnas">
-      <div>
-        <Buscador placeholder={t('prensa.buscarMedios')} vacio={t('prensa.sinResultados')} />
-        <ul class="lista-apariciones">
-          {apariciones.map((a) => (
-            <li class="aparicion" data-buscable={a.medio + ' ' + a.titular + ' ' + (a.subtitulo || '') + ' ' + a.fecha}>
+    <div class="contenedor">
+      <Buscador placeholder={t('prensa.buscarMedios')} vacio={t('prensa.sinResultados')} />
+      <ul class="lista-apariciones">
+        {apariciones.map((a) => (
+          <li class="aparicion" data-buscable={a.medio + ' ' + a.titular + ' ' + (a.subtitulo || '') + ' ' + a.fecha}>
+            {a.imagen && (
+              <a class="aparicion__foto" href={a.url} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+                <img src={withBase(a.imagen)} alt="" loading="lazy" decoding="async" />
+              </a>
+            )}
+            <div class="aparicion__contenido">
               <p class="aparicion__meta">
                 <span class="aparicion__medio">{a.medio}</span>
                 <span class="aparicion__fecha">{formatFecha(a.fecha)}</span>
@@ -39,26 +43,11 @@ const apariciones = [...APARICIONES].sort((a, b) => b.fecha.localeCompare(a.fech
               <p class="aparicion__pie">
                 <a class="boton boton--texto boton--pequeno" href={a.url} target="_blank" rel="noopener">{t('prensa.abrir')} ↗</a>
               </p>
-            </li>
-          ))}
-        </ul>
-      </div>
+            </div>
+          </li>
+        ))}
+      </ul>
 
-      <aside>
-        <div class="panel panel--sticky">
-          <h3>{t('nav.salaPrensa')}</h3>
-          <p class="pieza-pequena">
-            {'Notas de prensa y comunicados de la asociación, del más reciente al más antiguo.'}
-          </p>
-          <a class="boton boton--fantasma boton--pequeno" href={localizePath('/prensa')}>{t('nav.salaPrensa')} →</a>
-          <h3 class="mt-3">{t('prensa.contactoMedios')}</h3>
-          <ul class="lista-enlaces pieza-pequena">
-            <li><a href={'mailto:' + CONTACTO_PRENSA.email}>{CONTACTO_PRENSA.email}</a></li>
-            <li><a href={SITE.instagram.url} rel="noopener" target="_blank">{SITE.instagram.usuario}</a></li>
-          </ul>
-          <p class="pieza-pequena texto-suave mb-0">{CONTACTO_PRENSA.idiomas}</p>
-        </div>
-      </aside>
     </div>
   </section>
 </BaseLayout>
