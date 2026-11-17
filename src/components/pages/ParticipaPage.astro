@@ -38,8 +38,15 @@ const modalidades = [
 
 const donacionesIntro = 'Si quieres apoyar económicamente el trabajo de la asociación, estas son las vías disponibles:';
 
-const donaciones = [
-  { titulo: 'Transferencia bancaria', texto: 'Cuenta de la asociación: [PENDIENTE].' },
+/* Datos de la transferencia, el bloque principal */
+const transferencia = {
+  beneficiario: 'ASOC. COM. HISPANO PALESTINA (JERUSALEN)',
+  concepto: 'DONACION + [TU NOMBRE]',
+  cuenta: 'ES45 2100 2566 9813 0078 8761'
+};
+
+/* Las otras dos vías, debajo y en dos columnas */
+const otrasVias = [
   { titulo: 'Bizum', texto: 'Número para donaciones: [PENDIENTE].' },
   { titulo: 'Donaciones en especie', texto: 'Materiales, servicios o espacios: escríbenos y lo coordinamos.' }
 ];
@@ -84,8 +91,26 @@ const donaciones = [
         <h2>{t('participa.donaciones')}</h2>
         <p class="entradilla">{donacionesIntro}</p>
       </div>
-      <div class="rejilla rejilla--3">
-        {donaciones.map((d) => (
+      <div class="donacion-transferencia">
+        <h3 class="donacion-transferencia__titulo">Transferencia bancaria</h3>
+        <dl class="donacion-datos">
+          <div>
+            <dt>Beneficiario</dt>
+            <dd>{transferencia.beneficiario}</dd>
+          </div>
+          <div>
+            <dt>Concepto</dt>
+            <dd>{transferencia.concepto}</dd>
+          </div>
+          <div>
+            <dt>Número de cuenta</dt>
+            <dd class="donacion-datos__iban">{transferencia.cuenta}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="rejilla rejilla--2">
+        {otrasVias.map((d) => (
           <div class="panel">
             <h3>{d.titulo}</h3>
             <p class="pieza-pequena mb-0">{d.texto}</p>
