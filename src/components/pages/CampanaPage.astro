@@ -11,6 +11,22 @@ const pctMinimo = (CAMPANA.objetivoMinimo / escala) * 100;
 const pctOptimo = (CAMPANA.objetivoOptimo / escala) * 100;
 const hayExtra = CAMPANA.recaudado > CAMPANA.objetivoOptimo;
 
+/* Preguntas frecuentes: se muestran antes del desglose y se publican como FAQPage */
+const jsonLdFaq = CAMPANA.faq.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: CAMPANA.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.pregunta,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.respuesta.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+        }
+      }))
+    }
+  : null;
+
 const importeExtra = CAMPANA.recaudado - CAMPANA.objetivoOptimo;
 const fecha = new Date(CAMPANA.actualizado + 'T12:00:00').toLocaleDateString('es-ES', {
   day: 'numeric', month: 'long', year: 'numeric'
@@ -30,6 +46,7 @@ const campanaAbierta = new Date() <= limite;
   description={CAMPANA.descripcion}
   image="/images/campana/reencuentros-gaza-madrid-og.jpg"
 >
+  {jsonLdFaq && <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLdFaq)} />}
 
   <!-- Cabecera de la campana -->
   <section class="campana-hero">
@@ -171,6 +188,23 @@ const campanaAbierta = new Date() <= limite;
       </p>
     </div>
   </section>
+  <!-- Preguntas frecuentes -->
+  <section class="seccion" id="preguntas">
+    <div class="contenedor">
+      <div class="faq-envoltorio">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          {CAMPANA.faq.map((f) => (
+            <details class="faq__item">
+              <summary class="faq__pregunta">{f.pregunta}</summary>
+              <div class="faq__respuesta" set:html={f.respuesta} />
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Desglose de donaciones (al final y plegado) -->
   <section class="seccion" id="donaciones">
     <div class="contenedor">

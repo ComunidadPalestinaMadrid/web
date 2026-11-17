@@ -1023,3 +1023,22 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 }
 
 
+
+/* ==========================================================================
+   Preguntas frecuentes
+   ========================================================================== */
+
+.faq-envoltorio { max-width: 760px; }
+.faq { margin: 1.2rem 0 0; border-top: 1px solid var(--linea); }
+.faq__item { border-bottom: 1px solid var(--linea); }
+.faq__pregunta {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: .9rem 0; cursor: pointer; list-style: none;
+  font-family: var(--fuente); font-size: var(--t-base); font-weight: 600; color: var(--tinta);
+}
+.faq__pregunta::-webkit-details-marker { display: none; }
+.faq__pregunta::after { content: '+'; color: var(--texto-suave); font-weight: 700; }
+.faq__item[open] .faq__pregunta::after { content: '−'; }
+.faq__respuesta { color: var(--texto-suave); padding-bottom: .4rem; }
+.faq__respuesta p { margin: 0 0 .9rem; }
+.faq__respuesta p:last-child { margin-bottom: 1rem; }

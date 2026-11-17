@@ -236,6 +236,18 @@ export const CAMPANA = {
     concepto: 'DONACION REFUGIADOS GAZA + [TU NOMBRE]'
   },
 
+  /** Preguntas frecuentes. Se muestran antes del desglose de donaciones. */
+  faq: [
+    {
+      pregunta: '¿La Comunidad Palestina emite certificado de donaciones?',
+      respuesta: '<p>La Asociación Comunidad Hispano Palestina Jerusalén puede emitir un certificado de donaciones, para ello tienes que escribirnos a <a href="mailto:c.hispano.palestina.madrid@gmail.com">c.hispano.palestina.madrid@gmail.com</a> con tu nombre completo, DNI e importe de la donación que has hecho.</p><p>Sin embargo, nuestra Asociación no está certificada como ONG ni de Utilidad Pública, por tanto, las personas que donen no tienen derecho a deducciones fiscales como las de las ONGs grandes.</p><p>Las donaciones que se nos hagan son a fondo perdido.</p>'
+    },
+    {
+      pregunta: 'He hecho una donación correcta pero mi nombre no aparece entre los donantes en esta web',
+      respuesta: '<p>Si has hecho una donación pero no te encuentras, puede ser debido a un fallo humano transcribiendo los datos, o a que no has puesto claramente el nombre con el que querías aparecer en el concepto.</p><p>En <a href="#donaciones">esta sección</a> puedes ver todas las personas que han donado.</p><p>Si quieres que lo corrijamos, por favor envíanos el recibo de la donación a <a href="mailto:c.hispano.palestina.madrid@gmail.com">c.hispano.palestina.madrid@gmail.com</a> y el nombre con el que quieres aparecer y lo modificamos.</p>'
+    }
+  ],
+
   /** Suma de las donaciones */
   get recaudado() { return this.donaciones.reduce((t, d) => t + d.importe, 0); },
 
