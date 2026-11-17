@@ -122,6 +122,7 @@ export const ui = {
     'prensa.buscar': 'Buscar en las notas de prensa…',
     'prensa.buscarMedios': 'Buscar por medio, titular o fecha…',
     'prensa.sinResultados': 'No hay resultados para esa búsqueda.',
+  'prensa.sinImagen': 'Sin imagen',
     'prensa.abrir': 'Ver en el medio',
 
     'contacto.titulo': 'Contacto',

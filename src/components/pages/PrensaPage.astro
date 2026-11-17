@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PaginaCabecera from '../PaginaCabecera.astro';
 import Buscador from '../Buscador.astro';
 import { publicaciones, ETIQUETA_TIPO, CLASE_TIPO } from '../../data/publicaciones';
-import { useTranslations, localizePath, formatFecha, claveFecha } from '../../i18n/utils';
+import { useTranslations, localizePath, formatFecha, claveFecha, withBase } from '../../i18n/utils';
 
 const t = useTranslations();
 // Sala de prensa: notas de prensa y comunicados, del mas reciente al mas antiguo
@@ -13,7 +13,6 @@ const notas = publicaciones.filter((p) => p.tipo === 'nota-prensa' || p.tipo ===
   <PaginaCabecera
     eyebrow={t('nav.prensa')}
     titulo={t('nav.salaPrensa')}
-    entradilla={t('prensa.salaIntro')}
     sinFilete
     migas={[
       { texto: t('nav.inicio'), href: localizePath('/') },
@@ -29,17 +28,33 @@ const notas = publicaciones.filter((p) => p.tipo === 'nota-prensa' || p.tipo ===
         <ul class="lista-prensa">
           {notas.map((n) => (
             <li class="nota-prensa" data-buscable={n.title + ' ' + n.resumen + ' ' + claveFecha(n.date)}>
-              <p class="nota-prensa__meta">
-                <span class="nota-prensa__fecha">{formatFecha(n.date)}</span>
-                <span class={'etiqueta ' + CLASE_TIPO[n.tipo]}>{t(ETIQUETA_TIPO[n.tipo])}</span>
-              </p>
-              <h3 class="nota-prensa__titulo">
-                <a href={localizePath('/publicaciones/' + n.slug)}>{n.title}</a>
-              </h3>
-              <p class="nota-prensa__resumen">{n.resumen}</p>
-              <p class="nota-prensa__pie">
-                <a class="boton boton--texto boton--pequeno" href={localizePath('/publicaciones/' + n.slug)}>{t('common.leerMas')} →</a>
-              </p>
+              {n.portada?.src ? (
+                <a class="nota-prensa__foto" href={localizePath('/publicaciones/' + n.slug)} tabindex="-1" aria-hidden="true">
+                  <img src={withBase(n.portada.src)} alt="" loading="lazy" decoding="async" />
+                </a>
+              ) : (
+                <div class="nota-prensa__foto nota-prensa__foto--vacia" aria-hidden="true">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 5h12a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" />
+                    <path d="M17 8h3a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2h-2" />
+                    <path d="M7 9h6M7 13h6M7 17h4" />
+                  </svg>
+                  <span class="nota-prensa__foto-texto">{t('prensa.sinImagen')}</span>
+                </div>
+              )}
+              <div class="nota-prensa__contenido">
+                <p class="nota-prensa__meta">
+                  <span class="nota-prensa__fecha">{formatFecha(n.date)}</span>
+                  <span class={'etiqueta ' + CLASE_TIPO[n.tipo]}>{t(ETIQUETA_TIPO[n.tipo])}</span>
+                </p>
+                <h3 class="nota-prensa__titulo">
+                  <a href={localizePath('/publicaciones/' + n.slug)}>{n.title}</a>
+                </h3>
+                <p class="nota-prensa__resumen">{n.resumen}</p>
+                <p class="nota-prensa__pie">
+                  <a class="boton boton--texto boton--pequeno" href={localizePath('/publicaciones/' + n.slug)}>{t('common.leerMas')} →</a>
+                </p>
+              </div>
             </li>
           ))}
         </ul>
