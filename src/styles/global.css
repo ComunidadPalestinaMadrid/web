@@ -199,7 +199,7 @@ p { margin: 0 0 1em; }
 }
 .tarjeta:hover { box-shadow: var(--sombra-hover); transform: translateY(-2px); border-color: var(--linea-fuerte); text-decoration: none; }
 .tarjeta__cuerpo { padding: 1.15rem 1.25rem 1.3rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
-.tarjeta__titulo { font-size: var(--t-lg); line-height: 1.12; margin: 0; color: var(--tinta); }
+.tarjeta__titulo { font-size: var(--t-lg); line-height: 1.12; margin: 0; color: var(--tinta); font-weight: 600; }
 .tarjeta__texto { margin: 0; color: var(--texto-suave); font-size: var(--t-base); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .tarjeta__pie { margin-top: auto; padding-top: .6rem; font-weight: 600; font-size: var(--t-base); letter-spacing: .02em; color: var(--ps-rojo); }
 .tarjeta__media { aspect-ratio: 16 / 9; overflow: hidden; background: var(--fondo-suave); }
