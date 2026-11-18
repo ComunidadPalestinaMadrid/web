@@ -1,5 +1,4 @@
-// Calendario de eventos. Los eventos marcados con prueba:true son de ejemplo
-// mientras la asociacion publica su calendario definitivo.
+// Calendario de eventos de la asociacion.
 export type CategoriaEvento = 'movilización' | 'cultural' | 'institucional' | 'formacion';
 
 export interface Evento {
@@ -20,7 +19,6 @@ export interface Evento {
   /** Precio de entrada en euros (0 = entrada libre). Si falta, no se declara oferta. */
   precio?: number;
   destacado?: boolean;
-  prueba?: boolean;
 }
 
 export const EVENTOS: Evento[] = [
@@ -126,27 +124,6 @@ export const EVENTOS: Evento[] = [
     imagen: '/images/uploads/becerril.jpg',
     precio: 0
   },
-  {
-    id: 'cocina-palestina-2027',
-    titulo: 'Taller de cocina palestina (Cole Árabe)',
-    fecha: '2027-01-24',
-    hora: '11:00',
-    lugar: 'Sede de la asociación, Madrid',
-    descripcion: 'Taller familiar de cocina tradicional palestina: kunafa, hummus y taboule. Organizado por el Cole Árabe.',
-    categoria: 'cultural',
-    prueba: true
-  },
-  {
-    id: 'curso-arabe-2027',
-    titulo: 'Inicio del curso de árabe para adultos (Cole Árabe)',
-    fecha: '2027-04-06',
-    hora: '18:00',
-    lugar: 'Sede de la asociación, Madrid',
-    descripcion: 'Comienzo del curso de lengua árabe (nivel inicial e intermedio) y lectoescritura. Plazas limitadas.',
-    categoria: 'formacion',
-    destacado: true,
-    prueba: true
-  }
 ];
 
 const hoy = () => new Date(new Date().toISOString().slice(0, 10) + 'T00:00:00');

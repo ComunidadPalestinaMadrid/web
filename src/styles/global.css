@@ -1201,3 +1201,13 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .fuente-articulo p + p { margin-top: .45rem; }
 .fuente-articulo a { color: var(--ps-rojo); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
 .fuente-articulo a:hover { text-decoration-thickness: 2px; }
+
+/* Agenda de portada con un solo acto: el acto a la izquierda, las efemérides
+   de la semana a la derecha ---------------------------------------------- */
+.agenda-doble {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.2rem, 3vw, 2.5rem); align-items: start;
+}
+.agenda-doble .subtitulo-agenda { margin-top: 0; }
+.agenda-doble .rejilla { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 860px) { .agenda-doble { grid-template-columns: minmax(0, 1fr); } }

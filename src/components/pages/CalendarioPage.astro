@@ -10,7 +10,6 @@ import { useTranslations, localizePath, withBase, absoluteUrl } from '../../i18n
 const t = useTranslations();
 const actividades = proximosEventos();
 const efemerides = efemeridesProximas();
-const hayDemo = actividades.some((e) => e.prueba);
 
 /** Desfase horario de Madrid en una fecha dada: +01:00 en invierno, +02:00 en verano. */
 function desfaseMadrid(iso: string): string {
@@ -79,7 +78,6 @@ const eventosJsonLd = actividades.length > 0 ? {
   <!-- Actividades: convocatorias con fecha, lugar y cartel -->
   <section class="seccion">
     <div class="contenedor">
-      {hayDemo && <div class="aviso mb-3">{t('cal.notaDemo')}</div>}
       <div class="seccion-cabecera">
         <h2>{t('cal.actividades')}</h2>
       </div>

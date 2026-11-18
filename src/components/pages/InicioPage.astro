@@ -11,6 +11,10 @@ import { useTranslations, localizePath, withBase } from '../../i18n/utils';
 
 const t = useTranslations();
 const eventos = proximosEventos(3);
+/* Con un solo acto a la vista, las efemérides pasan a la columna de al lado;
+   sin actos, la sección se queda solo con ellas. */
+const unSoloEvento = eventos.length === 1;
+const sinEventos = eventos.length === 0;
 
 /* --- Destacado de la campana --------------------------------------------- */
 const eur = euros;
@@ -135,14 +139,40 @@ const coleActividades = [
         <span class="eyebrow">{t('home.eventosTitulo')}</span>
         <h2>{t('cal.agenda')}</h2>
       </div>
-      <h3 class="subtitulo-agenda">{t('cal.actividades')}</h3>
-      <div class="rejilla rejilla--2">
-        {eventos.map((e) => <TarjetaEvento evento={e} />)}
-      </div>
-      <h3 class="subtitulo-agenda">{t('cal.efemerides')}</h3>
-      <ul class="efemerides">
-        {efemerides.map(({ efemeride }) => <TarjetaEfemeride efemeride={efemeride} />)}
-      </ul>
+      {sinEventos ? (
+        <>
+          <h3 class="subtitulo-agenda">{t('cal.efemerides')}</h3>
+          <ul class="efemerides">
+            {efemerides.map(({ efemeride }) => <TarjetaEfemeride efemeride={efemeride} />)}
+          </ul>
+        </>
+      ) : unSoloEvento ? (
+        <div class="agenda-doble">
+          <div>
+            <h3 class="subtitulo-agenda">{t('cal.actividades')}</h3>
+            <div class="rejilla">
+              {eventos.map((e) => <TarjetaEvento evento={e} />)}
+            </div>
+          </div>
+          <div>
+            <h3 class="subtitulo-agenda">{t('cal.efemerides')}</h3>
+            <ul class="efemerides">
+              {efemerides.map(({ efemeride }) => <TarjetaEfemeride efemeride={efemeride} />)}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <>
+          <h3 class="subtitulo-agenda">{t('cal.actividades')}</h3>
+          <div class="rejilla rejilla--2">
+            {eventos.map((e) => <TarjetaEvento evento={e} />)}
+          </div>
+          <h3 class="subtitulo-agenda">{t('cal.efemerides')}</h3>
+          <ul class="efemerides">
+            {efemerides.map(({ efemeride }) => <TarjetaEfemeride efemeride={efemeride} />)}
+          </ul>
+        </>
+      )}
       <p class="mt-3"><a class="boton boton--fantasma" href={localizePath('/calendario')}>{t('common.verMasEventos')} →</a></p>
     </div>
   </section>
