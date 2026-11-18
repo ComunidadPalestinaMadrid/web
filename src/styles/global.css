@@ -26,6 +26,8 @@
   --linea-ambar: #efe4c6;
   --acento-ambar: #34c3af;
   --acento-ambar-oscuro: #2bb3a0;
+  /* Variante profunda, solo para texto sobre el fondo crema: 5,28:1 */
+  --acento-ambar-texto: #127568;
   --sombra-ambar: 0 1px 2px rgba(90, 70, 10, .05), 0 10px 26px -18px rgba(90, 70, 10, .35);
 
   /* Regla de diseno: nunca un filete de color sobre una caja redondeada. */
@@ -385,7 +387,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   border-radius: 0;
 }
 .seccion--ambar .cole-fotos img { box-shadow: var(--sombra-ambar); }
-.seccion--ambar .eyebrow { color: var(--acento-ambar); }
+.seccion--ambar .eyebrow { color: var(--acento-ambar-texto); }
 .seccion--ambar .boton--primario {
   background: var(--acento-ambar);
   /* Texto oscuro: el turquesa es claro y el blanco no llega a 2,2:1 */
