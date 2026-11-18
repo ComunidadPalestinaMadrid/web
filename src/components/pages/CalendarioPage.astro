@@ -81,7 +81,16 @@ const eventosJsonLd = actividades.length > 0 ? {
       <div class="seccion-cabecera">
         <h2>{t('cal.actividades')}</h2>
       </div>
-      {actividades.length > 0 ? (
+      {actividades.length === 1 ? (
+        <div class={'agenda-doble' + (actividades[0].imagen ? '' : ' agenda-doble--sin-cartel')}>
+          {actividades[0].imagen && (
+            <figure class="agenda-doble__cartel">
+              <img src={withBase(actividades[0].imagen)} alt={'Cartel del evento'} loading="lazy" decoding="async" />
+            </figure>
+          )}
+          <TarjetaEvento evento={actividades[0]} soloCuerpo />
+        </div>
+      ) : actividades.length > 1 ? (
         <div class="rejilla rejilla--2">
           {actividades.map((e) => <TarjetaEvento evento={e} />)}
         </div>
