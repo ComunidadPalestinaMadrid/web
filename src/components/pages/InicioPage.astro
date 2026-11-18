@@ -13,8 +13,9 @@ const t = useTranslations();
 const eventos = proximosEventos(3);
 /* Con un solo acto a la vista, las efemérides pasan a la columna de al lado;
    sin actos, la sección se queda solo con ellas. */
-const unSoloEvento = eventos.length === 1;
 const sinEventos = eventos.length === 0;
+const unSoloEvento = eventos.length === 1;
+const dosEventos = eventos.length === 2;
 
 /* --- Destacado de la campana --------------------------------------------- */
 const eur = euros;
@@ -155,6 +156,13 @@ const coleActividades = [
           )}
           <TarjetaEvento evento={eventos[0]} soloCuerpo />
         </div>
+      ) : dosEventos ? (
+        <>
+          <h3 class="subtitulo-agenda">{t('cal.actividades')}</h3>
+          <div class="rejilla rejilla--2">
+            {eventos.map((e) => <TarjetaEvento evento={e} />)}
+          </div>
+        </>
       ) : (
         <>
           <h3 class="subtitulo-agenda">{t('cal.actividades')}</h3>
