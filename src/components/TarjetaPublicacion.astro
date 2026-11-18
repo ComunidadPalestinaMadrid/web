@@ -11,7 +11,6 @@ interface Props {
 const { pub, variante = 'normal', conImagen = false } = Astro.props;
 const t = useTranslations();
 const f = formatFechaCorta(pub.date);
-const filete = pub.tipo === 'comunicado' ? 'tarjeta__filete--rojo' : pub.tipo === 'campana' ? 'tarjeta__filete--negro' : '';
 const conFoto = conImagen || variante !== 'normal';
 // Si el post no tiene foto, se usa un marcador gris generico.
 const imagen = pub.portada || '/images/placeholder.svg';
@@ -44,7 +43,6 @@ const sizes = variante === 'grande'
     : '(max-width: 860px) 100vw, 400px';
 ---
 <a class={'tarjeta' + (variante !== 'normal' ? ' tarjeta--' + variante : '')} href={localizePath('/publicaciones/' + pub.slug)}>
-  <span class={'tarjeta__filete ' + filete} aria-hidden="true"></span>
   {conFoto && (
     <span class="tarjeta__media">
       <img

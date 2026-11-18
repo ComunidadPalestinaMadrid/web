@@ -21,6 +21,7 @@
   --fondo-rojo: #fdf2f3;
   --fondo-verde: #f1f8f4;
 
+  /* Regla de diseno: nunca un filete de color sobre una caja redondeada. */
   --radio: 14px;
   --radio-sm: 9px;
   --sombra: 0 1px 2px rgba(16, 20, 24, .04), 0 8px 24px -18px rgba(16, 20, 24, .25);
@@ -197,9 +198,6 @@ p { margin: 0 0 1em; }
   box-shadow: var(--sombra); transition: box-shadow .16s ease, transform .16s ease, border-color .16s ease;
 }
 .tarjeta:hover { box-shadow: var(--sombra-hover); transform: translateY(-2px); border-color: var(--linea-fuerte); text-decoration: none; }
-.tarjeta__filete { height: 4px; background: var(--ps-verde); }
-.tarjeta__filete--rojo { background: var(--ps-rojo); }
-.tarjeta__filete--negro { background: var(--ps-negro); }
 .tarjeta__cuerpo { padding: 1.15rem 1.25rem 1.3rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
 .tarjeta__titulo { font-size: var(--t-lg); line-height: 1.12; margin: 0; color: var(--tinta); }
 .tarjeta__texto { margin: 0; color: var(--texto-suave); font-size: var(--t-base); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
@@ -209,7 +207,6 @@ p { margin: 0 0 1em; }
 a.tarjeta { color: inherit; }
 a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 
-.tarjeta--enlace .tarjeta__filete { background: linear-gradient(90deg, var(--ps-negro), var(--ps-verde) 50%, var(--ps-rojo)); }
 
 /* Etiquetas / chips ------------------------------------------------------ */
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0 0 1.4rem; padding: 0; }
