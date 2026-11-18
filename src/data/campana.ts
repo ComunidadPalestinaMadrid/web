@@ -22,6 +22,15 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261118-211', fecha: '2026-11-18', importe: 20, nombre: 'Quirolina' },
+    { id: 'don-20261118-210', fecha: '2026-11-18', importe: 200, nombre: 'Anónimo' },
+    { id: 'don-20261118-209', fecha: '2026-11-18', importe: 200, nombre: 'F.A.I' },
+    { id: 'don-20261118-208', fecha: '2026-11-18', importe: 150, nombre: 'Ana Chicharro' },
+    { id: 'don-20261118-207', fecha: '2026-11-18', importe: 100, nombre: 'Anónimo' },
+    { id: 'don-20261118-206', fecha: '2026-11-18', importe: 100, nombre: 'María del Carmen Suárez García' },
+    { id: 'don-20261118-205', fecha: '2026-11-18', importe: 2045, nombre: 'Alcorcón con Palestina' },
+    { id: 'don-20261118-204', fecha: '2026-11-18', importe: 100, nombre: 'Anónimo' },
+    { id: 'don-20261118-203', fecha: '2026-11-18', importe: 100, nombre: 'Escoly Criado Calzada' },
     { id: 'don-20261117-202', fecha: '2026-11-17', importe: 20, nombre: 'Kike' },
     { id: 'don-20261117-201', fecha: '2026-11-17', importe: 150, nombre: 'Juliana García' },
     { id: 'don-20261117-200', fecha: '2026-11-17', importe: 10, nombre: 'Jesús Pozo García' },
@@ -225,9 +234,9 @@ export const CAMPANA = {
     { id: 'don-20261115-002', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261115-001', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
   ],
-  actualizado: '2026-11-17',
+  actualizado: '2026-11-18',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '22:35',
+  horaActualizacion: '10:03',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
