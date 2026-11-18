@@ -8,7 +8,9 @@ interface Props { pub: Publicacion; relacionadas: Publicacion[]; }
 const { pub, relacionadas } = Astro.props;
 const t = useTranslations();
 const f = formatFecha(pub.date);
-const esAntigua = pub.originalUrl && !pub.originalUrl.includes(SITE.dominio);
+/* Del archivo histórico son las publicaciones de 2017 a 2024. Una republicación
+   reciente con enlace externo (por ejemplo, un artículo de otro medio) NO lo es. */
+const esAntigua = pub.date <= '2024-12-31';
 ---
 <BaseLayout
   title={pub.title}

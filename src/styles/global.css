@@ -1153,3 +1153,16 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 @media (max-width: 560px) {
   .donacion-datos > div { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Tarjeta de procedencia al final de un articulo republicado -------------- */
+.fuente-articulo {
+  margin: 2.2rem 0 0;
+  padding: 1.1rem 1.3rem;
+  background: var(--fondo-suave);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+}
+.fuente-articulo p { margin: 0; color: var(--texto-suave); font-size: var(--t-base); line-height: 1.6; }
+.fuente-articulo p + p { margin-top: .45rem; }
+.fuente-articulo a { color: var(--ps-rojo); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+.fuente-articulo a:hover { text-decoration-thickness: 2px; }
