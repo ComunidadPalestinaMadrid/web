@@ -147,19 +147,13 @@ const coleActividades = [
           </ul>
         </>
       ) : unSoloEvento ? (
-        <div class="agenda-doble">
-          <div>
-            <h3 class="subtitulo-agenda">{t('cal.actividades')}</h3>
-            <div class="rejilla">
-              {eventos.map((e) => <TarjetaEvento evento={e} />)}
-            </div>
-          </div>
-          <div>
-            <h3 class="subtitulo-agenda">{t('cal.efemerides')}</h3>
-            <ul class="efemerides">
-              {efemerides.map(({ efemeride }) => <TarjetaEfemeride efemeride={efemeride} />)}
-            </ul>
-          </div>
+        <div class={'agenda-doble' + (eventos[0].imagen ? '' : ' agenda-doble--sin-cartel')}>
+          {eventos[0].imagen && (
+            <figure class="agenda-doble__cartel">
+              <img src={withBase(eventos[0].imagen)} alt={'Cartel del evento'} loading="lazy" decoding="async" />
+            </figure>
+          )}
+          <TarjetaEvento evento={eventos[0]} soloCuerpo />
         </div>
       ) : (
         <>

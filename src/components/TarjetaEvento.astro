@@ -2,8 +2,12 @@
 import { useTranslations, withBase, localizePath } from '../i18n/utils';
 import { enlaceGoogleCalendar, type Evento } from '../data/eventos';
 
-interface Props { evento: Evento; }
-const { evento } = Astro.props;
+interface Props {
+  evento: Evento;
+  /** Solo los datos, sin el cartel (el cartel se pinta aparte) */
+  soloCuerpo?: boolean;
+}
+const { evento, soloCuerpo = false } = Astro.props;
 const t = useTranslations();
 const claves: Record<string, string> = {
   'movilización': 'cal.movilizacion', cultural: 'cal.cultural',
@@ -17,7 +21,7 @@ const rango = evento.hora ? evento.hora + (evento.horaFin ? ' - ' + evento.horaF
 const cuando = fechaBruta.charAt(0).toUpperCase() + fechaBruta.slice(1) + (rango ? ' · ' + rango : '');
 ---
 <article class={'evento' + (evento.destacado ? ' evento--destacado' : '')}>
-  {evento.imagen && (
+  {evento.imagen && !soloCuerpo && (
     <div class="evento__cartel">
       <img
         src={withBase(evento.imagen)}

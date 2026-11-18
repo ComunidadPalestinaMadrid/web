@@ -1208,6 +1208,11 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(1.2rem, 3vw, 2.5rem); align-items: start;
 }
-.agenda-doble .subtitulo-agenda { margin-top: 0; }
-.agenda-doble .rejilla { grid-template-columns: minmax(0, 1fr); }
+.agenda-doble__cartel { margin: 0; }
+.agenda-doble__cartel img {
+  display: block; width: 100%; height: 100%;
+  max-height: 640px; object-fit: contain;
+  border-radius: var(--radio); background: var(--fondo-suave);
+}
+.agenda-doble--sin-cartel { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
 @media (max-width: 860px) { .agenda-doble { grid-template-columns: minmax(0, 1fr); } }
