@@ -35,24 +35,9 @@ const filtros = [
       <p class="pieza-pequena texto-suave">{lista.length} {t('pub.total')}</p>
       {lista.length === 0 ? (
         <p class="aviso">{t('common.noResultados')}</p>
-      ) : tipo === 'todas' ? (
+      ) : (
         <div class="rejilla rejilla--3">
           {lista.map((p) => <TarjetaPublicacion pub={p} conImagen />)}
-        </div>
-      ) : (
-        <div class="rejilla rejilla--2">
-          {lista.map((p) => (
-            <a class="entrada" href={localizePath('/publicaciones/' + p.slug)} style="text-decoration:none">
-              <div class="entrada__fecha">
-                <span class="entrada__dia">{p.date.slice(8, 10)}</span>
-                <span class="entrada__mes">{p.date.slice(0, 4)}</span>
-              </div>
-              <div>
-                <h3 class="entrada__titulo">{p.title}</h3>
-                <p class="tarjeta__texto">{p.resumen}</p>
-              </div>
-            </a>
-          ))}
         </div>
       )}
     </div>
