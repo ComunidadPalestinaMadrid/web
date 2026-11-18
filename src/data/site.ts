@@ -18,6 +18,10 @@ export const SITE = {
     usuario: '@asc.hispanopalestinajerusalen',
     url: 'https://www.instagram.com/asc.hispanopalestinajerusalen/'
   },
+  telegram: {
+    usuario: '@comunidadpalestinamadrid',
+    url: 'https://t.me/comunidadpalestinamadrid'
+  },
   formularioContacto: 'https://forms.gle/F7FHvF6YaA9jhVwJ8',
   formularioAfiliacion: 'https://forms.gle/F7FHvF6YaA9jhVwJ8',
   formularioSimpatizante: 'https://forms.gle/uGdCUUnV3RTLdAUj9',
