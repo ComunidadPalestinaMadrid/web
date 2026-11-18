@@ -24,8 +24,8 @@
      chocar con los neutros frios del resto del sitio */
   --fondo-ambar: #fdf9ea;
   --linea-ambar: #efe4c6;
-  --acento-ambar: #9a6a10;
-  --acento-ambar-oscuro: #7d5508;
+  --acento-ambar: #34c3af;
+  --acento-ambar-oscuro: #2bb3a0;
   --sombra-ambar: 0 1px 2px rgba(90, 70, 10, .05), 0 10px 26px -18px rgba(90, 70, 10, .35);
 
   /* Regla de diseno: nunca un filete de color sobre una caja redondeada. */
@@ -388,7 +388,9 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 .seccion--ambar .eyebrow { color: var(--acento-ambar); }
 .seccion--ambar .boton--primario {
   background: var(--acento-ambar);
-  box-shadow: 0 10px 24px -14px rgba(122, 84, 8, .8);
+  /* Texto oscuro: el turquesa es claro y el blanco no llega a 2,2:1 */
+  color: var(--tinta);
+  box-shadow: 0 10px 24px -14px rgba(20, 120, 105, .75);
 }
 .seccion--ambar .boton--primario:hover { background: var(--acento-ambar-oscuro); }
 
