@@ -22,6 +22,10 @@ export const CAMPANA = {
   /** Donaciones recibidas, de la mas reciente a la mas antigua.
       El total recaudado se calcula solo a partir de esta lista. */
   donaciones: [
+    { id: 'don-20261119-225', fecha: '2026-11-19', importe: 30, nombre: 'Anónimo' },
+    { id: 'don-20261119-224', fecha: '2026-11-19', importe: 30, nombre: 'Anónimo' },
+    { id: 'don-20261119-223', fecha: '2026-11-19', importe: 5, nombre: 'Anónimo' },
+    { id: 'don-20261119-222', fecha: '2026-11-18', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261119-221', fecha: '2026-11-19', importe: 570, nombre: 'CS La Brecha' },
     { id: 'don-20261119-220', fecha: '2026-11-19', importe: 60, nombre: 'Pura Campozano Anton' },
     { id: 'don-20261119-219', fecha: '2026-11-19', importe: 75, nombre: 'Anónimo' },
@@ -244,9 +248,9 @@ export const CAMPANA = {
     { id: 'don-20261115-002', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261115-001', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
   ],
-  actualizado: '2026-11-19',
+  actualizado: '2026-11-20',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '19:57',
+  horaActualizacion: '10:32',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
