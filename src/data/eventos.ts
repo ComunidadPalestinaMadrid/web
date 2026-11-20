@@ -23,6 +23,30 @@ export interface Evento {
 
 export const EVENTOS: Evento[] = [
   {
+    id: 'particion-palestina-2026',
+    titulo: 'Concentración por el Día de la Partición de Palestina',
+    fecha: '2026-11-30',
+    hora: '19:00',
+    lugar: 'Plaza de Tirso de Molina, Madrid',
+    descripcion: 'Concentración por el Día Internacional de Solidaridad con el Pueblo Palestino, en rechazo al plan de partición de 1947 y para exigir justicia, reparación y libertad.',
+    categoria: 'movilización',
+    imagen: '/images/uploads/particion-palestina-2026.webp',
+    cartel: '/images/uploads/particion-palestina-2026.png',
+    detalle: `
+<p>Con motivo del Día Internacional de Solidaridad con el Pueblo Palestino, convocamos una concentración para denunciar la partición de Palestina y exigir justicia, reparación y libertad para su pueblo.</p>
+
+<p>El 29 de noviembre de 1947, la Asamblea General de la ONU aprobó el plan de partición de Palestina contra la voluntad de la mayoría de su población. El pueblo palestino rechazó entonces la división de su tierra y sigue defendiendo hoy su derecho a decidir su futuro.</p>
+
+<p>Salimos a la calle para exigir el fin del genocidio en Gaza, de la limpieza étnica, de la ocupación y del apartheid. Exigimos a los gobiernos que dejen de armar, financiar y proteger el proyecto colonial que despoja al pueblo palestino de su tierra. Defendemos su derecho a resistir a la ocupación y al colonialismo, el retorno de las personas refugiadas y sus descendientes y la restitución de las tierras y propiedades confiscadas.</p>
+
+<p>Llamamos a todas las personas y colectivos solidarios a sumarse a la concentración y a difundir la convocatoria.</p>
+
+<p><strong>Por el retorno, la autodeterminación y la liberación de Palestina del río al mar.</strong></p>
+`,
+    precio: 0,
+    destacado: true
+  },
+  {
     id: 'juventud-palestina-ucm-2026',
     titulo: 'La juventud palestina bajo la colonización israelí',
     fecha: '2026-11-18',
