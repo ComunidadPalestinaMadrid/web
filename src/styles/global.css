@@ -643,7 +643,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 
 /* Detalle del acto: cartel a un lado, texto al otro */
 .evento-detalle {
-  display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(1.6rem, 4vw, 3rem); align-items: start;
 }
 .evento-cartel { margin: 0; }
@@ -655,7 +655,6 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
 
 @media (max-width: 860px) {
   .evento-detalle { grid-template-columns: 1fr; gap: 1.6rem; }
-  .evento-cartel img { max-width: 420px; margin-inline: auto; }
 }
 
 /* El titular de la tarjeta es un enlace a la ficha: sin color de enlace */
@@ -1209,10 +1208,10 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   gap: clamp(1.2rem, 3vw, 2.5rem); align-items: start;
 }
 .agenda-doble__cartel { margin: 0; }
+/* A sangre: ocupa todo el ancho de su columna, sin franjas ni recortes */
 .agenda-doble__cartel img {
-  display: block; width: 100%; height: 100%;
-  max-height: 640px; object-fit: contain;
-  border-radius: var(--radio); background: var(--fondo-suave);
+  display: block; width: 100%; height: auto;
+  border-radius: var(--radio);
 }
 .agenda-doble--sin-cartel { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
 @media (max-width: 860px) { .agenda-doble { grid-template-columns: minmax(0, 1fr); } }
