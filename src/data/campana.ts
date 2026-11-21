@@ -253,7 +253,7 @@ export const CAMPANA = {
   ],
   actualizado: '2026-11-21',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '10:17',
+  horaActualizacion: '12:34',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
