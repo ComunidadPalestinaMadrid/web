@@ -253,9 +253,9 @@ export const CAMPANA = {
     { id: 'don-20261115-002', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
     { id: 'don-20261115-001', fecha: '2026-11-15', importe: 50, nombre: 'Anónimo' },
   ],
-  actualizado: '2026-11-22',
+  actualizado: '2026-11-23',
   /** Hora de la ultima revision del listado (HH:MM) */
-  horaActualizacion: '22:38',
+  horaActualizacion: '09:43',
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
