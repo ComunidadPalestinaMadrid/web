@@ -898,6 +898,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   border-radius: var(--radio);
   min-height: clamp(340px, 42vh, 460px);
 }
+.seccion--campana { padding-block: clamp(1.6rem, 3vw, 2.2rem); }
 .jumbo--caja .jumbo__grid { padding-block: clamp(1.8rem, 4vw, 2.8rem); }
 .jumbo__sello {
   display: inline-block; margin: 0 0 .7rem; padding: .3rem .7rem;
@@ -905,7 +906,7 @@ a.tarjeta:hover .tarjeta__titulo { color: var(--ps-rojo); }
   letter-spacing: .12em; text-transform: uppercase;
   color: #0b1710; background: var(--ps-verde); border-radius: 999px;
 }
-.jumbo--caja .jumbo__cta { color: #fff; border-color: rgba(255, 255, 255, .4); }
+.jumbo--caja .jumbo__cta { border-color: transparent; }
 .jumbo__grid { position: relative; padding-block: clamp(2.2rem, 5vw, 3.4rem); }
 .jumbo__texto { max-width: 30rem; color: #fff; }
 

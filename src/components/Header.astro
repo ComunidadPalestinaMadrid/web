@@ -1,17 +1,12 @@
 ---
 import { NAV } from '../data/nav';
 import { SITE } from '../data/site';
-import { CAMPANA } from '../data/campana';
 import { useTranslations, localizePath, currentPath, withBase } from '../i18n/utils';
 
 const t = useTranslations();
 const base = currentPath(Astro.url);
 const esActivo = (p: string) => (p === '/' ? base === '/' : base === p || base.startsWith(p + '/'));
 
-/* La campana desaparece del menu cuando termina su plazo. */
-const RUTA_CAMPANA = '/reencuentrosquesalvanvidas';
-const campanaActiva = new Date() <= new Date(CAMPANA.fechaLimite + 'T23:59:59');
-const cierre = new Date(CAMPANA.fechaLimite + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
 ---
 <header class="cabecera">
   <div class="filete" aria-hidden="true"></div>
@@ -58,19 +53,6 @@ const cierre = new Date(CAMPANA.fechaLimite + 'T12:00:00').toLocaleDateString('e
               </a>
             </li>
           )
-        )}
-        {campanaActiva && (
-          <li class="nav__campana-li">
-            <a
-              class="nav__campana"
-              href={localizePath(RUTA_CAMPANA)}
-              aria-current={esActivo(RUTA_CAMPANA) ? 'page' : undefined}
-            >
-              <span class="nav__campana__punto" aria-hidden="true"></span>
-              {t('nav.campana')}
-              <span class="nav__campana__cierre">hasta el {cierre}</span>
-            </a>
-          </li>
         )}
       </ul>
     </nav>

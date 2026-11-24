@@ -142,12 +142,8 @@ const campanaAbierta = !CAMPANA.finalizada && new Date() <= limite;
   <section class="seccion" id="donar">
     <div class="contenedor">
       <div class="campana-donar">
-        <h2 class="campana-donar__titulo">{campanaAbierta ? 'Cómo donar' : 'Cómo se donaba'}</h2>
-        <p class="campana-donar__intro">
-          {campanaAbierta
-            ? 'Haz una transferencia a esta cuenta con los datos que aparecen abajo. Es la única vía habilitada para esta campaña.'
-            : 'La campaña finalizó el ' + fechaLimite + '. Estas son las vías por las que se canalizaron las donaciones y los datos con los que se hicieron.'}
-        </p>
+        <h2 class="campana-donar__titulo">Cómo donar</h2>
+        <p class="campana-donar__intro">Haz una transferencia a esta cuenta con los datos que aparecen abajo. Es la única vía habilitada para esta campaña.</p>
 
         <dl class="campana-datos">
           <div class="campana-datos__fila">
