@@ -39,7 +39,7 @@ const donaciones = [...CAMPANA.donaciones].sort((a, b) => b.fecha.localeCompare(
 const ibanFormateado = CAMPANA.cuenta.iban.replace(/(.{4})/g, '$1 ').trim();
 const limite = new Date(CAMPANA.fechaLimite + 'T23:59:59');
 const fechaLimite = limite.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
-const campanaAbierta = new Date() <= limite;
+const campanaAbierta = !CAMPANA.finalizada && new Date() <= limite;
 ---
 <BaseLayout
   title={CAMPANA.titulo}
@@ -115,7 +115,11 @@ const campanaAbierta = new Date() <= limite;
           Actualizado por última vez a las {CAMPANA.horaActualizacion} del {fecha}. Los datos se actualizan cada 6 horas.
         </p>
 
-          <a class="boton boton--primario campana-importe__boton" href="#donar">Donar ahora</a>
+          {campanaAbierta ? (
+            <a class="boton boton--primario campana-importe__boton" href="#donar">Donar ahora</a>
+          ) : (
+            <a class="boton boton--fantasma campana-importe__boton" href="#donaciones">Ver las {donaciones.length} aportaciones</a>
+          )}
         </div>
 
         {donaciones.length > 0 && (
@@ -138,8 +142,12 @@ const campanaAbierta = new Date() <= limite;
   <section class="seccion" id="donar">
     <div class="contenedor">
       <div class="campana-donar">
-        <h2 class="campana-donar__titulo">Cómo donar</h2>
-        <p class="campana-donar__intro">Haz una transferencia a esta cuenta con los datos que aparecen abajo. Es la única vía habilitada para esta campaña.</p>
+        <h2 class="campana-donar__titulo">{campanaAbierta ? 'Cómo donar' : 'Cómo se donaba'}</h2>
+        <p class="campana-donar__intro">
+          {campanaAbierta
+            ? 'Haz una transferencia a esta cuenta con los datos que aparecen abajo. Es la única vía habilitada para esta campaña.'
+            : 'La campaña finalizó el ' + fechaLimite + '. Estas son las vías por las que se canalizaron las donaciones y los datos con los que se hicieron.'}
+        </p>
 
         <dl class="campana-datos">
           <div class="campana-datos__fila">
@@ -184,7 +192,11 @@ const campanaAbierta = new Date() <= limite;
       <div class="prosa prosa--ancho" set:html={CAMPANA.contenido} />
 
       <p class="campana-cierre">
-        <a class="boton boton--primario" href="#donar">Quiero ayudar</a>
+        {campanaAbierta ? (
+          <a class="boton boton--primario" href="#donar">Quiero ayudar</a>
+        ) : (
+          <a class="boton boton--fantasma" href="#donaciones">Ver el desglose completo</a>
+        )}
       </p>
     </div>
   </section>

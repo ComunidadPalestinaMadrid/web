@@ -11,6 +11,9 @@ import { useTranslations, localizePath, withBase } from '../../i18n/utils';
 
 const t = useTranslations();
 const eventos = proximosEventos(3);
+/* El panel del hero muestra solo el proximo acto que tenga cartel; si ninguno
+   lo tiene, cae a la lista de siempre. */
+const eventoPanel = proximosEventos().find((e) => e.imagen);
 /* Con un solo acto a la vista, las efemérides pasan a la columna de al lado;
    sin actos, la sección se queda solo con ellas. */
 const sinEventos = eventos.length === 0;
@@ -25,7 +28,7 @@ const pctCampana = (CAMPANA.recaudado / escalaCampana) * 100;
 const pctMinimoCampana = (CAMPANA.objetivoMinimo / escalaCampana) * 100;
 const pctOptimoCampana = (CAMPANA.objetivoOptimo / escalaCampana) * 100;
 const hayExtraCampana = CAMPANA.recaudado > CAMPANA.objetivoOptimo;
-const fechaLimiteCampana = new Date(CAMPANA.fechaLimite + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+const fechaCierreCampana = new Date(CAMPANA.fechaLimite + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
 const efemerides = efemeridesProximas().slice(0, 4);
 
@@ -52,7 +55,66 @@ const coleActividades = [
     imagesizes="100vw"
   />
   <!-- Campaña destacada -->
-  <section class="jumbo">
+  <section class="hero">
+    <img
+      class="hero__fondo"
+      srcset={withBase('/images/uploads/hero-manifestacion-960.webp') + ' 960w, ' + withBase('/images/uploads/hero-manifestacion-1280.webp') + ' 1280w, ' + withBase('/images/uploads/hero-manifestacion-1920.webp') + ' 1920w'}
+      sizes="100vw"
+      src={withBase('/images/uploads/hero-manifestacion-1920.webp')}
+      alt=""
+      aria-hidden="true"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="hero__velo" aria-hidden="true"></div>
+    <div class="contenedor hero__grid">
+      <div>
+        <h1 class="hero__titulo">{t('home.titulo')}</h1>
+        <p class="hero__texto">{t('home.texto')}</p>
+        <div class="boton-fila">
+          <a class="boton boton--primario" href={localizePath('/participa')}>{t('home.ctaApoyar')}</a>
+        </div>
+      </div>
+      <div class="hero__panel">
+        <h3>{t('common.proximosEventos')}</h3>
+        {eventoPanel ? (
+          <a class="panel-acto" href={localizePath('/calendario/' + eventoPanel.id)}>
+            <span class="panel-acto__marco">
+              <img
+                class="panel-acto__cartel"
+                src={withBase(eventoPanel.imagen!)}
+                alt={'Cartel: ' + eventoPanel.titulo}
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
+          </a>
+        ) : (
+          <ul class="lista-enlaces">
+            {eventos.map((e) => (
+              <li>
+                <a href={localizePath('/calendario/' + e.id)}>
+                  <strong>{e.titulo}</strong>
+                </a>
+                <div class="pieza-pequena texto-suave">
+                  {new Date(e.fecha + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {e.hora ? ' · ' + e.hora : ''}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+        <a class="boton boton--texto" href={localizePath('/calendario')}>{t('common.verMasEventos')} →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campana ya cerrada: balance dentro del contenedor -->
+<section class="seccion">
+  <div class="contenedor">
+  <div class="jumbo jumbo--caja">
     <img
       class="jumbo__fondo"
       srcset={withBase('/images/campana/jumbo-960.webp') + ' 960w, ' + withBase('/images/campana/jumbo-1920.webp') + ' 1920w'}
@@ -68,9 +130,9 @@ const coleActividades = [
     <div class="jumbo__velo" aria-hidden="true"></div>
     <div class="contenedor jumbo__grid">
       <div class="jumbo__texto">
-        <h1 class="jumbo__titulo">{CAMPANA.tituloCorto}</h1>
+        <p class="jumbo__sello">Campaña finalizada · {fechaCierreCampana}</p>
+        <h2 class="jumbo__titulo">{CAMPANA.tituloCorto}</h2>
         <p class="jumbo__sub">{CAMPANA.subtitulo}</p>
-        <p class="jumbo__plazo">¡Solo hasta el {fechaLimiteCampana}!</p>
         <div class="jumbo__recaudacion">
           <p class="jumbo__cifra">{eur(CAMPANA.recaudado)} <span class="jumbo__de">de {eur(CAMPANA.objetivoMinimo)}</span></p>
           <div class="jumbo__barra" aria-hidden="true">
@@ -86,10 +148,12 @@ const coleActividades = [
           </div>
           <p class="jumbo__leyenda">Mínimo {eur(CAMPANA.objetivoMinimo)} · óptimo {eur(CAMPANA.objetivoOptimo)}</p>
         </div>
-        <a class="boton boton--primario jumbo__cta" href={localizePath('/reencuentrosquesalvanvidas')}>Dona ahora</a>
+        <a class="boton boton--fantasma jumbo__cta" href={localizePath('/reencuentrosquesalvanvidas')}>Ver el balance de la campaña →</a>
       </div>
     </div>
-  </section>
+  </div>
+  </div>
+</section>
 
   <!-- Parrilla de posts: 2 grandes + 6 pequenos -->
   <section class="seccion">

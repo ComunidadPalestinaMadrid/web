@@ -263,6 +263,8 @@ export const CAMPANA = {
 
   /** Ultimo dia de campana */
   fechaLimite: '2026-11-24',
+  /** La campana ya cerro: los elementos publicos pasan a modo balance */
+  finalizada: true,
 
   /** Video de la campana (URL de YouTube). Vacio = hueco reservado. */
   videoUrl: 'https://youtube.com/shorts/9w39VYWpa9g',
