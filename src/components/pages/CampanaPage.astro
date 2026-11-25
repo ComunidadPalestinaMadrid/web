@@ -138,6 +138,30 @@ const campanaAbierta = !CAMPANA.finalizada && new Date() <= limite;
     </div>
   </section>
 
+  <!-- Informe de gastos -->
+  <section class="seccion seccion--suave" id="informe">
+    <div class="contenedor">
+      <div class="campana-informe">
+        <div class="campana-informe__texto">
+          <span class="eyebrow">Rendición de cuentas</span>
+          <h2>Informe de gastos</h2>
+          <p class="campana-informe__cifras">
+            <strong>{eur(CAMPANA.recaudado)}</strong> recaudados ·
+            <strong>6.925,55 €</strong> justificados ·
+            <strong>19.961,14 €</strong> pendientes de gasto
+          </p>
+          <p class="campana-informe__nota">
+            Balance a 25 de noviembre de 2026, con los diez anexos de los pagos: transporte de Gaza a Ammán,
+            vuelos y alojamiento. Incluye el detalle de cada documento y los tipos de cambio aplicados.
+          </p>
+        </div>
+        <a class="boton boton--primario campana-informe__boton" href={withBase('/documentos/informe-gastos-campana.pdf')} download>
+          Descargar el informe · PDF (2,2 MB) ↓
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Como donar -->
   <section class="seccion" id="donar">
     <div class="contenedor">
